@@ -9,6 +9,12 @@ const userRatingSchema = new mongoose.Schema({
   timestamps: true
 })
 
+//* Schema for comments on user
+const userCommentsSchema = new mongoose.Schema({
+  text: [ { type: String, maxlength: 200 } ],
+  user: { type: mongoose.Schema.ObjectId, ref: 'User', required: true }
+})
+
 //* Schema for user
 const userSchema = new mongoose.Schema({
   username: { type: String, required: true, unique: true, maxlength: 50 },//* username of user
@@ -17,7 +23,20 @@ const userSchema = new mongoose.Schema({
   postcode: { type: String },//* postcode location
   profilePic: [{ type: String }], //* profile picture in array to allow different options.
   articlesPosted: [{ type: mongoose.Schema.ObjectId, ref: 'Article', required: true }],//* array of Id's which we can populate on get request.
-  userRating: [userRatingSchema]//* reference to userRating schema to find the rating and the user who rated.
+  ratings: [userRatingSchema],//* reference to userRating schema to find the rating and the user who rated.
+  comments: [userCommentsSchema] //* array of comments on user
+})
+
+userSchema.virtual('createdArticles', {
+  ref: 'Article',
+  localField: '_id',
+  foreignField: 'user'
+})
+
+userSchema.virtual('createdPosts', {
+  ref: 'Posts',
+  localField: '_id',
+  foreignField: 'user'
 })
 
 userSchema //* stuff that won't be displayed in responses
