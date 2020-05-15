@@ -1,8 +1,15 @@
 import React from 'react'
 
 
-const About = () => {
+class About extends React.Component {
+  
+  
+  // * function to push the user to the register page 
+    handleClick= () => {
+      this.props.history.push('/register')
+    }
 
+render () {
   return (
     <>
       <section className="hero is-light">
@@ -30,13 +37,15 @@ const About = () => {
           {/* image to go here */}
         </div>
         <div className="container">
-          <p>Click Here to Join us Now!</p>
-          {/* Change to a link to the Register Page */}
-        </div>
+        <button className="button is fullwidth"
+              onClick={this.handleClick}
+              >Join Us Now</button>
+              </div>
       </section>
       </section>
     </>
   )
+}
 }
 
 export default About
