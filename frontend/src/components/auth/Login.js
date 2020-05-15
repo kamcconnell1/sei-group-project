@@ -3,7 +3,7 @@ import React from 'react'
 import LoginForm from './LoginForm'
 
 import {loginUser} from '../../lib/api'
-import {setToken} from '../../lib/auth'
+import {setToken, getUser} from '../../lib/auth'
 
 class Login extends React.Component{
   state = {
@@ -26,14 +26,15 @@ handleSubmit = async event => {
   try{
     const res = await loginUser(this.state.loginForm)
     setToken(res.data.token)
-    this.props.history.push('/user/1')
+    const user = getUser()
+    this.props.history.push(`/user/${user}`)
   } catch (err) {
     console.log(err)
   }
 }
 
   render() {
-    console.log(this.state.loginForm)
+    // console.log(this.state.loginForm)
     return (
       <>
       <section className="section">

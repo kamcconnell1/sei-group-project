@@ -1,15 +1,22 @@
 import React from 'react'
 import Select from 'react-select'
 
-const ClothesForm = () => {
 
 const colorOptions = [
+  { value: 'black', label: 'Black'},
+  { value: 'white', label: 'White'},
   { value: 'red', label: 'Red'},
-  { value: 'red', label: 'Red'},
-  { value: 'red', label: 'Red'},
-  { value: 'red', label: 'Red'},
-  { value: 'red', label: 'Red'},
+  { value: 'yellow', label: 'Yellow'},
+  { value: 'green', label: 'Green'},
+  { value: 'blue', label: 'Blue'},
+  { value: 'orange', label: 'Orange'},
+  { value: 'purple', label: 'Purple'},
+  { value: 'brown', label: 'Brown'},
+  { value: 'silver', label: 'Silver'},
+  { value: 'gold', label: 'Gold'}
 ]
+const ClothesForm = ({handleChange, handleSubmit, handleMultiChange, clothesForm}) => {
+const { title, category, genderCategory, size, rentalPrice, image } = clothesForm
 
   return (
     <section className="section">
@@ -17,6 +24,7 @@ const colorOptions = [
         <div className="columns">
           <form
             className="column is-half is-offset-one-quarter box"
+            onSubmit={handleSubmit}
           >
 
             <div className="field">
@@ -27,6 +35,8 @@ const colorOptions = [
                   type="text"
                   placeholder="Give your item a title!"
                   name="title"
+                  value={title}
+                  onChange={handleChange}
                 />
               </div>
             </div>
@@ -40,6 +50,8 @@ const colorOptions = [
                   type="text"
                   placeholder="What category is this item..."
                   name="category"
+                  value={category}
+                  onChange={handleChange}
                 />
               </div>
             </div>
@@ -47,13 +59,26 @@ const colorOptions = [
             <div className="field">
               <label className="label">This item is for...</label>
               <div className="control">
-                <div className="select">
-                  <select name="genderCategory">
-                  <option disabled value=""></option>
-                    <option>Men</option>
-                    <option>Women</option>
-                  </select>
-                </div>
+                <label className="radio">
+                <input
+                    type="radio"
+                    name="genderCategory"
+                    value="Women"
+                    onChange={handleChange}
+                    checked={genderCategory === 'Women'}
+                  />
+                    Women
+                </label>
+                <label className="radio">
+                <input
+                    type="radio"
+                    name="genderCategory"
+                    value="Men"
+                    onChange={handleChange}
+                    checked={genderCategory === 'Men'}
+                  />
+                    Men
+                </label>
               </div>
             </div>
 
@@ -61,32 +86,35 @@ const colorOptions = [
               <label className="label">Size</label>
               <div className="control">
                 <div className="select">
-                  <select name="size">
+                  <select 
+                  name="size"
+                  value={size}
+                  onChange={handleChange}>
                     <option disabled value=""></option>
-                    <option>8</option>
-                    <option>10</option>
-                    <option>12</option>
-                    <option>14</option>
-                    <option>16</option>
-                    <option>XS</option>
-                    <option>S</option>
-                    <option>M</option>
-                    <option>L</option>
-                    <option>XL</option>
+                    <option value="8">8</option>
+                    <option value="10">10</option>
+                    <option value="12">12</option>
+                    <option value="14">14</option>
+                    <option value="16">16</option>
+                    <option value="XS">XS</option>
+                    <option value="S">S</option>
+                    <option value="M">M</option>
+                    <option value="L">L</option>
+                    <option value="XL">XL</option>
                   </select>
                 </div>
               </div>
             </div>
 
-{/* Change  to multiselect*/}
             <div className="field">
               <label className="label">Colour</label>
               <div className="control">
-                <input
-                  className="input"
-                  type="text"
+                <Select
+                  options={colorOptions}
                   placeholder="Please select a colour / colours.."
                   name="color"
+                  isMulti
+                  onChange={handleMultiChange}
                 />
               </div>
             </div>
@@ -99,9 +127,30 @@ const colorOptions = [
                   type="number"
                   placeholder="How much will this rent for (per week)?"
                   name="rentalPrice"
+                  value={rentalPrice}
+                  onChange={handleChange}
                 />
               </div>
             </div>
+
+            {/* //! need to add the option to upload photos here too  */}
+            <div className="field">
+              <label className="label">Upload Images</label>
+              <div className="control">
+              <input
+              className="input"
+              type="text"
+              placeholder="Add image link here"
+              name="image"
+              value={image}
+              onChange={handleChange}
+              />
+              </div>
+            </div>
+
+            <div className="field">
+              <button type="submit" className="button is-fullwidth is-primary">Add Item</button>
+              </div>
 
           </form>
         </div>

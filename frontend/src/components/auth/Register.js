@@ -32,7 +32,7 @@ handleSubmit = async event => {
 }
 
   render() {
-    console.log(this.state.registerForm)
+    // console.log(this.state.registerForm)
     return (
       <>
           <section className="section">
