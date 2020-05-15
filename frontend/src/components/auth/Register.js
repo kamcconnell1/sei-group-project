@@ -1,6 +1,7 @@
 import React from 'react'
 
 import RegisterForm from './RegisterForm'
+import {registerUser} from '../../lib/api'
 
 class Register extends React.Component {
 state = {
@@ -8,7 +9,7 @@ state = {
     username: '', 
     email: '', 
     password: '', 
-    passwordConfirmation: ''
+    passwordConfirmation: '',
   }
 }
 
@@ -20,9 +21,14 @@ handleChange = event => {
 }
 
 // handleSubmit event for submitting the registration form
-handleSubmit = event => {
+handleSubmit = async event => {
   event.preventDefault()
-  console.log('I am submitting')
+  try{
+    await registerUser(this.state.registerForm)
+    this.props.history.push('/login')
+  } catch (err) {
+    console.log(err)
+  }
 }
 
   render() {
