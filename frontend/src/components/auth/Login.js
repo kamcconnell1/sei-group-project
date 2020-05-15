@@ -2,10 +2,13 @@ import React from 'react'
 
 import LoginForm from './LoginForm'
 
+import {loginUser} from '../../lib/api'
+import {setToken} from '../../lib/auth'
+
 class Login extends React.Component{
   state = {
     loginForm: {
-      username: '',
+      email: '',
       password: ''
     }
   } 
@@ -18,9 +21,15 @@ class Login extends React.Component{
   }
 
   // handleSubmit event for submitting the login form
-handleSubmit = event => {
+handleSubmit = async event => {
   event.preventDefault()
-  console.log('I am submitting')
+  try{
+    const res = await loginUser(this.state.loginForm)
+    setToken(res.data.token)
+    this.props.history.push('/user/1')
+  } catch (err) {
+    console.log(err)
+  }
 }
 
   render() {
