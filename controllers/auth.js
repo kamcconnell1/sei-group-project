@@ -1,5 +1,5 @@
 const User = require('../models/user')
-const secret = 'benga Smells'
+const { secret } = require('../config/environment')
 
 //* require login features
 const jwt = require('jsonwebtoken')
@@ -15,6 +15,7 @@ async function register(req, res) {
   }
 }
 
+//* function for user login
 async function login(req, res) {
   try {
     const user = await User.findOne({ email: req.body.email })
