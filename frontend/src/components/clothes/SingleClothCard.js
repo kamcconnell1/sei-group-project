@@ -1,6 +1,6 @@
 import React from 'react'
 
-const SingleClothCard = ({image, title, profilePic, username }) => {
+const SingleClothCard = ({image, title, profilePic, username, createdArticles, images }) => {
   return(
     <>
     <section className="section">
@@ -27,6 +27,18 @@ const SingleClothCard = ({image, title, profilePic, username }) => {
   <strong>{username}</strong>
   </p>
   <p>Ratings go here</p>
+    </div>
+    <div>
+    <div className="show-img column is-one-quarter">
+          <figure className="image">
+            <img src={images[Math.floor(Math.random() * images.length)]} alt={title} />
+          </figure>
+        </div>
+    <div className="show-img column is-one-quarter">
+          <figure className="image">
+            <img src={images[Math.floor(Math.random() * images.length)]} alt={title} />
+          </figure>
+        </div>
     </div>
   </section>
   </>

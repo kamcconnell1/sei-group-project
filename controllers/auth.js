@@ -11,6 +11,7 @@ async function register(req, res) {
     res.status(201).json({ message: `Welcome ${user.username}, please login to confirm registration.` })
   } catch (err) {
     console.log(err)
+    res.json(err)
   }
 }
 
