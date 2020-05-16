@@ -1,6 +1,6 @@
 import React from 'react'
 
-const RegisterForm = ({handleChange, handleSubmit, username, email, password, passwordConfirmation }) => {
+const RegisterForm = ({handleChange, handleSubmit, username, email, postcode, password, passwordConfirmation, errors }) => {
 
   return (
     <>
@@ -16,7 +16,7 @@ const RegisterForm = ({handleChange, handleSubmit, username, email, password, pa
                 <label className="label">Username</label>
                 <div className="control">
                   <input 
-                  className="input" 
+                  className={`input ${errors.username ? 'is-danger': '' }`} 
                   type="text" 
                   placeholder="Enter Username here" 
                   name="username"
@@ -24,6 +24,7 @@ const RegisterForm = ({handleChange, handleSubmit, username, email, password, pa
                   onChange={handleChange}
                   />
                   </div>
+                  {errors.username && <small className="help is-danger">{errors.username}</small>}
                 </div>
 
                 <div className="field">
@@ -35,6 +36,20 @@ const RegisterForm = ({handleChange, handleSubmit, username, email, password, pa
                   placeholder="Enter email here" 
                   name="email"
                   value={email}
+                  onChange={handleChange}
+                  />
+                  </div>
+                </div>
+
+                <div className="field">
+                <label className="label">Postcode</label>
+                <div className="control">
+                  <input 
+                  className="input" 
+                  type="text" 
+                  placeholder="Please add your postcode" 
+                  name="email"
+                  value={postcode}
                   onChange={handleChange}
                   />
                   </div>

@@ -9,6 +9,7 @@ class ClothesIndex extends React.Component {
   state = { 
     clothes: null, 
     filteredClothes: null,
+    color: null,
     searchClothes: ''
   }
 
@@ -29,7 +30,7 @@ class ClothesIndex extends React.Component {
     const searchClothes = event.target.value
     const filteredClothes = clothes.filter(cloth => {
       const regex = RegExp(searchClothes, 'i')
-      return cloth.category.match(regex) || cloth.color.find(col => col).includes(regex)
+      return cloth.category.match(regex) || cloth.title.match(regex)
     })
     this.setState({searchClothes, filteredClothes})
   }
@@ -39,6 +40,7 @@ class ClothesIndex extends React.Component {
     if (!this.state.filteredClothes) return <h1>Some Ninjas are fixing this</h1>
     const { filteredClothes } = this.state
     console.log(filteredClothes)
+    // console.log(filteredClothes)
     return (
       <>
         <section className="hero is-light">

@@ -8,16 +8,19 @@ state = {
   registerForm: {
     username: '', 
     email: '', 
+    postcode: '',
     password: '', 
     passwordConfirmation: '',
-  }
+  }, 
+  errors: {}
 }
 
 //handleChange event for inputting values on form 
 handleChange = event => {
   // console.log(event.target.value);
   const registerForm = {...this.state.registerForm, [event.target.name]: event.target.value }
-  this.setState({registerForm})
+  const errors = { ...this.state.errors, [event.target.name]: ''}
+  this.setState({ registerForm, errors })
 }
 
 // handleSubmit event for submitting the registration form
@@ -27,12 +30,13 @@ handleSubmit = async event => {
     await registerUser(this.state.registerForm)
     this.props.history.push('/login')
   } catch (err) {
+    // this.setState({ errors: err.response.data.errors })
     console.log(err)
   }
 }
 
   render() {
-    // console.log(this.state.registerForm)
+    console.log(this.state.errors)
     return (
       <>
           <section className="section">
@@ -46,6 +50,7 @@ handleSubmit = async event => {
         <RegisterForm 
         handleChange={this.handleChange}
         handleSubmit={this.handleSubmit}
+        errors={this.state.errors}
         {...this.state.registerForm}
         />
       </>
