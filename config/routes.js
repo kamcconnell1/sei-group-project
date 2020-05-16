@@ -46,18 +46,11 @@ router.route('/posts/:id/comments/:commentId')
 
 //* Ratings
 
-//* Rating for articles
+//* Rating for articles 
 router.route('/clothes/:id/rating')
   .post(secureRoute, articles.rating)
 
-//* Rating for users
 
-router.route('users/:id/rating')
-  .post(secureRoute, user.ratingCreate)
-
-router.route('users/:id/rating/:ratingId')
-  .put(secureRoute, user.ratingUpdate)
-  .delete(secureRoute, user.ratingDelete)
 
 //*****************************/
 
@@ -77,16 +70,17 @@ router.route('/profile')
   .put(secureRoute, user.updateUser)
 
 //* user ratings
-router.route('/profile/rating')
+router.route('/profile/:id/rating')
   .post(secureRoute, user.ratingCreate)
-  .put(secureRoute, user.ratingUpdate)
-  .delete(secureRoute, user.ratingDelete)
 
-router.route('/profile/comments')
+// router.route('/profile/:id/rating/:ratingId')
+//   .delete(secureRoute, user.ratingDelete)
+
+router.route('/profile/:id/comments')
   .post(secureRoute, user.commentCreate)
 
-router.route('/profile/comments/:commentId')
-  .delete(user.commentDelete)
+router.route('/profile/:id/comments/:commentId')
+  .delete(secureRoute, user.commentDelete)
 
 //* exports
 module.exports = router

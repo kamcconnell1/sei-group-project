@@ -1,61 +1,69 @@
 const Article = require('../models/article')
+const { notFound, unauthorized } = require('../lib/errorMessages')
 
 
 //* function to get all articles of clothing
-async function articlesIndex(req, res) {
+//* tested
+async function articlesIndex(req, res, next) {
   try {
     const articles = await Article.find().populate('user').populate('comments.user').populate('ratings.user').populate('user.article')
-    if (!articles) throw new Error('Not Found')
+    if (!articles) throw new Error(notFound)
     res.status(200).json(articles)
   } catch (err) {
-    res.json(err)
+    next(err)
   }
 }
 
 //* function to create an article of clothing
-async function articlesCreate(req, res) {
+//* tested
+async function articlesCreate(req, res, next) {
   try {
     req.body.user = req.currentUser
     const createdArticle = await Article.create(req.body)
     res.status(201).json(createdArticle)
   } catch (err) {
-    res.json(err)
+    next(err)
   }
 }
 
 //* function to show single article of clothing
-async function articlesShow(req, res) {
+//* tested
+async function articlesShow(req, res, next) {
   const articleId = req.params.id
   try {
-    const article = await Article.findById(articleId)
-    if (!article) throw new Error('Not found')
-    res.status(200).json(article)
+    const anArticle = await Article.findById(articleId)
+    console.log(anArticle)
+    if (!anArticle) throw new Error('Not Found')
+    res.status(200).json(anArticle)
   } catch (err) {
-    res.json(err)
+    next(err)
   }
 }
 
 //* function to update single article of clothing
-async function articlesUpdate(req, res) {
-  const articleId = req.params.id
+//* tested
+async function articlesUpdate(req, res, next) {
   try {
-    const article = await Article.findById(articleId)
-    if (!article) throw new Error('Not found')
-    if (!article.user.equals(req.currentUser._id)) throw new Error('Unauthorized')
+    const article = await Article.findById(req.params.id)
+    console.log(req.params)
+    if (!article) throw new Error(notFound)
+    if (!article.user.equals(req.currentUser._id)) throw new Error(unauthorized)
     Object.assign(article, req.body)
     await article.save()
     res.status(202).json(article)
   } catch (err) {
-    res.json(err)
+    console.log(err.message)
+    next(err)
   }
 }
 
 //* function to delete an article of clothing by id
+//* tested
 async function articlesDelete(req, res) {
   const articleId = req.params.id
   try {
     const articleToDelete = await Article.findById(articleId)
-    if (!articleToDelete) throw new Error('Not found')
+    if (!articleToDelete) throw new Error(notFound)
     if (!articleToDelete.user.equals(req.currentUser._id)) throw new Error('Unauthorized')
     await articleToDelete.remove()
     res.sendStatus(204)
@@ -65,13 +73,13 @@ async function articlesDelete(req, res) {
 }
 
 //* COMMENTS
-
+//* tested
 async function articleCommentCreate (req, res) {
   try {
     req.body.user = req.currentUser
     const articleId = req.params.id
     const article = await Article.findById(articleId)
-    if (!article) throw new Error()
+    if (!article) throw new Error('Not found')
     console.log(req.body)
     //* push comment to specific article of clothing
     article.comments.push(req.body)
@@ -82,6 +90,7 @@ async function articleCommentCreate (req, res) {
   }
 }
 
+//* tested
 async function articleCommentDelete (req, res) {
   try {
     req.body.user = req.currentUser
@@ -102,7 +111,7 @@ async function articleCommentDelete (req, res) {
 }
 
 //* RATING
-
+//* tested
 async function articleRatingCreate (req, res) {
   try {
     req.body.user = req.currentUser

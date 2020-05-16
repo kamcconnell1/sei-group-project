@@ -1,5 +1,7 @@
 const Post = require('../models/post')
 
+
+//* tested
 async function postsIndex(req, res) {
   try {
     const posts = await Post.find().populate('user').populate('comments.user')
@@ -9,6 +11,7 @@ async function postsIndex(req, res) {
   }
 }
 
+//* tested
 async function postsCreate(req, res) {
   try {
     req.body.user = req.currentUser
@@ -19,6 +22,7 @@ async function postsCreate(req, res) {
   }
 }
 
+//* tested
 async function postsShow(req, res) {
   const postId = req.params.id
   try {
@@ -30,6 +34,7 @@ async function postsShow(req, res) {
   }
 }
 
+//* tested
 async function postsUpdate(req, res) {
   const postId = req.params.id
   try {
@@ -44,6 +49,7 @@ async function postsUpdate(req, res) {
   }
 }
 
+//* tested
 async function postsDelete(req, res) {
   const postId = req.params.id
   try {
@@ -60,6 +66,7 @@ async function postsDelete(req, res) {
 
 //* POST COMMENTS CONTROLLERS
 
+//* tested
 async function postCommentCreate (req, res) {
   try {
     req.body.user = req.currentUser
@@ -75,7 +82,7 @@ async function postCommentCreate (req, res) {
   }
 }
 
-
+//* tested
 async function postCommentDelete (req, res) {
   console.log(req)
   try {

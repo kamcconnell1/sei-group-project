@@ -10,8 +10,8 @@ const postCommentsSchema = new mongoose.Schema({
 })
 //* schema for posts (news/post feed)
 const postSchema = new mongoose.Schema({
-  title: { type: String, required: true, maxlength: 50 },
-  text: { type: String, required: true, maxlength: 1000 },
+  title: { type: String, required: true, maxlength: 100 },
+  text: { type: String, required: true },
   photo: { type: String }, //* we allow 1 photo
 
   // tags: [tagSchema],

@@ -29,7 +29,7 @@ async function login(req, res) {
 //* Show user's info for profile--- tested
 async function userProfile(req, res) {
   try {
-    const user = await User.findById(req.currentUser._id).populate('createdArticles').populate('createdPosts').populate('comments')
+    const user = await User.findById(req.currentUser._id).populate('createdArticles').populate('createdPosts').populate('comments.user')
     res.status(200).json(user)
   } catch (err) {
     res.json(err)
@@ -50,43 +50,49 @@ async function userUpdate(req, res) {
 }
 
 //* Comments 
-//* comment on user profile.--- NOT WORKING!!!
+//* comment on user profile --- tested 
 async function userCommentCreate(req, res) {
   try {
-    const user = await User.findById(req.currentUser._id)
-    if (!user) throw new Error('Not found')
-    console.log(req)
-    user.comments.push(req.body)
-    await user.save()
-    res.status(201).json(user)
+    req.body.user = req.currentUser
+    const userReceivingId = await req.params.id
+    const userReceiving = await User.findById(userReceivingId)
+    console.log(userReceiving)
+    // if (!userCommenting) throw new Error('Not found')
+    userReceiving.comments.push(req.body)
+    await userReceiving.save()
+    res.status(201).json(userReceiving)
   } catch (err) {
     console.log(err)
   }
 }
 
-//* cant test until above works!!!!!!!!!!
+//* delete a comment if you're the user who posted it --- tested
 async function userCommentDelete(req, res) {
-  console.log(req)
   try {
+    const userId = req.params.id
     const commentId = req.params.commentId
-    const user = await User.findById(commentId)
-    if (!user) throw new Error('Not Found')
+    const user = await User.findById(userId) 
+    if (!user) throw new Error('Not Found user')
     const commentToDelete = user.comments.id(commentId)
-    if (!commentToDelete) throw new Error('Not found')
+    console.log(commentToDelete.user)
+    if (!commentToDelete) throw new Error('Not found comment')
+    console.log(req.currentUser._id)
     if (!commentToDelete.user.equals(req.currentUser._id)) throw new Error('unauthorized')
     await commentToDelete.remove()
-    await user.save()
+    await user.save() 
     res.sendStatus(204)
   } catch (err) {
     console.log(err)
   }
 }
 
-//* Ratings
+//* Ratings--- tested
 async function userRatingCreate(req, res) {
   try {
+    req.body.user = req.currentUser
+    const userToRate = req.params.id
     const rating = req.body
-    const user = await User.findById(req.currentUser)
+    const user = await User.findById(userToRate)
     if (!user) throw new Error()
     user.ratings.push(rating)
     await user.save()
@@ -96,40 +102,24 @@ async function userRatingCreate(req, res) {
   }
 }
 
-async function userRatingUpdate(req, res) {
-  const userId = req.params.id
-  const ratingId = req.params.ratingId
-  try {
-    const user = await User.findById(userId)
-    if (!user) throw new Error('Not found')
-    if (!user.user.equals(req.currentUser._id)) throw new Error('Unauthorized')
-    const ratingToUpdate = user.ratings.id(ratingId)
-    Object.assign(ratingToUpdate, req.body)
-    await user.save()
-    res.status(202).json(user)
-  } catch (err) {
-    res.json(err)
-  }
-}
-
-async function userRatingDelete(req, res) {
-  console.log(req)
-  try {
-    req.body.user = req.currentUser
-    const userId = req.params.id
-    const ratingId = req.params.ratingId
-    const user = await User.findById(userId)
-    if (!user) throw new Error('Not Found')
-    const ratingToDelete = user.ratings.id(ratingId)
-    if (!ratingToDelete) throw new Error('Not found')
-    if (!ratingToDelete.user.equals(req.currentUser._id)) throw new Error('unauthorized')
-    await ratingToDelete.remove()
-    await user.save()
-    res.sendStatus(204)
-  } catch (err) {
-    console.log(err)
-  }
-}
+// async function userRatingDelete(req, res) {
+//   console.log(req)
+//   try {
+//     req.body.user = req.currentUser
+//     const userId = req.params.id
+//     const ratingId = req.params.ratingId
+//     const user = await User.findById(userId)
+//     if (!user) throw new Error('Not Found')
+//     const ratingToDelete = user.ratings.id(ratingId)
+//     if (!ratingToDelete) throw new Error('Not found')
+//     if (!ratingToDelete.user.equals(req.currentUser._id)) throw new Error('unauthorized')
+//     await ratingToDelete.remove()
+//     await user.save()
+//     res.sendStatus(204)
+//   } catch (err) {
+//     console.log(err)
+//   }
+// }
 
 //* export controller functions.
 module.exports = {
@@ -139,7 +129,6 @@ module.exports = {
   profile: userProfile,
   commentCreate: userCommentCreate,
   commentDelete: userCommentDelete,
-  ratingCreate: userRatingCreate,
-  ratingDelete: userRatingDelete,
-  ratingUpdate: userRatingUpdate
+  ratingCreate: userRatingCreate
+  // ratingDelete: userRatingDelete
 }

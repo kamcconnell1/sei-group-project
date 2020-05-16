@@ -18,6 +18,7 @@ const articleOfClothingSchema = new mongoose.Schema({
   title: { type: String, required: true, maxlength: 50 }, //* title of clothing
   category: { type: String, required: true }, //* category of clothing (skirt, shirt etc)
   genderCategory: { type: String, require: true, enum: ['Women', 'Men'] }, //* Man or woman
+  brand: { type: String, required: true, maxlength: 30 },
   size: { type: String, required: true },//* size of clothing
   color: [{ type: String, required: true }],//* color of clothing. in an array for different color options.
   rentalPrice: { type: Number, required: true }, //* rental price in number.
