@@ -64,6 +64,8 @@ async function articlesDelete(req, res) {
   }
 }
 
+//* COMMENTS
+
 async function articleCommentCreate (req, res) {
   try {
     req.body.user = req.currentUser
@@ -98,6 +100,8 @@ async function articleCommentDelete (req, res) {
     console.log(err)
   }
 }
+
+//* RATING
 
 async function articleRatingCreate (req, res) {
   try {
