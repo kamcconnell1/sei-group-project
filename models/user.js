@@ -1,5 +1,6 @@
 const mongoose = require('mongoose')
 const bcrypt = require('bcrypt')
+const uniqueValidator = require('mongoose-unique-validator')
 
 //* Schema for user rating
 const userRatingSchema = new mongoose.Schema({
@@ -12,7 +13,7 @@ const userRatingSchema = new mongoose.Schema({
 //* Schema for comments on user
 const userCommentsSchema = new mongoose.Schema({
   text: [ { type: String, maxlength: 200 } ],
-  user: [ { type: mongoose.Schema.ObjectId, ref: 'User', required: true } ]
+  user: { type: mongoose.Schema.ObjectId, ref: 'User' }
 })
 
 //* Schema for user
@@ -76,6 +77,6 @@ userSchema //* will run before the model is saved and hash the password before i
     next()
   })
 
-userSchema.plugin(require('mongoose-unique-validator'))
+userSchema.plugin(uniqueValidator)
 
 module.exports = mongoose.model('User', userSchema)

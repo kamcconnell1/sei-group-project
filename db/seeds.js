@@ -24,8 +24,18 @@ mongoose.connect(
       console.log(`${'😃 '.repeat(users.length)} users created `)
 
       //* SEED ARTICLES
+      // const articlesWithUserOne = articleData.slice(1,4).map(article => {
+      //   return { ...article, user: users[1]._id }
+      // })
+      // const articlesWithUserTwo = articleData.slice(4,7).map(article => {
+      //   return { ...article, user: users[2]._id }
+      // })
+      // const articlesWithUserThree = articleData.slice(6,8).map(article => {
+      //   return { ...article, user: users[3]._id }
+      // })
+
       const articlesWithUsers = articleData.map(article => {
-        return { ...article, user: users[0]._id }
+        return { ...article, user: users[1]._id }
       })
       const articles = await Article.create(articlesWithUsers)
       console.log(`${'👗 '.repeat(articles.length)} articles created `)
@@ -33,7 +43,7 @@ mongoose.connect(
 
       //* SEED POSTS
       const postsWithUsers = postData.map(post => {
-        return { ...post, user: user[0]._id}
+        return { ...post, user: users[1]._id }
       })
       const posts = await Post.create(postsWithUsers)
       console.log(`${'📄 '.repeat(posts.length)} posts created `)
