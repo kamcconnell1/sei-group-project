@@ -1,6 +1,5 @@
 const mongoose = require('mongoose')
 const bcrypt = require('bcrypt')
-const uniqueValidator = require('mongoose-unique-validator')
 
 //* Schema for user rating
 const userRatingSchema = new mongoose.Schema({
@@ -12,7 +11,7 @@ const userRatingSchema = new mongoose.Schema({
 
 //* Schema for comments on user
 const userCommentsSchema = new mongoose.Schema({
-  text: [ { type: String, maxlength: 200 } ],
+  text: [{ type: String, maxlength: 200 }],
   user: { type: mongoose.Schema.ObjectId, ref: 'User' }
 })
 
@@ -42,7 +41,7 @@ userSchema.virtual('createdPosts', {
 
 userSchema //* stuff that won't be displayed in responses
   .set('toJSON', {
-    virtuals: true, 
+    virtuals: true,
     transform(doc, json) {
       delete json.password
       delete json.email
@@ -51,7 +50,7 @@ userSchema //* stuff that won't be displayed in responses
   })
 
 //* validate incoming passwords of users trying to login against their saved one in the db
-userSchema.methods.validatePassword = function(password) { 
+userSchema.methods.validatePassword = function(password) {
   return bcrypt.compareSync(password, this.password)
 }
 
@@ -77,6 +76,6 @@ userSchema //* will run before the model is saved and hash the password before i
     next()
   })
 
-userSchema.plugin(uniqueValidator)
+userSchema.plugin(require('mongoose-unique-validator'))
 
 module.exports = mongoose.model('User', userSchema)
