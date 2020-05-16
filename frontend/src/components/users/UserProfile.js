@@ -27,9 +27,8 @@ class UserProfile extends React.Component {
 
   //* Function to allow user to upload a profile picture
   handleChange = event => {
-    console.log('clicked');
-    
-    // const user = {...this.state.formData, []}
+    const user = { ...this.state.user, profilePic: event.target.value }
+    this.setState({ user })
   }
 
   // * function to push the user to clothes add page if they want to add a new item 
@@ -39,9 +38,11 @@ class UserProfile extends React.Component {
   }
 
   render() {
-    console.log(this.state.user)
+    // console.log(this.state.user)
     if (!this.state.user) return null
     const { username, createdArticles, profilePic } = this.state.user
+    console.log(this.state.user);
+    
     return (
 
       <>
@@ -53,12 +54,21 @@ class UserProfile extends React.Component {
             <div className="columns">
               <div className="column ">
                 <div className="control">
-                  <img src={avatar} alt="avatar" />
-                  <div className="container">
-                    <ImageUpload 
-                    onChange={this.handeChange}
-                    />
-                  </div>
+                  {(profilePic.length> 0) ?
+                    <div>
+                      <img src={profilePic} alt="profile pic" />
+                    </div>
+                    :
+                    <div>
+                      <img src={avatar} alt="avatar" />
+                {/* //! Want to change this to a button - says add profile picture and then the upload form pops up rather then always on show */}
+                      <ImageUpload
+                        onChange={this.handleChange}
+                        name="profilePic"
+                        labelText="Upload Profile Picture"
+                      />
+                    </div>
+                  }
                 </div>
                 <button className="button is fullwidth"
                   onClick={this.handleAddClothes}
@@ -71,6 +81,7 @@ class UserProfile extends React.Component {
                   <ClothCard
                     {...item}
                     key={item._id}
+                    name={profilePic}
                   />
                 )}
                 </div>
@@ -83,6 +94,7 @@ class UserProfile extends React.Component {
           </div>
             </div>
           </div>
+
         </section>
 
 
