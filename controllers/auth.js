@@ -42,7 +42,7 @@ async function userUpdate(req, res) {
   try {
     const userId = req.currentUser
     const updatedProfile = await User.findByIdAndUpdate(userId, req.body, { new: true, runValidators: true })
-    if (!updatedProfile) throw new Error()
+    if (!updatedProfile) throw new Error('Not found')
     res.status(202).json(updatedProfile)
   } catch (err) {
     console.log(err)
