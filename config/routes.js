@@ -50,8 +50,6 @@ router.route('/posts/:id/comments/:commentId')
 router.route('/clothes/:id/rating')
   .post(secureRoute, articles.rating)
 
-
-
 //* Rating for users
 
 router.route('users/:id/rating')
@@ -76,16 +74,18 @@ router.route('/login')
 //* show single user
 router.route('/profile')
   .get(secureRoute, user.profile)
+  .put(secureRoute, user.updateUser)
 
+//* user ratings
+router.route('/profile/rating')
+  .post(secureRoute, user.ratingCreate)
+  .put(secureRoute, user.ratingUpdate)
+  .delete(secureRoute, user.ratingDelete)
 
-//   //* user comments
-// router.route('/users')
-//   .get()
+router.route('/profile/comments')
+  .post(secureRoute, user.commentCreate)
 
-router.route('/users/:id/comments')
-  .post(user.commentCreate)
-
-router.route('/users/:id/comments/:commentId')
+router.route('/profile/comments/:commentId')
   .delete(user.commentDelete)
 
 //* exports

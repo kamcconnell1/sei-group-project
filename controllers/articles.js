@@ -68,7 +68,7 @@ async function articleCommentCreate (req, res) {
   try {
     req.body.user = req.currentUser
     const articleId = req.params.id
-    const article = await (await Article.findById(articleId))
+    const article = await Article.findById(articleId)
     if (!article) throw new Error()
     console.log(req.body)
     //* push comment to specific article of clothing

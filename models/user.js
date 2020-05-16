@@ -12,7 +12,7 @@ const userRatingSchema = new mongoose.Schema({
 //* Schema for comments on user
 const userCommentsSchema = new mongoose.Schema({
   text: [ { type: String, maxlength: 200 } ],
-  user: { type: mongoose.Schema.ObjectId, ref: 'User', required: true }
+  user: [ { type: mongoose.Schema.ObjectId, ref: 'User', required: true } ]
 })
 
 //* Schema for user
@@ -34,7 +34,7 @@ userSchema.virtual('createdArticles', {
 })
 
 userSchema.virtual('createdPosts', {
-  ref: 'Posts',
+  ref: 'Post',
   localField: '_id',
   foreignField: 'user'
 })
