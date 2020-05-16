@@ -23,8 +23,9 @@ class ClothesShow extends React.Component {
   render() {
     if (!this.state.cloth) return <h1>Even more Ninjas are working on this</h1>
     const {cloth, user} = this.state
-    console.log(cloth)
-    console.log(user)
+
+    //* Variable of images from articles user posted
+    const images = user.createdArticles.map(image => image.image)
     return (
       <>
         <section className="hero is-light">
@@ -42,6 +43,7 @@ class ClothesShow extends React.Component {
               <SingleClothCard 
               {...cloth}
               {...user}
+              images={images}
               />
             </div>
           </div>

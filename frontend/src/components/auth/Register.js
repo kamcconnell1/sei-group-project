@@ -30,8 +30,8 @@ handleSubmit = async event => {
     await registerUser(this.state.registerForm)
     this.props.history.push('/login')
   } catch (err) {
-    // this.setState({ errors: err.response.data.errors })
-    console.log(err)
+    this.setState({ errors: err.response.data.errors })
+    console.log(err.response)
   }
 }
 

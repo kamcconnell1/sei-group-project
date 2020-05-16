@@ -30,3 +30,7 @@ export const isAuthenticated = () => {
   const now = Math.round(Date.now() / 1000) // * works out the time RIGHT NOW
   return now < payload.exp // * is RIGHT NOW earlier than EXPIRY TIME ON TOKEN
 }
+
+export const logout = () => {
+  localStorage.removeItem('token')
+}
