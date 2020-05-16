@@ -36,7 +36,7 @@ handleSubmit = async event => {
 }
 
   render() {
-    console.log(this.state.errors)
+    // console.log(this.state.errors)
     return (
       <>
           <section className="section">

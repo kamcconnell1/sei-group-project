@@ -14,8 +14,9 @@ import Register from './components/auth/Register'
 import Login from './components/auth/Login'
 
 
-
 const App = () => {
+
+
   return (
     <BrowserRouter>
     <Navbar />
@@ -26,8 +27,8 @@ const App = () => {
     <Route path='/about' component={About} />
     <Route path='/register' component={Register} />
     <Route path='/login' component={Login} />
-    <Route path='/user/:id/add' component={ClothesAdd} />
-    <Route path='/user/:id' component={UserProfile} />
+    <Route path='/profile/:username/add' component={ClothesAdd} />
+    <Route path='/profile/:username' component={UserProfile} />
     </Switch>
     </BrowserRouter>
   )

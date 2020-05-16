@@ -20,6 +20,11 @@ export const addClothes = clothesForm => {
   return axios.post(`${kebb_url}/clothes`, clothesForm, withHeaders())
 }
 
+// * Function to get single clothing item
+export const singleCloth = id => {
+  return axios.get(`${kebb_url}/clothes/${id}`)
+}
+
 
 //------------------------------------USER REQUESTS--------------------------------------------
 // * login user POST function
@@ -33,6 +38,6 @@ export const registerUser = registerForm => {
 }
 
 //* get user for PROFILE page 
-export const getUser = () => {
+export const getProfile = () => {
   return axios.get(`${kebb_url}/profile`, withHeaders())
 }

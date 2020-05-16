@@ -1,7 +1,30 @@
 import React from 'react'
 
+import { singleCloth, getProfile } from '../../lib/api'
+
+import SingleClothCard from './SingleClothCard'
+
 class ClothesShow extends React.Component {
+
+  state = {cloth: null, user: null}
+
+  // * GET each clothing item on mount via Id
+  async componentDidMount() {
+    const clothId = this.props.match.params.id
+    try {
+      const res = await singleCloth(clothId)
+      const user = await getProfile()
+      this.setState({cloth: res.data, user: user.data})
+    } catch (err) {
+      console.log(err)
+    }
+  }
+
   render() {
+    if (!this.state.cloth) return <h1>Even more Ninjas are working on this</h1>
+    const {cloth, user} = this.state
+    console.log(cloth)
+    console.log(user)
     return (
       <>
         <section className="hero is-light">
@@ -9,21 +32,17 @@ class ClothesShow extends React.Component {
             <div className="container">
               <h1 className="title">
                 Item show page
-      </h1>
+              </h1>
             </div>
           </div>
         </section>
         <section className="section">
           <div className="container">
             <div className="columns">
-              <div className="column is-half">
-                <figure className="image">
-                  <p>Picture goes here</p>
-                </figure>
-              </div>
-              <div>
-                <p>Description</p>
-              </div>
+              <SingleClothCard 
+              {...cloth}
+              {...user}
+              />
             </div>
           </div>
         </section>

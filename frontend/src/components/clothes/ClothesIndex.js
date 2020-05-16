@@ -4,7 +4,8 @@ import React from 'react'
 import { showAllClothes } from '../../lib/api'
 
 import ClothCard from './ClothCard'
-import Select from 'react-select'
+// import Select from 'react-select'
+import ClothesFilter from './ClothesFilter'
 
 class ClothesIndex extends React.Component {
   state = {
@@ -12,10 +13,12 @@ class ClothesIndex extends React.Component {
     filteredClothes: null,
     color: null,
     category: null,
+    gender: null,
+    sizes: null,
     searchClothes: ''
   }
 
-  // * Function to GET all clothes 
+  // * Function to GET all clothes and get data for filter functions
   async componentDidMount() {
     try {
       const res = await showAllClothes()
@@ -24,7 +27,11 @@ class ClothesIndex extends React.Component {
       const color = res.data.map(col => col.color)
       const colorArray = color.reduce((acc, col) => { return acc.concat(col) }, [])
       const filteredColor = colorArray.filter((col, index) => colorArray.indexOf(col) === index)
-      this.setState({ clothes: res.data, filteredClothes: res.data, category: filteredCategory, color: filteredColor })
+      const gender = res.data.map(gen => gen.genderCategory)
+      const filteredGender = gender.filter((gen, index) => gender.indexOf(gen) === index)
+      const sizes = res.data.map(size => size.size)
+      const filteredSize = sizes.filter((size, index) => sizes.indexOf(size) === index)
+      this.setState({ clothes: res.data, filteredClothes: res.data, category: filteredCategory, color: filteredColor, gender: filteredGender, sizes: filteredSize })
     } catch (err) {
       console.log(err)
     }
@@ -41,18 +48,29 @@ class ClothesIndex extends React.Component {
     this.setState({ searchClothes, filteredClothes })
   }
 
-  // * Function to allow user to filter clothing intems.
-
+  // * Function to allow user to filter clothing intems
+  // ! To be completed - by Benga
+  filterChange = event => {
+    console.log(event.target.value)
+  }
 
 
   render() {
     if (!this.state.filteredClothes) return <h1>Some Ninjas are fixing this</h1>
-    const { filteredClothes } = this.state
-    // * Variable of category options
-  const categoryOption = [{ value: this.state.category.forEach(cat => <option>{cat}</option>) }, { label: this.state.category.map(cat => cat) }]
+    const { filteredClothes, color, category, gender, searchClothes, sizes } = this.state
 
+    // * Variable of category options
+    const categoryOption = category.map(cat => { return {value: cat, label: cat}})
+    
     // * Variable of color options
-    const colorOption = [{ value: this.state.color.map(col => col) }, { lable: this.state.color.map(col => col) }]
+    const colorOption = color.map(col => { return {value: col, label: col}})
+    
+    // * Variable of Gender options
+    const genderOption = gender.map(gen => { return {value: gen, label: gen}})
+
+    // * Variable of Size options
+    const sizeOption = sizes.map(size => {return {value: size, label: size}})
+
     return (
       <>
         <section className="hero is-light">
@@ -60,42 +78,33 @@ class ClothesIndex extends React.Component {
             <div className="container">
               <h1 className="title">
                 Latest Items
-      </h1>
+              </h1>
             </div>
           </div>
         </section>
-        {/* Working on this now */}
-        <div className="hero is-dark"> 
-          <div className="column is-one-quarter is-offset-one-quarter box">
-            <ul>
-              <li>
-                <select className="select is-one-quarter">
-                {this.state.category.map(cat => <option key={cat}>{cat}</option>)}
-            </select>
-              </li>
-            </ul>
-          </div>
-          <div className="column is-one-quarter is-offset-one-quarter box">
-            <ul>
-              <li>
-                <Select
-                  placeholder="color"
-                  options={colorOption}
-                />
-              </li>
-            </ul>
-          </div>
-        </div>
-        <div>
-          <form className="column is-one-quarter is-offset-one-quarter box">
-            <input
-              className="input"
-              type="text"
-              placeholder="Search Item"
-              onChange={this.handleChange}
+        <div className="column is-one-quarter">
+          <form>
+            <input className="input" 
+            type="text" 
+            placeholder="Search for Category, Name and User" 
+            value={searchClothes}
+            onChange={this.handleChange}
             />
           </form>
         </div>
+        <section className="section is-dark">
+            <div className="container">
+              <div className="columns is-multiline">
+              <ClothesFilter
+                category={categoryOption}
+                color={colorOption}
+                gender={genderOption}
+                sizes={sizeOption}
+                filterChange={this.filterChange}
+              />
+            </div>
+            </div>
+        </section>
         <div className="columns is-multiline">
           {filteredClothes.map(cloth =>
             <ClothCard
@@ -110,7 +119,3 @@ class ClothesIndex extends React.Component {
 }
 
 export default ClothesIndex
-
-{/* <select className="select">
-{this.state.category.map(cat => <option key={cat}>{cat}</option>)}
-            </select> */}

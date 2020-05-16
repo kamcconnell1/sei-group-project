@@ -3,7 +3,8 @@ import React from 'react'
 import LoginForm from './LoginForm'
 
 import {loginUser} from '../../lib/api'
-import {setToken, getUser} from '../../lib/auth'
+import {setToken } from '../../lib/auth'
+import { getProfile } from '../../lib/api'
 
 class Login extends React.Component{
   state = {
@@ -26,8 +27,8 @@ handleSubmit = async event => {
   try{
     const res = await loginUser(this.state.loginForm)
     setToken(res.data.token)
-    const user = getUser()
-    this.props.history.push(`/user/${user}`)
+    const response = await getProfile()
+    this.props.history.push(`/profile/${response.data.username}`)
   } catch (err) {
     console.log(err)
   }
