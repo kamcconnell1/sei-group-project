@@ -1,22 +1,24 @@
 import React from 'react'
 import Select from 'react-select'
 
+import ImageUpload from '../common/ImageUpload'
+import { uploadClothesImage } from '../../lib/ext_api'
 
 const colorOptions = [
-  { value: 'black', label: 'Black'},
-  { value: 'white', label: 'White'},
-  { value: 'red', label: 'Red'},
-  { value: 'yellow', label: 'Yellow'},
-  { value: 'green', label: 'Green'},
-  { value: 'blue', label: 'Blue'},
-  { value: 'orange', label: 'Orange'},
-  { value: 'purple', label: 'Purple'},
-  { value: 'brown', label: 'Brown'},
-  { value: 'silver', label: 'Silver'},
-  { value: 'gold', label: 'Gold'}
+  { value: 'black', label: 'Black' },
+  { value: 'white', label: 'White' },
+  { value: 'red', label: 'Red' },
+  { value: 'yellow', label: 'Yellow' },
+  { value: 'green', label: 'Green' },
+  { value: 'blue', label: 'Blue' },
+  { value: 'orange', label: 'Orange' },
+  { value: 'purple', label: 'Purple' },
+  { value: 'brown', label: 'Brown' },
+  { value: 'silver', label: 'Silver' },
+  { value: 'gold', label: 'Gold' }
 ]
-const ClothesForm = ({handleChange, handleSubmit, handleMultiChange, clothesForm}) => {
-const { title, category, genderCategory, size, rentalPrice, image } = clothesForm
+const ClothesForm = ({ handleChange, handleSubmit, handleMultiChange, clothesForm, handleImageChange, handleAddImage }) => {
+  const { title, category, genderCategory, size, rentalPrice, image, brand } = clothesForm
 
   return (
     <section className="section">
@@ -57,10 +59,24 @@ const { title, category, genderCategory, size, rentalPrice, image } = clothesFor
             </div>
 
             <div className="field">
+              <label className="label">Brand</label>
+              <div className="control">
+                <input
+                  className="input"
+                  type="text"
+                  placeholder="Item brand"
+                  name="brand"
+                  value={brand}
+                  onChange={handleChange}
+                />
+              </div>
+            </div>
+
+            <div className="field">
               <label className="label">This item is for...</label>
               <div className="control">
                 <label className="radio">
-                <input
+                  <input
                     type="radio"
                     name="genderCategory"
                     value="Women"
@@ -70,7 +86,7 @@ const { title, category, genderCategory, size, rentalPrice, image } = clothesFor
                     Women
                 </label>
                 <label className="radio">
-                <input
+                  <input
                     type="radio"
                     name="genderCategory"
                     value="Men"
@@ -86,10 +102,10 @@ const { title, category, genderCategory, size, rentalPrice, image } = clothesFor
               <label className="label">Size</label>
               <div className="control">
                 <div className="select">
-                  <select 
-                  name="size"
-                  value={size}
-                  onChange={handleChange}>
+                  <select
+                    name="size"
+                    value={size}
+                    onChange={handleChange}>
                     <option disabled value=""></option>
                     <option value="8">8</option>
                     <option value="10">10</option>
@@ -135,23 +151,38 @@ const { title, category, genderCategory, size, rentalPrice, image } = clothesFor
 
             {/* //! need to add the option to upload photos here too  */}
             <div className="field">
-              <label className="label">Upload Images</label>
+              <label className="label">Upload Image Link or Files</label>
               <div className="control">
-              <input
-              className="input"
-              type="text"
-              placeholder="Add image link here"
-              name="image"
-              value={image}
-              onChange={handleChange}
-              />
+                <input
+                  className="input"
+                  type="text"
+                  placeholder="Add image link here"
+                  name="image"
+                  value={image}
+                  onChange={handleChange}
+                />
               </div>
             </div>
 
             <div className="field">
-              <button type="submit" className="button is-fullwidth is-primary">Add Item</button>
+              <div className="control">
+                {/* {image.map((image, index) => { */}
+                  {/* return ( */}
+                    <ImageUpload
+                      // onChange={args => handleImageChange(args, index)}
+                      preset={uploadClothesImage}
+                      name="image"
+                      value={image}
+                    />
+                  {/* ) */}
+                {/* }) */}
+                {/* } */}
+                {image.length < 5 && <button onClick={handleAddImage}>Add Another Image</button>}
               </div>
-
+            </div>
+            <div className="field">
+              <button type="submit" className="button is-fullwidth is-primary">Add Item</button>
+            </div>
           </form>
         </div>
       </div>

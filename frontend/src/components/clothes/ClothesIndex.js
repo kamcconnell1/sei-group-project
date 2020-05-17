@@ -15,6 +15,7 @@ class ClothesIndex extends React.Component {
     category: null,
     gender: null,
     sizes: null,
+    prices: {min: 15, max: 32},
     searchClothes: ''
   }
 
@@ -57,7 +58,7 @@ class ClothesIndex extends React.Component {
 
   render() {
     if (!this.state.filteredClothes) return <h1>Some Ninjas are fixing this</h1>
-    const { filteredClothes, color, category, gender, searchClothes, sizes } = this.state
+    const { filteredClothes, color, category, gender, searchClothes, sizes, prices } = this.state
 
     // * Variable of category options
     const categoryOption = category.map(cat => { return {value: cat, label: cat}})
@@ -101,6 +102,7 @@ class ClothesIndex extends React.Component {
                 gender={genderOption}
                 sizes={sizeOption}
                 filterChange={this.filterChange}
+                prices={prices}
               />
             </div>
             </div>

@@ -8,6 +8,7 @@ state = {
   clothesForm: {
     title: '',
     category: '', 
+    brand: '',
     genderCategory: '', 
     size: '', 
     color: [''], 
@@ -29,6 +30,24 @@ state = {
     this.setState({clothesForm})
   }
 
+// function to allow user to upload multiple images or links to the clothing item
+handleAddImage = () => {
+  const clothesForm = { ...this.state.clothesForm, image: [...this.state.clothesForm.image, ''] }
+  this.setState({ clothesForm})
+}
+
+// handleImageChange = (event, i) => {
+//   const images = [...this.state.clothesForm.image]
+//   const newImages = images.map((image, index) => {
+//     if (i === index) return event.target.value
+//     return image
+//   })
+//   const clothesForm = {...this.state.clothesForm, image: newImages}
+//   this.setState({ clothesForm })
+// }
+
+
+// submits the add clothes form 
   handleSubmit = async event => {
     event.preventDefault()
     try {
@@ -49,6 +68,8 @@ state = {
       handleMultiChange={this.handleMultiChange}
       handleSubmit={this.handleSubmit}
       clothesForm={this.state.clothesForm}
+      // onChange={this.handleImageChange}
+      onClick={this.handleAddImage}
       />
       </>
     )

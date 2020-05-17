@@ -3,7 +3,7 @@ import React from 'react'
 import ClothCard from '../clothes/ClothCard'
 import ImageUpload from '../common/ImageUpload'
 import { getProfile } from '../../lib/api'
-import { getPostcodeInfo } from '../../lib/ext_api'
+import { getPostcodeInfo, uploadProfileImage } from '../../lib/ext_api'
 import avatar from '../assets/avatar.png'
 
 import Map from '../common/Map'
@@ -65,7 +65,6 @@ class UserProfile extends React.Component {
     const { username, createdArticles, profilePic} = this.state.user
     const location = this.state.location
   
-    
     return (
 
       <>
@@ -90,6 +89,7 @@ class UserProfile extends React.Component {
                 {this.state.hoverAvatar? 
                       <ImageUpload
                         onChange={this.handleChange}
+                        preset={uploadProfileImage}
                         name="profilePic"
                         labelText="Upload Profile Picture"
                       />

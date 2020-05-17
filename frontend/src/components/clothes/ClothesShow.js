@@ -13,8 +13,10 @@ class ClothesShow extends React.Component {
     const clothId = this.props.match.params.id
     try {
       const res = await singleCloth(clothId)
+      console.log('clothes info:', res.data)
+
       const user = await getProfile()
-      console.log(user.data)
+      console.log('user profile info:', user.data)
       this.setState({cloth: res.data, user: user.data})
     } catch (err) {
       console.log(err)
