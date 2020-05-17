@@ -1,1 +1,23 @@
+.marker {
+  background-color: red;
+  height: 12px;
+  width: 12px;
+  border-radius: 100%;
+}
+.siderbar {
+  width: 20%;
+}
+.map {
+  border-left: 1px solid #fff;
+  position: absolute;
+  left: 20%;
+  width: 80%;
+  top: 0;
+  bottom: 0;
+}
+
+.pad2 {
+  padding: 20px;
+  box-sizing: border-box;
+}
 @import '~bulma/bulma.sass'

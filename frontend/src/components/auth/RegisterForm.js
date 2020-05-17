@@ -48,7 +48,7 @@ const RegisterForm = ({handleChange, handleSubmit, username, email, postcode, pa
                   className="input" 
                   type="text" 
                   placeholder="Please add your postcode" 
-                  name="email"
+                  name="postcode"
                   value={postcode}
                   onChange={handleChange}
                   />

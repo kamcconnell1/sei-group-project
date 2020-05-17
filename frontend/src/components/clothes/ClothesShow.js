@@ -14,6 +14,7 @@ class ClothesShow extends React.Component {
     try {
       const res = await singleCloth(clothId)
       const user = await getProfile()
+      console.log(user.data)
       this.setState({cloth: res.data, user: user.data})
     } catch (err) {
       console.log(err)
