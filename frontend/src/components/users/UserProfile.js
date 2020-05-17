@@ -1,6 +1,6 @@
 import React from 'react'
 
-import ClothCard from '../clothes/ClothCard'
+import UserClothCard from './UserClothCard'
 import ImageUpload from '../common/ImageUpload'
 import { getProfile } from '../../lib/api'
 import { getPostcodeInfo, uploadProfileImage } from '../../lib/ext_api'
@@ -79,7 +79,7 @@ class UserProfile extends React.Component {
                 onMouseEnter={this.toggleHover} 
                 onMouseLeave={this.toggleHover}
                 >
-                  {(profilePic.length> 0) ?
+                  {(profilePic) ?
                     <div>
                       <img src={profilePic} alt="profile pic" />
                     </div>
@@ -115,7 +115,7 @@ class UserProfile extends React.Component {
               <div className="column is-multiline">
                 <div className="control">
                 {createdArticles.map(item =>
-                  <ClothCard
+                  <UserClothCard
                     {...item}
                     key={item._id}
                     name={profilePic}

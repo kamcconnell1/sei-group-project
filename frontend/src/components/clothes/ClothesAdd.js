@@ -13,7 +13,7 @@ state = {
     size: '', 
     color: [''], 
     rentalPrice: '', 
-    image: ''
+    image: ['']
   }
 }
   
@@ -36,15 +36,15 @@ handleAddImage = () => {
   this.setState({ clothesForm})
 }
 
-// handleImageChange = (event, i) => {
-//   const images = [...this.state.clothesForm.image]
-//   const newImages = images.map((image, index) => {
-//     if (i === index) return event.target.value
-//     return image
-//   })
-//   const clothesForm = {...this.state.clothesForm, image: newImages}
-//   this.setState({ clothesForm })
-// }
+handleImageChange = (event, i) => {
+  const images = [...this.state.clothesForm.image]
+  const newImages = images.map((image, index) => {
+    if (i === index) return event.target.value
+    return image
+  })
+  const clothesForm = {...this.state.clothesForm, image: newImages}
+  this.setState({ clothesForm })
+}
 
 
 // submits the add clothes form 
@@ -60,16 +60,19 @@ handleAddImage = () => {
   }
 
   render() {
+    console.log(this.state.clothesForm.image);
+    
     return(
       <>
       <h1>Add Clothes</h1>
       <ClothesForm 
+      onChange={this.handleImageChange}
+      onClick={this.handleAddImage}
+
       handleChange={this.handleChange}
       handleMultiChange={this.handleMultiChange}
       handleSubmit={this.handleSubmit}
       clothesForm={this.state.clothesForm}
-      // onChange={this.handleImageChange}
-      onClick={this.handleAddImage}
       />
       </>
     )

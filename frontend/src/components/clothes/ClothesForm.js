@@ -17,7 +17,7 @@ const colorOptions = [
   { value: 'silver', label: 'Silver' },
   { value: 'gold', label: 'Gold' }
 ]
-const ClothesForm = ({ handleChange, handleSubmit, handleMultiChange, clothesForm, handleImageChange, handleAddImage }) => {
+const ClothesForm = ({ handleChange, handleSubmit, handleMultiChange, clothesForm, onClick, onChange}) => {
   const { title, category, genderCategory, size, rentalPrice, image, brand } = clothesForm
 
   return (
@@ -166,18 +166,18 @@ const ClothesForm = ({ handleChange, handleSubmit, handleMultiChange, clothesFor
 
             <div className="field">
               <div className="control">
-                {/* {image.map((image, index) => { */}
-                  {/* return ( */}
+                {image.map((image, index) => {
+                  return (
                     <ImageUpload
-                      // onChange={args => handleImageChange(args, index)}
+                      key={index}
+                      onChange={args => onChange(args, index)}
                       preset={uploadClothesImage}
                       name="image"
-                      value={image}
                     />
-                  {/* ) */}
-                {/* }) */}
-                {/* } */}
-                {image.length < 5 && <button onClick={handleAddImage}>Add Another Image</button>}
+                  )
+                })
+                }
+                {image.length < 5 && <button onClick={onClick}>Add Another Image</button>}
               </div>
             </div>
             <div className="field">
