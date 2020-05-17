@@ -1,5 +1,6 @@
 import React from 'react'
 
+import { isAuthenticated } from '../../lib/auth'
 
 class About extends React.Component {
   
@@ -37,9 +38,10 @@ render () {
           {/* image to go here */}
         </div>
         <div className="container">
+          {!isAuthenticated() &&
         <button className="button is fullwidth"
               onClick={this.handleClick}
-              >Join Us Now</button>
+              >Join Us Now</button>}
               </div>
       </section>
       </section>

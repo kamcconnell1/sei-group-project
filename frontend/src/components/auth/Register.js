@@ -2,6 +2,7 @@ import React from 'react'
 
 import RegisterForm from './RegisterForm'
 import {registerUser} from '../../lib/api'
+import { getPostcodeInfo } from '../../lib/ext_api'
 
 class Register extends React.Component {
 state = {
@@ -23,9 +24,22 @@ handleChange = event => {
   this.setState({ registerForm, errors })
 }
 
+// ! Function to check whether postcode exists in postcode API - if it doesnt it will cause the user profile page to error so need to check now - come back to this once the register form errors are working 
+// async getLocation () {
+//   try {
+//     const postcode = this.state.registerForm.postcode
+//     console.log(postcode);
+//     const response = await getPostcodeInfo(postcode)
+//     console.log(response)
+//   } catch (err) {
+//     console.log(err.response)
+//   }
+// }
+
 // handleSubmit event for submitting the registration form
 handleSubmit = async event => {
   event.preventDefault()
+  // getPostcodeInfo()
   try{
     await registerUser(this.state.registerForm)
     this.props.history.push('/login')
