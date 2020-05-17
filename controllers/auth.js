@@ -7,7 +7,9 @@ const Posts = require('../models/post')
 //* require login features
 const jwt = require('jsonwebtoken')
 
-//! function for user creation--- registers without all credentials!
+//? register a user
+//* WORKING tested
+//* ERROR tested 
 async function register(req, res, next) {
   try {
     const user = await User.create(req.body)
@@ -17,44 +19,65 @@ async function register(req, res, next) {
   }
 }
 
-//* function for user login--- tested
-async function login(req, res) {
+//? function for user login
+//* WORKING tested
+//* ERROR tested 
+async function login(req, res, next) {
   try {
     const user = await User.findOne({ email: req.body.email })
-    if (!user || !user.validatePassword(req.body.password)) throw new Error()
+    if (!user || !user.validatePassword(req.body.password)) throw new Error(unauthorized)
     const token = jwt.sign({ sub: user._id }, secret, { expiresIn: '7 days' })
     res.status(202).json({ message: `Hello ${user.username}`, token })
   } catch (err) {
-    console.log(err)
+    next(err)
   }
 }
 
-//* Show user's info for profile--- tested
-async function userProfile(req, res) {
+//? Show currentUser Profile -> user's own dashboard
+//* WORKING tested
+//* ERROR tested
+async function currentUserProfile(req, res, next) {
   try {
-    const user = await User.findById(req.currentUser._id).populate('createdArticles').populate('createdPosts').populate('comments.user')
+    const user = await User.findById(req.currentUser._id).populate('createdArticles').populate('createdPosts').populate('comments.user').populate('favourites.favArticles').populate('favourites.favUsers').populate('favourites.favPosts')
+    if (!user) throw new Error(unauthorized)
     res.status(200).json(user)
   } catch (err) {
-    res.json(err)
+    next(err)
   }
 }
 
+//! Show another user's profile -> other's dashboards
+async function getProfile(req, res, next) {
+  try {
+    const user = req.params.id
+    const userProfile = await User.findById(user).populate()
+    console.log(userProfile)
+    if (!userProfile) throw new Error(unauthorized)
+    res.status(200).json(userProfile)
+  } catch (err) {
+    next(err)
+  }
+}
 
-//* update details on user profile--- tested
-async function userUpdate(req, res) {
+//* update details on user profile
+//? WORKING tested
+//! ERROR not tested 
+async function userUpdate(req, res, next) {
   try {
     const userId = req.currentUser
     const updatedProfile = await User.findByIdAndUpdate(userId, req.body, { new: true, runValidators: true })
     if (!updatedProfile) throw new Error('Not found')
     res.status(202).json(updatedProfile)
   } catch (err) {
-    console.log(err)
+    next(err)
   }
 }
 
 //* Comments 
-//* comment on user profile --- tested 
-async function userCommentCreate(req, res) {
+//* comment on user profile
+//? WORKING tested
+//! ERROR not tested 
+async function userCommentCreate(req, res, next) {
   try {
     req.body.user = req.currentUser
     const userReceivingId = await req.params.id
@@ -65,12 +88,14 @@ async function userCommentCreate(req, res) {
     await userReceiving.save()
     res.status(201).json(userReceiving)
   } catch (err) {
-    console.log(err)
+    next(err)
   }
 }
 
-//* delete a comment if you're the user who posted it --- tested
-async function userCommentDelete(req, res) {
+//* delete a comment if you're the user who posted it
+//? WORKING tested
+//! ERROR not tested 
+async function userCommentDelete(req, res, next) {
   try {
     const userId = req.params.id
     const commentId = req.params.commentId
@@ -85,12 +110,16 @@ async function userCommentDelete(req, res) {
     await user.save()
     res.sendStatus(204)
   } catch (err) {
-    console.log(err)
+    next(err)
   }
 }
 
-//* Ratings--- tested
-async function userRatingCreate(req, res) {
+//* RATINGS
+
+//* add a rating on a user
+//? WORKING tested
+//! ERROR not tested 
+async function userRatingCreate(req, res, next) {
   try {
     req.body.user = req.currentUser
     const userToRate = req.params.id
@@ -101,7 +130,7 @@ async function userRatingCreate(req, res) {
     await user.save()
     res.status(201).json(user)
   } catch (err) {
-    console.log(err)
+    next(err)
   }
 }
 
@@ -124,7 +153,11 @@ async function userRatingCreate(req, res) {
 //   }
 // }
 
-//* Add to favourites --- tested
+//* FAVOURITES
+
+//* Add an article to your favourites
+//? WORKING tested
+//! ERROR not tested 
 async function addArticleToFavourites(req, res, next) {
   try {
     const id = req.currentUser.id
@@ -144,6 +177,9 @@ async function addArticleToFavourites(req, res, next) {
   }
 }
 
+//* Add a user to your favourites -> friends
+//? WORKING tested
+//! ERROR not tested 
 async function addUserToFavourites(req, res, next) {
   try {
     const id = req.currentUser.id
@@ -162,6 +198,9 @@ async function addUserToFavourites(req, res, next) {
   }
 }
 
+//* add a post to your favourites
+//? WORKING tested
+//! ERROR not tested 
 async function addPostToFavourites(req, res, next) {
   try {
     const id = req.currentUser.id
@@ -179,18 +218,76 @@ async function addPostToFavourites(req, res, next) {
   }
 }
 
+//* remove article from your favs
+//! WORKING tested
+//! ERROR not tested 
+
+async function removeArticleFromFavs(req, res, next) {
+  try {
+    const id = req.currentUser.id
+    const user = await User.findById(id)
+    if (!user) throw new Error(unauthorized)
+    const articleToRemove = req.params.id
+    await user.favourites.favArticles.remove(articleToRemove)
+    await user.save()
+    res.sendStatus(204)
+  } catch (err) {
+    next(err)
+  }
+}
+
+//* remove user from your friends favs
+//! WORKING tested
+//! ERROR not tested 
+async function removeUserFromFavs(req, res, next) {
+  try {
+    const id = req.currentUser.id
+    const user = await User.findById(id)
+    if (!user) throw new Error(unauthorized)
+    const friendToRemove = req.params.id
+    await user.favourites.favUsers.remove(friendToRemove)
+    await user.save()
+    res.sendStatus(204)
+  } catch (err) {
+    next(err)
+  }
+}
+
+//* remove posts from your posts favs
+//! WORKING tested
+//! ERROR not tested 
+async function removePostsFromFavs(req, res, next) {
+  try {
+    const id = req.currentUser.id
+    const user = await User.findById(id)
+    if (!user) throw new Error(unauthorized)
+    const postToRemove = req.params.id
+    await user.favourites.favPosts.remove(postToRemove)
+    await user.save()
+    res.sendStatus(204)
+  } catch (err) {
+    next(err)
+  }
+}
+
+
 
 //* export controller functions.
 module.exports = {
   register,
   login,
   updateUser: userUpdate,
-  profile: userProfile,
+  profile: currentUserProfile,
+  getProfile,
   commentCreate: userCommentCreate,
   commentDelete: userCommentDelete,
   ratingCreate: userRatingCreate,
-  favsArt: addArticleToFavourites,
+  favsArticle: addArticleToFavourites,
   favsFriend: addUserToFavourites,
-  favsPost: addPostToFavourites
+  favsPost: addPostToFavourites,
+  favArticlesRemove: removeArticleFromFavs,
+  favFriendsRemove: removeUserFromFavs,
+  favPostsRemove: removePostsFromFavs
+
   // ratingDelete: userRatingDelete
 }

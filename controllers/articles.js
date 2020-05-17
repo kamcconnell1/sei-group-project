@@ -60,8 +60,9 @@ async function articlesUpdate(req, res, next) {
 //* function to delete an article of clothing by id
 //* tested
 async function articlesDelete(req, res) {
-  const articleId = req.params.id
+  req.body.user = req.currentUser
   try {
+    const articleId = req.params.id
     const articleToDelete = await Article.findById(articleId)
     if (!articleToDelete) throw new Error(notFound)
     if (!articleToDelete.user.equals(req.currentUser._id)) throw new Error('Unauthorized')

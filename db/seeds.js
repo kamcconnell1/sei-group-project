@@ -23,7 +23,17 @@ mongoose.connect(
       const users = await User.create(userData)
       console.log(`${'😃 '.repeat(users.length)} users created `)
 
+
+      // //* Comments on Users
+      // //* Coments on John profile
+      // const commentsByJohn = userCommentsData.slice(0, 3).map(comment => {
+      //   return { ...comment, user: users[1]}
+
+      // })
+
+
       //* SEED ARTICLES
+      // articles for user 0 only
       // const articlesWithUsers = articleData.map(article => {
       //   return { ...article, user: users[0]._id }
       // })
@@ -53,6 +63,7 @@ mongoose.connect(
 
 
       // //* SEED POSTS
+      // posts for user 0 only
       // const postsWithUsers = postData.map(post => {
       //   return { ...post, user: users[0]._id }
       // })

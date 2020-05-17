@@ -1,41 +1,48 @@
 const Post = require('../models/post')
 
-
-//* tested
-async function postsIndex(req, res) {
+//* show all posts (from all users)
+//? WORKING tested
+//! ERROR not tested 
+async function postsIndex(req, res, next) {
   try {
     const posts = await Post.find().populate('user').populate('comments.user')
     res.status(200).json(posts)
   } catch (err) {
-    res.json(err)
+    next(err)
   }
 }
 
-//* tested
-async function postsCreate(req, res) {
+//* add a post
+//? WORKING tested
+//! ERROR not tested 
+async function postsCreate(req, res, next) {
   try {
     req.body.user = req.currentUser
     const createdPost = await Post.create(req.body)
     res.status(201).json(createdPost)
   } catch (err) {
-    res.json(err)
+    next(err)
   }
 }
 
-//* tested
-async function postsShow(req, res) {
+//* show single post
+//? WORKING tested
+//! ERROR not tested 
+async function postsShow(req, res, next) {
   const postId = req.params.id
   try {
     const post = await Post.findById(postId)
     if (!post) throw new Error('Not found')
     res.status(200).json(post)
   } catch (err) {
-    res.json(err)
+    next(err)
   }
 }
 
-//* tested
-async function postsUpdate(req, res) {
+//* update post
+//? WORKING tested
+//! ERROR not tested 
+async function postsUpdate(req, res, next) {
   const postId = req.params.id
   try {
     const post = await Post.findById(postId)
@@ -45,12 +52,14 @@ async function postsUpdate(req, res) {
     await post.save()
     res.status(202).json(post)
   } catch (err) {
-    res.json(err)
+    next(err)
   }
 }
 
-//* tested
-async function postsDelete(req, res) {
+//* delete post
+//? WORKING tested
+//! ERROR not tested 
+async function postsDelete(req, res, next) {
   const postId = req.params.id
   try {
     const postToDelete = await Post.findById(postId)
@@ -59,15 +68,17 @@ async function postsDelete(req, res) {
     await postToDelete.remove()
     res.sendStatus(204)
   } catch (err) {
-    res.json(err)
+    next(err)
   }
 }
 
 
 //* POST COMMENTS CONTROLLERS
 
-//* tested
-async function postCommentCreate (req, res) {
+//* create a comment on a post
+//? WORKING tested
+//! ERROR not tested 
+async function postCommentCreate (req, res, next) {
   try {
     req.body.user = req.currentUser
     const postId = req.params.id
@@ -78,12 +89,14 @@ async function postCommentCreate (req, res) {
     await post.save()
     res.status(201).json(post)
   } catch (err) {
-    console.log(err)
+    next(err)
   }
 }
 
-//* tested
-async function postCommentDelete (req, res) {
+//* delete comment from post
+//? WORKING tested
+//! ERROR not tested 
+async function postCommentDelete (req, res, next) {
   console.log(req)
   try {
     req.body.user = req.currentUser
@@ -99,7 +112,7 @@ async function postCommentDelete (req, res) {
     await post.save()
     res.sendStatus(204)
   } catch (err) {
-    console.log(err)
+    next(err)
   }
 }
 
