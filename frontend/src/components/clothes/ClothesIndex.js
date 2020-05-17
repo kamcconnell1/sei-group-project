@@ -1,5 +1,7 @@
 import React from 'react'
 
+// ! Filter function yet to be completed - Benga
+
 
 import { showAllClothes } from '../../lib/api'
 
@@ -15,7 +17,6 @@ class ClothesIndex extends React.Component {
     category: null,
     gender: null,
     sizes: null,
-    prices: {min: 15, max: 32},
     searchClothes: ''
   }
 
@@ -57,8 +58,8 @@ class ClothesIndex extends React.Component {
 
 
   render() {
-    if (!this.state.filteredClothes) return <h1>Some Ninjas are fixing this</h1>
-    const { filteredClothes, color, category, gender, searchClothes, sizes, prices } = this.state
+    if (!this.state.filteredClothes) return <h1>Some Ninjas are working on this</h1>
+    const { filteredClothes, color, category, gender, searchClothes, sizes,} = this.state
 
     // * Variable of category options
     const categoryOption = category.map(cat => { return {value: cat, label: cat}})
@@ -71,6 +72,8 @@ class ClothesIndex extends React.Component {
 
     // * Variable of Size options
     const sizeOption = sizes.map(size => {return {value: size, label: size}})
+
+    // ! Needs to include range filter to filter price - Benga
 
     return (
       <>
@@ -102,7 +105,6 @@ class ClothesIndex extends React.Component {
                 gender={genderOption}
                 sizes={sizeOption}
                 filterChange={this.filterChange}
-                prices={prices}
               />
             </div>
             </div>

@@ -2,7 +2,7 @@ import React from 'react'
 
 import {Link} from 'react-router-dom'
 
-const ClothCard = ({_id, title, image, rentalPrice}) => {
+const UserClothCard = ({_id, title, image, rentalPrice}) => {
   return (
     <div className="column is-one-quarter-desktop is-one-third-tablet is-half-mobile">
     <Link to={`/clothes/${_id}`}>
@@ -16,7 +16,7 @@ const ClothCard = ({_id, title, image, rentalPrice}) => {
           </figure>
         </div>
         <div className="card-content">
-          <h5 className=""><strong>Rental Price:</strong> {`£${rentalPrice}`}</h5>
+          <h5 className="">{`£${rentalPrice}`}</h5>
         </div>
       </div>
     </Link>
@@ -24,4 +24,4 @@ const ClothCard = ({_id, title, image, rentalPrice}) => {
   )
 }
 
-export default ClothCard
+export default UserClothCard
