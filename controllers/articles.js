@@ -33,7 +33,7 @@ async function articlesShow(req, res, next) {
   try {
     const anArticle = await Article.findById(articleId)
     console.log(anArticle)
-    if (!anArticle) throw new Error('Not Found')
+    if (!anArticle) throw new Error(notFound)
     res.status(200).json(anArticle)
   } catch (err) {
     next(err)
