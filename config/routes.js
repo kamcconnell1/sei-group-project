@@ -54,6 +54,17 @@ router.route('/clothes/:id/rating')
 
 //*****************************/
 
+router.route('/favourites/art')
+  .post(secureRoute, user.favsArt)
+
+router.route('/favourites/friends')
+  .post(secureRoute, user.favsFriend)
+
+router.route('/favourites/posts')
+  .post(secureRoute, user.favsPost)
+
+//*****************************/
+
 //* AUTH
 
 //* register

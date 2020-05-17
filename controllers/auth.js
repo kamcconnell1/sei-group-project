@@ -1,16 +1,19 @@
 const User = require('../models/user')
 const { secret } = require('../config/environment')
+const { notFound, unauthorized, duplicate } = require('../lib/errorMessages')
+const Article = require('../models/article')
+const Posts = require('../models/post')
 
 //* require login features
 const jwt = require('jsonwebtoken')
 
-//* function for user creation--- tested
-async function register(req, res) {
+//! function for user creation--- registers without all credentials!
+async function register(req, res, next) {
   try {
     const user = await User.create(req.body)
     res.status(201).json({ message: `Welcome ${user.username}, please login to confirm registration.` })
   } catch (err) {
-    res.json(err)
+    next(err)
   }
 }
 
@@ -71,7 +74,7 @@ async function userCommentDelete(req, res) {
   try {
     const userId = req.params.id
     const commentId = req.params.commentId
-    const user = await User.findById(userId) 
+    const user = await User.findById(userId)
     if (!user) throw new Error('Not Found user')
     const commentToDelete = user.comments.id(commentId)
     console.log(commentToDelete.user)
@@ -79,7 +82,7 @@ async function userCommentDelete(req, res) {
     console.log(req.currentUser._id)
     if (!commentToDelete.user.equals(req.currentUser._id)) throw new Error('unauthorized')
     await commentToDelete.remove()
-    await user.save() 
+    await user.save()
     res.sendStatus(204)
   } catch (err) {
     console.log(err)
@@ -121,6 +124,62 @@ async function userRatingCreate(req, res) {
 //   }
 // }
 
+//* Add to favourites --- tested
+async function addArticleToFavourites(req, res, next) {
+  try {
+    const id = req.currentUser.id
+    const user = await User.findById(id)
+    if (!user) throw new Error(unauthorized)
+    const article = await Article.findById(req.body.item)
+    console.log(article)
+    if (!article) throw new Error(notFound)
+    if (user.favourites.favArticles.includes(article._id)) throw new Error(duplicate)
+    if (!user.favourites.favArticles.includes(article._id))
+      user.favourites.favArticles.push(article)
+    console.log(user.favourites)
+    await user.save()
+    res.status(201).json(user)
+  } catch (err) {
+    next(err)
+  }
+}
+
+async function addUserToFavourites(req, res, next) {
+  try {
+    const id = req.currentUser.id
+    const user = await User.findById(id)
+    if (!user) throw new Error(unauthorized)
+    const friend = await User.findById(req.body.friend)
+    console.log(req.body.friend)
+    if (!friend) throw new Error(notFound)
+    if (user.favourites.favUsers.includes(friend._id)) throw new Error(duplicate)
+    if (!user.favourites.favUsers.includes(friend._id))
+      user.favourites.favUsers.push(friend)
+    await user.save()
+    res.status(201).json(user)
+  } catch (err) {
+    next(err)
+  }
+}
+
+async function addPostToFavourites(req, res, next) {
+  try {
+    const id = req.currentUser.id
+    const user = await User.findById(id)
+    if (!user) throw new Error(unauthorized)
+    const post = await Posts.findById(req.body.posts)
+    if (!post) throw new Error(notFound)
+    if (user.favourites.favPosts.includes(post._id)) throw new Error(duplicate)
+    if (!user.favourites.favPosts.includes(post._id))
+      user.favourites.favPosts.push(post)
+    await user.save()
+    res.status(201).json(user)
+  } catch (err) {
+    next(err)
+  }
+}
+
+
 //* export controller functions.
 module.exports = {
   register,
@@ -129,6 +188,9 @@ module.exports = {
   profile: userProfile,
   commentCreate: userCommentCreate,
   commentDelete: userCommentDelete,
-  ratingCreate: userRatingCreate
+  ratingCreate: userRatingCreate,
+  favsArt: addArticleToFavourites,
+  favsFriend: addUserToFavourites,
+  favsPost: addPostToFavourites
   // ratingDelete: userRatingDelete
 }

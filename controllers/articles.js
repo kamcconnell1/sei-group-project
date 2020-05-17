@@ -31,7 +31,7 @@ async function articlesCreate(req, res, next) {
 async function articlesShow(req, res, next) {
   const articleId = req.params.id
   try {
-    const anArticle = await Article.findById(articleId)
+    const anArticle = await Article.findById(articleId).populate('user')
     console.log(anArticle)
     if (!anArticle) throw new Error('Not Found')
     res.status(200).json(anArticle)

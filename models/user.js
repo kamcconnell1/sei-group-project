@@ -21,8 +21,13 @@ const userSchema = new mongoose.Schema({
   email: { type: String, required: true, maxlength: 50 },//* email of user
   password: { type: String, required: true },//* password
   postcode: { type: String },//* postcode location
-  profilePic: [{ type: String }], //* profile picture in array to allow different options.
+  profilePic: { type: String }, //* profile picture to allow different options.
   articlesPosted: [{ type: mongoose.Schema.ObjectId, ref: 'Article', required: true }],//* array of Id's which we can populate on get request.
+  favourites: {
+    favArticles: [{ type: mongoose.Schema.ObjectId, ref: 'Article' }],
+    favUsers: [{ type: mongoose.Schema.ObjectId, ref: 'User' }],
+    favPosts: [{ type: mongoose.Schema.ObjectId, ref: 'Posts' }]
+  },
   ratings: [userRatingSchema],//* reference to userRating schema to find the rating and the user who rated.
   comments: [userCommentsSchema] //* array of comments on user
 })
@@ -38,6 +43,8 @@ userSchema.virtual('createdPosts', {
   localField: '_id',
   foreignField: 'user'
 })
+
+
 
 userSchema //* stuff that won't be displayed in responses
   .set('toJSON', {
