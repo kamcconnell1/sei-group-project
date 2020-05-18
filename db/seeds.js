@@ -2,6 +2,7 @@ const mongoose = require('mongoose')
 const { dbURI } = require('../config/environment')
 const User = require('../models/user')
 const Article = require('../models/article')
+// const ArticleCommentsSchema = require('../models/article')
 const Post = require('../models/post')
 const userData = require('./data/users')
 const articleData = require('./data/articles')
@@ -32,13 +33,19 @@ mongoose.connect(
       const articlesJohn = await Article.create(articlesFromJohn)
       console.log(`${'👗🧒🏻 '.repeat(articlesJohn.length)} articles created `)
 
+
       // const commentsArticleMtoJ = commentsData.slice(9, 12).map(comment => {
-      //   return { ...comment, user: users[2]}
+      //   return { ...comment, user: users[2] }
+      // })
+      // const commentsJohnsArt = await ArticleCommentsSchema.create(commentsArticleMtoJ)
+
+      // commentsJohnsArt.map(comment => articlesFromJohn[0].push(commentsJohnsArt)
+
       // })
 
-      // const commentsJohnsArt = await 
+      // console.log(`${'💡 '.repeat(commentsJohnsArt.length)} comments from Mary to John's article created `)
 
-      
+
       //* articles for mary
       const articlesForMary = articleData.slice(4, 6).map(article => {
         return { ...article, user: users[2]._id }

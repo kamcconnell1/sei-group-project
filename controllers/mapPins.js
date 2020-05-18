@@ -1,6 +1,17 @@
 const User = require('../models/user')
 const { notFound } = require('../lib/errorMessages')
 
+// //? Function to get all Map Pins of current user
+//* WORKING tested
+//* ERROR tested
+async function getPins(req, res, next) {
+  try {
+    const user = await User.findById(req.currentUser._id)
+    res.status(201).json(user.pins)
+  } catch (err) {
+    next(err)
+  }
+}
 
 // //? Function to create a Map Pin
 //* WORKING tested
@@ -8,9 +19,9 @@ const { notFound } = require('../lib/errorMessages')
 async function mapPinsCreate(req, res, next) {
   req.body.user = req.currentUser
   try {
-    const user = await User.findById(req.currentUser)
+    const user = await User.findById(req.currentUser._id)
     user.pins.push(req.body)
-    user.save()
+    await user.save()
     res.status(201).json(user.pins)
   } catch (err) {
     next(err)
@@ -47,7 +58,7 @@ async function mapPinUpdate(req, res, next) {
     const user = await User.findById(req.currentUser)
     const pinToUpdate = user.pins.id(pinId)
     if (!pinToUpdate) throw new Error(notFound)
-    console.log(pinToUpdate) 
+    console.log(pinToUpdate)
     Object.assign(pinToUpdate, req.body)
     await user.save()
     res.status(202).json(pinToUpdate)
@@ -75,7 +86,7 @@ async function mapPinDelete(req, res, next) {
 }
 
 module.exports = {
-  // index: getPins,
+  getPins,
   create: mapPinsCreate,
   single: mapPinShow,
   update: mapPinUpdate,

@@ -10,7 +10,7 @@ const secureRoute = require('../lib/secureRoute')
 //? CLOTHES
 //* Get/Post Clothes
 router.route('/clothes')
-  .get(articles.index)
+  .get(articles.getClothes)
   .post(secureRoute, articles.create)
 
 //* Get Single Clothes/ Edit Clothes/ Delete Clothes
@@ -38,7 +38,7 @@ router.route('/register')
 router.route('/login')
   .post(auths.login)
 
-//* Show single user
+//* Show current user
 router.route('/profile')
   .get(secureRoute, user.profile)
   .put(secureRoute, user.updateUser)
@@ -134,8 +134,9 @@ router.route('/favourites/posts/:id')
 //? *****************************//
 
 //? MAP PINS
-router.route('/profile/pins')
-  // .get(secureRoute, mapPins.index)
+
+router.route('/pins')
+  .get(secureRoute, mapPins.getPins)
   .post(secureRoute, mapPins.create)
 
 router.route('/profile/pins/:pinId')
