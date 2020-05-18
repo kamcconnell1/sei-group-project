@@ -106,7 +106,7 @@ router.route('/favourites')
   .get(secureRoute, user.getAllFavourites)
 
 //? FAVS ARTICLES
-//* add article to favs
+//* Add article to favs
 router.route('/favourites/article')
   .post(secureRoute, user.favsArticle)
 
@@ -136,10 +136,12 @@ router.route('/favourites/posts/:id')
 
 //? MAP PINS
 
+//* Get and post pins
 router.route('/pins')
   .get(secureRoute, mapPins.getPins)
   .post(secureRoute, mapPins.create)
 
+//* Get single pin/ edit pin/ deletepin
 router.route('/pins/:pinId')
   .get(secureRoute, mapPins.single)
   .put(secureRoute, mapPins.update)
@@ -148,11 +150,22 @@ router.route('/pins/:pinId')
 //? *****************************//
 
 //? MESSAGES
+//* start message chain
 router.route('/:userid/messages')
   .post(secureRoute, messages.createMessage)
 
+//* get single message/ post response
 router.route('/messages/:id')
   .post(secureRoute, messages.sendResponse)
+  .get(secureRoute, messages.getMessage)
+
+//* outbox for sent messages
+router.route('/profile/messages/sent')
+  .get(secureRoute, messages.getSentMessages)
+
+//* inbox for received messages
+router.route('/profile/messages/received')
+  .get(secureRoute, messages.getReceivedMessages)
 
 //! exports
 module.exports = router

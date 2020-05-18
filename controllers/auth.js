@@ -1,3 +1,4 @@
+//! Required
 const User = require('../models/user')
 const { secret } = require('../config/environment')
 const { unauthorized } = require('../lib/errorMessages')
@@ -30,7 +31,7 @@ async function login(req, res, next) {
   }
 }
 
-//? Exports.
+//! Exports.
 module.exports = {
   register,
   login

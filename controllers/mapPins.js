@@ -1,3 +1,4 @@
+//! Required
 const User = require('../models/user')
 const { notFound } = require('../lib/errorMessages')
 
@@ -85,6 +86,7 @@ async function mapPinDelete(req, res, next) {
   }
 }
 
+//! Exports
 module.exports = {
   getPins,
   create: mapPinsCreate,
