@@ -2,11 +2,11 @@ import React from 'react'
 
 
 const PinForm = ({handleChange, handleSubmit, title, place, location, notes, errors }) => {
-
+  
   return (
     <form
       onSubmit={handleSubmit}
-      className="column is-3"
+      className="column is-3 is-pulled-left	"
     >
 
       <div className="field">
@@ -15,7 +15,7 @@ const PinForm = ({handleChange, handleSubmit, title, place, location, notes, err
           <input
             className={`input ${errors.title ? 'is-danger' : ''}`}
             type="text"
-            placeholder="Enter Username here"
+            placeholder="What was it you found here?"
             name="title"
             value={title}
             onChange={handleChange}
@@ -30,7 +30,7 @@ const PinForm = ({handleChange, handleSubmit, title, place, location, notes, err
           <input
             className={`input ${errors.place ? 'is-danger' : ''}`}
             type="text"
-            placeholder="Enter Username here"
+            placeholder="Where?"
             name="place"
             value={place}
             onChange={handleChange}
@@ -45,9 +45,9 @@ const PinForm = ({handleChange, handleSubmit, title, place, location, notes, err
           <input
             className={`input ${errors.location ? 'is-danger' : ''}`}
             type="text"
-            placeholder="Enter Username here"
+            placeholder="Postcode?"
             name="location"
-            value={location}
+            value={location.postcode}
             onChange={handleChange}
           />
         </div>
@@ -61,7 +61,7 @@ const PinForm = ({handleChange, handleSubmit, title, place, location, notes, err
             className="textarea"
             rows="3"
             type="text"
-            placeholder="Enter Username here"
+            placeholder="Notes"
             name="notes"
             value={notes}
             onChange={handleChange}

@@ -139,7 +139,7 @@ router.route('/pins')
   .get(secureRoute, mapPins.getPins)
   .post(secureRoute, mapPins.create)
 
-router.route('/profile/pins/:pinId')
+router.route('/pins/:pinId')
   .get(secureRoute, mapPins.single)
   .put(secureRoute, mapPins.update)
   .delete(secureRoute, mapPins.delete)

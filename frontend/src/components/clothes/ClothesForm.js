@@ -19,7 +19,7 @@ const colorOptions = [
 ]
 const ClothesForm = ({ handleChange, handleSubmit, handleMultiChange, clothesForm, onClick, onChange, errors}) => {
   const { title, category, genderCategory, size, rentalPrice, image, brand } = clothesForm
-console.log(errors);
+
 
   return (
     <section className="section">
@@ -157,7 +157,7 @@ console.log(errors);
               {errors.rentalPrice && <small className="help is-danger">{errors.rentalPrice}</small>}
             </div>
 
-            {/* //! need to add the option to upload photos here too  */}
+            {/* //! need to add the option to upload photos here too 
             <div className="field">
               <label className="label">Upload Image Link or Files</label>
               <div className="control">
@@ -170,10 +170,11 @@ console.log(errors);
                   onChange={handleChange}
                 />
               </div>
-            </div>
+            </div> */}
  
             <div className="field">
               {errors.image && <small className="help is-danger">Please upload some images</small>}
+
               <div className="control">
                 {image.map((image, index) => {
                   return (

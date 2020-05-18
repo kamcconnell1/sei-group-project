@@ -29,7 +29,7 @@ const App = () => {
     <Navbar />
     <Switch>
     <Route exact path='/' component={Home}/>
-    <Route path='/page/:username' component={userShowProfile} />
+    <Route path='/page/:id' component={userShowProfile} />
     <SecureRoute path='/profile/:username/add' component={ClothesAdd} />
     <Route path='/profile/:username/map' component={UserMap} />
     <Route path='/profile/:username' component={UserProfile} />

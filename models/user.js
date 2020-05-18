@@ -33,6 +33,8 @@ const userSchema = new mongoose.Schema({
       title: { type: String, required: true, maxlength: 100 },
       place: { type: String, required: true, maxlength: 100 },
       location: { type: String, required: true },
+      latitude: { type: String },
+      longitude: { type: String },
       note: { type: String, maxlength: 300 },
       photo: { type: String }
     }

@@ -1,24 +1,24 @@
 import React from 'react'
+import {Link} from 'react-router-dom'
 import { getUserProfile } from '../../lib/api'
 
 class userShowProfile extends React.Component {
-  state = { user: null }
+  state = { user: null, userItems: null }
 
   async componentDidMount() {
     try {
       const userId = this.props.match.params.id
-      console.log(userId)
       const res = await getUserProfile(userId)
-      // console.log(res)
-      this.setState({ user: res.data })
+      const userItems = res.data.createdArticles
+      this.setState({ user: res.data, userItems })
     } catch (err) {
       console.log(err)
     }
   }
   render() {
     if (!this.state.user) return <h1>User kidnapped, Ninja to the rescue</h1>
-    const { user } = this.state
-    console.log(user)
+    const { user, userItems } = this.state
+    console.log(userItems)
     return (
       <>
         <section>
@@ -36,14 +36,31 @@ class userShowProfile extends React.Component {
             <h4 className="title is-5">Ratings go here</h4>
           </div>
         </section>
-          <section className="section">
-            <div className="container">
-              <h1 className="title">Section</h1>
-              <h2 className="subtitle">
-                A simple container to divide your page into <strong>sections</strong>, like the one you're currently reading
-              </h2>
+        <section className="section">
+          <div className="container">
+          <div className="columns is-multiline">
+            {userItems.map(item => 
+              <div key={item._id} className="column is-one-quarter-desktop is-one-third-tablet is-half-mobile">
+                <Link to={`/clothes/${item._id}`}>
+              <div className="card">
+              <div className="card-header">
+                <h4 className="card-header-title">{item.title}</h4>
+              </div>
+              <div className="card-image">
+                <figure className="image image is-1by1">
+                  <img src={item.image} alt={item.title} loading="lazy" width="255" height="255" />
+                </figure>
+              </div>
+              <div className="card-content">
+                <h5 className=""><strong>Rental Price:</strong> {`£${item.rentalPrice}`}</h5>
+              </div>
+              </div>
+              </Link>
+            </div> 
+            )}
             </div>
-          </section>
+          </div>
+        </section>
       </>
     )
   }

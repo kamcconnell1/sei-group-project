@@ -66,7 +66,7 @@ handleImageChange = (event, i) => {
   }
 
   render() {
-    console.log(this.state.clothesForm.image);
+    console.log(this.state.clothesForm);
     
     return(
       <>
