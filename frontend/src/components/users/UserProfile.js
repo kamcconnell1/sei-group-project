@@ -1,9 +1,10 @@
 import React from 'react'
 
 import UserClothCard from './UserClothCard'
-import ImageUpload from '../common/ImageUpload'
-import { getProfile } from '../../lib/api'
-import { getPostcodeInfo, uploadProfileImage } from '../../lib/ext_api'
+import ProfilePic from './ProfilePic'
+
+import { getProfile, editProfile } from '../../lib/api'
+import { getPostcodeInfo} from '../../lib/ext_api'
 import avatar from '../assets/avatar.png'
 
 import Map from '../common/Map'
@@ -13,8 +14,8 @@ import Map from '../common/Map'
 class UserProfile extends React.Component {
   state = {
     user: null,
-    location: '', 
-    hoverAvatar: false
+    location: '',
+    clickAvatar: false
   }
 
 
@@ -29,42 +30,50 @@ class UserProfile extends React.Component {
     }
   }
 
-//* Function to find user location details
-  async getLocation () {
+  //* Function to find user location details
+  async getLocation() {
     const postcode = this.state.user.postcode
     const response = await getPostcodeInfo(postcode)
     const nuts = response.data.result.nuts
     const region = response.data.result.region
-      
-    this.setState({location: `${nuts}, ${region}`})
+
+    this.setState({ location: `${nuts}, ${region}` })
   }
 
   //* Function to allow user to upload a profile picture
-  handleChange = event => {
-    const user = { ...this.state.user, profilePic: event.target.value }
+  handleChange = async event => {
+    const user = { ...this.state.user, [event.target.name]: event.target.value }
     this.setState({ user })
+    
+    try {
+      console.log(user)
+      await editProfile(this.state.user)
+    } catch (err){
+      console.log(err.response.data);
+    }
   }
 
   // * Function to push the user to clothes add page if they want to add a new item 
   handleAddClothes = () => {
     const user = this.props.match.params.username
     console.log(user);
-    
+
     this.props.history.push(`/profile/${user}/add`)
   }
 
   //* Function to toggle state to show the image upload form or not
-  toggleHover= () => {
-    this.setState({ hoverAvatar: !this.state.hoverAvatar })
+  toggleModal = () => {
+    this.setState({ clickAvatar: !this.state.clickAvatar })
   }
-  
+
   render() {
     if (!this.state.user || !this.state.location) return null
 
     // consts taken from state to populate user data shown on the page
-    const { username, createdArticles, profilePic} = this.state.user
+    const { username, createdArticles, profilePic } = this.state.user
     const location = this.state.location
-  
+
+    console.log(this.state.user);
     return (
 
       <>
@@ -73,36 +82,32 @@ class UserProfile extends React.Component {
           <div className="container">
             <div className="columns">
               <div className="column is-3 is-profile-info">
+                
+                  {/* Section for avatar or profile pic need to change to allow to change the file  & so appears over the form appears over the avatar on hover */}
 
-{/* Section for avatar or profile pic need to change to allow to change the file  & so appears over the form appears over the avatar on hover */}
-                <div className="control" 
-                onMouseEnter={this.toggleHover} 
-                onMouseLeave={this.toggleHover}
-                >
-                  {(profilePic) ?
-                    <div>
-                      <img src={profilePic} alt="profile pic" />
-                    </div>
-                    :
-                    <div>
-                      <img src={avatar} alt="avatar" />
-                {this.state.hoverAvatar? 
-                      <ImageUpload
-                        onChange={this.handleChange}
-                        preset={uploadProfileImage}
-                        name="profilePic"
-                        labelText="Upload Profile Picture"
-                      />
-                   : '' }
-                    </div>
-                  }
+                <div className="profile-img">
+                  { profilePic ?
+                  <img src={profilePic} alt="profile pic" />
+                :
+                <img src={avatar} alt="avatar" />
+
+                }
+                <button onClick={this.toggleModal}
+                className="button is-profile-btn"
+                >Change Profile Picture</button>
                 </div>
+                <ProfilePic 
+                onClick={this.toggleModal}
+                modalStatus={this.state.clickAvatar}
+                onChange={this.handleChange}
+                />
+            
 
-{/* Section for the user details - username, location & star rating. button to add clothes to profile   */}
+                {/* Section for the user details - username, location & star rating. button to add clothes to profile   */}
                 <div className="control">
                   <h5 className="title">Welcome {username}</h5>
                   <h6 className="subtitle">{location}</h6>
-              {/* //! NEED TO ADD STAR RATINGS HERE  */}
+                  {/* //! NEED TO ADD STAR RATINGS HERE  */}
                   <p>Star Rating</p>
                   <hr />
                 </div>
@@ -114,13 +119,13 @@ class UserProfile extends React.Component {
               {/* Map over the clothes the user has uploaded - need to work on the positioning of this - need to add to allow user to edit / delete items */}
               <div className="column is-multiline is-user-clothes">
                 <div className="control">
-                {createdArticles.map(item =>
-                  <UserClothCard
-                    {...item}
-                    key={item._id}
-                    name={profilePic}
-                  />
-                )}
+                  {createdArticles.map(item =>
+                    <UserClothCard
+                      {...item}
+                      key={item._id}
+                      name={profilePic}
+                    />
+                  )}
                 </div>
               </div>
               {/* Notifications / chat section */}
@@ -131,11 +136,11 @@ class UserProfile extends React.Component {
           </div>
 
           {/* Map section - which will show pins user has added - need to link to items of clothing / shops somehow  */}
-                <div className="control">
-                Map to allow users to save locations - linked from searches on clothes show page maybe
-                  <Map 
-                  {...this.state.user}/>
-            </div>
+          <div className="control">
+            Map to allow users to save locations - linked from searches on clothes show page maybe
+                  <Map
+              {...this.state.user} />
+          </div>
 
         </section>
 

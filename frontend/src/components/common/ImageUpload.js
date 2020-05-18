@@ -12,10 +12,10 @@ class ImageUpload extends React.Component{
   }
   
   handleUpload = async event => {
-    const preset = (this.props.preset)
-    console.log(preset)
     
+    const preset = (this.props.preset)
     const data = new FormData()
+    
     data.append('file', event.target.files[0])
     data.append('upload_preset', preset)
     const res = await postImage(data)
@@ -40,7 +40,7 @@ class ImageUpload extends React.Component{
         </div>
         :
         <>
-          <label className="label">{this.props.labelText || 'Upload Image'}</label>
+          <label className="label">{this.props.labelText}</label>
           <input
             className="input"
             type="file"

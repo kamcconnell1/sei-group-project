@@ -1,6 +1,6 @@
 import React from 'react'
 
-const LoginForm = ({email, password, handleChange, handleSubmit}) => {
+const LoginForm = ({email, password, handleChange, handleSubmit, errors}) => {
   return (
     <section className="section">
       <div className="container">
@@ -13,7 +13,7 @@ const LoginForm = ({email, password, handleChange, handleSubmit}) => {
               <label className="label">Email</label>
               <div className="control">
                 <input
-                  className="input"
+                  className={`input ${errors ? 'is-danger' : '' }`}
                   type="text"
                   placeholder="Enter Username here"
                   name="email"
@@ -26,7 +26,7 @@ const LoginForm = ({email, password, handleChange, handleSubmit}) => {
               <label className="label">Password</label>
               <div className="control">
                 <input
-                  className="input"
+                  className={`input ${errors ? 'is-danger' : '' }`}
                   type="password"
                   placeholder="Enter password"
                   name="password"

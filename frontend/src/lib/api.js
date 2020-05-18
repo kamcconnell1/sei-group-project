@@ -41,3 +41,13 @@ export const registerUser = registerForm => {
 export const getProfile = () => {
   return axios.get(`${kebb_url}/profile`, withHeaders())
 }
+
+//* PUT request to edit user PROFILE Page
+  export const editProfile = (profileData) => {
+    return axios.put(`${kebb_url}/profile`, profileData,  withHeaders())
+  }
+
+// * GET to show specific user (no need to be logged in)
+  export const getUserProfile = id => {
+    return axios.get(`${kebb_url}/profile/${id}`)
+  }

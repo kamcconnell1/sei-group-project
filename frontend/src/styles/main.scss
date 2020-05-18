@@ -1,4 +1,5 @@
 
+
 //Global Styling 
 * {
   margin: 0;
@@ -34,10 +35,32 @@
   box-sizing: border-box;
 }
 
-// User Profile Page 
+//? User Profile Page 
+
+
 div.is-profile-info {
   border: 1px solid black;
 }
+      div.profile-img {
+        position: relative;
+        width: 50%;
+       img {
+         width: 100%;
+         height: auto;
+       }
+       button.is-profile-btn {
+         position: absolute;
+         top: 50%;
+         left: 50%;
+         transform: translate(-50%, -50%);
+         background-color: #555;
+          color: white;
+          font-size: 8px;
+          border: none;
+          cursor: pointer;
+          border-radius: 5px;
+       }
+      }
 
 div.is-user-clothes {
   border: 1px solid black;
@@ -46,4 +69,32 @@ div.is-user-clothes {
 div.is-user-chat{
   border: 1px solid black;
 }
+
+
+// * Slide images styling on Show page
+.slide-container {
+  width: 70%;
+  margin: auto; }
+
+h3 {
+  text-align: center; }
+
+.each-slide > div {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-size: cover;
+  height: 150px;
+}
+
+.each-slide span {
+  padding: 8px;
+  font-size: 7px;
+  background: #efefef;
+  text-align: center;
+}
+
+//Bulma Variables
+$modal-content-width: 500px;
+
 @import '~bulma/bulma.sass'
