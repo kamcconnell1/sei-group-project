@@ -1,9 +1,9 @@
 const Article = require('../models/article')
 const { notFound, unauthorized } = require('../lib/errorMessages')
 
-
-//* function to get all articles of clothing
-//* tested
+//? Function to get all articles of clothing
+//* WORKING tested
+//* ERROR tested
 async function articlesIndex(req, res, next) {
   try {
     const articles = await Article.find().populate('user').populate('comments.user').populate('ratings.user').populate('user.article')
@@ -14,8 +14,9 @@ async function articlesIndex(req, res, next) {
   }
 }
 
-//* function to create an article of clothing
-//* tested
+//? Function to create an article of clothing
+//* WORKING tested
+//* ERROR tested
 async function articlesCreate(req, res, next) {
   try {
     req.body.user = req.currentUser
@@ -26,22 +27,30 @@ async function articlesCreate(req, res, next) {
   }
 }
 
-//* function to show single article of clothing
-//* tested
+//? Function to show single article of clothing
+//* WORKING tested
+//* ERROR tested
 async function articlesShow(req, res, next) {
   const articleId = req.params.id
   try {
+<<<<<<< HEAD
     const anArticle = await Article.findById(articleId).populate('user')
     console.log(anArticle)
     if (!anArticle) throw new Error(notFound)
     res.status(200).json(anArticle)
+=======
+    const article = await Article.findById(articleId).populate('user')
+    if (!article) throw new Error(notFound)
+    res.status(200).json(article)
+>>>>>>> 8f04e88d792cb017a90b847f2376ce335979bce7
   } catch (err) {
     next(err)
   }
 }
 
-//* function to update single article of clothing
-//* tested
+//? Function to update single article of clothing
+//* WORKING tested
+//* ERROR tested
 async function articlesUpdate(req, res, next) {
   try {
     const article = await Article.findById(req.params.id)
@@ -57,6 +66,7 @@ async function articlesUpdate(req, res, next) {
   }
 }
 
+<<<<<<< HEAD
 //* function to delete an article of clothing by id
 //* tested
 async function articlesDelete(req, res) {
@@ -67,64 +77,99 @@ async function articlesDelete(req, res) {
     if (!articleToDelete) throw new Error(notFound)
     if (!articleToDelete.user.equals(req.currentUser._id)) throw new Error('Unauthorized')
     await articleToDelete.remove()
+=======
+//? Function to delete an article of clothing by id
+//* WORKING tested
+//* ERROR tested
+async function articlesDelete(req, res, next) {
+  req.body.user = req.currentUser
+  try {
+    const toDelete = await Article.findById(req.params.id)
+    if (!toDelete) throw new Error(notFound)
+    if (!toDelete.user.equals(req.currentUser._id)) throw new Error(unauthorized)
+    await toDelete.remove()
+>>>>>>> 8f04e88d792cb017a90b847f2376ce335979bce7
     res.sendStatus(204)
   } catch (err) {
-    res.json(err)
+    next(err)
   }
 }
 
-//* COMMENTS
-//* tested
-async function articleCommentCreate (req, res) {
+//? COMMENTS
+//? Function to Create Comments
+//* WORKING tested
+//* ERROR tested
+async function articleCommentCreate (req, res, next) {
   try {
     req.body.user = req.currentUser
     const articleId = req.params.id
     const article = await Article.findById(articleId)
-    if (!article) throw new Error('Not found')
-    console.log(req.body)
-    //* push comment to specific article of clothing
+    if (!article) throw new Error(notFound)
     article.comments.push(req.body)
     await article.save()
     res.status(201).json(article)
   } catch (err) {
-    console.log(err)
+    next(err)
   }
 }
 
-//* tested
-async function articleCommentDelete (req, res) {
+//? Function to delete Comment on Article
+//* WORKING tested
+//* ERROR tested
+async function articleCommentDelete (req, res, next) {
   try {
     req.body.user = req.currentUser
     const articleId = req.params.id
     const commentId = req.params.commentId
-    console.log(req.currentUser)
     const article = await Article.findById(articleId)
-    if (!article) throw new Error('Not found')
+    if (!article) throw new Error(notFound)
     const commentToDelete = article.comments.id(commentId)
-    if (!commentToDelete) throw new Error('Not found')
-    if (!commentToDelete.user.equals(req.currentUser._id)) throw new Error('unauthorized')
-    await commentToDelete.remove()
+    if (!commentToDelete) throw new Error(notFound)
+    if (!commentToDelete.user.equals(req.currentUser._id)) throw new Error(unauthorized)
+    await article.remove()
     await article.save()
     res.sendStatus(204)
   } catch (err) {
-    console.log(err)
+    next(err)
   }
 }
 
-//* RATING
-//* tested
-async function articleRatingCreate (req, res) {
+//? Add Rating
+//* WORKING tested
+//* ERROR tested
+async function articleRatingCreate (req, res, next) {
   try {
     req.body.user = req.currentUser
     const rating = req.body
     const articleId = req.params.id
     const article = await Article.findById(articleId)
-    if (!article) throw new Error()
+    if (!article) throw new Error(notFound)
     article.ratings.push(rating)
     await article.save()
-    res.status(201).json(article)
+    res.status(201).json(article.ratings)
   } catch (err) {
-    console.log(err)
+    next(err)
+  }
+}
+
+//? update article rating
+//* WORKING tested
+//* ERROR tested
+async function editArticleRating (req, res, next) {
+  try {
+    req.body.user = req.currentUser
+    const id = req.params.id
+    const ratingId = req.params.ratingid
+    const article = await Article.findById(id)
+    if (!article) throw new Error(notFound)
+    const ratingToUpdate = article.ratings.id(ratingId)
+    if (!ratingToUpdate) throw new Error(notFound)
+    if (!ratingToUpdate.user.equals(req.currentUser._id)) throw new Error(unauthorized)
+    Object.assign(ratingToUpdate, req.body)
+    await article.save()
+    res.status(201).json(ratingToUpdate)
+  } catch (err) {
+    next(err)
   }
 }
 
@@ -137,6 +182,7 @@ module.exports = {
   delete: articlesDelete,
   commentCreate: articleCommentCreate,
   commentDelete: articleCommentDelete,
-  rating: articleRatingCreate
+  rating: articleRatingCreate,
+  editArticleRating
 
 }

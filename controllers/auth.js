@@ -1,5 +1,6 @@
 const User = require('../models/user')
 const { secret } = require('../config/environment')
+<<<<<<< HEAD
 const { notFound, unauthorized, duplicate } = require('../lib/errorMessages')
 const Article = require('../models/article')
 const Posts = require('../models/post')
@@ -8,6 +9,13 @@ const Posts = require('../models/post')
 const jwt = require('jsonwebtoken')
 
 //? register a user
+=======
+const { unauthorized } = require('../lib/errorMessages')
+const jwt = require('jsonwebtoken')
+
+
+//? Register a User
+>>>>>>> 8f04e88d792cb017a90b847f2376ce335979bce7
 //* WORKING tested
 //* ERROR tested 
 async function register(req, res, next) {
@@ -19,7 +27,11 @@ async function register(req, res, next) {
   }
 }
 
+<<<<<<< HEAD
 //? function for user login
+=======
+//? Function for User Login
+>>>>>>> 8f04e88d792cb017a90b847f2376ce335979bce7
 //* WORKING tested
 //* ERROR tested 
 async function login(req, res, next) {
@@ -30,6 +42,7 @@ async function login(req, res, next) {
     res.status(202).json({ message: `Hello ${user.username}`, token })
   } catch (err) {
     next(err)
+<<<<<<< HEAD
   }
 }
 
@@ -290,4 +303,13 @@ module.exports = {
   favPostsRemove: removePostsFromFavs
 
   // ratingDelete: userRatingDelete
+=======
+  }
+}
+
+//? Exports.
+module.exports = {
+  register,
+  login
+>>>>>>> 8f04e88d792cb017a90b847f2376ce335979bce7
 }

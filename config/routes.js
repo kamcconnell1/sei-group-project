@@ -1,56 +1,99 @@
-//* require router, secureRoute and controllers 
+//! require router, secureRoute and controllers 
 const router = require('express').Router()
-const user = require('../controllers/auth')
+const user = require('../controllers/users')
+const auths = require('../controllers/auth')
 const articles = require('../controllers/articles')
 const posts = require('../controllers/posts')
 const mapPins = require('../controllers/mapPins')
 const secureRoute = require('../lib/secureRoute')
 
-//* CLOTHES
-//* main route for get and post
+//? CLOTHES
+//* Get/Post Clothes
 router.route('/clothes')
   .get(articles.index)
   .post(secureRoute, articles.create)
 
-//* route for unique id get, delete and update
+//* Get Single Clothes/ Edit Clothes/ Delete Clothes
 router.route('/clothes/:id')
   .get(articles.single)
   .put(secureRoute, articles.update)
   .delete(secureRoute, articles.delete)
 
-//* Comments on clothing id
+//* Comments on Clothing
 router.route('/clothes/:id/comments')
   .post(secureRoute, articles.commentCreate)
 
+//* Delete Comments on Clothing
 router.route('/clothes/:id/comments/:commentId')
   .delete(secureRoute, articles.commentDelete)
 
-//*****************************/
+//? *****************************//
 
-//* POSTS
+//? AUTHS
+//* Register
+router.route('/register')
+  .post(auths.register)
+
+//* Login
+router.route('/login')
+  .post(auths.login)
+
+//* Show single user
+router.route('/profile')
+  .get(secureRoute, user.profile)
+  .put(secureRoute, user.updateUser)
+
+//* Get Specific Profile
+router.route('/profile/:id')
+  .get(user.getProfile)
+
+//* Add Comment to specifc profile
+router.route('/profile/:id/comments')
+  .post(secureRoute, user.commentCreate)
+
+//* Delete specific comment on specific user.
+router.route('/profile/:id/comments/:commentId')
+  .delete(secureRoute, user.commentDelete)
+
+//? *****************************//
+
+//? POSTS
+//* Get/Create posts
 router.route('/posts')
   .get(posts.index)
   .post(secureRoute, posts.create)
 
+//* Get specific Post/ Edit Post/ Delete Post
 router.route('/posts/:id')
   .get(posts.single)
   .put(secureRoute, posts.update)
   .delete(secureRoute, posts.delete)
 
+//* Comment on Post
 router.route('/posts/:id/comments')
   .post(secureRoute, posts.commentCreate)
 
+//* Delete a Comment on a Post
 router.route('/posts/:id/comments/:commentId')
   .delete(secureRoute, posts.commentDelete)
 
-//*****************************/
+//? *****************************//
 
-//* Ratings
+//? RATINGS
 
-//* Rating for articles 
+//* User ratings
+router.route('/profile/:id/rating')
+  .post(secureRoute, user.ratingCreate)
+
+//* Edit User rating
+router.route('/profile/:id/rating/:ratingid')
+  .put(secureRoute, user.editUserRating)
+
+//* Rating for Articles 
 router.route('/clothes/:id/rating')
   .post(secureRoute, articles.rating)
 
+<<<<<<< HEAD
 //*****************************/
 
 //* Favs Article
@@ -79,9 +122,20 @@ router.route('/favourites/posts')
 //*remove post from favs
 router.route('/favourites/posts/:id')
   .delete(secureRoute, user.favPostsRemove)
+=======
+//* Edit Rating for Articles
+router.route('/clothes/:id/rating/:ratingid')
+  .put(secureRoute, articles.editArticleRating)
 
-//*****************************/
+//? *****************************//
+>>>>>>> 8f04e88d792cb017a90b847f2376ce335979bce7
 
+//? FAVOURITES
+//* Get Favourites
+router.route('/favourites')
+  .get(secureRoute, user.getAllFavourites)
+
+<<<<<<< HEAD
 
 
 //* MAP PINS
@@ -99,35 +153,57 @@ router.route('/profile/map-pins/:map-pinId')
 
 
 //* AUTH
+=======
+//? FAVS ARTICLES
+//* add article to favs
+router.route('/favourites/article')
+  .post(secureRoute, user.favsArticle)
+>>>>>>> 8f04e88d792cb017a90b847f2376ce335979bce7
 
-//* register
-router.route('/register')
-  .post(user.register)
+//* remove article from favs
+router.route('/favourites/article/:id')
+  .delete(secureRoute, user.favArticlesRemove)
 
-//* login
-router.route('/login')
-  .post(user.login)
+//? FAVS FRIENDS
+//* add friend to favs
+router.route('/favourites/friends')
+  .post(secureRoute, user.favsFriend)
 
-//* show single user
-router.route('/profile')
-  .get(secureRoute, user.profile)
-  .put(secureRoute, user.updateUser)
+//* remove friend from favs
+router.route('/favourite/friend/:id')
+  .delete(secureRoute, user.favFriendsRemove)
 
+<<<<<<< HEAD
 router.route('/profile/:id')
   .get(user.getProfile)
 
 //* user ratings
 router.route('/profile/:id/rating')
   .post(secureRoute, user.ratingCreate)
+=======
+//? FAVS POSTS
+//* Add post to favs
+router.route('/favourites/posts')
+  .post(secureRoute, user.favsPost)
+>>>>>>> 8f04e88d792cb017a90b847f2376ce335979bce7
 
-// router.route('/profile/:id/rating/:ratingId')
-//   .delete(secureRoute, user.ratingDelete)
+//*Remove post from favs
+router.route('/favourites/posts/:id')
+  .delete(secureRoute, user.favPostsRemove)
 
-router.route('/profile/:id/comments')
-  .post(secureRoute, user.commentCreate)
+//? *****************************//
 
-router.route('/profile/:id/comments/:commentId')
-  .delete(secureRoute, user.commentDelete)
+//? MAP PINS
+router.route('/profile/pins')
+  // .get(secureRoute, mapPins.index)
+  .post(secureRoute, mapPins.create)
 
-//* exports
+router.route('/profile/pins/:pinId')
+  .get(secureRoute, mapPins.single)
+  .put(secureRoute, mapPins.update)
+  .delete(secureRoute, mapPins.delete)
+
+//? *****************************//
+
+//! exports
 module.exports = router

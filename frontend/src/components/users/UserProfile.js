@@ -72,7 +72,11 @@ class UserProfile extends React.Component {
         <section className="section">
           <div className="container">
             <div className="columns">
+<<<<<<< HEAD
               <div className="column is-3">
+=======
+              <div className="column is-3 is-profile-info">
+>>>>>>> 8f04e88d792cb017a90b847f2376ce335979bce7
 
 {/* Section for avatar or profile pic need to change to allow to change the file  & so appears over the form appears over the avatar on hover */}
                 <div className="control" 
@@ -112,7 +116,11 @@ class UserProfile extends React.Component {
               </div>
 
               {/* Map over the clothes the user has uploaded - need to work on the positioning of this - need to add to allow user to edit / delete items */}
+<<<<<<< HEAD
               <div className="column is-multiline">
+=======
+              <div className="column is-multiline is-user-clothes">
+>>>>>>> 8f04e88d792cb017a90b847f2376ce335979bce7
                 <div className="control">
                 {createdArticles.map(item =>
                   <UserClothCard
@@ -124,7 +132,11 @@ class UserProfile extends React.Component {
                 </div>
               </div>
               {/* Notifications / chat section */}
+<<<<<<< HEAD
               <div className="column">
+=======
+              <div className="column is-3 is-user-chat">
+>>>>>>> 8f04e88d792cb017a90b847f2376ce335979bce7
                 Incoming Notifications
           </div>
             </div>

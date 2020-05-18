@@ -51,7 +51,10 @@ handleSubmit = async event => {
 }
 
   render() {
+<<<<<<< HEAD
  console.log(this.state.errors);
+=======
+>>>>>>> 8f04e88d792cb017a90b847f2376ce335979bce7
  
     return (
       <>
