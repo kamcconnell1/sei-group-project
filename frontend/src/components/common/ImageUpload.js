@@ -31,7 +31,6 @@ class ImageUpload extends React.Component{
       
       render() {
         const { image } = this.state
-        console.log(this.props);
         
     return (
       <>
