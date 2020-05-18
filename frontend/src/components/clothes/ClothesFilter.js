@@ -1,8 +1,9 @@
 import React from 'react'
 import Select from 'react-select'
+import InputRange from 'react-input-range'
 
 
-const ClothesFilter = ({ color, category, gender, sizes, filterChange }) => {
+const ClothesFilter = ({ color, category, gender, sizes, filterChange}) => {
   return (
     <>
     <div className="column is-one-quarter is-offset-one-quarter box">

@@ -3,6 +3,7 @@ const router = require('express').Router()
 const user = require('../controllers/auth')
 const articles = require('../controllers/articles')
 const posts = require('../controllers/posts')
+const mapPins = require('../controllers/mapPins')
 const secureRoute = require('../lib/secureRoute')
 
 //* CLOTHES
@@ -50,9 +51,52 @@ router.route('/posts/:id/comments/:commentId')
 router.route('/clothes/:id/rating')
   .post(secureRoute, articles.rating)
 
+//*****************************/
 
+//* Favs Article
+//* add article to favs
+router.route('/favourites/article')
+  .post(secureRoute, user.favsArticle)
+
+//* remove article from favs
+router.route('/favourites/article/:id')
+  .delete(secureRoute, user.favArticlesRemove)
+
+//* favs Friends
+//* add friend to favs
+router.route('/favourites/friends')
+  .post(secureRoute, user.favsFriend)
+
+//* remove friend from favs
+router.route('/favourite/friend/:id')
+  .delete(secureRoute, user.favFriendsRemove)
+
+//* favs Posts
+//* add post to favs
+router.route('/favourites/posts')
+  .post(secureRoute, user.favsPost)
+
+//*remove post from favs
+router.route('/favourites/posts/:id')
+  .delete(secureRoute, user.favPostsRemove)
 
 //*****************************/
+
+
+
+//* MAP PINS
+router.route('/profile/map-pins')
+  .get(secureRoute, mapPins.index)
+  .post(secureRoute, mapPins.create)
+
+router.route('/profile/map-pins/:map-pinId')
+  .get(secureRoute, mapPins.single)
+  .put(secureRoute, mapPins.update)
+  .delete(secureRoute, mapPins.delete)
+
+//*****************************/
+
+
 
 //* AUTH
 
@@ -68,6 +112,9 @@ router.route('/login')
 router.route('/profile')
   .get(secureRoute, user.profile)
   .put(secureRoute, user.updateUser)
+
+router.route('/profile/:id')
+  .get(user.getProfile)
 
 //* user ratings
 router.route('/profile/:id/rating')

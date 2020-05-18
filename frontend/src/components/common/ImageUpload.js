@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { postImage, uploadPreset } from '../../lib/ext_api'
+import { postImage } from '../../lib/ext_api'
 
 
 
@@ -12,9 +12,12 @@ class ImageUpload extends React.Component{
   }
   
   handleUpload = async event => {
+    const preset = (this.props.preset)
+    console.log(preset)
+    
     const data = new FormData()
     data.append('file', event.target.files[0])
-    data.append('upload_preset', uploadPreset)
+    data.append('upload_preset', preset)
     const res = await postImage(data)
     this.setState({
         image: res.data.url
@@ -28,8 +31,7 @@ class ImageUpload extends React.Component{
       
       render() {
         const { image } = this.state
-        // console.log(this.props);
-  
+        console.log(this.props);
         
     return (
       <>

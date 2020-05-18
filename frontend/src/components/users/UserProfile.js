@@ -1,9 +1,9 @@
 import React from 'react'
 
-import ClothCard from '../clothes/ClothCard'
+import UserClothCard from './UserClothCard'
 import ImageUpload from '../common/ImageUpload'
 import { getProfile } from '../../lib/api'
-import { getPostcodeInfo } from '../../lib/ext_api'
+import { getPostcodeInfo, uploadProfileImage } from '../../lib/ext_api'
 import avatar from '../assets/avatar.png'
 
 import Map from '../common/Map'
@@ -48,6 +48,8 @@ class UserProfile extends React.Component {
   // * Function to push the user to clothes add page if they want to add a new item 
   handleAddClothes = () => {
     const user = this.props.match.params.username
+    console.log(user);
+    
     this.props.history.push(`/profile/${user}/add`)
   }
 
@@ -63,7 +65,6 @@ class UserProfile extends React.Component {
     const { username, createdArticles, profilePic} = this.state.user
     const location = this.state.location
   
-    
     return (
 
       <>
@@ -73,23 +74,22 @@ class UserProfile extends React.Component {
             <div className="columns">
               <div className="column is-3">
 
-
-
+{/* Section for avatar or profile pic need to change to allow to change the file  & so appears over the form appears over the avatar on hover */}
                 <div className="control" 
                 onMouseEnter={this.toggleHover} 
                 onMouseLeave={this.toggleHover}
                 >
-                  {(profilePic.length> 0) ?
+                  {(profilePic) ?
                     <div>
                       <img src={profilePic} alt="profile pic" />
                     </div>
                     :
                     <div>
                       <img src={avatar} alt="avatar" />
-                {/* //! Want to change this to a button - says add profile picture and then the upload form pops up rather then always on show */}
                 {this.state.hoverAvatar? 
                       <ImageUpload
                         onChange={this.handleChange}
+                        preset={uploadProfileImage}
                         name="profilePic"
                         labelText="Upload Profile Picture"
                       />
@@ -98,6 +98,7 @@ class UserProfile extends React.Component {
                   }
                 </div>
 
+{/* Section for the user details - username, location & star rating. button to add clothes to profile   */}
                 <div className="control">
                   <h5 className="title">Welcome {username}</h5>
                   <h6 className="subtitle">{location}</h6>
@@ -105,16 +106,16 @@ class UserProfile extends React.Component {
                   <p>Star Rating</p>
                   <hr />
                 </div>
-
-
                 <button className="button is fullwidth"
                   onClick={this.handleAddClothes}
                 >Add Clothes Now</button>
               </div>
+
+              {/* Map over the clothes the user has uploaded - need to work on the positioning of this - need to add to allow user to edit / delete items */}
               <div className="column is-multiline">
                 <div className="control">
                 {createdArticles.map(item =>
-                  <ClothCard
+                  <UserClothCard
                     {...item}
                     key={item._id}
                     name={profilePic}
@@ -122,12 +123,16 @@ class UserProfile extends React.Component {
                 )}
                 </div>
               </div>
+              {/* Notifications / chat section */}
               <div className="column">
                 Incoming Notifications
           </div>
             </div>
           </div>
+
+          {/* Map section - which will show pins user has added - need to link to items of clothing / shops somehow  */}
                 <div className="control">
+                Map to allow users to save locations - linked from searches on clothes show page maybe
                   <Map 
                   {...this.state.user}/>
             </div>

@@ -20,9 +20,14 @@ const userSchema = new mongoose.Schema({
   username: { type: String, required: true, unique: true, maxlength: 50 },//* username of user
   email: { type: String, required: true, maxlength: 50 },//* email of user
   password: { type: String, required: true },//* password
-  postcode: { type: String },//* postcode location
-  profilePic: [{ type: String }], //* profile picture in array to allow different options.
+  postcode: { type: String, required: true },//* postcode location
+  profilePic: { type: String }, //* profile picture to allow different options.
   articlesPosted: [{ type: mongoose.Schema.ObjectId, ref: 'Article', required: true }],//* array of Id's which we can populate on get request.
+  favourites: {
+    favArticles: [{ type: mongoose.Schema.ObjectId, ref: 'Article' }],
+    favUsers: [{ type: mongoose.Schema.ObjectId, ref: 'User' }],
+    favPosts: [{ type: mongoose.Schema.ObjectId, ref: 'Post' }]
+  },
   ratings: [userRatingSchema],//* reference to userRating schema to find the rating and the user who rated.
   comments: [userCommentsSchema] //* array of comments on user
 })
@@ -38,6 +43,8 @@ userSchema.virtual('createdPosts', {
   localField: '_id',
   foreignField: 'user'
 })
+
+
 
 userSchema //* stuff that won't be displayed in responses
   .set('toJSON', {
@@ -63,7 +70,7 @@ userSchema //* sets virtual field on model called _passwordConfirmation
 userSchema //* runs before (pre) mongos own validations, if it doesn't match we stop user's creation
   .pre('validate', function(next) {
     if (this.isModified('password') && this._passwordConfirmation !== this.password) {
-      this.invalidate('passwordConfirmation', 'does not match')
+      this.invalidate('passwordConfirmation', 'Password does not match')
     }
     next()
   })

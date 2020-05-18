@@ -13,7 +13,10 @@ class ClothesShow extends React.Component {
     const clothId = this.props.match.params.id
     try {
       const res = await singleCloth(clothId)
+      // console.log('clothes info:', res.data)
+
       const user = await getProfile()
+      // console.log('user profile info:', user.data)
       this.setState({cloth: res.data, user: user.data})
     } catch (err) {
       console.log(err)
@@ -23,6 +26,9 @@ class ClothesShow extends React.Component {
   render() {
     if (!this.state.cloth) return <h1>Even more Ninjas are working on this</h1>
     const {cloth, user} = this.state
+
+    console.log(cloth)
+    console.log(user)
 
     //* Variable of images from articles user posted
     const images = user.createdArticles.map(image => image.image)

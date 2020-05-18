@@ -1,7 +1,7 @@
 import React from 'react'
 import { Link, withRouter } from 'react-router-dom'
 
-import { isAuthenticated, logout } from '../../lib/auth'
+import { isAuthenticated, logout, getUsername } from '../../lib/auth'
 
 class Navbar extends React.Component {
   state = {
@@ -23,8 +23,14 @@ class Navbar extends React.Component {
     }
   }
 
+  username = getUsername()
+  
+  
+  
   render() {
+    
     const { isOpen } = this.state
+
     return (
       <nav className="navbar is-dark" >
         <div className="container">
@@ -41,8 +47,7 @@ class Navbar extends React.Component {
           <div className={`navbar-menu ${isOpen ? 'is-active' : ''}`}>
             <div className="navbar-end">
               {/* //! the clothes add page & User profile should only be linked from the user profile page but just put a link here for now */}
-              {isAuthenticated() && <Link to="/profile/:username" className="navbar-item">View Profile</Link>}
-              {isAuthenticated() && <Link to="/profile/:username/add" className="navbar-item">Add an Item</Link>}
+              {isAuthenticated() && <Link to={`/profile/${this.username}`} className="navbar-item">View Profile</Link>}
 
               {!isAuthenticated() && <Link to="/register" className="navbar-item">Register</Link>}
               {!isAuthenticated() && <Link to="login" className="navbar-item">Login</Link>}

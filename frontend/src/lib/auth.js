@@ -1,11 +1,24 @@
-// Function to set users token when logged in
+// Function to set users token when logged in & set username in local sotrage
 export const setToken = token => {
   window.localStorage.setItem('token', token)
 }
-// Function to get users token and store in local storage
+
+
+// * Function to get users username
+export const setUsername = username => {
+  window.localStorage.setItem('username', username)
+}
+
+
+// Function to get users token & username from local storage
 export const getToken = () => {
   return window.localStorage.getItem('token')
 }
+
+export const getUsername = () => {
+  return window.localStorage.getItem('username')
+}
+
 
 const getPayload = () => { // * returns the decoded data from the token or false
   const token = getToken()

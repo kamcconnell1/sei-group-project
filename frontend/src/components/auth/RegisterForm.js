@@ -2,6 +2,7 @@ import React from 'react'
 
 const RegisterForm = ({handleChange, handleSubmit, username, email, postcode, password, passwordConfirmation, errors }) => {
 
+
   return (
     <>
       <section className="section">
@@ -31,7 +32,7 @@ const RegisterForm = ({handleChange, handleSubmit, username, email, postcode, pa
                 <label className="label">Email</label>
                 <div className="control">
                   <input 
-                  className="input" 
+                 className={`input ${errors.email ? 'is-danger' : ''}`}
                   type="text" 
                   placeholder="Enter email here" 
                   name="email"
@@ -39,27 +40,29 @@ const RegisterForm = ({handleChange, handleSubmit, username, email, postcode, pa
                   onChange={handleChange}
                   />
                   </div>
+                  {errors.email && <small className="help is-danger">{errors.email}</small>}
                 </div>
 
                 <div className="field">
                 <label className="label">Postcode</label>
                 <div className="control">
                   <input 
-                  className="input" 
+                   className={`input ${errors.postcode ? 'is-danger' : ''}`}
                   type="text" 
                   placeholder="Please add your postcode" 
-                  name="email"
+                  name="postcode"
                   value={postcode}
                   onChange={handleChange}
                   />
                   </div>
+                  {errors.postcode && <small className="help is-danger">{errors.postcode}</small>}
                 </div>
 
                 <div className="field">
                 <label className="label">Password</label>
                 <div className="control">
                   <input 
-                  className="input" 
+                  className={`input ${errors.password ? 'is-danger' : ''}`}
                   type="password" 
                   placeholder="Enter password here" 
                   name="password"
@@ -67,13 +70,14 @@ const RegisterForm = ({handleChange, handleSubmit, username, email, postcode, pa
                   onChange={handleChange}
                   />
                   </div>
+                  {errors.password && <small className="help is-danger">{errors.password}</small>}
                 </div>
 
                 <div className="field">
                 <label className="label">Confirm Password</label>
                 <div className="control">
                   <input 
-                  className="input" 
+                  className={`input ${errors.passwordConfirmation ? 'is-danger' : ''}`}
                   type="password" 
                   placeholder="Confirm password here" 
                   name="passwordConfirmation"
@@ -81,6 +85,7 @@ const RegisterForm = ({handleChange, handleSubmit, username, email, postcode, pa
                   onChange={handleChange}
                   />
                   </div>
+                  {errors.passwordConfirmation && <small className="help is-danger">{errors.passwordConfirmation}</small>}
                 </div>
               <div className="field">
               <button type="submit" className="button is-fullwidth is-primary">Register</button>

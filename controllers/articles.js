@@ -31,7 +31,7 @@ async function articlesCreate(req, res, next) {
 async function articlesShow(req, res, next) {
   const articleId = req.params.id
   try {
-    const anArticle = await Article.findById(articleId)
+    const anArticle = await Article.findById(articleId).populate('user')
     console.log(anArticle)
     if (!anArticle) throw new Error(notFound)
     res.status(200).json(anArticle)
@@ -60,8 +60,9 @@ async function articlesUpdate(req, res, next) {
 //* function to delete an article of clothing by id
 //* tested
 async function articlesDelete(req, res) {
-  const articleId = req.params.id
+  req.body.user = req.currentUser
   try {
+    const articleId = req.params.id
     const articleToDelete = await Article.findById(articleId)
     if (!articleToDelete) throw new Error(notFound)
     if (!articleToDelete.user.equals(req.currentUser._id)) throw new Error('Unauthorized')
