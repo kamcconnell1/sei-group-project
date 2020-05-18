@@ -15,8 +15,8 @@ class Map extends React.Component {
     try {
       const postcode = this.props.postcode      
       const response = await getPostcodeInfo(postcode)
-      const latitude = response.data.result.latitude
-      const longitude = response.data.result.longitude
+      const latitude = response.data.result.latitude 
+      const longitude = response.data.result.longitude 
 
       this.setState({latitude,  longitude}, )
     } catch (err) {
@@ -31,12 +31,19 @@ class Map extends React.Component {
       <MapGl
         mapboxApiAccessToken={process.env.REACT_APP_MAPBOX_ACCESS_TOKEN}
         height={'50vh'}
-        width={'100vw'}
+        width={'80vw'}
         mapStyle='mapbox://styles/mapbox/light-v10'
-        latitude={this.state.latitude}
-        longitude={this.state.longitude}
+        latitude={51.515}
+        longitude={-0.078}
         zoom={12}
       >
+          <Marker
+          className="marker"
+          latitude={51.515}
+          longitude={-0.078}
+          >
+            {/* <span role="img" aria-label="marker">🦆</span> */}
+          </Marker>
 
       </MapGl>
     )

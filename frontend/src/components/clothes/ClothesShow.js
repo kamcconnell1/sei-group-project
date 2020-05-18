@@ -9,28 +9,42 @@ class ClothesShow extends React.Component {
   state = {cloth: null, user: null}
 
   // * GET each clothing item on mount via Id
-  async componentDidMount() {
-    const clothId = this.props.match.params.id
+  componentDidMount() {
     try {
-      const res = await singleCloth(clothId)
-      console.log(res.data.user)
-      // console.log('clothes info:', res.data.user.id)
-      const userId = res.data.user.id
-      const user = await getUserProfile(userId)
-      // console.log('user profile info:', user.data)
-      this.setState({cloth: res.data, user: user.data})
+      this.getSingleCloth()
     } catch (err) {
       console.log(err)
     }
   }
 
+  getSingleCloth = async () => {
+    const clothId = this.props.match.params.id
+    const res = await singleCloth(clothId)
+      // console.log('clothes info:', res.data.user.id)
+      const userId = res.data.user.id
+      const user = await getUserProfile(userId)
+      // console.log('user profile info:', user.data)
+      this.setState({cloth: res.data, user: user.data})
+  }
+
+  handleClick = async () => {
+    console.log('clicks')
+    const clothId = this.props.match.params.id
+    const res = await singleCloth(clothId)
+    const userId = res.data.user.id
+    const user = await getUserProfile(userId)
+    const newCloth = user.data.createdArticles[0]
+    this.setState({cloth: newCloth, user: user.data})
+  }
+
   render() {
     if (!this.state.cloth) return <h1>Even more Ninjas are working on this</h1>
     const {cloth, user} = this.state
-    // console.log(cloth)
-        console.log(user)
     //* Variable of images from articles user posted
-    // const images = user.createdArticles.map(image => image.image)
+    const images = user.createdArticles.map(image => {return {image: image.image, id: image._id}})
+    // Current users Id
+    const userId = user._id
+    console.log(userId)
     return (
       <>
         <section className="hero is-light">
@@ -47,8 +61,10 @@ class ClothesShow extends React.Component {
             <div className="columns">
               <SingleClothCard 
               {...cloth}
-              // {...user}
-              // images={images}
+              {...user}
+              images={images}
+              currentUserId={userId}
+              onClick={this.handleClick}
               />
             </div>
           </div>

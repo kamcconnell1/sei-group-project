@@ -3,7 +3,7 @@ import React from 'react'
 import UserClothCard from './UserClothCard'
 import ProfilePic from './ProfilePic'
 
-import { getProfile, editProfile } from '../../lib/api'
+import { getProfile } from '../../lib/api'
 import { getPostcodeInfo} from '../../lib/ext_api'
 import avatar from '../assets/avatar.png'
 
@@ -41,16 +41,9 @@ class UserProfile extends React.Component {
   }
 
   //* Function to allow user to upload a profile picture
-  handleChange = async event => {
-    const user = { ...this.state.user, [event.target.name]: event.target.value }
+  handleChange = event => {
+    const user = { ...this.state.user, profilePic: event.target.value }
     this.setState({ user })
-    
-    try {
-      console.log(user)
-      await editProfile(this.state.user)
-    } catch (err){
-      console.log(err.response.data);
-    }
   }
 
   // * Function to push the user to clothes add page if they want to add a new item 

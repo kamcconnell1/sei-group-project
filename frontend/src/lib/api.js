@@ -51,3 +51,8 @@ export const getProfile = () => {
   export const getUserProfile = id => {
     return axios.get(`${kebb_url}/profile/${id}`)
   }
+
+  //* POST for user to add pin to their map 
+  export const postPin = pinForm => {
+    return axios.post(`${kebb_url}/profile/pins`, pinForm, withHeaders())
+  }

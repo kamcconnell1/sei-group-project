@@ -46,11 +46,10 @@ class Navbar extends React.Component {
           </div>
           <div className={`navbar-menu ${isOpen ? 'is-active' : ''}`}>
             <div className="navbar-end">
-              {/* //! the clothes add page & User profile should only be linked from the user profile page but just put a link here for now */}
               {isAuthenticated() && <Link to={`/profile/${this.username}`} className="navbar-item">View Profile</Link>}
-
+              {isAuthenticated() && <Link to={`/profile/${this.username}/map`} className="navbar-item">User Map</Link> }
               {!isAuthenticated() && <Link to="/register" className="navbar-item">Register</Link>}
-              {!isAuthenticated() && <Link to="login" className="navbar-item">Login</Link>}
+              {!isAuthenticated() && <Link to="/login" className="navbar-item">Login</Link>}
               {isAuthenticated() && <span onClick={this.handleLogout} className="navbar-item">Logout</span>}
             </div>
           </div>
