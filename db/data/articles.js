@@ -1,5 +1,6 @@
 module.exports = [
   {
+    //* john's art
     title: 'Vintage wedding dress',
     category: 'Dress',
     genderCategory: 'Women',

@@ -6,9 +6,8 @@ const Post = require('../models/post')
 const userData = require('./data/users')
 const articleData = require('./data/articles')
 const postData = require('./data/posts')
-// const userCommentsData = require('./data/userComments')
-// const articleCommentsData = require('./data/articleComments')
-// const postCommentsData = require('./data/postComments')
+// const commentsData = require('./data/comments')
+
 
 mongoose.connect(
   dbURI,
@@ -24,35 +23,29 @@ mongoose.connect(
       console.log(`${'😃 '.repeat(users.length)} users created `)
 
 
-      // //* Comments on Users
-      // //* Coments on John profile
-      // const commentsByJohn = userCommentsData.slice(0, 3).map(comment => {
-      //   return { ...comment, user: users[1]}
-
-      // })
-
-
       //* SEED ARTICLES
-      // articles for user 0 only
-      // const articlesWithUsers = articleData.map(article => {
-      //   return { ...article, user: users[0]._id }
-      // })
-      // const articles = await Article.create(articlesForJohn)
-      // console.log(`${'👗 '.repeat(articles.length)} articles created `)
 
       //* articles for john
-      const articlesForJohn = articleData.slice(0, 3).map(article => {
+      const articlesFromJohn = articleData.slice(0, 3).map(article => {
         return { ...article, user: users[1]._id }
       })
-      const articlesJohn = await Article.create(articlesForJohn)
+      const articlesJohn = await Article.create(articlesFromJohn)
       console.log(`${'👗🧒🏻 '.repeat(articlesJohn.length)} articles created `)
 
+      // const commentsArticleMtoJ = commentsData.slice(9, 12).map(comment => {
+      //   return { ...comment, user: users[2]}
+      // })
+
+      // const commentsJohnsArt = await 
+
+      
       //* articles for mary
       const articlesForMary = articleData.slice(4, 6).map(article => {
         return { ...article, user: users[2]._id }
       })
       const articlesMary = await Article.create(articlesForMary)
       console.log(`${'👗👩🏾‍🦰 '.repeat(articlesMary.length)} articles created `)
+
 
       //* articles for paul
       const articlesForPaul = articleData.slice(6, 8).map(article => {
@@ -62,15 +55,7 @@ mongoose.connect(
       console.log(`${'👗🧔🏼 '.repeat(articlesPaul.length)} articles created `)
 
 
-      // //* SEED POSTS
-      // posts for user 0 only
-      // const postsWithUsers = postData.map(post => {
-      //   return { ...post, user: users[0]._id }
-      // })
-
-      // const posts = await Post.create(postsWithUsers)
-      // console.log(`${'📄 '.repeat(posts.length)} posts created`)
-
+      //* SEED POSTS
 
       //* posts for john
       const postsForJohn = postData.slice(0, 3).map(post => {
@@ -78,6 +63,8 @@ mongoose.connect(
       })
       const postsJohn = await Post.create(postsForJohn)
       console.log(`${'📄🧒🏻 '.repeat(postsJohn.length)} posts created `)
+
+
 
       //* posts for mary
       const postsForMary = postData.slice(4, 6).map(post => {
@@ -93,6 +80,18 @@ mongoose.connect(
       const postsPaul = await Post.create(postsForPaul)
       console.log(`${'📄🧔🏼 '.repeat(postsPaul.length)} posts created `)
 
+
+      // //* SEED COMMENTS
+
+      // //* seeds comment articles
+      // const commentsArticleJtoM = commentsData.slice(0, 3).map(comment => {
+      //   return users[2].articlesPosted[0].push(comment)
+      // })
+      // //* seeds comment articles
+      // //* seeds comment articles
+
+
+
       await mongoose.connection.close()
 
       console.log('bye')
@@ -101,3 +100,4 @@ mongoose.connect(
       console.log(err)
     }
   })
+
