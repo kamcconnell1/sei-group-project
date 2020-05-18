@@ -6,6 +6,7 @@ const articles = require('../controllers/articles')
 const posts = require('../controllers/posts')
 const mapPins = require('../controllers/mapPins')
 const secureRoute = require('../lib/secureRoute')
+const messages = require('../controllers/messages')
 
 //? CLOTHES
 //* Get/Post Clothes
@@ -145,6 +146,13 @@ router.route('/pins/:pinId')
   .delete(secureRoute, mapPins.delete)
 
 //? *****************************//
+
+//? MESSAGES
+router.route('/:userid/messages')
+  .post(secureRoute, messages.createMessage)
+
+router.route('/messages/:id')
+  .post(secureRoute, messages.sendResponse)
 
 //! exports
 module.exports = router
