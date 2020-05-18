@@ -42,21 +42,7 @@ const userSchema = new mongoose.Schema({
     favUsers: [{ type: mongoose.Schema.ObjectId, ref: 'User' }],
     favPosts: [{ type: mongoose.Schema.ObjectId, ref: 'Post' }]
   },
-<<<<<<< HEAD
-  pins: [
-    {
-      title: { type: String, required: true, maxlength: 100 },
-      place: { type: String, required: true, maxlength: 100 },
-      location: { type: String, required: true },
-      latitude: { type: String },
-      longitude: { type: String },
-      note: { type: String, maxlength: 300 },
-      photo: { type: String }
-    }
-  ],
-=======
   pins: [pinSchema],
->>>>>>> development
   user: [{ type: mongoose.Schema.ObjectId, ref: 'User' }],
   ratings: [userRatingSchema],//* reference to userRating schema to find the rating and the user who rated.
   comments: [userCommentsSchema] //* array of comments on user
