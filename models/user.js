@@ -11,7 +11,7 @@ const userRatingSchema = new mongoose.Schema({
 
 //* Schema for comments on user
 const userCommentsSchema = new mongoose.Schema({
-  text: [{ type: String, maxlength: 200 }],
+  text: [{ type: String, maxlength: 200, required: true }],
   user: { type: mongoose.Schema.ObjectId, ref: 'User' }
 })
 
@@ -28,14 +28,16 @@ const userSchema = new mongoose.Schema({
     favUsers: [{ type: mongoose.Schema.ObjectId, ref: 'User' }],
     favPosts: [{ type: mongoose.Schema.ObjectId, ref: 'Post' }]
   },
-  pins: [{
-    title: { type: String, required: true, maxlength: 100 },
-    place: { type: String, required: true, maxlength: 100 },
-    location: { type: String, required: true },
-    note: { type: String, maxlength: 300 },
-    photo: { type: String },
-    user: { type: mongoose.Schema.ObjectId, ref: 'User' }
-  }],
+  pins: [
+    {
+      title: { type: String, required: true, maxlength: 100 },
+      place: { type: String, required: true, maxlength: 100 },
+      location: { type: String, required: true },
+      note: { type: String, maxlength: 300 },
+      photo: { type: String }
+    }
+  ],
+  user: [{ type: mongoose.Schema.ObjectId, ref: 'User' }],
   ratings: [userRatingSchema],//* reference to userRating schema to find the rating and the user who rated.
   comments: [userCommentsSchema] //* array of comments on user
 })

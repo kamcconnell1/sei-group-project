@@ -155,7 +155,7 @@ async function editArticleRating (req, res, next) {
 
 //* export
 module.exports = {
-  index: articlesIndex,
+  getClothes: articlesIndex,
   create: articlesCreate,
   single: articlesShow,
   update: articlesUpdate,

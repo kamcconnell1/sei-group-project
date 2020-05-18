@@ -30,3 +30,4 @@ const articleOfClothingSchema = new mongoose.Schema({
 
 
 module.exports = mongoose.model('Article', articleOfClothingSchema)
+// module.exports = mongoose.model('ArticleCommentsSchema', articleCommentsSchema)
