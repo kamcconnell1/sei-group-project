@@ -1,5 +1,6 @@
 import axios from 'axios'
 import { getToken } from './auth'
+import ProfilePic from '../components/users/ProfilePic'
 
 const kebb_url = '/api'
 
@@ -43,8 +44,8 @@ export const getProfile = () => {
 }
 
 //* PUT request to edit user PROFILE Page
-  export const editProfile = (profileData) => {
-    return axios.put(`${kebb_url}/profile`, profileData,  withHeaders())
+  export const editProfile = user => {
+    return axios.put(`${kebb_url}/profile`, user,  withHeaders())
   }
 
 // * GET to show specific user (no need to be logged in)
@@ -54,5 +55,5 @@ export const getProfile = () => {
 
   //* POST for user to add pin to their map 
   export const postPin = pinForm => {
-    return axios.post(`${kebb_url}/profile/pins`, pinForm, withHeaders())
+    return axios.post(`${kebb_url}/pins`, pinForm, withHeaders())
   }

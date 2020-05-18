@@ -19,7 +19,7 @@ const properties = {
   }
 }
 
-const SingleClothCard = ({ title, profilePic, username, images, image, currentUserId, onClick }) => {
+const SingleClothCard = ({ title, profilePic, username, images, image, currentUserId, onFirstClick, onSecondClick }) => {
   const slideImages = [image[0], image[0], image[0]]
   // console.log(slideImages)
   return (
@@ -64,21 +64,21 @@ const SingleClothCard = ({ title, profilePic, username, images, image, currentUs
           <div>
 
             <div className="column is-one-quarter">
-              <button onClick={onClick}>
+              <button onClick={onFirstClick}>
               <figure className="image">
                 <img src={images[0].image} alt={title} />
               </figure>
               </button>
             </div>
 
-            <Link to={`/clothes/${images[1].id}`}>
             <div className="column is-one-quarter">
+              <button onClick={onSecondClick}>
               <figure className="image">
                 <img src={images[1].image} alt={title} />
               </figure>
+              </button>
             </div>
-            </Link>
-          </div>
+        </div>
         </section>
   </>
   )

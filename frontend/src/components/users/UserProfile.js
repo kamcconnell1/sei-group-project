@@ -3,7 +3,7 @@ import React from 'react'
 import UserClothCard from './UserClothCard'
 import ProfilePic from './ProfilePic'
 
-import { getProfile } from '../../lib/api'
+import { getProfile, editProfile } from '../../lib/api'
 import { getPostcodeInfo} from '../../lib/ext_api'
 import avatar from '../assets/avatar.png'
 
@@ -13,8 +13,10 @@ import Map from '../common/Map'
 
 class UserProfile extends React.Component {
   state = {
-    user: null,
+    user: '',
     location: '',
+    latitude: '', 
+    longitude: '',
     clickAvatar: false
   }
 
@@ -34,10 +36,13 @@ class UserProfile extends React.Component {
   async getLocation() {
     const postcode = this.state.user.postcode
     const response = await getPostcodeInfo(postcode)
+  
     const nuts = response.data.result.nuts
     const region = response.data.result.region
+    const latitude = response.data.result.latitude
+    const longitude = response.data.result.longitude
 
-    this.setState({ location: `${nuts}, ${region}` })
+    this.setState({ location: `${nuts}, ${region}`, latitude, longitude })
   }
 
   //* Function to allow user to upload a profile picture
@@ -45,6 +50,17 @@ class UserProfile extends React.Component {
     const user = { ...this.state.user, profilePic: event.target.value }
     this.setState({ user })
   }
+
+  async handleSubmit() {
+    console.log('pre submit event user', this.state.user);
+    try {
+      const res = await editProfile(this.state.user)
+      console.log('submit event res', res.data);
+    } catch (err) {
+      console.log(err.response.data);
+      
+    }
+  } 
 
   // * Function to push the user to clothes add page if they want to add a new item 
   handleAddClothes = () => {
@@ -66,7 +82,7 @@ class UserProfile extends React.Component {
     const { username, createdArticles, profilePic } = this.state.user
     const location = this.state.location
 
-    console.log(this.state.user);
+    console.log(this.state)
     return (
 
       <>
@@ -93,6 +109,7 @@ class UserProfile extends React.Component {
                 onClick={this.toggleModal}
                 modalStatus={this.state.clickAvatar}
                 onChange={this.handleChange}
+                onLoad={this.handleSubmit}
                 />
             
 
@@ -132,7 +149,8 @@ class UserProfile extends React.Component {
           <div className="control">
             Map to allow users to save locations - linked from searches on clothes show page maybe
                   <Map
-              {...this.state.user} />
+              latitude={this.state.latitude}
+              longitude={this.state.longitude} />
           </div>
 
         </section>

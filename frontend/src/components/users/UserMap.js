@@ -3,7 +3,7 @@ import MapGl, { Marker } from 'react-map-gl'
 
 import Map from '../common/Map'
 import PinForm from '../users/PinForm'
-import { postPin } from '../../lib/api'
+import { postPin, getProfile } from '../../lib/api'
 import { getPostcodeInfo } from '../../lib/ext_api'
 
 import 'mapbox-gl/dist/mapbox-gl.css'
@@ -12,34 +12,37 @@ import 'mapbox-gl/dist/mapbox-gl.css'
 
 class UserMap extends React.Component {
   state = {
+    user: null,
     pinForm: {
       title: '',
       place: '',
       location: '',
+      latitude: '', 
+      longitude: '',
       note: '',
       photo: ''
     },
     errors: {}
   }
 
+  // * Function to GET the users details
+  async componentDidMount() {
+    try {
+      const res = await getProfile()
+      this.setState({ user: res.data })
+    } catch (err) {
+      console.log(err)
+    }
+  }
+
+
   handleChange = event => {
     const pinForm = {...this.state.pinForm, [event.target.name]: event.target.value }
     const errors = { ...this.state.errors, [event.target.name]: ''}
     this.setState({ pinForm, errors })
   }
-
-  getLocation = async event => {
-    try {
-      const location = this.state.pinForm.location
-      console.log(location);
-      const response = await getPostcodeInfo(location)
-      console.log('postcode info', response)
-    } catch (err) {
-      const errors = {...this.state.errors, location: err.response.data.error}
-      console.log(err.response.data.error)
-      this.setState({errors})
-    }
-  }
+  
+  
   
   // handleSubmit event for submitting the registration form
   handleSubmit = async event => {
@@ -54,9 +57,11 @@ class UserMap extends React.Component {
     }
   }
 
-
+  
   render() {
-    console.log(this.state);
+
+    if (!this.state.user) return null 
+    console.log(this.state.user.pins);
     
     return (
       <>
@@ -69,10 +74,10 @@ class UserMap extends React.Component {
                {...this.state.pinForm}
                />
                <div className="pinData">
-                 {this.state.}
+                 {/* {this.state.pins} */}
                </div>
             <div className="map">
-              {/* <Map /> */}
+              <Map {...this.state.user.pins}/>
             </div>
           </div>
         </div>

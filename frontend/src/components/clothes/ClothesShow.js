@@ -17,6 +17,7 @@ class ClothesShow extends React.Component {
     }
   }
 
+  // * Function to GET single clothing Item
   getSingleCloth = async () => {
     const clothId = this.props.match.params.id
     const res = await singleCloth(clothId)
@@ -27,14 +28,27 @@ class ClothesShow extends React.Component {
       this.setState({cloth: res.data, user: user.data})
   }
 
-  handleClick = async () => {
-    console.log('clicks')
+
+  handleFirstClick = async () => {
     const clothId = this.props.match.params.id
     const res = await singleCloth(clothId)
     const userId = res.data.user.id
     const user = await getUserProfile(userId)
     const newCloth = user.data.createdArticles[0]
+    const newClothId = user.data.createdArticles[0]._id
     this.setState({cloth: newCloth, user: user.data})
+    this.props.history.push(`/clothes/${newClothId}`)
+  }
+
+  handleSecondClick = async () => {
+    const clothId = this.props.match.params.id
+    const res = await singleCloth(clothId)
+    const userId = res.data.user.id
+    const user = await getUserProfile(userId)
+    const newCloth = user.data.createdArticles[1]
+    const newClothId = user.data.createdArticles[1]._id
+    this.setState({cloth: newCloth, user: user.data})
+    this.props.history.push(`/clothes/${newClothId}`)
   }
 
   render() {
@@ -44,7 +58,7 @@ class ClothesShow extends React.Component {
     const images = user.createdArticles.map(image => {return {image: image.image, id: image._id}})
     // Current users Id
     const userId = user._id
-    console.log(userId)
+    // console.log(userId)
     return (
       <>
         <section className="hero is-light">
@@ -64,7 +78,8 @@ class ClothesShow extends React.Component {
               {...user}
               images={images}
               currentUserId={userId}
-              onClick={this.handleClick}
+              onFirstClick={this.handleFirstClick}
+              onSecondClick={this.handleSecondClick}
               />
             </div>
           </div>

@@ -45,6 +45,7 @@ class ImageUpload extends React.Component{
             className="input"
             type="file"
             name={this.props.name}
+            multiple
             onChange={this.handleUpload}
           />
         </>
