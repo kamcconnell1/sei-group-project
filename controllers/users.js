@@ -22,7 +22,7 @@ async function currentUserProfile(req, res, next) {
 async function getProfile(req, res, next) {
   try {
     const user = req.params.id
-    const userProfile = await User.findById(user).populate()
+    const userProfile = await User.findById(user).populate('createdArticles').populate('createdPosts').populate('comments.user')
     if (!userProfile) throw new Error(notFound)
     res.status(200).json(userProfile)
   } catch (err) {
