@@ -43,7 +43,7 @@ handleSubmit = async event => {
   this.getLocation()
   try{
     await registerUser(this.state.registerForm)
-    // this.props.history.push('/login')
+    this.props.history.push('/login')
   } catch (err) {
     this.setState({ errors: err.response.data})
     console.log(err.response.data)
@@ -51,7 +51,6 @@ handleSubmit = async event => {
 }
 
   render() {
- console.log(this.state.errors);
  
     return (
       <>

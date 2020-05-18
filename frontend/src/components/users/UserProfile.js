@@ -72,7 +72,7 @@ class UserProfile extends React.Component {
         <section className="section">
           <div className="container">
             <div className="columns">
-              <div className="column is-3">
+              <div className="column is-3 is-profile-info">
 
 {/* Section for avatar or profile pic need to change to allow to change the file  & so appears over the form appears over the avatar on hover */}
                 <div className="control" 
@@ -112,7 +112,7 @@ class UserProfile extends React.Component {
               </div>
 
               {/* Map over the clothes the user has uploaded - need to work on the positioning of this - need to add to allow user to edit / delete items */}
-              <div className="column is-multiline">
+              <div className="column is-multiline is-user-clothes">
                 <div className="control">
                 {createdArticles.map(item =>
                   <UserClothCard
@@ -124,7 +124,7 @@ class UserProfile extends React.Component {
                 </div>
               </div>
               {/* Notifications / chat section */}
-              <div className="column">
+              <div className="column is-3 is-user-chat">
                 Incoming Notifications
           </div>
             </div>
