@@ -1,3 +1,4 @@
+//! Required
 const User = require('../models/user')
 const { notFound, unauthorized, duplicate } = require('../lib/errorMessages')
 const Article = require('../models/article')
@@ -44,7 +45,7 @@ async function userUpdate(req, res, next) {
   }
 }
 
-//? Comments 
+//? COMMENTS
 //? Comment on User profile
 //* WORKING tested
 //* ERROR tested
@@ -192,7 +193,7 @@ async function addPostToFavourites(req, res, next) {
   }
 }
 
-//? Favourites Delete functions
+//? FAVOURITES DELETE FUNCTION
 //? Remove Article from your Favs
 //* WORKING tested
 //* ERROR tested
@@ -245,6 +246,7 @@ async function removePostsFromFavs(req, res, next) {
   }
 }
 
+//! Exports
 module.exports = {
   updateUser: userUpdate,
   profile: currentUserProfile,

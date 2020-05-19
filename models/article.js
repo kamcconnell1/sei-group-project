@@ -1,3 +1,4 @@
+//! Require
 const mongoose = require('mongoose')
 
 //* schema for rating
@@ -11,6 +12,8 @@ const ratingSchema = new mongoose.Schema({
 const articleCommentsSchema = new mongoose.Schema({
   text: [ { type: String, maxlength: 200 } ],
   user: { type: mongoose.Schema.ObjectId, ref: 'User', required: true }
+}, {
+  timestamps: true
 })
 
 //* schema for clothing
@@ -26,8 +29,9 @@ const articleOfClothingSchema = new mongoose.Schema({
   ratings: [ratingSchema],//* reference to rating schema (which gets user who rated clothing)
   user: { type: mongoose.Schema.ObjectId, ref: 'User', required: true }, //* grabs the user who added clothing ( which will provide location etc.)
   comments: [articleCommentsSchema]//* comments Schema
+}, {
+  timestamps: true
 })
 
-
+//! Export
 module.exports = mongoose.model('Article', articleOfClothingSchema)
-// module.exports = mongoose.model('ArticleCommentsSchema', articleCommentsSchema)

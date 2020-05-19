@@ -1,3 +1,4 @@
+//! Require
 const mongoose = require('mongoose')
 const bcrypt = require('bcrypt')
 
@@ -13,14 +14,19 @@ const userRatingSchema = new mongoose.Schema({
 const userCommentsSchema = new mongoose.Schema({
   text: [{ type: String, maxlength: 200, required: true }],
   user: { type: mongoose.Schema.ObjectId, ref: 'User' }
+}, {
+  timestamps: true
 })
 
+//* Schema for pins
 const pinSchema = new mongoose.Schema({
   title: { type: String, required: true, maxlength: 100 },
   place: { type: String, required: true, maxlength: 100 },
   location: { type: String, required: true },
   note: { type: String, maxlength: 300 },
   photo: { type: String }
+}, {
+  timestamps: true
 })
 
 //* Schema for user
@@ -40,14 +46,18 @@ const userSchema = new mongoose.Schema({
   user: [{ type: mongoose.Schema.ObjectId, ref: 'User' }],
   ratings: [userRatingSchema],//* reference to userRating schema to find the rating and the user who rated.
   comments: [userCommentsSchema] //* array of comments on user
+}, {
+  timestamps: true
 })
 
+//* virtual for Created Articles
 userSchema.virtual('createdArticles', {
   ref: 'Article',
   localField: '_id',
   foreignField: 'user'
 })
 
+//* virtual for createdPosts
 userSchema.virtual('createdPosts', {
   ref: 'Post',
   localField: '_id',
@@ -91,7 +101,9 @@ userSchema //* will run before the model is saved and hash the password before i
     next()
   })
 
+//* Require Plugin for uniqueValidator
 userSchema.plugin(require('mongoose-unique-validator'))
 
+//! Export
 module.exports =
   mongoose.model('User', userSchema)
