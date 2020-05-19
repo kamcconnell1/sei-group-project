@@ -1,7 +1,7 @@
 import React from 'react'
 import PostCards from '../posts/PostsCards'
 
-import { getAllPosts, createAPost } from '../../lib/api'
+import { getAllPosts, createPost, deleteAPost } from '../../lib/api'
 import { Link } from 'react-router-dom'
 
 
@@ -11,7 +11,8 @@ class Posts extends React.Component {
     posts: null,
     input: {
       title: '',
-      text: ''
+      text: '',
+      photo: ''
     }
   }
 
@@ -41,16 +42,18 @@ class Posts extends React.Component {
   handleSubmit = async e => {
     e.preventDefault()
     try {
-      const res = await createAPost(this.state.input)
+      const res = await createPost(this.state.input)
+      this.pageSetup()
       console.log(res.data)
     } catch (err) {
       console.log(err)
     }
   }
 
-  deletePost = e => {
+  deletePost = async e => {
     console.log(e.target.value)
-
+    await deleteAPost(e.target.value)
+    this.props.history.push(`/posts`)
   }
 
 
@@ -73,6 +76,11 @@ class Posts extends React.Component {
                   <input
                     name="text"
                     value={this.state.input.text}
+                    onChange={this.handleChange}
+                  />
+                  <input
+                    name="photo"
+                    value={this.state.input.photo}
                     onChange={this.handleChange}
                   />
                   <button>Submit Post</button>

@@ -1,13 +1,9 @@
 import 'mapbox-gl/dist/mapbox-gl.css'
 import "mapbox-gl/dist/mapbox-gl.css"
 import React from 'react'
-
 import MapGl, { Marker, Popup, FlyToInterpolator } from 'react-map-gl'
-
+// import DeckGL, { GeoJsonLayer } from 'deck.gl'
 import Geocoder from 'react-map-gl-geocoder'
-
-
-
 class Map extends React.Component {
   state = {
     viewport: {
@@ -15,48 +11,22 @@ class Map extends React.Component {
       longitude: -0.078,
       zoom: 12
     },
-    searchResultLayer: null,
+    // state of dropped pin
     latitude: '',
-    longitude: ''
-  }
-
-  
-  componentDidMount() {
-    const pins = []
-    
-    for (let i = 0; i < 3; i++ ){
-      const pin = this.props.pins
-      const id = i
-      const latitude = pin[i].latitude
-      const longitude = pin[i].longitude
-      
-      pins.push({
-        type: "Pin",
-        geometry: {
-          type: "Point",
-          coordinates: [longitude, latitude]
-        },
-        properties: {
-          id,
-          name: pin[i].title,
-          description: pin[i].place
-        }
-      })
+    longitude: '',
+    flyTo: {
+      lat: '',
+      lon: ''
     }
-    this.setState({pins})
   }
-  
-  
   //This is required as a paramter for Geocode to work
   myMap = React.createRef()
-
   //This function continuously sets state as you move the viewport
   handleViewportChange = viewport => {
     this.setState({
       viewport: { ...this.state.viewport, ...viewport }
     })
   }
-
   goToViewport = ({ longitude, latitude }) => {
     this.handleViewportChange({
       longitude,
@@ -75,70 +45,57 @@ class Map extends React.Component {
       this.props.location(this.state.latitude, this.state.longitude)
     })
   }
-  
-  // myMap.addLayer({
-
-
-
-  // })
-  
-  // pinLayer = new GeoJsonLayer({
-  //     id:"pin-layer",
-  //     data: this.state.pins,
-  //     pickable: true,
-  //     getFillColor: [160, 160, 180, 200],
-    //   points: {
-    //     type: "IconLayer",
-    //   iconAtlas: './icon-atlas.png',
-    //   iconMapping: './icon-mapping.json',
-    //   getIcon: d => d.sourceFeature.feature.properties.marker,
-    //   getColor: [255, 200, 0],
-    //   getSize: 32
-    // }
-    // })
-
-   
-    
-    
-    
-    render() {
-      console.log(this.state.pins);
-      
-      const { viewport, searchResultLayer } = this.state
-      
-      return (
-        <>
-      <MapGl
-        ref={this.myMap}
-        {...viewport}
-        height={'800px'}
-        width={'60vw'}
-        onViewportChange={this.handleViewportChange}
-        mapboxApiAccessToken={process.env.REACT_APP_MAPBOX_ACCESS_TOKEN}
-        mapStyle='mapbox://styles/mapbox/light-v10'
-      >
-        <Geocoder
-          mapRef={this.myMap}
-          onResult={this.handleOnResult}
+  render() {
+    const pins = (this.props.pins)
+    const { viewport, popupInfo } = this.state
+    // console.log(viewport);
+    return (
+      <>
+        <MapGl
+          ref={this.myMap}
+          {...viewport}
+          height={'800px'}
+          width={'60vw'}
           onViewportChange={this.handleViewportChange}
           mapboxApiAccessToken={process.env.REACT_APP_MAPBOX_ACCESS_TOKEN}
-          position="top-left" />
-          {/* //? Don't think these are needed - left in here for now  */}
-        {/* <GeolocateControl />
-        <NavigationControl /> */}
-        <Marker
-          className="marker"
-          {...viewport} />
-
-      </MapGl>
-      <button
-        className="button is-primary"
-        onClick={this.handleDropPin}
-      >Save Location</button>
-    </>
-  )
+          mapStyle='mapbox://styles/mapbox/light-v10'
+          // onClick={() => this.goToViewport(viewport.longitude, viewport.latitude)}
+        >
+          <Geocoder
+            mapRef={this.myMap}
+            onViewportChange={this.handleViewportChange}
+            mapboxApiAccessToken={process.env.REACT_APP_MAPBOX_ACCESS_TOKEN}
+            position="top-left" />
+          {pins.map(point => (
+            <div key={point._id}>
+              <Marker
+                latitude={parseFloat(point.latitude)}
+                longitude={parseFloat(point.longitude)}
+              >
+                <span role="img" aria-label="marker">❇️</span>
+              </Marker>
+              <Popup
+                latitude={parseFloat(point.latitude)}
+                longitude={parseFloat(point.longitude)}
+                closeButton={false}
+                closeOnClick={true}
+              >{point.title.charAt(0).toUpperCase() + point.title.slice(1)
+                }</Popup>
+            </div>
+          ))}
+          {/* //! If you comment below back in it is a pin to highlight user location - helpful when adding pins */}
+          <Marker
+            className=""
+            {...viewport} >
+            <span role="img" aria-label="marker">📍</span>
+          </Marker>
+        </MapGl>
+        <button
+          className="button is-primary"
+          onClick={this.handleDropPin}
+        >Save Location</button>
+      </>
+    )
+  }
 }
-
-}
-
 export default Map

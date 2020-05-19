@@ -18,8 +18,8 @@ const PostCards = ({ deletePost, photo, text, user, title, _id}) => {
         <div className="card-content">
           <h4 className=""><strong>{text}</strong></h4>
           <h5 className=""><strong>Posted by</strong> {user.username}</h5>
-          <button onClick={deletePost} value={_id}>Delete</button>
         </div>
+        <button onClick={deletePost} value={_id}>Delete</button>
       </div>
     </Link>
   </div> 

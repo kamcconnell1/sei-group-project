@@ -78,7 +78,13 @@ export const allUsersFavourites = () => {
   return axios.get(`${kebb_url}/favourites`, withHeaders())
 }
 
-//------------------------------------USER REQUESTS--------------------------------------------
+// * POST user to Friends favourite
+export const postFavoriteFriend = data => {
+  return axios.post(`${kebb_url}/favourites/friends`, data, withHeaders())
+}
+
+
+//------------------------------------POSTS--------------------------------------------
 
 //* Get all POSTS
 export const getAllPosts = () => {
@@ -86,7 +92,7 @@ export const getAllPosts = () => {
 }
 
 //* Create a POST
-export const createAPost = data => {
+export const createPost = data => {
   return axios.post(`${kebb_url}/posts`, data, withHeaders())
 }
 
@@ -96,21 +102,23 @@ export const getSinglePost = id => {
 }
 
 //* Edit a post
-export const editAPost = (id, data) => {
+export const editPost = (id, data) => {
   return axios.put(`${kebb_url}/posts/${id}`, data, withHeaders())
 }
+
 //* Delete a post
 export const deleteAPost = id => {
   return axios.delete(`${kebb_url}/posts/${id}`, withHeaders())
 }
 
-// * POST Favourites to users favourite
-export const postFavorite = data => {
-return axios.post(`${kebb_url}/favourites/article`, data, withHeaders())
+//* Comment on a post
+export const commentOnPost = (id, data) => {
+  return axios.post(`${kebb_url}/posts/${id}/comments`, data, withHeaders())
 }
 
-// * POST user to Friends favourite
-export const postFavoriteFriend = data => {
-return axios.post(`${kebb_url}/favourites/friends`, data, withHeaders())
+//* Delete Comment on post
+export const DeleteCommentOnPost = (id, commentid) => {
+  return axios.delete(`${kebb_url}/posts/${id}/comments/${commentid}`, withHeaders())
 }
+
 

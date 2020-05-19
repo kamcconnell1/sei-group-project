@@ -25,7 +25,6 @@ import Login from './components/auth/Login'
 import Posts from './components/posts/Posts'
 import PostsShow from './components/posts/PostsShow'
 import PostEdit from './components/posts/PostEdit'
-import PostCreate from './components/posts/PostCreate'
 
 const App = () => {
 
