@@ -65,6 +65,14 @@ export const allUsersFavourites = () => {
 export const postFavoriteFriend = data => {
   return axios.post(`${kebb_url}/favourites/friends`, data, withHeaders())
 }
+//*POST comment on USER
+export const commentOnUser = (id, data) => {
+  return axios.post(`${kebb_url}/profile/${id}/comments`, data, withHeaders())
+}
+//* DELETE Comment on USER
+export const DeleteCommentOnUser = (id, commentid) => {
+  return axios.delete(`${kebb_url}/profile/${id}/comments/${commentid}`, withHeaders())
+}
 
 
 //------------------------------------POSTS--------------------------------------------

@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import Comments  from '../common/Comments'
 
 import { getSinglePost, commentOnPost, DeleteCommentOnPost } from '../../lib/api'
+import { isOwner, isAuthenticated } from '../../lib/auth'
 
 class PostsShow extends React.Component {
   state = {
@@ -83,12 +84,12 @@ class PostsShow extends React.Component {
           <p>{post.text}</p>
           <Link to={`/page/${post.user._id}`}><p>Created by: {post.user.username}</p> </Link>
           <p>{date} {time}</p>
-          <Link to={`/posts/${post._id}/edit`}><button>Edit</button></Link>
+          {!isOwner && <Link to={`/posts/${post._id}/edit`}><button>Edit</button></Link>}
         </section>
-        <section>
+        {isAuthenticated && <section>
         <form onSubmit={this.handleCommentSubmit}>
-          <div>
-            <div className="label for comments">
+        <div>
+        <div className="label for comments">
               <p> Comment on {post.title} </p>
             </div>
             <input
@@ -112,7 +113,7 @@ class PostsShow extends React.Component {
             />
           ))}
         </div>
-      </section>
+      </section>}
       </>
     )
   }

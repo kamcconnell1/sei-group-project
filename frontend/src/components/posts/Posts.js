@@ -2,6 +2,7 @@ import React from 'react'
 import PostCards from '../posts/PostsCards'
 
 import { getAllPosts, createPost, deleteAPost } from '../../lib/api'
+import { isOwner, isAuthenticated } from '../../lib/auth'
 import { Link } from 'react-router-dom'
 
 class Posts extends React.Component {
@@ -13,6 +14,7 @@ class Posts extends React.Component {
       photo: ''
     }
   }
+
   async componentDidMount() {
     try {
       this.pageSetup()
@@ -20,6 +22,7 @@ class Posts extends React.Component {
       console.log(err)
     }
   }
+
   pageSetup = async () => {
     try {
       const res = await getAllPosts()
@@ -29,10 +32,12 @@ class Posts extends React.Component {
       console.log(err)
     }
   }
+
   handleChange = e => {
     const input = { ...this.state.input, [e.target.name]: e.target.value }
     this.setState({ input })
   }
+
   handleSubmit = async e => {
     e.preventDefault()
     try {
@@ -46,7 +51,7 @@ class Posts extends React.Component {
   deletePost = async e => {
     console.log(e.target.value)
     await deleteAPost(e.target.value)
-    this.props.history.push(`/posts`)
+    await this.pageSetup()
   }
 
   render() {
@@ -58,7 +63,7 @@ class Posts extends React.Component {
             <div className="container">
               <div className="columns is-multiline">
                 <h1>Posts</h1>
-                <form onSubmit={this.handleSubmit} >
+                {isAuthenticated &&<form onSubmit={this.handleSubmit} >
                   <input
                     name="title"
                     value={this.state.input.title}
@@ -76,7 +81,7 @@ class Posts extends React.Component {
                     onChange={this.handleChange}
                   />
                   <button>Submit Post</button>
-                </form>
+                </form>}
                 <div>
                   {this.state.posts.map(post => (
                     <PostCards

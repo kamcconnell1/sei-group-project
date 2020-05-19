@@ -22,7 +22,7 @@ class PostEdit extends React.Component {
   }
 
   handleChange = e => {
-    const dataInput = { ...this.state.dataInput, [e.target.name]: e.target.value}
+    const dataInput = { ...this.state.dataInput, [e.target.name]: e.target.value }
     this.setState({ dataInput })
   }
 
@@ -39,38 +39,38 @@ class PostEdit extends React.Component {
 
 
 
-    render() {
-      return (
-        <section className="hero is-light">
-          <div className="hero-body">
-            <div className="container">
-              <div className="columns is-multiline">
-                <h1>Posts</h1>
-                <form onSubmit={this.handleSubmit} >
-                  <input
-                    name="title"
-                    value={this.state.dataInput.title}
-                    place="Title"
-                    onChange={this.handleChange}
-                  />
-                  <input
-                    name="text"
-                    value={this.state.dataInput.text}
-                    onChange={this.handleChange}
-                  />
-                  <input
+  render() {
+    return (
+      <section className="hero is-light">
+        <div className="hero-body">
+          <div className="container">
+            <div className="columns is-multiline">
+              <h1>Posts</h1>
+              <form onSubmit={this.handleSubmit} >
+                <input
+                  name="title"
+                  value={this.state.dataInput.title}
+                  place="Title"
+                  onChange={this.handleChange}
+                />
+                <input
+                  name="text"
+                  value={this.state.dataInput.text}
+                  onChange={this.handleChange}
+                />
+                <input
                   name="photo"
                   value={this.state.dataInput.photo}
                   onChange={this.handleChange}
-                  />
-                  <button>Submit Post</button>
-                </form>
-              </div>
+                />
+                <button>Submit Post</button>
+              </form>
             </div>
           </div>
-        </section>
-      )
-    }
+        </div>
+      </section>
+    )
   }
+}
 
-  export default PostEdit
+export default PostEdit
