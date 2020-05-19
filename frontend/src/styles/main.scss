@@ -4,6 +4,7 @@
 * {
   margin: 0;
   padding: 0;
+  font-family: 'Hind Siliguri', sans-serif;
 }
 
 
@@ -17,13 +18,13 @@
 
 // ? SLIDE IMAGE - SHOW PAGE 
 .slide-container {
-  width: 70%;
+  width: 50%;
   margin: auto; }
 
 h3 {
   text-align: center; }
 
-.each-slide > div {
+.each-slide div {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -31,12 +32,13 @@ h3 {
   height: 150px;
 }
 
-.each-slide span {
-  padding: 8px;
-  font-size: 7px;
-  background: #efefef;
-  text-align: center;
+
+// ? FILTERS ON CLOTHES INDEX
+.filter {
+  margin-left: 0;
 }
+
+
 
 
 //? ------------------------------- User Pages --------------------------------------------------------
@@ -76,6 +78,7 @@ div.is-user-chat{
 
 
 //? ------------------------------- Map Pages --------------------------------------------------------
+
 .marker {
   background-color: red;
   height: 12px;
@@ -87,13 +90,16 @@ div.map {
   border-left: 1px solid #fff;
   position: absolute;
   left: 30%;
-  // width: 800px;
+  width: 0px;
   top: 0;
   bottom: 0;
 }
 
 
+
+
 //? ------------------------------- Bulma Variables ------------------------------------------------------
 $modal-content-width: 500px;
+
 
 @import '~bulma/bulma.sass'

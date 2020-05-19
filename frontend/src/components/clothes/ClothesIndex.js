@@ -81,8 +81,11 @@ class ClothesIndex extends React.Component {
           <div className="hero-body">
             <div className="container">
               <h1 className="title">
-                Latest Items
+              KEBB Clothes
               </h1>
+              <h2 className="subtitle">
+                Latest Items
+      </h2>
             </div>
           </div>
         </section>
@@ -98,7 +101,7 @@ class ClothesIndex extends React.Component {
         </div>
         <section className="section is-dark">
             <div className="container">
-              <div className="columns is-multiline">
+              <div className="columns">
               <ClothesFilter
                 category={categoryOption}
                 color={colorOption}

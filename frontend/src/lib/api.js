@@ -1,6 +1,6 @@
 import axios from 'axios'
 import { getToken } from './auth'
-import ProfilePic from '../components/users/ProfilePic'
+
 
 const kebb_url = '/api'
 
@@ -56,4 +56,9 @@ export const getProfile = () => {
   //* POST for user to add pin to their map 
   export const postPin = pinForm => {
     return axios.post(`${kebb_url}/pins`, pinForm, withHeaders())
+  }
+
+  // * POST Favourites to users favourite
+  export const postFavorite = data => {
+    return axios.post(`${kebb_url}/favourites/article`, data, withHeaders())
   }

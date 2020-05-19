@@ -2,6 +2,7 @@ import React from 'react'
 import { BrowserRouter, Switch, Route } from 'react-router-dom'
 
 import Navbar from './components/common/Navbar'
+import Footer from './components/common/Footer'
 import SecureRoute from './components/common/SecureRoute'
 import Error from './components/common/Error'
 import Home from './components/common/Home'
@@ -10,7 +11,6 @@ import Newsfeed from './components/common/Newsfeed'
 import ClothesAdd from './components/clothes/ClothesAdd'
 import ClothesIndex from './components/clothes/ClothesIndex'
 import ClothesShow from './components/clothes/ClothesShow'
-import TestPage from './components/clothes/TestPage'
 
 
 import UserProfile from './components/users/UserProfile'
@@ -39,9 +39,9 @@ const App = () => {
     <Route path='/about' component={About} />
     <Route path='/register' component={Register} />
     <Route path='/login' component={Login} />
-    <Route path='/test' component={TestPage} />
     <Route path="/*" component={Error} />
     </Switch>
+    <Footer />
     </BrowserRouter>
   )
 }

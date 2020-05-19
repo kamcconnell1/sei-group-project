@@ -56,9 +56,9 @@ handleSubmit = async event => {
       <>
           <section className="section">
             <div className="container">
-              <h1 className="title">Register</h1>
+              <h1 className="title">KEBB Clothes</h1>
               <h2 className="subtitle">
-                Register to join here
+                Join here
               </h2>
             </div>
           </section>

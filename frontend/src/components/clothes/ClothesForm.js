@@ -183,7 +183,7 @@ const ClothesForm = ({ handleChange, handleSubmit, handleMultiChange, clothesFor
                       onChange={args => onChange(args, index)}
                       preset={uploadClothesImage}
                       name="image"
-                      labelText="Or"
+                      labelText="Add Images"
                     />
                   )
                 })

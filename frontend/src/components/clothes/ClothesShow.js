@@ -1,12 +1,12 @@
 import React from 'react'
 
-import { singleCloth, getUserProfile } from '../../lib/api'
+import { singleCloth, getUserProfile, postFavorite } from '../../lib/api'
 
 import SingleClothCard from './SingleClothCard'
 
 class ClothesShow extends React.Component {
 
-  state = {cloth: null, user: null}
+  state = {cloth: null, user: null, item: ''}
 
   // * GET each clothing item on mount via Id
   componentDidMount() {
@@ -28,7 +28,7 @@ class ClothesShow extends React.Component {
       this.setState({cloth: res.data, user: user.data})
   }
 
-
+  // * Function to click on first picture in similar user post
   handleFirstClick = async () => {
     const clothId = this.props.match.params.id
     const res = await singleCloth(clothId)
@@ -40,6 +40,7 @@ class ClothesShow extends React.Component {
     this.props.history.push(`/clothes/${newClothId}`)
   }
 
+// * Function to click on second picture in similar user post
   handleSecondClick = async () => {
     const clothId = this.props.match.params.id
     const res = await singleCloth(clothId)
@@ -51,6 +52,19 @@ class ClothesShow extends React.Component {
     this.props.history.push(`/clothes/${newClothId}`)
   }
 
+  // * Function to add item to Favourite
+  handleFavouriteSubmit =  async e => {
+    try {
+      const addToList = await { ...this.state.item, [e.target.name]: e.target.value }
+      console.log(addToList)
+      const res = await postFavorite(addToList)
+      console.log(res)
+      console.log('clicked')
+    } catch (err) {
+      console.log(err)
+    }
+  }
+
   render() {
     if (!this.state.cloth) return <h1>Even more Ninjas are working on this</h1>
     const {cloth, user} = this.state
@@ -59,13 +73,15 @@ class ClothesShow extends React.Component {
     // Current users Id
     const userId = user._id
     // console.log(userId)
+    const clothId = cloth._id
+    // console.log(user)
     return (
       <>
         <section className="hero is-light">
           <div className="hero-body">
             <div className="container">
               <h1 className="title">
-                Item show page
+                {cloth.title}
               </h1>
             </div>
           </div>
@@ -80,6 +96,8 @@ class ClothesShow extends React.Component {
               currentUserId={userId}
               onFirstClick={this.handleFirstClick}
               onSecondClick={this.handleSecondClick}
+              onClick={this.handleFavouriteSubmit}
+              clothId={clothId}
               />
             </div>
           </div>

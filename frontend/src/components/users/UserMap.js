@@ -2,6 +2,7 @@ import React from 'react'
 import MapGl, { Marker } from 'react-map-gl'
 
 import Map from '../common/Map'
+import GeoCodeMap from './GeoCodeMap'
 import PinForm from '../users/PinForm'
 import { postPin, getProfile } from '../../lib/api'
 import { getPostcodeInfo } from '../../lib/ext_api'
@@ -77,7 +78,8 @@ class UserMap extends React.Component {
                  {/* {this.state.pins} */}
                </div>
             <div className="map">
-              <Map {...this.state.user.pins}/>
+              {/* <Map {...this.state.user.pins}/> */}
+              <GeoCodeMap />
             </div>
           </div>
         </div>

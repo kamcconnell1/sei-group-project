@@ -12,15 +12,17 @@ class ImageUpload extends React.Component{
   }
   
   handleUpload = async event => {
-    
+    const files = event.target.files
     const preset = (this.props.preset)
     const data = new FormData()
-    
-    data.append('file', event.target.files[0])
+    for (let x =0; x<5; x++) {
+    data.append('file', event.target.files[x])
     data.append('upload_preset', preset)
+    }
     const res = await postImage(data)
+
     this.setState({
-        image: res.data.url
+        image: files
       }, () => {
           this.props.onChange({ target: { name: this.props.name, value: this.state.image } })
         })
@@ -34,6 +36,7 @@ class ImageUpload extends React.Component{
         
     return (
       <>
+      
       {image ?
         <div>
           <img src={image} alt="selected"/>
@@ -45,7 +48,8 @@ class ImageUpload extends React.Component{
             className="input"
             type="file"
             name={this.props.name}
-            multiple
+            //! need to add this in so you can upload multiple and then it shows you multiple
+            //  multiple 
             onChange={this.handleUpload}
           />
         </>
