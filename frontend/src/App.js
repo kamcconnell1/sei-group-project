@@ -20,6 +20,8 @@ import userShowProfile from './components/users/userShowProfile'
 import Register from './components/auth/Register'
 import Login from './components/auth/Login'
 
+import Posts from './components/posts/Posts'
+import PostsShow from './components/posts/PostsShow'
 
 const App = () => {
 
@@ -39,6 +41,8 @@ const App = () => {
     <Route path='/about' component={About} />
     <Route path='/register' component={Register} />
     <Route path='/login' component={Login} />
+    <Route path='/posts/:id' component={PostsShow} />
+    <Route path='/posts' component={Posts} />
     <Route path="/*" component={Error} />
     </Switch>
     <Footer />

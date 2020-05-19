@@ -72,3 +72,11 @@ export const getProfile = () => {
   export const postFavorite = data => {
     return axios.post(`${kebb_url}/favourites/article`, data, withHeaders())
   }
+
+
+  //------------------------------------USER REQUESTS--------------------------------------------
+
+  //* Get all POSTS
+  export const getAllPosts = () => {
+    return axios.get(`${kebb_url}/posts`)
+  }
