@@ -17,17 +17,10 @@ class Map extends React.Component {
       longitude: -0.078,
       zoom: 12
     },
-
-    // state of dropped pin
+    searchResultLayer: null,
     latitude: '',
-    longitude: '',
-    flyTo: {
-      lat: '',
-      lon: ''
-    }
+    longitude: ''
   }
-
-
 
   
   componentDidMount() {
@@ -56,7 +49,6 @@ class Map extends React.Component {
   }
   
   
-
   //This is required as a paramter for Geocode to work
   myMap = React.createRef()
 
@@ -85,70 +77,6 @@ class Map extends React.Component {
       this.props.location(this.state.latitude, this.state.longitude)
     })
   }
-
-
-
-
-  render() {
-    const pins = (this.props.pins)
-    const { viewport, popupInfo } = this.state
-
-    console.log(viewport);
-
-    return (
-      <>
-        <MapGl
-          ref={this.myMap}
-          {...viewport}
-          height={'800px'}
-          width={'60vw'}
-          onViewportChange={this.handleViewportChange}
-          mapboxApiAccessToken={process.env.REACT_APP_MAPBOX_ACCESS_TOKEN}
-          mapStyle='mapbox://styles/mapbox/light-v10'
-          // onClick={() => this.goToViewport(viewport.longitude, viewport.latitude)}
-        >
-          <Geocoder
-            mapRef={this.myMap}
-
-            onViewportChange={this.handleViewportChange}
-            mapboxApiAccessToken={process.env.REACT_APP_MAPBOX_ACCESS_TOKEN}
-            position="top-left" />
-
-          {pins.map(point => (
-            <div key={point._id}>
-              <Marker
-                latitude={parseFloat(point.latitude)}
-                longitude={parseFloat(point.longitude)}
-              >
-                <span role="img" aria-label="marker">❇️</span>
-              </Marker>
-              <Popup
-                latitude={parseFloat(point.latitude)}
-                longitude={parseFloat(point.longitude)}
-                closeButton={false}
-                closeOnClick={true}
-              >{point.title.charAt(0).toUpperCase() + point.title.slice(1)
-                }</Popup>
-            </div>
-          ))}
-
-          {/* //! If you comment below back in it is a pin to highlight user location - helpful when adding pins */}
-          <Marker
-            className=""
-            {...viewport} >
-            <span role="img" aria-label="marker">📍</span>
-          </Marker>
-
-
-        </MapGl>
-        <button
-          className="button is-primary"
-          onClick={this.handleDropPin}
-        >Save Location</button>
-      </>
-    )
-  }
-
   
   // myMap.addLayer({
 

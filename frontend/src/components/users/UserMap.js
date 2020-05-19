@@ -6,7 +6,6 @@ import PinForm from '../pins/PinForm'
 import PinCard from '../pins/PinCard'
 
 import PinForm from '../users/PinForm'
-
 import { postPin, getProfile } from '../../lib/api'
 
 import 'mapbox-gl/dist/mapbox-gl.css'
