@@ -267,6 +267,6 @@ module.exports = [
     color: 'Pink',
     rentalPrice: 12,
     image: 'https://lp2.hm.com/hmgoepprod?set=quality[79],source[/7f/58/7f58c36b44d0881f89be4a2d7872261915ef4668.jpg],origin[dam],category[],type[LOOKBOOK],res[m],hmver[1]&call=url[file:/product/main]'
-  },
+  }
   
 ]

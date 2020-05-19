@@ -19,6 +19,10 @@ class Map extends React.Component {
       lon: ''
     }
   }
+<<<<<<< HEAD
+=======
+
+>>>>>>> development
   //This is required as a paramter for Geocode to work
   myMap = React.createRef()
   //This function continuously sets state as you move the viewport
@@ -51,6 +55,7 @@ class Map extends React.Component {
     // console.log(viewport);
     return (
       <>
+<<<<<<< HEAD
         <div className="map">
           <div className="map-map">
             <MapGl
@@ -100,6 +105,52 @@ class Map extends React.Component {
             >Save Location</button>
           </div>
         </div>
+=======
+        <MapGl
+          ref={this.myMap}
+          {...viewport}
+          height={'800px'}
+          width={'60vw'}
+          onViewportChange={this.handleViewportChange}
+          mapboxApiAccessToken={process.env.REACT_APP_MAPBOX_ACCESS_TOKEN}
+          mapStyle='mapbox://styles/mapbox/light-v10'
+          // onClick={() => this.goToViewport(viewport.longitude, viewport.latitude)}
+        >
+          <Geocoder
+            mapRef={this.myMap}
+            onViewportChange={this.handleViewportChange}
+            mapboxApiAccessToken={process.env.REACT_APP_MAPBOX_ACCESS_TOKEN}
+            position="top-left" />
+            {pins.map(point => (
+            <div key={point._id}>
+              <Marker
+                latitude={parseFloat(point.latitude)}
+                longitude={parseFloat(point.longitude)}
+              >
+                <span role="img" aria-label="marker">❇️</span>
+              </Marker>
+              <Popup
+                latitude={parseFloat(point.latitude)}
+                longitude={parseFloat(point.longitude)}
+                closeButton={false}
+                closeOnClick={true}
+              >{point.title.charAt(0).toUpperCase() + point.title.slice(1)
+                }</Popup>
+            </div>
+          ))}
+
+          {/* //! If you comment below back in it is a pin to highlight user location - helpful when adding pins */}
+          <Marker
+            className=""
+            {...viewport} >
+            <span role="img" aria-label="marker">📍</span>
+          </Marker>
+        </MapGl>
+        <button
+          className="button is-primary"
+          onClick={this.handleDropPin}
+        >Save Location</button>
+>>>>>>> development
       </>
     )
   }

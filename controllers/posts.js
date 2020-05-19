@@ -84,7 +84,7 @@ async function postCommentCreate (req, res, next) {
   try {
     req.body.user = req.currentUser
     const postId = req.params.id
-    const post = await Post.findById(postId)
+    const post = await Post.findById(postId).populate('user')
     if (!post) throw new Error(notFound)
     post.comments.push(req.body)
     await post.save()
@@ -98,7 +98,6 @@ async function postCommentCreate (req, res, next) {
 //* WORKING tested
 //* ERROR tested 
 async function postCommentDelete (req, res, next) {
-  console.log(req)
   try {
     req.body.user = req.currentUser
     const postId = req.params.id

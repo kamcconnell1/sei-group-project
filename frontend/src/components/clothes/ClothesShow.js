@@ -33,7 +33,7 @@ class ClothesShow extends React.Component {
       const userId = res.data.user.id
       const user = await getUserProfile(userId)
       // console.log('user profile info:', user.data)
-      this.setState({cloth: res.data, user: user.data, commentsArray: res.data.comments})
+      this.setState({cloth: res.data, user: user.data, commentsArray: res.data.comments })
   }
 
   // * Function to click on first picture in similar user post
@@ -84,7 +84,7 @@ class ClothesShow extends React.Component {
     try {
       const res = await addCommentCloth(clothId, this.state.comments)
       console.log(res.data)
-      this.setState({ commentsArray: res.data.comments})
+      this.setState({ commentsArray: res.data.comments })
       this.getSingleCloth()
     } catch (err) {
       console.log(err)

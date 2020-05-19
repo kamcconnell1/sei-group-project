@@ -14,6 +14,7 @@ class FavouriteFriends extends React.Component {
       console.log(err)
     }
   }
+  
 
   render() {
     if (!this.state.friends) return <h1>Looks like the Ninjas dont like you</h1>
@@ -26,7 +27,7 @@ class FavouriteFriends extends React.Component {
             <div className="container">
               <h1 className="title">
                 Friends
-      </h1>
+              </h1>
             </div>
           </div>
         </section>

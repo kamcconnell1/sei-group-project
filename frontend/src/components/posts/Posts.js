@@ -1,13 +1,21 @@
 import React from 'react'
 import PostCards from '../posts/PostsCards'
+<<<<<<< HEAD
 import { getAllPosts, createPost } from '../../lib/api'
 import { Link } from 'react-router-dom'
+=======
+
+import { getAllPosts, createPost, deleteAPost } from '../../lib/api'
+import { Link } from 'react-router-dom'
+
+>>>>>>> development
 class Posts extends React.Component {
   state = {
     posts: null,
     input: {
       title: '',
-      text: ''
+      text: '',
+      photo: ''
     }
   }
   async componentDidMount() {
@@ -34,14 +42,28 @@ class Posts extends React.Component {
     e.preventDefault()
     try {
       const res = await createPost(this.state.input)
+<<<<<<< HEAD
       console.log(res.data)
+=======
+      this.pageSetup()
+>>>>>>> development
     } catch (err) {
       console.log(err)
     }
   }
+<<<<<<< HEAD
   deletePost = e => {
     console.log(e.target.value)
   }
+=======
+
+  deletePost = async e => {
+    console.log(e.target.value)
+    await deleteAPost(e.target.value)
+    this.props.history.push(`/posts`)
+  }
+
+>>>>>>> development
   render() {
     if (!this.state.posts) return null
     return (
@@ -61,6 +83,11 @@ class Posts extends React.Component {
                   <input
                     name="text"
                     value={this.state.input.text}
+                    onChange={this.handleChange}
+                  />
+                  <input
+                    name="photo"
+                    value={this.state.input.photo}
                     onChange={this.handleChange}
                   />
                   <button>Submit Post</button>

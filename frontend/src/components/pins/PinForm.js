@@ -66,23 +66,6 @@ const PinForm = ({ modalStatus, handleChange, handleSubmit, onClick, title, plac
             >Save Location</button>
           </div>
 
-          <div className="field">
-            <label className="label">Notes</label>
-            <div className="control">
-              <textarea
-                className="textarea"
-                rows="3"
-                type="text"
-                placeholder="Notes"
-                name="notes"
-                value={notes}
-                onChange={handleChange}
-              />
-            </div>
-          </div>
-          <div className="field">
-            <button type="submit" className="button is-fullwidth is-primary">Save Location</button>
-          </div>
 
         </form>
       </div>

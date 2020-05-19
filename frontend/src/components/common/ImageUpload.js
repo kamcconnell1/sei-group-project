@@ -4,21 +4,49 @@ class ImageUpload extends React.Component{
   state = {
     image: null
   }
+
+
+//   handleChange = event => {
+//     this.setState({
+//       image:event.target.files[0],
+//       loaded:0
+//     }, () => {
+//       this.handleUpload()
+//     })
+//   }
+
+//   ({ latitude, longitude }, () => {
+//     this.props.location(this.state.latitude, this.state.longitude)
+//   })
+// }
+
+
+//! Might need to add some error handling on this function 
   handleUpload = async event => {
-    
+    event.preventDefault()
+    // Cloudinary preset passed in as props 
     const preset = (this.props.preset)
-    const data = new FormData()
     
+    // Append file to FormData with the preset
+    const data = new FormData()
     data.append('file', event.target.files[0])
     data.append('upload_preset', preset)
+
+    // Axios request to send image to Cloudinary
     const res = await postImage(data)
     console.log(res)
+
+    //Set state with link to image sent in response data
     this.setState({
         image: res.data.url
-      }, () => {
+      }, () => { 
+        //Use setstates callback function to pass the updated state into the function and back into formData on reqd page 
           this.props.onChange({ target: { name: this.props.name, value: this.state.image } })
         })
       }
+      
+
+      
       render() {
         const { image } = this.state
     return (
@@ -29,7 +57,7 @@ class ImageUpload extends React.Component{
         </div>
         :
         <>
-          <label className="label">{this.props.labelText}</label>
+
           <input
             className="input"
             type="file"
@@ -37,6 +65,7 @@ class ImageUpload extends React.Component{
             onChange={this.handleUpload}
           />
         </>
+        
       }
     </>
     )
