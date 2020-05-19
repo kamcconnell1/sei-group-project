@@ -26,11 +26,18 @@ class PostsShow extends React.Component {
     const time = edited[1].split('.')[0]
     return (
       <>
-        <h1>{post.title}</h1>
-        <img src={post.photo} alt={post.title} height="200" width="100" />
-        <p>{post.text}</p>
-        <Link to={`/page/${post.user._id}`}><p>Created by: {post.user.username}</p> </Link>
-        <p>{date} {time}</p>
+        <section className="hero is-light">
+          <div className="hero-body">
+            <div className="container">
+              <h1>{post.title}</h1>
+            </div>
+          </div>
+          <img src={post.photo} alt={post.title} height="200" width="100" />
+          <p>{post.text}</p>
+          <Link to={`/page/${post.user._id}`}><p>Created by: {post.user.username}</p> </Link>
+          <p>{date} {time}</p>
+          <Link to={`/posts/${post._id}/edit`}><button>Edit</button></Link>
+          </section>
       </>
     )
   }

@@ -22,6 +22,8 @@ import Login from './components/auth/Login'
 
 import Posts from './components/posts/Posts'
 import PostsShow from './components/posts/PostsShow'
+import PostEdit from './components/posts/PostEdit'
+import PostCreate from './components/posts/PostCreate'
 
 const App = () => {
 
@@ -41,6 +43,7 @@ const App = () => {
     <Route path='/about' component={About} />
     <Route path='/register' component={Register} />
     <Route path='/login' component={Login} />
+    <Route path='/posts/:id/edit' component={PostEdit} />
     <Route path='/posts/:id' component={PostsShow} />
     <Route path='/posts' component={Posts} />
     <Route path="/*" component={Error} />

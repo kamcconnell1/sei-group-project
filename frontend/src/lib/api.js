@@ -81,7 +81,21 @@ export const getProfile = () => {
     return axios.get(`${kebb_url}/posts`)
   }
 
-  //* get single Post
+  //* Create a POST
+  export const createAPost = data => {
+    return axios.post(`${kebb_url}/posts`, data, withHeaders())
+  }
+
+  //* Get single POST
   export const getSinglePost = id => {
     return axios.get(`${kebb_url}/posts/${id}`)
+  }
+
+  //* edit a post
+  export const editAPost = (id, data) => {
+    return axios.put(`${kebb_url}/posts/${id}`, data, withHeaders())
+  }
+  //* delete a post
+  export const deleteAPost = id => {
+    return axios.delete(`${kebb_url}/posts/${id}`, withHeaders())
   }
