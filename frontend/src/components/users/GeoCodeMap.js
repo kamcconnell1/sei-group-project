@@ -18,23 +18,12 @@ class Map extends React.Component {
       zoom: 12
     },
     searchResultLayer: null,
-<<<<<<< HEAD
-
-    latitude: '',
-    longitude: ''
-  }
-
-  
-  
-  jsonData = () => {
-=======
     latitude: '',
     longitude: ''
   }
 
   
   componentDidMount() {
->>>>>>> development
     const pins = []
     
     for (let i = 0; i < 3; i++ ){
@@ -56,16 +45,10 @@ class Map extends React.Component {
         }
       })
     }
-<<<<<<< HEAD
-    console.log(this.pins);
-  }
-  
-=======
     this.setState({pins})
   }
   
   
->>>>>>> development
   //This is required as a paramter for Geocode to work
   myMap = React.createRef()
   
@@ -102,20 +85,6 @@ class Map extends React.Component {
     })
   }
   
-<<<<<<< HEAD
-  
-  
-  // pinLayer = new GeoJsonLayer({
-    //   id:"pin-layer",
-    //   data: <TestGeoJSON />,
-    //   pickable: true
-    // })
-    
-    
-    
-    render() {
-
-=======
   // myMap.addLayer({
 
 
@@ -143,7 +112,6 @@ class Map extends React.Component {
     
     render() {
       console.log(this.state.pins);
->>>>>>> development
       
       const { viewport, searchResultLayer } = this.state
       
@@ -164,14 +132,6 @@ class Map extends React.Component {
           onViewportChange={this.handleViewportChange}
           mapboxApiAccessToken={process.env.REACT_APP_MAPBOX_ACCESS_TOKEN}
           position="top-left" />
-<<<<<<< HEAD
-        <GeolocateControl />
-        <NavigationControl />
-        <Marker
-          className="marker"
-          {...viewport} />
-        <DeckGL {...viewport} layers={[searchResultLayer], [this.pinLayer]} />
-=======
           {/* //? Don't think these are needed - left in here for now  */}
         {/* <GeolocateControl />
         <NavigationControl /> */}
@@ -179,7 +139,6 @@ class Map extends React.Component {
           className="marker"
           {...viewport} />
         <DeckGL {...viewport} layers={[searchResultLayer, this.pinLayer]} />
->>>>>>> development
       </MapGl>
       <button
         className="button is-primary"
