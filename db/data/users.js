@@ -13,10 +13,6 @@ module.exports = [
         place: 'H&M',
         latitude: '51.500193113059076',
         longitude: '0.11085416633009527'
-<<<<<<< HEAD
-=======
-
->>>>>>> development
       }
     ],
     profilePic: 'https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcR-6wOL0HGj3DLwrc-fKSkw6BH5qmrW0Zqjy9MGF1wDdHGzP3ce&usqp=CAU'
