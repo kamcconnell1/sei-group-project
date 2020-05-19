@@ -26,6 +26,16 @@ export const singleCloth = id => {
   return axios.get(`${kebb_url}/clothes/${id}`)
 }
 
+//* comment on single clothing item
+export const addCommentCloth = (id, data) => {
+  return axios.post(`${kebb_url}/clothes/${id}/comments`, data, withHeaders())
+}
+
+//* delete comment on single clothing item
+export const deleteCommentCloth = (clothesid, commentid) => {
+  return axios.delete(`${kebb_url}/clothes/${commentid}/comments/${clothesid}`, withHeaders())
+}
+
 
 //------------------------------------USER REQUESTS--------------------------------------------
 // * login user POST function

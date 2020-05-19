@@ -1,4 +1,5 @@
 import React from 'react'
+import Comments from '../common/Comments'
 
 import { Slide } from 'react-slideshow-image'
 
@@ -21,7 +22,7 @@ const properties = {
   }
 }
 
-const SingleClothCard = ({ title, clothId, profilePic, username, images, image, currentUserId, onFirstClick, onSecondClick, onClick, location }) => {
+const SingleClothCard = ({ deleteComment, commentsArray, comments, title, clothId, profilePic, username, images, image, currentUserId, onFirstClick, onSecondClick, onClick, location, handleCommentSubmit, handleCommentChange }) => {
   const slideImages = [image[0], image[0], image[0]]
   // console.log(slideImages)
   return (
@@ -68,15 +69,11 @@ const SingleClothCard = ({ title, clothId, profilePic, username, images, image, 
         </div>
         <hr />
         <div>
-        <div className="columns">
-           {!isAuthenticated() && <div>
-              <Link className="column" to="/login" className="button is-danger">SIGN IN</Link>
-            </div>}
-            {!isAuthenticated() && <p>OR</p>}
-            {!isAuthenticated() && <div>
-              <Link className="column" to="/register" className="button is-danger">JOIN KEBB</Link>
-            </div>}
-          </div>
+          {!isAuthenticated() && <div className="columns">
+            <Link className="column" to="/login" className="button is-danger">Sign IN</Link>
+            <p>OR</p>
+            <Link className="column" to="/register" className="button is-danger">JOIN KEBB</Link>
+          </div>}
           {isAuthenticated() && <button className="button is-primary">Contact User</button>}
         </div>
         <hr />
@@ -96,6 +93,34 @@ const SingleClothCard = ({ title, clothId, profilePic, username, images, image, 
               </figure>
             </a>
           </div>
+        </div>
+      </section>
+      <section>
+        <form onSubmit={handleCommentSubmit}>
+          <div>
+            <div className="label for comments">
+              <p> Comment on {title} </p>
+            </div>
+            <input
+              className="comments-input"
+              type="textArea"
+              maxLength="250"
+              name="text"
+              onChange={handleCommentChange}
+              value={comments.text} />
+          </div>
+          <div className="comments-submit-button">
+            <button>Submit Comment</button>
+          </div>
+        </form>
+        <div>
+          {commentsArray.map(comment => (
+            <Comments
+              key={comment._id}
+              comment={comment}
+              deleteComment={deleteComment}
+            />
+          ))}
         </div>
       </section>
     </>

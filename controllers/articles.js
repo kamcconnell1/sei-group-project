@@ -34,7 +34,7 @@ async function articlesCreate(req, res, next) {
 async function articlesShow(req, res, next) {
   const articleId = req.params.id
   try {
-    const article = await Article.findById(articleId).populate('user')
+    const article = await Article.findById(articleId).populate('user').populate('comments.user')
     if (!article) throw new Error(notFound)
     res.status(200).json(article)
   } catch (err) {
@@ -84,7 +84,7 @@ async function articleCommentCreate (req, res, next) {
   try {
     req.body.user = req.currentUser
     const articleId = req.params.id
-    const article = await Article.findById(articleId)
+    const article = await Article.findById(articleId).populate('comments.user')
     if (!article) throw new Error(notFound)
     article.comments.push(req.body)
     await article.save()
@@ -100,14 +100,12 @@ async function articleCommentCreate (req, res, next) {
 async function articleCommentDelete (req, res, next) {
   try {
     req.body.user = req.currentUser
-    const articleId = req.params.id
-    const commentId = req.params.commentId
-    const article = await Article.findById(articleId)
+    const article = await Article.findById(req.params.articleid)
     if (!article) throw new Error(notFound)
-    const commentToDelete = article.comments.id(commentId)
+    const commentToDelete = article.comments.id(req.params.commentId)
     if (!commentToDelete) throw new Error(notFound)
     if (!commentToDelete.user.equals(req.currentUser._id)) throw new Error(unauthorized)
-    await article.remove()
+    await commentToDelete.remove()
     await article.save()
     res.sendStatus(204)
   } catch (err) {

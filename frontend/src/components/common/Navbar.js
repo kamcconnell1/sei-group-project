@@ -32,12 +32,12 @@ class Navbar extends React.Component {
     const { isOpen } = this.state
 
     return (
-      <nav className="navbar is-dark" >
+      <nav className="navbar Navbar" >
         <div className="container">
           <div className="navbar-brand">
-            <Link to="/" className="navbar-item" >Home</Link>
-            <Link to="/about" className="navbar-item" >About Us</Link>
-            <Link to="/clothes" className="navbar-item" >Latest Items</Link>
+            <Link to="/" className="navbar-item Navbar-item" >Home</Link>
+            <Link to="/about" className="navbar-item Navbar-item" >About Us</Link>
+            <Link to="/clothes" className="navbar-item Navbar-item" >Latest Items</Link>
             <span onClick={this.handleToggle} className={`navbar-burger ${isOpen ? 'is-active' : ''}`}>
               <span></span>
               <span></span>
@@ -46,11 +46,11 @@ class Navbar extends React.Component {
           </div>
           <div className={`navbar-menu ${isOpen ? 'is-active' : ''}`}>
             <div className="navbar-end">
-              {isAuthenticated() && <Link to={`/profile/${this.username}`} className="navbar-item">View Profile</Link>}
-              {isAuthenticated() && <Link to={`/profile/${this.username}/map`} className="navbar-item">User Map</Link> }
-              {!isAuthenticated() && <Link to="/register" className="navbar-item">Register</Link>}
-              {!isAuthenticated() && <Link to="/login" className="navbar-item">Login</Link>}
-              {isAuthenticated() && <span onClick={this.handleLogout} className="navbar-item">Logout</span>}
+              {isAuthenticated() && <Link to={`/profile/${this.username}`} className="navbar-item Navbar-item">View Profile</Link>}
+              {isAuthenticated() && <Link to={`/profile/${this.username}/map`} className="navbar-item Navbar-item">User Map</Link> }
+              {!isAuthenticated() && <Link to="/register" className="navbar-item Navbar-item">Register</Link>}
+              {!isAuthenticated() && <Link to="/login" className="navbar-item Navbar-item">Login</Link>}
+              {isAuthenticated() && <span onClick={this.handleLogout} className="navbar-item Navbar-item">Logout</span>}
             </div>
           </div>
         </div>
@@ -58,5 +58,6 @@ class Navbar extends React.Component {
     )
   }
 }
+
 
 export default withRouter(Navbar)
