@@ -34,7 +34,7 @@ class ClothesIndex extends React.Component {
       const filteredGender = gender.filter((gen, index) => gender.indexOf(gen) === index)
       const sizes = res.data.map(size => size.size)
       const filteredSize = sizes.filter((size, index) => sizes.indexOf(size) === index)
-      this.setState({ clothes: res.data, filteredClothes: res.data, category: filteredCategory, color: filteredColor, gender: filteredGender, sizes: filteredSize, filteredCategories: filteredCategory })
+      this.setState({ clothes: res.data, filteredClothes: res.data, category: filteredCategory, color: filteredColor, gender: filteredGender, sizes: filteredSize })
     } catch (err) {
       console.log(err)
     }
@@ -54,20 +54,24 @@ class ClothesIndex extends React.Component {
   // * Function to allow user to filter clothing intems
   // ! To be completed - by Benga
   filterChange = event => {
-    const {clothes} = this.state
+    const {filteredClothes} = this.state
     const showFilter = event.value
-    const filteredClothes = clothes.filter(cloth => {
-      const regex = RegExp(showFilter, 'i')
-      return cloth.category.match(regex) 
-    })
-    this.setState({filteredClothes})
-    console.log(event.value)
+    if (filteredClothes.length > 0) {
+      const filteredCats = filteredClothes.filter(cloth => {
+        const regex = RegExp(showFilter, 'i')
+        return (cloth.category.match(regex) || cloth.color[0].match(regex) || cloth.genderCategory.match(regex) || cloth.size.match(regex)) 
+      })
+      this.setState({filteredClothes: filteredCats})
+      console.log(event.value)
+    } else {return 'unavailable'}
   }
 
 
   render() {
     if (!this.state.filteredClothes) return <h1>Some Ninjas are working on this</h1>
-    const { filteredClothes, color, category, gender, searchClothes, sizes, filteredCategories} = this.state
+    const { filteredClothes, color, category, gender, searchClothes, sizes } = this.state
+
+    console.log(filteredClothes)
 
     // * Variable of category options
     const categoryOption = category.map(cat => { return {value: cat, label: cat}})

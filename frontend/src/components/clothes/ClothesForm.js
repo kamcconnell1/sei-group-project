@@ -145,21 +145,7 @@ const ClothesForm = ({ handleChange, handleSubmit, handleMultiChange, formData, 
               </div>
               {errors.rentalPrice && <small className="help is-danger">{errors.rentalPrice}</small>}
             </div>
-            {/* //! need to add the option to upload photos here too 
-             {/* //! need to add the option to upload photos here too  */}
-            <div className="field">
-              <label className="label">Upload Image Link or Files</label>
-              <div className="control">
-                <input
-                  className="input"
-                  type="text"
-                  placeholder="Add image link here"
-                  name="image"
-                  value={image}
-                  onChange={handleChange}
-                />
-              </div>
-            </div>
+ 
             <div className="field">
               {errors.image && <small className="help is-danger">Please upload some images</small>}
               <div className="control">
@@ -177,6 +163,7 @@ const ClothesForm = ({ handleChange, handleSubmit, handleMultiChange, formData, 
                 }
                 {image.length < 5 && <button onClick={onClick}>Add Another Image</button>}
               </div>
+      
             <div className="field">
               <button type="submit" className="button is-fullwidth is-primary">Add Item</button>
             </div>

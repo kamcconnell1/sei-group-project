@@ -6,8 +6,7 @@ import MapGl, { Marker, GeolocateControl, NavigationControl } from 'react-map-gl
 import DeckGL, { GeoJsonLayer } from 'deck.gl'
 import Geocoder from 'react-map-gl-geocoder'
 
-import TestGeoJson from '../users/TestGeoJSON'
-import TestGeoJSON from '../users/TestGeoJSON'
+
 
 class Map extends React.Component {
   state = {
@@ -17,14 +16,12 @@ class Map extends React.Component {
       zoom: 12
     },
     searchResultLayer: null,
-
     latitude: '',
     longitude: ''
   }
 
   
-  
-  jsonData = () => {
+  componentDidMount() {
     const pins = []
     
     for (let i = 0; i < 3; i++ ){
@@ -46,8 +43,9 @@ class Map extends React.Component {
         }
       })
     }
-    console.log(this.pins);
+    this.setState({pins})
   }
+  
   
   //This is required as a paramter for Geocode to work
   myMap = React.createRef()
@@ -85,18 +83,33 @@ class Map extends React.Component {
     })
   }
   
-  
+  // myMap.addLayer({
+
+
+
+  // })
   
   // pinLayer = new GeoJsonLayer({
-    //   id:"pin-layer",
-    //   data: <TestGeoJSON />,
-    //   pickable: true
+  //     id:"pin-layer",
+  //     data: this.state.pins,
+  //     pickable: true,
+  //     getFillColor: [160, 160, 180, 200],
+    //   points: {
+    //     type: "IconLayer",
+    //   iconAtlas: './icon-atlas.png',
+    //   iconMapping: './icon-mapping.json',
+    //   getIcon: d => d.sourceFeature.feature.properties.marker,
+    //   getColor: [255, 200, 0],
+    //   getSize: 32
+    // }
     // })
+
+   
     
     
     
     render() {
-
+      console.log(this.state.pins);
       
       const { viewport, searchResultLayer } = this.state
       
@@ -117,12 +130,13 @@ class Map extends React.Component {
           onViewportChange={this.handleViewportChange}
           mapboxApiAccessToken={process.env.REACT_APP_MAPBOX_ACCESS_TOKEN}
           position="top-left" />
-        <GeolocateControl />
-        <NavigationControl />
+          {/* //? Don't think these are needed - left in here for now  */}
+        {/* <GeolocateControl />
+        <NavigationControl /> */}
         <Marker
           className="marker"
           {...viewport} />
-        <DeckGL {...viewport} layers={[searchResultLayer], [this.pinLayer]} />
+        <DeckGL {...viewport} layers={[searchResultLayer, this.pinLayer]} />
       </MapGl>
       <button
         className="button is-primary"

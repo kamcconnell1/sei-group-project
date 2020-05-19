@@ -5,8 +5,15 @@ class ImageUpload extends React.Component{
     image: null
   }
   handleUpload = async event => {
+<<<<<<< HEAD
     const preset = (this.props.preset)
     const data = new FormData()
+=======
+    
+    const preset = (this.props.preset)
+    const data = new FormData()
+    
+>>>>>>> c71f4522d3077b6580c579e21637ae72c1d3ea88
     data.append('file', event.target.files[0])
     data.append('upload_preset', preset)
     const res = await postImage(data)
