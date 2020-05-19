@@ -9,6 +9,7 @@ import Geocoder from 'react-map-gl-geocoder'
 import TestGeoJson from '../users/TestGeoJSON'
 import TestGeoJSON from '../users/TestGeoJSON'
 
+
 class Map extends React.Component {
   state = {
     viewport: {
@@ -17,6 +18,7 @@ class Map extends React.Component {
       zoom: 12
     },
     searchResultLayer: null,
+<<<<<<< HEAD
 
     latitude: '',
     longitude: ''
@@ -25,6 +27,14 @@ class Map extends React.Component {
   
   
   jsonData = () => {
+=======
+    latitude: '',
+    longitude: ''
+  }
+
+  
+  componentDidMount() {
+>>>>>>> development
     const pins = []
     
     for (let i = 0; i < 3; i++ ){
@@ -46,9 +56,16 @@ class Map extends React.Component {
         }
       })
     }
+<<<<<<< HEAD
     console.log(this.pins);
   }
   
+=======
+    this.setState({pins})
+  }
+  
+  
+>>>>>>> development
   //This is required as a paramter for Geocode to work
   myMap = React.createRef()
   
@@ -85,6 +102,7 @@ class Map extends React.Component {
     })
   }
   
+<<<<<<< HEAD
   
   
   // pinLayer = new GeoJsonLayer({
@@ -97,6 +115,35 @@ class Map extends React.Component {
     
     render() {
 
+=======
+  // myMap.addLayer({
+
+
+
+  // })
+  
+  // pinLayer = new GeoJsonLayer({
+  //     id:"pin-layer",
+  //     data: this.state.pins,
+  //     pickable: true,
+  //     getFillColor: [160, 160, 180, 200],
+    //   points: {
+    //     type: "IconLayer",
+    //   iconAtlas: './icon-atlas.png',
+    //   iconMapping: './icon-mapping.json',
+    //   getIcon: d => d.sourceFeature.feature.properties.marker,
+    //   getColor: [255, 200, 0],
+    //   getSize: 32
+    // }
+    // })
+
+   
+    
+    
+    
+    render() {
+      console.log(this.state.pins);
+>>>>>>> development
       
       const { viewport, searchResultLayer } = this.state
       
@@ -117,12 +164,22 @@ class Map extends React.Component {
           onViewportChange={this.handleViewportChange}
           mapboxApiAccessToken={process.env.REACT_APP_MAPBOX_ACCESS_TOKEN}
           position="top-left" />
+<<<<<<< HEAD
         <GeolocateControl />
         <NavigationControl />
         <Marker
           className="marker"
           {...viewport} />
         <DeckGL {...viewport} layers={[searchResultLayer], [this.pinLayer]} />
+=======
+          {/* //? Don't think these are needed - left in here for now  */}
+        {/* <GeolocateControl />
+        <NavigationControl /> */}
+        <Marker
+          className="marker"
+          {...viewport} />
+        <DeckGL {...viewport} layers={[searchResultLayer, this.pinLayer]} />
+>>>>>>> development
       </MapGl>
       <button
         className="button is-primary"

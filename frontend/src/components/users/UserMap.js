@@ -2,7 +2,11 @@ import React from 'react'
 
 import GeoCodeMap from './GeoCodeMap'
 import PinForm from '../users/PinForm'
+<<<<<<< HEAD
 import TestGeoJSON from '../users/TestGeoJSON'
+=======
+
+>>>>>>> development
 import { postPin, getProfile } from '../../lib/api'
 
 import 'mapbox-gl/dist/mapbox-gl.css'
@@ -65,7 +69,11 @@ class UserMap extends React.Component {
   render() {
 
     if (!this.state.user) return null
+<<<<<<< HEAD
     console.log(this.state.user.pins)
+=======
+    // console.log(this.state.user.pins)
+>>>>>>> development
     const pins = this.state.user.pins
 
     return (

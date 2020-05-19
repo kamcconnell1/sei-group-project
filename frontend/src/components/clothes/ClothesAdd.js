@@ -13,7 +13,7 @@ state = {
     size: '', 
     color: [''], 
     rentalPrice: '', 
-    image: ['']
+    image: []
   }, 
   errors: {}
 }

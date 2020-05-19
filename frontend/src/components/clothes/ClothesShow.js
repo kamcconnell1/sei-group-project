@@ -1,12 +1,20 @@
 import React from 'react'
 
-import { singleCloth, getUserProfile, postFavorite } from '../../lib/api'
+import { singleCloth, getUserProfile, postFavorite, addCommentCloth, deleteCommentCloth } from '../../lib/api'
 
 import SingleClothCard from './SingleClothCard'
 
 class ClothesShow extends React.Component {
 
-  state = {cloth: null, user: null, item: ''}
+  state = {
+    cloth: null, 
+    user: null, 
+    item: '',
+    comments: {
+      text: ''
+    },
+    commentsArray: []
+  }
 
   // * GET each clothing item on mount via Id
   componentDidMount() {
@@ -21,11 +29,12 @@ class ClothesShow extends React.Component {
   getSingleCloth = async () => {
     const clothId = this.props.match.params.id
     const res = await singleCloth(clothId)
+    console.log(res.data.comments)
       // console.log('clothes info:', res.data.user.id)
       const userId = res.data.user.id
       const user = await getUserProfile(userId)
       // console.log('user profile info:', user.data)
-      this.setState({cloth: res.data, user: user.data})
+      this.setState({cloth: res.data, user: user.data, commentsArray: res.data.comments})
   }
 
   // * Function to click on first picture in similar user post
@@ -65,9 +74,39 @@ class ClothesShow extends React.Component {
     }
   }
 
+  handleCommentChange = e => {
+    const comments = { ...this.state.comments, [e.target.name]: e.target.value}
+    this.setState({ comments })
+  }
+
+  handleCommentSubmit = async e => {
+    const clothId = this.props.match.params.id
+    e.preventDefault()
+    try {
+      const res = await addCommentCloth(clothId, this.state.comments)
+      console.log(res.data)
+      this.setState({ commentsArray: res.data.comments})
+      this.getSingleCloth()
+    } catch (err) {
+      console.log(err)
+    }
+  }
+
+  deleteComment = async e => {
+    try {
+      const clothId = this.props.match.params.id
+      const commentId = e.target.value
+      console.log(clothId, commentId)
+      const res = await deleteCommentCloth(clothId, commentId)
+      this.getSingleCloth()
+    } catch (err) {
+      console.log(err)
+    }
+  }
+
   render() {
     if (!this.state.cloth) return <h1>Even more Ninjas are working on this</h1>
-    const {cloth, user} = this.state
+    const {cloth, user, comments, commentsArray} = this.state
     //* Variable of images from articles user posted
     const images = user.createdArticles.map(image => {return {image: image.image, id: image._id}})
     // Current users Id
@@ -92,6 +131,11 @@ class ClothesShow extends React.Component {
               <SingleClothCard 
               {...cloth}
               {...user}
+              {...comments}
+              commentsArray={commentsArray}
+              deleteComment={this.deleteComment}
+              handleCommentChange={this.handleCommentChange}
+              handleCommentSubmit={this.handleCommentSubmit}
               images={images}
               currentUserId={userId}
               onFirstClick={this.handleFirstClick}

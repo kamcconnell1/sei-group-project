@@ -42,8 +42,18 @@ handleSubmit = async event => {
   event.preventDefault()
   this.getLocation()
   try{
+<<<<<<< HEAD
     await registerUser(this.state.formData)
     this.props.history.push('/login')
+=======
+<<<<<<< HEAD
+    await registerUser(this.state.registerForm)
+    // this.props.history.push('/login')
+=======
+    await registerUser(this.state.formData)
+    this.props.history.push('/login')
+>>>>>>> 4f2d136abb9b6097fa180d0fd1748bfc8ee87641
+>>>>>>> development
   } catch (err) {
     this.setState({ errors: err.response.data})
     console.log(err.response.data)
