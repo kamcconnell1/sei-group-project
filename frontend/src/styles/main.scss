@@ -18,7 +18,7 @@
 
 // ? SLIDE IMAGE - SHOW PAGE 
 .slide-container {
-  width: 50%;
+  width: 70%;
   margin: auto; }
 
 h3 {
@@ -28,8 +28,10 @@ h3 {
   display: flex;
   align-items: center;
   justify-content: center;
-  background-size: cover;
+  background-size: contain;
+  background-repeat: no-repeat;
   height: 150px;
+  width: 100%;
 }
 
 
