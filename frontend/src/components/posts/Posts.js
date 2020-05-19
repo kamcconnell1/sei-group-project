@@ -1,12 +1,8 @@
 import React from 'react'
 import PostCards from '../posts/PostsCards'
-
-import { getAllPosts, createAPost } from '../../lib/api'
+import { getAllPosts, createPost } from '../../lib/api'
 import { Link } from 'react-router-dom'
-
-
 class Posts extends React.Component {
-
   state = {
     posts: null,
     input: {
@@ -14,7 +10,6 @@ class Posts extends React.Component {
       text: ''
     }
   }
-
   async componentDidMount() {
     try {
       this.pageSetup()
@@ -22,7 +17,6 @@ class Posts extends React.Component {
       console.log(err)
     }
   }
-
   pageSetup = async () => {
     try {
       const res = await getAllPosts()
@@ -32,28 +26,22 @@ class Posts extends React.Component {
       console.log(err)
     }
   }
-
   handleChange = e => {
     const input = { ...this.state.input, [e.target.name]: e.target.value }
     this.setState({ input })
   }
-
   handleSubmit = async e => {
     e.preventDefault()
     try {
-      const res = await createAPost(this.state.input)
+      const res = await createPost(this.state.input)
       console.log(res.data)
     } catch (err) {
       console.log(err)
     }
   }
-
   deletePost = e => {
     console.log(e.target.value)
-
   }
-
-
   render() {
     if (!this.state.posts) return null
     return (
@@ -94,5 +82,4 @@ class Posts extends React.Component {
     )
   }
 }
-
 export default Posts
