@@ -2,11 +2,8 @@ import React from 'react'
 
 const LoginForm = ({email, password, handleChange, handleSubmit, errors}) => {
   return (
-    <section className="section">
-      <div className="container">
-        <div className="columns">
           <form 
-          className="column is-half is-offset-one-quarter box"
+          className="box"
           onSubmit={handleSubmit}
           >
             <div className="field">
@@ -39,9 +36,6 @@ const LoginForm = ({email, password, handleChange, handleSubmit, errors}) => {
               <button type="submit" className="button is-fullwidth is-primary">Login</button>
               </div>
           </form>
-        </div>
-      </div>
-    </section>
   )
 }
 

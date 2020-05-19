@@ -26,7 +26,7 @@ mongoose.connect(
       //? SEED ARTICLES
 
       //* Articles by John
-      const articlesFromJohn = articleData.slice(0, 3).map(article => {
+      const articlesFromJohn = articleData.slice(0, 9).map(article => {
         return { ...article, user: users[1]._id }
       })
       const articlesJohn = await Article.create(articlesFromJohn)
@@ -34,7 +34,7 @@ mongoose.connect(
 
 
       //* Articles By Mary
-      const articlesForMary = articleData.slice(4, 6).map(article => {
+      const articlesForMary = articleData.slice(9, 17).map(article => {
         return { ...article, user: users[2]._id }
       })
       const articlesMary = await Article.create(articlesForMary)
@@ -42,7 +42,7 @@ mongoose.connect(
 
 
       //* Articles By Paul
-      const articlesForPaul = articleData.slice(6, 8).map(article => {
+      const articlesForPaul = articleData.slice(17, 24).map(article => {
         return { ...article, user: users[3]._id }
       })
       const articlesPaul = await Article.create(articlesForPaul)

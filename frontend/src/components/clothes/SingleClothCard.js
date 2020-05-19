@@ -89,7 +89,7 @@ const SingleClothCard = ({ deleteComment, commentsArray, comments, title, clothI
           <div className="column is-one-quarter">
             <a onClick={onSecondClick}>
               <figure className="image">
-                <img src={images[1].image ? images[1].image : images[0].image} alt={title} />
+                <img src={images[1].image} alt={title} />
               </figure>
             </a>
           </div>

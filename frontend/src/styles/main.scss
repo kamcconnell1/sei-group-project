@@ -1,29 +1,121 @@
+@import '~bulma/bulma.sass';
+
+//? VARS
+:root {
+  --main-bg-color: rgba(198, 187, 200, 0.548);
+  --main-bg-rgb: 198, 187, 200;
+  --navbar-color: 255, 255, 255;
+  --navbar-hover-color: grey;
+}
+
+//? LIBRARY
+
+.column-center {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.row-center {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
 
 
-//Global Styling 
+//?Global Styling 
 * {
   margin: 0;
   padding: 0;
-  font-family: 'Hind Siliguri', sans-serif;
+  // font-family: 'Hind Siliguri', sans-serif;
+  font-family: 'Poppins', sans-serif;
+
 }
-
-
 .body {
   padding: 0;
+  width: 100vw;
+  height: 100vh;
 }
 
+
+//? ALL PAGES - navbar, main, footer
+
+
+.Main {
+  display: flex;
+  background-color: var(--main-bg-color);
+  min-height: 80vh;
+  min-width: 100vh;
+  }
+
+ 
+.Navbar {
+  height: 10vh;
+  display: flex;
+  align-items: center;
+  background-color: var(--navbar-color);
+
+  .Navbar-item {
+    color: inherit;
+    margin: -100px 1%;
+    font-size: 30px;
+    font-weight: 500;
+  }
+  .navbar-item {
+   margin: 0;
+   background-color:var(--navbar-color);
+  }
+  .navbar-item:hover,
+  .navbar-burger:hover {
+    background-color: var(--navbar-color);
+    color: var(--navbar-hover-color);
+  }
+}
+
+.Footer {
+  height: 10vh;
+  display: flex;
+  justify-content: center;
+  // background-color: rgb(198, 187, 200);
+}
+
+.box {
+  width: 40%;
+  background-color: rgba(var(--navbar-color), 0.1);
+  .field {
+    padding: 10px;
+
+  }
+}
+
+
+
+
+//? HOME
+//* title
+
+.Home {
+  h1 {
+    color: black;
+    font-weight: bold;
+    font-size: 50px;
+    }
+  
+    //* subtitle
+    h2 {
+    color: grey;
+    }
+}
 
 
 // ?------------------------------- Clothing Pages --------------------------------------------------------
-
 // ? SLIDE IMAGE - SHOW PAGE 
 .slide-container {
   width: 70%;
   margin: auto; }
-
 h3 {
   text-align: center; }
-
 .each-slide div {
   display: flex;
   align-items: center;
@@ -31,10 +123,7 @@ h3 {
   background-size: contain;
   background-repeat: no-repeat;
   height: 150px;
-  width: 100%;
 }
-
-
 // ? FILTERS ON CLOTHES INDEX
 .filter {
   margin-left: 0;
@@ -43,8 +132,8 @@ h3 {
 
 
 
-//? ------------------------------- User Pages --------------------------------------------------------
 
+//? ------------------------------- User Pages --------------------------------------------------------
 //? USER PROFILE PAGE 
 div.is-profile-info {
   border: 1px solid black;
@@ -69,25 +158,24 @@ div.is-profile-info {
           border-radius: 5px;
        }
       }
-
 div.is-user-clothes {
   border: 1px solid black;
 }
-
 div.is-user-chat{
   border: 1px solid black;
 }
+//? ------------------------------- Pins--------------------------------------------------------
 
-
+div.pincard {
+  border: 1px royalblue solid;
+}
 //? ------------------------------- Map Pages --------------------------------------------------------
-
 .marker {
   background-color: red;
   height: 12px;
   width: 12px;
   border-radius: 100%;
 }
-
 .sidebar {
   width:30%;
   height: 100%;
@@ -108,9 +196,5 @@ div.is-user-chat{
   padding:20px
 }
 
-
 //? ------------------------------- Bulma Variables ------------------------------------------------------
-$modal-content-width: 500px;
-
-
-@import '~bulma/bulma.sass'
+// $modal-content-width: 500px;

@@ -2,8 +2,8 @@ import 'mapbox-gl/dist/mapbox-gl.css'
 import "mapbox-gl/dist/mapbox-gl.css"
 import React from 'react'
 
-import MapGl, { Marker, GeolocateControl, NavigationControl } from 'react-map-gl'
-import DeckGL, { GeoJsonLayer } from 'deck.gl'
+import MapGl, { Marker, Popup, FlyToInterpolator } from 'react-map-gl'
+
 import Geocoder from 'react-map-gl-geocoder'
 
 
@@ -49,37 +49,30 @@ class Map extends React.Component {
   
   //This is required as a paramter for Geocode to work
   myMap = React.createRef()
-  
+
   //This function continuously sets state as you move the viewport
   handleViewportChange = viewport => {
     this.setState({
       viewport: { ...this.state.viewport, ...viewport }
     })
   }
-  
-  // This sets state with lots of details from the users search location - probably not necessary
-  handleOnResult = event => {
-    console.log(event.result);
-    this.setState({
-      searchResultLayer: new GeoJsonLayer({
-        id: "search-result",
-        data: event.result.geometry,
-        getFillColor: [255, 0, 0, 128],
-        getRadius: 1000,
-        pointRadiusMinPixels: 10,
-        pointRadiusMaxPixels: 10
-      })
+
+  goToViewport = ({ longitude, latitude }) => {
+    this.handleViewportChange({
+      longitude,
+      latitude,
+      zoom: 12,
+      transitionInterpolator: new FlyToInterpolator({ speed: 1.2 }),
+      transitionDuration: 'auto'
     })
   }
-  
-  
   // Sets state based on the lat / long the viewport has landed on & opens the pin form modal when you add pin. Callback function passes lat / long back up to parent
   handleDropPin = event => {
     const latitude = (this.state.viewport.latitude)
     const longitude = (this.state.viewport.longitude)
     this.props.onClick()
     this.setState({ latitude, longitude }, () => {
-      this.props.onChange({ target: { name: this.state.name, value: this.state.value } })
+      this.props.location(this.state.latitude, this.state.longitude)
     })
   }
   
@@ -136,7 +129,7 @@ class Map extends React.Component {
         <Marker
           className="marker"
           {...viewport} />
-        <DeckGL {...viewport} layers={[searchResultLayer, this.pinLayer]} />
+
       </MapGl>
       <button
         className="button is-primary"
@@ -145,6 +138,7 @@ class Map extends React.Component {
     </>
   )
 }
+
 }
 
 export default Map

@@ -17,6 +17,8 @@ const colorOptions = [
 ]
 const ClothesForm = ({ handleChange, handleSubmit, handleMultiChange, formData, onClick, onChange, errors}) => {
   const { title, category, genderCategory, size, rentalPrice, image, brand } = formData
+
+
   return (
     <section className="section">
       <div className="container">
