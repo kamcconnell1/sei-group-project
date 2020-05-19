@@ -91,32 +91,34 @@ class UserMap extends React.Component {
               </h2>
           </div>
         </section>
-        <div className="sidebar pad2">
+        <div className="map-page">
           <div className="container">
-            {pins.map(pin =>
-              <PinCard key={pin._id} {...pin} />
-            )}
-
-            {/* PinForm will pop up if a user decides to drop a pin on thr map */}
-            <PinForm
-              handleChange={this.handleChange}
-              handleSubmit={this.handleSubmit}
+            <GeoCodeMap
+              onChange={this.handleChange}
               onClick={this.toggleModal}
-              errors={this.state.errors}
-              modalStatus={this.state.modalOpen}
-              {...this.state.formData}
-            />
-
-            {/* GeoCodeMap - for user to view locations & drop pins */}
+              pins={this.state.user.pins}
+              location={this.addLocation}
+              name="location" />
           </div>
-          <div className="map pad2">
+          <div className="map-pins">
             <div className="container">
-              <GeoCodeMap
-                onChange={this.handleChange}
+              {pins.map(pin =>
+                <PinCard key={pin._id} {...pin} />
+              )}
+
+              {/* PinForm will pop up if a user decides to drop a pin on thr map */}
+              <PinForm
+                handleChange={this.handleChange}
+                handleSubmit={this.handleSubmit}
                 onClick={this.toggleModal}
-                pins={this.state.user.pins}
-                location={this.addLocation}
-                name="location" />
+                errors={this.state.errors}
+                modalStatus={this.state.modalOpen}
+                {...this.state.formData}
+              />
+
+              {/* GeoCodeMap - for user to view locations & drop pins */}
+            </div>
+            <div className="map pad2">
             </div>
           </div>
         </div>

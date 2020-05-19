@@ -90,6 +90,51 @@
 }
 
 
+//? PIN-MAP
+
+.map-page {
+  display: flex;
+  align-items: center;
+  max-width: 60vw;
+  max-height: 800px;
+  .map {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: black;
+    overflow: hidden;
+    margin: 50px 20px 0 0;
+    border-radius: 10px; 
+    .map-map {
+      #mapboxgl-control-continer {
+        position: fixed;
+        bottom: 100px;
+      }
+      
+    }
+
+  }
+  .map-pins {
+    width: 300px;
+    .pincard {
+      text-align: center;
+      background-color: white;
+      margin: 30px;
+      padding: 10px;
+      box-shadow: 0 10px 20px #777;   
+      border-radius: 10px; 
+    }
+  }
+}
+
+
+.marker {
+  background-color: red;
+  height: 12px;
+  width: 12px;
+  border-radius: 100%;
+}
+
 
 
 //? HOME
@@ -169,37 +214,17 @@ div.is-user-clothes {
 div.is-user-chat{
   border: 1px solid black;
 }
-//? ------------------------------- Pins--------------------------------------------------------
 
-div.pincard {
-  border: 1px royalblue solid;
-}
-//? ------------------------------- Map Pages --------------------------------------------------------
-.marker {
-  background-color: red;
-  height: 12px;
-  width: 12px;
-  border-radius: 100%;
-}
-.sidebar {
-  width:30%;
-  height: 100%;
-  top: 200px;
-  left: 0;
-  overflow: hidden;
-  border-right: 1px solid rgab(0, 0, 0, 0.25)
-}
-.map {
-  border-left: 1px solid #fff;
-  position: absolute;
-  left: 30%;
-  width: 70%;
-  top: 200px;
-  bottom: 0;
-}
-.pad2{
-  padding:20px
-}
+
+// .sidebar {
+//   width:30%;
+//   height: 100%;
+//   top: 200px;
+//   left: 0;
+//   overflow: hidden;
+//   border-right: 1px solid rgab(0, 0, 0, 0.25)
+// }
+
 
 //? ------------------------------- Bulma Variables ------------------------------------------------------
 // $modal-content-width: 500px;

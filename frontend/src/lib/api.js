@@ -65,6 +65,7 @@ export const allUsersFavourites = () => {
 export const postFavoriteFriend = data => {
   return axios.post(`${kebb_url}/favourites/friends`, data, withHeaders())
 }
+
 //*POST comment on USER
 export const commentOnUser = (id, data) => {
   return axios.post(`${kebb_url}/profile/${id}/comments`, data, withHeaders())
@@ -90,6 +91,7 @@ export const getSinglePost = id => {
   return axios.get(`${kebb_url}/posts/${id}`)
 }
 //* Edit a post
+
 export const editPost = (id, data) => {
   return axios.put(`${kebb_url}/posts/${id}`, data, withHeaders())
 }
