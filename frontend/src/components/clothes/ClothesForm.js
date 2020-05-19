@@ -17,8 +17,8 @@ const colorOptions = [
   { value: 'silver', label: 'Silver' },
   { value: 'gold', label: 'Gold' }
 ]
-const ClothesForm = ({ handleChange, handleSubmit, handleMultiChange, clothesForm, onClick, onChange, errors}) => {
-  const { title, category, genderCategory, size, rentalPrice, image, brand } = clothesForm
+const ClothesForm = ({ handleChange, handleSubmit, handleMultiChange, formData, onClick, onChange, errors}) => {
+  const { title, category, genderCategory, size, rentalPrice, image, brand } = formData
 
 
   return (

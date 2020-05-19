@@ -1,9 +1,14 @@
 import React from 'react'
 
 
-const PinForm = ({handleChange, handleSubmit, title, place, location, notes, errors }) => {
+const PinForm = ({modalStatus, handleChange, handleSubmit, onClick, title, place, notes, errors }) => {
   
   return (
+    <div 
+    className={modalStatus ? "modal is-active" : "modal"}
+    >
+       <div className="modal-background"></div>
+       <div className="modal-content">
     <form
       onSubmit={handleSubmit}
       className="column is-3 is-pulled-left	"
@@ -40,21 +45,6 @@ const PinForm = ({handleChange, handleSubmit, title, place, location, notes, err
       </div>
 
       <div className="field">
-        <label className="label">Postcode</label>
-        <div className="control">
-          <input
-            className={`input ${errors.location ? 'is-danger' : ''}`}
-            type="text"
-            placeholder="Postcode?"
-            name="location"
-            value={location.postcode}
-            onChange={handleChange}
-          />
-        </div>
-        {errors.location && <small className="help is-danger">{errors.location}</small>}
-      </div>
-
-      <div className="field">
         <label className="label">Notes</label>
         <div className="control">
           <textarea
@@ -69,9 +59,16 @@ const PinForm = ({handleChange, handleSubmit, title, place, location, notes, err
         </div>
       </div>
       <div className="field">
-              <button type="submit" className="button is-fullwidth is-primary">Add Pin</button>
+              <button type="submit" className="button is-fullwidth is-primary">Save Location</button>
               </div>
     </form>
+    <button 
+
+    className="modal-close is-large" 
+    aria-label="close"
+    onClick={onClick}></button>
+</div>
+</div>
 
 
   )

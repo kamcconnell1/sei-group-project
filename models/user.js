@@ -22,7 +22,8 @@ const userCommentsSchema = new mongoose.Schema({
 const pinSchema = new mongoose.Schema({
   title: { type: String, required: true, maxlength: 100 },
   place: { type: String, required: true, maxlength: 100 },
-  location: { type: String, required: true },
+  latitude: { type: String, required: true },
+  longitude: { type: String, required: true },
   note: { type: String, maxlength: 300 },
   photo: { type: String }
 }, {

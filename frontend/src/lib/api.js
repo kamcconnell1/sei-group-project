@@ -17,8 +17,8 @@ export const showAllClothes = () => {
 }
 
 //* user POST clothes article function
-export const addClothes = clothesForm => {
-  return axios.post(`${kebb_url}/clothes`, clothesForm, withHeaders())
+export const addClothes = formData => {
+  return axios.post(`${kebb_url}/clothes`, formData, withHeaders())
 }
 
 // * Function to get single clothing item
@@ -29,13 +29,13 @@ export const singleCloth = id => {
 
 //------------------------------------USER REQUESTS--------------------------------------------
 // * login user POST function
-export const loginUser = loginForm => {
-  return axios.post(`${kebb_url}/login`, loginForm)
+export const loginUser = formData => {
+  return axios.post(`${kebb_url}/login`, formData)
 }
 
 // * register user POST function
-export const registerUser = registerForm => {
-  return axios.post(`${kebb_url}/register`, registerForm)
+export const registerUser = formData => {
+  return axios.post(`${kebb_url}/register`, formData)
 }
 
 //* get user for PROFILE page 
@@ -54,8 +54,8 @@ export const getProfile = () => {
   }
 
   //* POST for user to add pin to their map 
-  export const postPin = pinForm => {
-    return axios.post(`${kebb_url}/pins`, pinForm, withHeaders())
+  export const postPin = formData => {
+    return axios.post(`${kebb_url}/pins`, formData, withHeaders())
   }
 
   // * POST Favourites to users favourite
