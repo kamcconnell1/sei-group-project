@@ -5,7 +5,7 @@ import ClothesForm from './ClothesForm'
 
 class ClothesAdd extends React.Component{
 state = {
-  clothesForm: {
+  formData: {
     title: '',
     category: '', 
     brand: '',
@@ -13,42 +13,42 @@ state = {
     size: '', 
     color: [''], 
     rentalPrice: '', 
-    image: ['']
+    image: []
   }, 
   errors: {}
 }
   
   //handleChange event for inputting values on form 
   handleChange = event => {
-    const clothesForm = {...this.state.clothesForm, [event.target.name]: event.target.value}
+    const formData = {...this.state.formData, [event.target.name]: event.target.value}
     const errors = { ...this.state.errors, [event.target.name]: ''}
-    this.setState({clothesForm, errors})
+    this.setState({formData, errors})
   }
 
   //handle Multi change to deal with selecting different colours
   handleMultiChange = selected => {
     const selectedItems = selected ? selected.map(item => item.value) : []
-    const clothesForm = {...this.state.clothesForm, color: selectedItems}
+    const formData = {...this.state.formData, color: selectedItems}
     const errors = { ...this.state.errors, color: ''}
-    this.setState({clothesForm, errors})
+    this.setState({formData, errors})
   }
 
 // function to allow user to upload multiple images or links to the clothing item
 handleAddImage = () => {
-  const clothesForm = { ...this.state.clothesForm, image: [...this.state.clothesForm.image, ''] }
+  const formData = { ...this.state.formData, image: [...this.state.formData.image, ''] }
   const errors = { ...this.state.errors, image: ''}
-  this.setState({ clothesForm, errors})
+  this.setState({ formData, errors})
 }
 
 handleImageChange = (event, i) => {
-  const images = [...this.state.clothesForm.image]
+  const images = [...this.state.formData.image]
   const newImages = images.map((image, index) => {
     if (i === index) return event.target.value
     return image
   })
-  const clothesForm = {...this.state.clothesForm, image: newImages}
+  const formData = {...this.state.formData, image: newImages}
   const errors = { ...this.state.errors, image: ''}
-  this.setState({ clothesForm, errors })
+  this.setState({ formData, errors })
 }
 
 
@@ -56,7 +56,7 @@ handleImageChange = (event, i) => {
   handleSubmit = async event => {
     event.preventDefault()
     try {
-      const res = await addClothes(this.state.clothesForm)
+      const res = await addClothes(this.state.formData)
       this.props.history.push(`/clothes/${res.data._id}`)
     } catch (err) {
       this.setState({ errors: err.response.data})
@@ -66,7 +66,7 @@ handleImageChange = (event, i) => {
   }
 
   render() {
-    console.log(this.state.clothesForm);
+    console.log(this.state.formData);
     
     return(
       <>
@@ -78,7 +78,7 @@ handleImageChange = (event, i) => {
       handleChange={this.handleChange}
       handleMultiChange={this.handleMultiChange}
       handleSubmit={this.handleSubmit}
-      clothesForm={this.state.clothesForm}
+      formData={this.state.formData}
       errors={this.state.errors}
       />
       </>

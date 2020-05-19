@@ -34,16 +34,9 @@ async function articlesCreate(req, res, next) {
 async function articlesShow(req, res, next) {
   const articleId = req.params.id
   try {
-<<<<<<< HEAD
-    const anArticle = await Article.findById(articleId).populate('user')
-    console.log(anArticle)
-    if (!anArticle) throw new Error(notFound)
-    res.status(200).json(anArticle)
-=======
-    const article = await Article.findById(articleId).populate('user')
+    const article = await Article.findById(articleId).populate('user').populate('comments.user')
     if (!article) throw new Error(notFound)
     res.status(200).json(article)
->>>>>>> 8f04e88d792cb017a90b847f2376ce335979bce7
   } catch (err) {
     next(err)
   }
@@ -67,18 +60,6 @@ async function articlesUpdate(req, res, next) {
   }
 }
 
-<<<<<<< HEAD
-//* function to delete an article of clothing by id
-//* tested
-async function articlesDelete(req, res) {
-  req.body.user = req.currentUser
-  try {
-    const articleId = req.params.id
-    const articleToDelete = await Article.findById(articleId)
-    if (!articleToDelete) throw new Error(notFound)
-    if (!articleToDelete.user.equals(req.currentUser._id)) throw new Error('Unauthorized')
-    await articleToDelete.remove()
-=======
 //? Function to delete an article of clothing by id
 //* WORKING tested
 //* ERROR tested
@@ -89,7 +70,6 @@ async function articlesDelete(req, res, next) {
     if (!toDelete) throw new Error(notFound)
     if (!toDelete.user.equals(req.currentUser._id)) throw new Error(unauthorized)
     await toDelete.remove()
->>>>>>> 8f04e88d792cb017a90b847f2376ce335979bce7
     res.sendStatus(204)
   } catch (err) {
     next(err)
@@ -104,7 +84,7 @@ async function articleCommentCreate (req, res, next) {
   try {
     req.body.user = req.currentUser
     const articleId = req.params.id
-    const article = await Article.findById(articleId)
+    const article = await Article.findById(articleId).populate('comments.user')
     if (!article) throw new Error(notFound)
     article.comments.push(req.body)
     await article.save()
@@ -120,14 +100,12 @@ async function articleCommentCreate (req, res, next) {
 async function articleCommentDelete (req, res, next) {
   try {
     req.body.user = req.currentUser
-    const articleId = req.params.id
-    const commentId = req.params.commentId
-    const article = await Article.findById(articleId)
+    const article = await Article.findById(req.params.articleid)
     if (!article) throw new Error(notFound)
-    const commentToDelete = article.comments.id(commentId)
+    const commentToDelete = article.comments.id(req.params.commentId)
     if (!commentToDelete) throw new Error(notFound)
     if (!commentToDelete.user.equals(req.currentUser._id)) throw new Error(unauthorized)
-    await article.remove()
+    await commentToDelete.remove()
     await article.save()
     res.sendStatus(204)
   } catch (err) {

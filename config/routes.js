@@ -25,7 +25,7 @@ router.route('/clothes/:id/comments')
   .post(secureRoute, articles.commentCreate)
 
 //* Delete Comments on Clothing
-router.route('/clothes/:id/comments/:commentId')
+router.route('/clothes/:commentId/comments/:articleid')
   .delete(secureRoute, articles.commentDelete)
 
 //? *****************************//

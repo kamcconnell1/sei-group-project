@@ -1,9 +1,7 @@
 import React from 'react'
 import Select from 'react-select'
-
 import ImageUpload from '../common/ImageUpload'
 import { uploadClothesImage } from '../../lib/ext_api'
-
 const colorOptions = [
   { value: 'black', label: 'Black' },
   { value: 'white', label: 'White' },
@@ -17,10 +15,8 @@ const colorOptions = [
   { value: 'silver', label: 'Silver' },
   { value: 'gold', label: 'Gold' }
 ]
-const ClothesForm = ({ handleChange, handleSubmit, handleMultiChange, clothesForm, onClick, onChange, errors}) => {
-  const { title, category, genderCategory, size, rentalPrice, image, brand } = clothesForm
-
-
+const ClothesForm = ({ handleChange, handleSubmit, handleMultiChange, formData, onClick, onChange, errors}) => {
+  const { title, category, genderCategory, size, rentalPrice, image, brand } = formData
   return (
     <section className="section">
       <div className="container">
@@ -29,7 +25,6 @@ const ClothesForm = ({ handleChange, handleSubmit, handleMultiChange, clothesFor
             className="column is-half is-offset-one-quarter box"
             onSubmit={handleSubmit}
           >
-
             <div className="field">
               <label className="label">Title</label>
               <div className="control">
@@ -44,7 +39,6 @@ const ClothesForm = ({ handleChange, handleSubmit, handleMultiChange, clothesFor
               </div>
               {errors.title && <small className="help is-danger">{errors.title}</small>}
             </div>
-
             {/* This input should be changed to a multi select to select categories fit into */}
             <div className="field">
               <label className="label">Category</label>
@@ -60,7 +54,6 @@ const ClothesForm = ({ handleChange, handleSubmit, handleMultiChange, clothesFor
               </div>
               {errors.category && <small className="help is-danger">{errors.category}</small>}
             </div>
-
             <div className="field">
               <label className="label">Brand</label>
               <div className="control">
@@ -75,7 +68,6 @@ const ClothesForm = ({ handleChange, handleSubmit, handleMultiChange, clothesFor
               </div>
               {errors.brand && <small className="help is-danger">{errors.brand}</small>}
             </div>
-
             <div className="field">
               <label className="label">This item is for...</label>
               <div className="control">
@@ -102,7 +94,6 @@ const ClothesForm = ({ handleChange, handleSubmit, handleMultiChange, clothesFor
               </div>
               {errors.genderCategory && <small className="help is-danger">Please select an input</small>}
             </div>
-
             <div className="field">
               <label className="label">Size</label>
               <div className="control">
@@ -127,7 +118,6 @@ const ClothesForm = ({ handleChange, handleSubmit, handleMultiChange, clothesFor
               </div>
               {errors.genderCategory && <small className="help is-danger">Please select a size</small>}
             </div>
-
             <div className="field">
               <label className="label">Colour</label>
               <div className="control">
@@ -141,7 +131,6 @@ const ClothesForm = ({ handleChange, handleSubmit, handleMultiChange, clothesFor
               </div>
               {errors.size && <small className="help is-danger">Please select a colour</small>}
             </div>
-
             <div className="field">
               <label className="label">Rental Price</label>
               <div className="control">
@@ -156,25 +145,9 @@ const ClothesForm = ({ handleChange, handleSubmit, handleMultiChange, clothesFor
               </div>
               {errors.rentalPrice && <small className="help is-danger">{errors.rentalPrice}</small>}
             </div>
-
-            {/* //! need to add the option to upload photos here too 
-            <div className="field">
-              <label className="label">Upload Image Link or Files</label>
-              <div className="control">
-                <input
-                  className="input"
-                  type="text"
-                  placeholder="Add image link here"
-                  name="image"
-                  value={image}
-                  onChange={handleChange}
-                />
-              </div>
-            </div> */}
  
             <div className="field">
               {errors.image && <small className="help is-danger">Please upload some images</small>}
-
               <div className="control">
                 {image.map((image, index) => {
                   return (
@@ -183,16 +156,17 @@ const ClothesForm = ({ handleChange, handleSubmit, handleMultiChange, clothesFor
                       onChange={args => onChange(args, index)}
                       preset={uploadClothesImage}
                       name="image"
-                      labelText="Add Images"
+                      labelText="Or"
                     />
                   )
                 })
                 }
                 {image.length < 5 && <button onClick={onClick}>Add Another Image</button>}
               </div>
-            </div>
+      
             <div className="field">
               <button type="submit" className="button is-fullwidth is-primary">Add Item</button>
+            </div>
             </div>
           </form>
         </div>
@@ -200,5 +174,4 @@ const ClothesForm = ({ handleChange, handleSubmit, handleMultiChange, clothesFor
     </section>
   )
 }
-
 export default ClothesForm

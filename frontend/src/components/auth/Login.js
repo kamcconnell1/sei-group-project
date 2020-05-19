@@ -8,7 +8,7 @@ import {setToken, setUsername } from '../../lib/auth'
 
 class Login extends React.Component{
   state = {
-    loginForm: {
+    formData: {
       email: '',
       password: ''
     }, 
@@ -18,15 +18,15 @@ class Login extends React.Component{
 
   //handleChange event for inputting values on form 
   handleChange = event => {
-    const loginForm = {...this.state.loginForm, [event.target.name]: event.target.value}
-    this.setState({loginForm, error: '' })
+    const formData = {...this.state.formData, [event.target.name]: event.target.value}
+    this.setState({formData, error: '' })
   }
 
   // handleSubmit event for submitting the login form
 handleSubmit = async event => {
   event.preventDefault()
   try{
-    const res = await loginUser(this.state.loginForm)
+    const res = await loginUser(this.state.formData)
     setToken(res.data.token)
     const response = await getProfile()
     setUsername(response.data.username)
@@ -38,7 +38,7 @@ handleSubmit = async event => {
 
 
   render() {
-    // console.log(this.state.loginForm)
+    // console.log(this.state.formData)
     return (
       <>
       <section className="section">
@@ -53,7 +53,7 @@ handleSubmit = async event => {
       handleChange={this.handleChange}
       handleSubmit={this.handleSubmit}
       errors={this.state.error}
-      {...this.state.loginForm}
+      {...this.state.formData}
       />
   </>
     )

@@ -15,6 +15,7 @@ class ClothesIndex extends React.Component {
     filteredClothes: null,
     color: null,
     category: null,
+    filteredCategories: null,
     gender: null,
     sizes: null,
     searchClothes: ''
@@ -53,13 +54,24 @@ class ClothesIndex extends React.Component {
   // * Function to allow user to filter clothing intems
   // ! To be completed - by Benga
   filterChange = event => {
-    console.log(event.target.value)
+    const {filteredClothes} = this.state
+    const showFilter = event.value
+    if (filteredClothes.length > 0) {
+      const filteredCats = filteredClothes.filter(cloth => {
+        const regex = RegExp(showFilter, 'i')
+        return (cloth.category.match(regex) || cloth.color[0].match(regex) || cloth.genderCategory.match(regex) || cloth.size.match(regex)) 
+      })
+      this.setState({filteredClothes: filteredCats})
+      console.log(event.value)
+    } else {return 'unavailable'}
   }
 
 
   render() {
     if (!this.state.filteredClothes) return <h1>Some Ninjas are working on this</h1>
-    const { filteredClothes, color, category, gender, searchClothes, sizes,} = this.state
+    const { filteredClothes, color, category, gender, searchClothes, sizes } = this.state
+
+    console.log(filteredClothes)
 
     // * Variable of category options
     const categoryOption = category.map(cat => { return {value: cat, label: cat}})
