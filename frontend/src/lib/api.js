@@ -80,3 +80,8 @@ export const getProfile = () => {
   export const getAllPosts = () => {
     return axios.get(`${kebb_url}/posts`)
   }
+
+  //* get single Post
+  export const getSinglePost = id => {
+    return axios.get(`${kebb_url}/posts/${id}`)
+  }
