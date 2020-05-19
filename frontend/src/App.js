@@ -27,8 +27,6 @@ import PostsShow from './components/posts/PostsShow'
 import PostEdit from './components/posts/PostEdit'
 
 const App = () => {
-
-
   return (
     <BrowserRouter>
     <Navbar className="Navbar" />

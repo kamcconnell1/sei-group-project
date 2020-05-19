@@ -6,7 +6,7 @@ import EditProfile from './EditProfile'
 import { getProfile, editProfile } from '../../lib/api'
 import { getPostcodeInfo } from '../../lib/ext_api'
 import avatar from '../assets/avatar.png'
-// import Map from '../common/Map'
+
 // ! User profile, GETs data for user on mount
 class UserProfile extends React.Component {
   state = {
@@ -14,8 +14,10 @@ class UserProfile extends React.Component {
     location: '',
     latitude: '',
     longitude: '',
-    clickAvatar: false
+    modalOpen: false
   }
+
+
   // * Function to GET the users details
   async componentDidMount() {
     try {
@@ -26,6 +28,8 @@ class UserProfile extends React.Component {
       console.log(err)
     }
   }
+
+
   //* Function to find user location details
   async getLocation() {
     const postcode = this.state.user.postcode
@@ -36,11 +40,16 @@ class UserProfile extends React.Component {
     const longitude = response.data.result.longitude
     this.setState({ location: `${nuts}, ${region}`, latitude, longitude })
   }
+
+
+
   //* Function to allow user to upload a profile picture
   handleChange = event => {
     const user = { ...this.state.user, profilePic: event.target.value }
-    this.setState({ user }, this.handleSubmit)
+    this.setState({ user })
   }
+  
+
  async handleSubmit() {
     try {
       console.log(this.state.user);
@@ -51,23 +60,30 @@ class UserProfile extends React.Component {
     }
   }
 
+
+  //* Function to toggle state to show the image upload form or not
+  toggleModal = () => {
+    this.setState({ modalOpen: !this.state.modalOpen })
+  }
+
+
+
   // * Function to push the user to clothes add page if they want to add a new item 
   handleAddClothes = () => {
     const user = this.props.match.params.username
     console.log(user);
     this.props.history.push(`/profile/${user}/add`)
   }
-  //* Function to toggle state to show the image upload form or not
-  toggleModal = () => {
-    this.setState({ clickAvatar: !this.state.clickAvatar })
-  }
+
+
+
+
   render() {
     if (!this.state.user || !this.state.location) return null
     // consts taken from state to populate user data shown on the page
     const { username, createdArticles, profilePic } = this.state.user
     const location = this.state.location
-    console.log(username)
-    // console.log(this.state)
+
     return (
       <>
         <section className="section">
@@ -89,15 +105,13 @@ class UserProfile extends React.Component {
                   >Change Profile Picture</button>
                 </div>
                 <EditProfile
-                  onClick={this.toggleModal}
-                  modalStatus={this.state.clickAvatar}
+                  toggleModal={this.toggleModal}
+                  modalOpen={this.state.modalOpen}
                   onChange={this.handleChange}
 
                 />
 
-                <button className="button is fullwidth"
-                  onClick={this.toggleModal}
-                >Edit Profile</button>
+
                 {/* Section for the user details - username, location & star rating. button to add clothes to profile   */}
                 <div className="control">
                   <h5 className="title">Welcome {username}</h5>

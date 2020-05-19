@@ -27,27 +27,54 @@ const SingleClothCard = ({ deleteComment, commentsArray, comments, title, clothI
   // console.log(slideImages)
   return (
     <>
-      <section className="section">
-        <div className="slide-container">
-          <Slide {...properties}>
-            <div className="each-slide">
-              <div className="slide" style={{ 'backgroundImage': `url(${slideImages[0]})` }}>
-                <span>image 1</span>
-              </div>
+    <section className="section">
+<div className="slide-container">
+        <Slide {...properties}>
+          <div className="each-slide">
+            <div style={{'backgroundImage': `url(${slideImages[0]})`}}>
+              <span>Slide 1</span>
             </div>
-            <div className="each-slide">
-              <div className="slide" style={{ 'backgroundImage': `url(${slideImages[1]})` }}>
-                <span>image 2</span>
-              </div>
+          </div>
+          <div className="each-slide">
+            <div style={{'backgroundImage': `url(${slideImages[1]})`}}>
+              <span>Slide 2</span>
             </div>
-            <div className="each-slide">
-              <div className="slide" style={{ 'backgroundImage': `url(${slideImages[2]})` }}>
-                <span>image 3</span>
-              </div>
+          </div>
+          <div className="each-slide">
+            <div style={{'backgroundImage': `url(${slideImages[2]})`}}>
+              <span>Slide 3</span>
             </div>
-          </Slide>
-        </div>
+          </div>
+        </Slide>
+      </div>
+
         {isAuthenticated() && <button name="item" value={clothId} onClick={onClick} className="button is-dark">Add to Favourites</button>}
+        {isAuthenticated() && <form onSubmit={handleCommentSubmit}>
+          <div>
+            <div className="label for comments">
+              <p> Comment on {title} </p>
+            </div>
+            <input
+              className="comments-input"
+              type="textArea"
+              maxLength="250"
+              name="text"
+              onChange={handleCommentChange}
+              value={comments.text} />
+          </div>
+          <div className="comments-submit-button">
+            <button>Submit Comment</button>
+          </div>
+        </form> }
+        <div>
+          {commentsArray.map(comment => (
+            <Comments
+              key={comment._id}
+              comment={comment}
+              deleteComment={deleteComment}
+            />
+          ))}
+        </div>
       </section>
       <section className="section">
         <Link to={`/page/${currentUserId}`}>
@@ -70,9 +97,9 @@ const SingleClothCard = ({ deleteComment, commentsArray, comments, title, clothI
         <hr />
         <div>
           {!isAuthenticated() && <div className="columns">
-            <Link className="column" to="/login" className="button is-danger">Sign IN</Link>
-            <p>OR</p>
-            <Link className="column" to="/register" className="button is-danger">JOIN KEBB</Link>
+            <Link className="sign-in-button column" to="/login" className="button is-danger">SIGN IN</Link>
+            <p> OR </p>
+            <Link className="join-button column" to="/register" className="button is-danger">JOIN KEBB</Link>
           </div>}
           {isAuthenticated() && <button className="button is-primary">Contact User</button>}
         </div>
@@ -93,34 +120,6 @@ const SingleClothCard = ({ deleteComment, commentsArray, comments, title, clothI
               </figure>
             </a>
           </div>
-        </div>
-      </section>
-      <section>
-        <form onSubmit={handleCommentSubmit}>
-          <div>
-            <div className="label for comments">
-              <p> Comment on {title} </p>
-            </div>
-            <input
-              className="comments-input"
-              type="textArea"
-              maxLength="250"
-              name="text"
-              onChange={handleCommentChange}
-              value={comments.text} />
-          </div>
-          <div className="comments-submit-button">
-            <button>Submit Comment</button>
-          </div>
-        </form>
-        <div>
-          {commentsArray.map(comment => (
-            <Comments
-              key={comment._id}
-              comment={comment}
-              deleteComment={deleteComment}
-            />
-          ))}
         </div>
       </section>
     </>

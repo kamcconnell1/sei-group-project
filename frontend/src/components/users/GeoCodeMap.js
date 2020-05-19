@@ -19,6 +19,7 @@ class Map extends React.Component {
       lon: ''
     }
   }
+
   //This is required as a paramter for Geocode to work
   myMap = React.createRef()
   //This function continuously sets state as you move the viewport
@@ -66,7 +67,7 @@ class Map extends React.Component {
             onViewportChange={this.handleViewportChange}
             mapboxApiAccessToken={process.env.REACT_APP_MAPBOX_ACCESS_TOKEN}
             position="top-left" />
-          {pins.map(point => (
+            {pins.map(point => (
             <div key={point._id}>
               <Marker
                 latitude={parseFloat(point.latitude)}
@@ -83,6 +84,7 @@ class Map extends React.Component {
                 }</Popup>
             </div>
           ))}
+
           {/* //! If you comment below back in it is a pin to highlight user location - helpful when adding pins */}
           <Marker
             className=""

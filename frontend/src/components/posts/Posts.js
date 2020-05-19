@@ -4,9 +4,7 @@ import PostCards from '../posts/PostsCards'
 import { getAllPosts, createPost, deleteAPost } from '../../lib/api'
 import { Link } from 'react-router-dom'
 
-
 class Posts extends React.Component {
-
   state = {
     posts: null,
     input: {
@@ -15,7 +13,6 @@ class Posts extends React.Component {
       photo: ''
     }
   }
-
   async componentDidMount() {
     try {
       this.pageSetup()
@@ -23,7 +20,6 @@ class Posts extends React.Component {
       console.log(err)
     }
   }
-
   pageSetup = async () => {
     try {
       const res = await getAllPosts()
@@ -33,18 +29,15 @@ class Posts extends React.Component {
       console.log(err)
     }
   }
-
   handleChange = e => {
     const input = { ...this.state.input, [e.target.name]: e.target.value }
     this.setState({ input })
   }
-
   handleSubmit = async e => {
     e.preventDefault()
     try {
       const res = await createPost(this.state.input)
       this.pageSetup()
-      console.log(res.data)
     } catch (err) {
       console.log(err)
     }
@@ -55,7 +48,6 @@ class Posts extends React.Component {
     await deleteAPost(e.target.value)
     this.props.history.push(`/posts`)
   }
-
 
   render() {
     if (!this.state.posts) return null
@@ -102,5 +94,4 @@ class Posts extends React.Component {
     )
   }
 }
-
 export default Posts

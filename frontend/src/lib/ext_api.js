@@ -8,10 +8,10 @@ const imageUrl = process.env.REACT_APP_CLOUDINARY_URL
 export const postImage = data => {
   return axios.post(imageUrl, data)
 }
-export const uploadProfileImage = process.env.REACT_APP_PROFILE_IMAGE_PRESET
+// export const uploadProfileImage = process.env.REACT_APP_PROFILE_IMAGE_PRESET
 
 
-export const uploadClothesImage = process.env.REACT_APP_CLOTHES_IMAGE_PRESET
+export const uploadClothesImage = process.env.REACT_APP_IMAGE_PRESET
 
 //* GET request to find the postcode details of user /item
 export const getPostcodeInfo = postcode => {
