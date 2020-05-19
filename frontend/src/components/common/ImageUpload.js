@@ -12,6 +12,7 @@ class ImageUpload extends React.Component{
     data.append('file', event.target.files[0])
     data.append('upload_preset', preset)
     const res = await postImage(data)
+    console.log(res)
     this.setState({
         image: res.data.url
       }, () => {
