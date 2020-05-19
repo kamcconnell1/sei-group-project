@@ -16,35 +16,6 @@ class ClothesIndex extends React.Component {
   async componentDidMount() {
     try {
       const res = await showAllClothes()
-<<<<<<< HEAD
-      const category = res.data.map((cat) => cat.category)
-      const filteredCategory = category.filter(
-        (cat, index) => category.indexOf(cat) === index
-      )
-      const color = res.data.map((col) => col.color)
-      const colorArray = color.reduce((acc, col) => {
-        return acc.concat(col)
-      }, [])
-      const filteredColor = colorArray.filter(
-        (col, index) => colorArray.indexOf(col) === index
-      )
-      const gender = res.data.map((gen) => gen.genderCategory)
-      const filteredGender = gender.filter(
-        (gen, index) => gender.indexOf(gen) === index
-      )
-      const sizes = res.data.map((size) => size.size)
-      const filteredSize = sizes.filter(
-        (size, index) => sizes.indexOf(size) === index
-      )
-      this.setState({
-        clothes: res.data,
-        filteredClothes: res.data,
-        categories: filteredCategory,
-        colors: filteredColor,
-        genders: filteredGender,
-        sizes: filteredSize,
-      })
-=======
       const category = res.data.map(cat => cat.category)
       const filteredCategory = category.filter((cat, index) => category.indexOf(cat) === index)
       const color = res.data.map(col => col.color)
@@ -54,8 +25,7 @@ class ClothesIndex extends React.Component {
       const filteredGender = gender.filter((gen, index) => gender.indexOf(gen) === index)
       const sizes = res.data.map(size => size.size)
       const filteredSize = sizes.filter((size, index) => sizes.indexOf(size) === index)
-      this.setState({ clothes: res.data, filteredClothes: res.data, category: filteredCategory, color: filteredColor, gender: filteredGender, sizes: filteredSize, filteredCategories: filteredCategory })
->>>>>>> development
+      this.setState({ clothes: res.data, filteredClothes: res.data, categories: filteredCategory, colors: filteredColor, genders: filteredGender, sizes: filteredSize, filteredCategories: filteredCategory })
     } catch (err) {
       console.log(err)
     }
@@ -76,7 +46,7 @@ class ClothesIndex extends React.Component {
   }
   // * Function to allow user to filter clothing intems
   // ! To be completed - by Benga
-<<<<<<< HEAD
+
   // filterChange = event => {
   //   const {filteredClothes} = this.state
   //   const showFilter = event.value
@@ -138,18 +108,9 @@ class ClothesIndex extends React.Component {
       )
     })
     this.setState({ filteredItemsToDisplay })
-=======
+  }
+
   filterChange = event => {
-<<<<<<< HEAD
-    const {clothes} = this.state
-    const showFilter = event.value
-    const filteredClothes = clothes.filter(cloth => {
-      const regex = RegExp(showFilter, 'i')
-      return cloth.category.match(regex) 
-    })
-    this.setState({filteredClothes})
-    console.log(event.value)
-=======
     const {filteredClothes} = this.state
     const showFilter = event.value
     if (filteredClothes.length > 0) {
@@ -160,13 +121,12 @@ class ClothesIndex extends React.Component {
       this.setState({filteredClothes: filteredCats})
       console.log(event.value)
     } else {return 'unavailable'}
->>>>>>> development
->>>>>>> development
+
   }
 
 
   render() {
-<<<<<<< HEAD
+
     if (!this.state.filteredClothes)
       return <h1>Some Ninjas are working on this</h1>
     const {
@@ -180,17 +140,12 @@ class ClothesIndex extends React.Component {
     } = this.state
     console.log('Filtered clothes:', filteredClothes)
     console.log('Item to display:', filteredItemsToDisplay)
-=======
-    if (!this.state.filteredClothes) return <h1>Some Ninjas are working on this</h1>
-<<<<<<< HEAD
-    const { filteredClothes, color, category, gender, searchClothes, sizes, filteredCategories} = this.state
-=======
-    const { filteredClothes, color, category, gender, searchClothes, sizes } = this.state
+
+  
 
     console.log(filteredClothes)
->>>>>>> development
 
->>>>>>> development
+
     // * Variable of category options
     const categoryOption = categories.map((cat) => {
       return { value: cat, label: cat }
@@ -254,4 +209,5 @@ class ClothesIndex extends React.Component {
     )
   }
 }
+
 export default ClothesIndex

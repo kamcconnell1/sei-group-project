@@ -3,11 +3,9 @@ import "mapbox-gl/dist/mapbox-gl.css"
 import React from 'react'
 
 import MapGl, { Marker, Popup, FlyToInterpolator } from 'react-map-gl'
-// import DeckGL, { GeoJsonLayer } from 'deck.gl'
+
 import Geocoder from 'react-map-gl-geocoder'
 
-import TestGeoJson from '../users/TestGeoJSON'
-import TestGeoJSON from '../users/TestGeoJSON'
 
 
 class Map extends React.Component {
@@ -131,7 +129,7 @@ class Map extends React.Component {
         <Marker
           className="marker"
           {...viewport} />
-        <DeckGL {...viewport} layers={[searchResultLayer, this.pinLayer]} />
+
       </MapGl>
       <button
         className="button is-primary"

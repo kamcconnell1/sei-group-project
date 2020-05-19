@@ -1,9 +1,6 @@
 import React from 'react'
-<<<<<<< HEAD
 import {Link} from 'react-router-dom'
 
-=======
->>>>>>> development
 import UserClothCard from './UserClothCard'
 import EditProfile from './EditProfile'
 import { getProfile, editProfile } from '../../lib/api'
@@ -33,10 +30,6 @@ class UserProfile extends React.Component {
   async getLocation() {
     const postcode = this.state.user.postcode
     const response = await getPostcodeInfo(postcode)
-<<<<<<< HEAD
-
-=======
->>>>>>> development
     const nuts = response.data.result.nuts
     const region = response.data.result.region
     const latitude = response.data.result.latitude
@@ -48,28 +41,16 @@ class UserProfile extends React.Component {
     const user = { ...this.state.user, profilePic: event.target.value }
     this.setState({ user }, this.handleSubmit)
   }
-<<<<<<< HEAD
-
-  async handleSubmit() {
-    try {
-      console.log(this.state.user);
-
-=======
  async handleSubmit() {
     try {
       console.log(this.state.user);
->>>>>>> development
       const res = await editProfile(this.state.user)
       console.log('submit event res', res)
     } catch (err) {
       console.log(err.response.data);
     }
-<<<<<<< HEAD
   }
 
-=======
-  } 
->>>>>>> development
   // * Function to push the user to clothes add page if they want to add a new item 
   handleAddClothes = () => {
     const user = this.props.match.params.username
@@ -85,19 +66,14 @@ class UserProfile extends React.Component {
     // consts taken from state to populate user data shown on the page
     const { username, createdArticles, profilePic } = this.state.user
     const location = this.state.location
-<<<<<<< HEAD
     console.log(username)
     // console.log(this.state)
-=======
-    console.log(this.state)
->>>>>>> development
     return (
       <>
         <section className="section">
           <div className="container">
             <div className="columns">
               <div className="column is-3 is-profile-info">
-<<<<<<< HEAD
 
                 {/* Section for avatar or profile pic need to change to allow to change the file  & so appears over the form appears over the avatar on hover */}
 
@@ -120,25 +96,6 @@ class UserProfile extends React.Component {
                 />
 
                 <button className="button is fullwidth"
-=======
-                  {/* Section for avatar or profile pic need to change to allow to change the file  & so appears over the form appears over the avatar on hover */}
-                <div className="profile-img">
-                  { profilePic ?
-                  <img src={profilePic} alt="profile pic" />
-                :
-                <img src={avatar} alt="avatar" />
-                }
-                <button onClick={this.toggleModal}
-                className="button is-profile-btn"
-                >Change Profile Picture</button>
-                </div>
-                <EditProfile 
-                onClick={this.toggleModal}
-                modalStatus={this.state.clickAvatar}
-                onChange={this.handleChange}
-                />
-            <button className="button is fullwidth"
->>>>>>> development
                   onClick={this.toggleModal}
                 >Edit Profile</button>
                 {/* Section for the user details - username, location & star rating. button to add clothes to profile   */}
@@ -161,11 +118,8 @@ class UserProfile extends React.Component {
                   <Link to={`/profile/${username}/favourites`} className="button">Favourite Items</Link>
                 </div>
               </div>
-<<<<<<< HEAD
 
 
-=======
->>>>>>> development
               {/* Map over the clothes the user has uploaded - need to work on the positioning of this - need to add to allow user to edit / delete items */}
               <div className="column is-multiline is-user-clothes">
                 <div className="control">
