@@ -14,26 +14,30 @@ state = {
     color: [''], 
     rentalPrice: '', 
     image: ['']
-  }
+  }, 
+  errors: {}
 }
   
   //handleChange event for inputting values on form 
   handleChange = event => {
     const clothesForm = {...this.state.clothesForm, [event.target.name]: event.target.value}
-    this.setState({clothesForm})
+    const errors = { ...this.state.errors, [event.target.name]: ''}
+    this.setState({clothesForm, errors})
   }
 
   //handle Multi change to deal with selecting different colours
   handleMultiChange = selected => {
     const selectedItems = selected ? selected.map(item => item.value) : []
     const clothesForm = {...this.state.clothesForm, color: selectedItems}
-    this.setState({clothesForm})
+    const errors = { ...this.state.errors, color: ''}
+    this.setState({clothesForm, errors})
   }
 
 // function to allow user to upload multiple images or links to the clothing item
 handleAddImage = () => {
   const clothesForm = { ...this.state.clothesForm, image: [...this.state.clothesForm.image, ''] }
-  this.setState({ clothesForm})
+  const errors = { ...this.state.errors, image: ''}
+  this.setState({ clothesForm, errors})
 }
 
 handleImageChange = (event, i) => {
@@ -43,7 +47,8 @@ handleImageChange = (event, i) => {
     return image
   })
   const clothesForm = {...this.state.clothesForm, image: newImages}
-  this.setState({ clothesForm })
+  const errors = { ...this.state.errors, image: ''}
+  this.setState({ clothesForm, errors })
 }
 
 
@@ -54,13 +59,14 @@ handleImageChange = (event, i) => {
       const res = await addClothes(this.state.clothesForm)
       this.props.history.push(`/clothes/${res.data._id}`)
     } catch (err) {
+      this.setState({ errors: err.response.data})
       console.log(err.response);
     }
     
   }
 
   render() {
-    console.log(this.state.clothesForm.image);
+    console.log(this.state.clothesForm);
     
     return(
       <>
@@ -73,6 +79,7 @@ handleImageChange = (event, i) => {
       handleMultiChange={this.handleMultiChange}
       handleSubmit={this.handleSubmit}
       clothesForm={this.state.clothesForm}
+      errors={this.state.errors}
       />
       </>
     )

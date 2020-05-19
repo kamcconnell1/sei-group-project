@@ -51,18 +51,14 @@ handleSubmit = async event => {
 }
 
   render() {
-<<<<<<< HEAD
- console.log(this.state.errors);
-=======
->>>>>>> 8f04e88d792cb017a90b847f2376ce335979bce7
  
     return (
       <>
           <section className="section">
             <div className="container">
-              <h1 className="title">Register</h1>
+              <h1 className="title">KEBB Clothes</h1>
               <h2 className="subtitle">
-                Register to join here
+                Join here
               </h2>
             </div>
           </section>

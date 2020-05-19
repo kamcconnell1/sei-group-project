@@ -1,3 +1,4 @@
+//! Required
 const Post = require('../models/post')
 const { notFound, unauthorized } = require('../lib/errorMessages')
 
@@ -159,7 +160,7 @@ async function postCommentDelete (req, res, next) {
   }
 }
 
-//? Exports.
+//! Exports
 module.exports = {
   index: postsIndex,
   create: postsCreate,

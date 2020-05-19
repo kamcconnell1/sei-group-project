@@ -1,3 +1,4 @@
+//! Require
 const Article = require('../models/article')
 const { notFound, unauthorized } = require('../lib/errorMessages')
 
@@ -152,7 +153,7 @@ async function articleRatingCreate (req, res, next) {
   }
 }
 
-//? update article rating
+//? Update article rating
 //* WORKING tested
 //* ERROR tested
 async function editArticleRating (req, res, next) {
@@ -173,9 +174,9 @@ async function editArticleRating (req, res, next) {
   }
 }
 
-//* export
+//! Exports
 module.exports = {
-  index: articlesIndex,
+  getClothes: articlesIndex,
   create: articlesCreate,
   single: articlesShow,
   update: articlesUpdate,
@@ -184,5 +185,4 @@ module.exports = {
   commentDelete: articleCommentDelete,
   rating: articleRatingCreate,
   editArticleRating
-
 }

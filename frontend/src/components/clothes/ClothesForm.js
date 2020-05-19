@@ -17,8 +17,9 @@ const colorOptions = [
   { value: 'silver', label: 'Silver' },
   { value: 'gold', label: 'Gold' }
 ]
-const ClothesForm = ({ handleChange, handleSubmit, handleMultiChange, clothesForm, onClick, onChange}) => {
+const ClothesForm = ({ handleChange, handleSubmit, handleMultiChange, clothesForm, onClick, onChange, errors}) => {
   const { title, category, genderCategory, size, rentalPrice, image, brand } = clothesForm
+
 
   return (
     <section className="section">
@@ -33,7 +34,7 @@ const ClothesForm = ({ handleChange, handleSubmit, handleMultiChange, clothesFor
               <label className="label">Title</label>
               <div className="control">
                 <input
-                  className="input"
+                  className={`input ${errors.title ? 'is-danger': '' }`} 
                   type="text"
                   placeholder="Give your item a title!"
                   name="title"
@@ -41,6 +42,7 @@ const ClothesForm = ({ handleChange, handleSubmit, handleMultiChange, clothesFor
                   onChange={handleChange}
                 />
               </div>
+              {errors.title && <small className="help is-danger">{errors.title}</small>}
             </div>
 
             {/* This input should be changed to a multi select to select categories fit into */}
@@ -48,7 +50,7 @@ const ClothesForm = ({ handleChange, handleSubmit, handleMultiChange, clothesFor
               <label className="label">Category</label>
               <div className="control">
                 <input
-                  className="input"
+                  className={`input ${errors.category ? 'is-danger': '' }`} 
                   type="text"
                   placeholder="What category is this item..."
                   name="category"
@@ -56,13 +58,14 @@ const ClothesForm = ({ handleChange, handleSubmit, handleMultiChange, clothesFor
                   onChange={handleChange}
                 />
               </div>
+              {errors.category && <small className="help is-danger">{errors.category}</small>}
             </div>
 
             <div className="field">
               <label className="label">Brand</label>
               <div className="control">
                 <input
-                  className="input"
+                  className={`input ${errors.brand ? 'is-danger': '' }`} 
                   type="text"
                   placeholder="Item brand"
                   name="brand"
@@ -70,6 +73,7 @@ const ClothesForm = ({ handleChange, handleSubmit, handleMultiChange, clothesFor
                   onChange={handleChange}
                 />
               </div>
+              {errors.brand && <small className="help is-danger">{errors.brand}</small>}
             </div>
 
             <div className="field">
@@ -96,12 +100,13 @@ const ClothesForm = ({ handleChange, handleSubmit, handleMultiChange, clothesFor
                     Men
                 </label>
               </div>
+              {errors.genderCategory && <small className="help is-danger">Please select an input</small>}
             </div>
 
             <div className="field">
               <label className="label">Size</label>
               <div className="control">
-                <div className="select">
+                <div className={`select ${errors.size ? 'is-danger': '' }`}>
                   <select
                     name="size"
                     value={size}
@@ -120,6 +125,7 @@ const ClothesForm = ({ handleChange, handleSubmit, handleMultiChange, clothesFor
                   </select>
                 </div>
               </div>
+              {errors.genderCategory && <small className="help is-danger">Please select a size</small>}
             </div>
 
             <div className="field">
@@ -133,13 +139,14 @@ const ClothesForm = ({ handleChange, handleSubmit, handleMultiChange, clothesFor
                   onChange={handleMultiChange}
                 />
               </div>
+              {errors.size && <small className="help is-danger">Please select a colour</small>}
             </div>
 
             <div className="field">
               <label className="label">Rental Price</label>
               <div className="control">
                 <input
-                  className="input"
+                  className={`input ${errors.rentalPrice ? 'is-danger': '' }`} 
                   type="number"
                   placeholder="How much will this rent for (per week)?"
                   name="rentalPrice"
@@ -147,9 +154,10 @@ const ClothesForm = ({ handleChange, handleSubmit, handleMultiChange, clothesFor
                   onChange={handleChange}
                 />
               </div>
+              {errors.rentalPrice && <small className="help is-danger">{errors.rentalPrice}</small>}
             </div>
 
-            {/* //! need to add the option to upload photos here too  */}
+            {/* //! need to add the option to upload photos here too 
             <div className="field">
               <label className="label">Upload Image Link or Files</label>
               <div className="control">
@@ -162,9 +170,11 @@ const ClothesForm = ({ handleChange, handleSubmit, handleMultiChange, clothesFor
                   onChange={handleChange}
                 />
               </div>
-            </div>
-
+            </div> */}
+ 
             <div className="field">
+              {errors.image && <small className="help is-danger">Please upload some images</small>}
+
               <div className="control">
                 {image.map((image, index) => {
                   return (
@@ -173,6 +183,7 @@ const ClothesForm = ({ handleChange, handleSubmit, handleMultiChange, clothesFor
                       onChange={args => onChange(args, index)}
                       preset={uploadClothesImage}
                       name="image"
+                      labelText="Add Images"
                     />
                   )
                 })

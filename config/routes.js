@@ -6,11 +6,12 @@ const articles = require('../controllers/articles')
 const posts = require('../controllers/posts')
 const mapPins = require('../controllers/mapPins')
 const secureRoute = require('../lib/secureRoute')
+const messages = require('../controllers/messages')
 
 //? CLOTHES
 //* Get/Post Clothes
 router.route('/clothes')
-  .get(articles.index)
+  .get(articles.getClothes)
   .post(secureRoute, articles.create)
 
 //* Get Single Clothes/ Edit Clothes/ Delete Clothes
@@ -38,7 +39,7 @@ router.route('/register')
 router.route('/login')
   .post(auths.login)
 
-//* Show single user
+//* Show current user
 router.route('/profile')
   .get(secureRoute, user.profile)
   .put(secureRoute, user.updateUser)
@@ -93,72 +94,21 @@ router.route('/profile/:id/rating/:ratingid')
 router.route('/clothes/:id/rating')
   .post(secureRoute, articles.rating)
 
-<<<<<<< HEAD
-//*****************************/
-
-//* Favs Article
-//* add article to favs
-router.route('/favourites/article')
-  .post(secureRoute, user.favsArticle)
-
-//* remove article from favs
-router.route('/favourites/article/:id')
-  .delete(secureRoute, user.favArticlesRemove)
-
-//* favs Friends
-//* add friend to favs
-router.route('/favourites/friends')
-  .post(secureRoute, user.favsFriend)
-
-//* remove friend from favs
-router.route('/favourite/friend/:id')
-  .delete(secureRoute, user.favFriendsRemove)
-
-//* favs Posts
-//* add post to favs
-router.route('/favourites/posts')
-  .post(secureRoute, user.favsPost)
-
-//*remove post from favs
-router.route('/favourites/posts/:id')
-  .delete(secureRoute, user.favPostsRemove)
-=======
 //* Edit Rating for Articles
 router.route('/clothes/:id/rating/:ratingid')
   .put(secureRoute, articles.editArticleRating)
 
 //? *****************************//
->>>>>>> 8f04e88d792cb017a90b847f2376ce335979bce7
 
 //? FAVOURITES
 //* Get Favourites
 router.route('/favourites')
   .get(secureRoute, user.getAllFavourites)
 
-<<<<<<< HEAD
-
-
-//* MAP PINS
-router.route('/profile/map-pins')
-  .get(secureRoute, mapPins.index)
-  .post(secureRoute, mapPins.create)
-
-router.route('/profile/map-pins/:map-pinId')
-  .get(secureRoute, mapPins.single)
-  .put(secureRoute, mapPins.update)
-  .delete(secureRoute, mapPins.delete)
-
-//*****************************/
-
-
-
-//* AUTH
-=======
 //? FAVS ARTICLES
-//* add article to favs
+//* Add article to favs
 router.route('/favourites/article')
   .post(secureRoute, user.favsArticle)
->>>>>>> 8f04e88d792cb017a90b847f2376ce335979bce7
 
 //* remove article from favs
 router.route('/favourites/article/:id')
@@ -173,19 +123,10 @@ router.route('/favourites/friends')
 router.route('/favourite/friend/:id')
   .delete(secureRoute, user.favFriendsRemove)
 
-<<<<<<< HEAD
-router.route('/profile/:id')
-  .get(user.getProfile)
-
-//* user ratings
-router.route('/profile/:id/rating')
-  .post(secureRoute, user.ratingCreate)
-=======
 //? FAVS POSTS
 //* Add post to favs
 router.route('/favourites/posts')
   .post(secureRoute, user.favsPost)
->>>>>>> 8f04e88d792cb017a90b847f2376ce335979bce7
 
 //*Remove post from favs
 router.route('/favourites/posts/:id')
@@ -194,16 +135,37 @@ router.route('/favourites/posts/:id')
 //? *****************************//
 
 //? MAP PINS
-router.route('/profile/pins')
-  // .get(secureRoute, mapPins.index)
+
+//* Get and post pins
+router.route('/pins')
+  .get(secureRoute, mapPins.getPins)
   .post(secureRoute, mapPins.create)
 
-router.route('/profile/pins/:pinId')
+//* Get single pin/ edit pin/ deletepin
+router.route('/pins/:pinId')
   .get(secureRoute, mapPins.single)
   .put(secureRoute, mapPins.update)
   .delete(secureRoute, mapPins.delete)
 
 //? *****************************//
+
+//? MESSAGES
+//* start message chain
+router.route('/:userid/messages')
+  .post(secureRoute, messages.createMessage)
+
+//* get single message/ post response
+router.route('/messages/:id')
+  .post(secureRoute, messages.sendResponse)
+  .get(secureRoute, messages.getMessage)
+
+//* outbox for sent messages
+router.route('/profile/messages/sent')
+  .get(secureRoute, messages.getSentMessages)
+
+//* inbox for received messages
+router.route('/profile/messages/received')
+  .get(secureRoute, messages.getReceivedMessages)
 
 //! exports
 module.exports = router

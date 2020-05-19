@@ -1,3 +1,4 @@
+//! Required
 const User = require('../models/user')
 const { secret } = require('../config/environment')
 <<<<<<< HEAD
@@ -307,7 +308,7 @@ module.exports = {
   }
 }
 
-//? Exports.
+//! Exports.
 module.exports = {
   register,
   login

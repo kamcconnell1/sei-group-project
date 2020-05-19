@@ -11,14 +11,15 @@ class Login extends React.Component{
     loginForm: {
       email: '',
       password: ''
-    }
+    }, 
+    error: ''
   } 
 
 
   //handleChange event for inputting values on form 
   handleChange = event => {
     const loginForm = {...this.state.loginForm, [event.target.name]: event.target.value}
-    this.setState({loginForm})
+    this.setState({loginForm, error: '' })
   }
 
   // handleSubmit event for submitting the login form
@@ -31,9 +32,10 @@ handleSubmit = async event => {
     setUsername(response.data.username)
     this.props.history.push(`/profile/${response.data.username}`)
   } catch (err) {
-    console.log(err)
+    this.setState({ error: 'Invalid Credentials' })
   }
 }
+
 
   render() {
     // console.log(this.state.loginForm)
@@ -50,6 +52,7 @@ handleSubmit = async event => {
       <LoginForm 
       handleChange={this.handleChange}
       handleSubmit={this.handleSubmit}
+      errors={this.state.error}
       {...this.state.loginForm}
       />
   </>

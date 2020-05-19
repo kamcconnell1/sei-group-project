@@ -1,6 +1,7 @@
 import axios from 'axios'
 import { getToken } from './auth'
 
+
 const kebb_url = '/api'
 
 //* function to add the headers to the secure routes 
@@ -41,3 +42,23 @@ export const registerUser = registerForm => {
 export const getProfile = () => {
   return axios.get(`${kebb_url}/profile`, withHeaders())
 }
+
+//* PUT request to edit user PROFILE Page
+  export const editProfile = user => {
+    return axios.put(`${kebb_url}/profile`, user,  withHeaders())
+  }
+
+// * GET to show specific user (no need to be logged in)
+  export const getUserProfile = id => {
+    return axios.get(`${kebb_url}/profile/${id}`)
+  }
+
+  //* POST for user to add pin to their map 
+  export const postPin = pinForm => {
+    return axios.post(`${kebb_url}/pins`, pinForm, withHeaders())
+  }
+
+  // * POST Favourites to users favourite
+  export const postFavorite = data => {
+    return axios.post(`${kebb_url}/favourites/article`, data, withHeaders())
+  }
