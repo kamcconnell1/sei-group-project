@@ -68,48 +68,49 @@ export const postPin = formData => {
   return axios.post(`${kebb_url}/pins`, formData, withHeaders())
 }
 
-  // * POST Favourites to users favourite
-  export const postFavorite = data => {
-    return axios.post(`${kebb_url}/favourites/article`, data, withHeaders())
-  }
-
-
-  //------------------------------------USER REQUESTS--------------------------------------------
-
-  //* Get all POSTS
-  export const getAllPosts = () => {
-    return axios.get(`${kebb_url}/posts`)
-  }
-
-  //* Create a POST
-  export const createAPost = data => {
-    return axios.post(`${kebb_url}/posts`, data, withHeaders())
-  }
-
-  //* Get single POST
-  export const getSinglePost = id => {
-    return axios.get(`${kebb_url}/posts/${id}`)
-  }
-
-  //* edit a post
-  export const editAPost = (id, data) => {
-    return axios.put(`${kebb_url}/posts/${id}`, data, withHeaders())
-  }
-  //* delete a post
-  export const deleteAPost = id => {
-    return axios.delete(`${kebb_url}/posts/${id}`, withHeaders())
-  }
 // * POST Favourites to users favourite
 export const postFavorite = data => {
   return axios.post(`${kebb_url}/favourites/article`, data, withHeaders())
-}
-
-// * POST user to Friends favourite
-export const postFavoriteFriend = data => {
-  return axios.post(`${kebb_url}/favourites/friends`, data, withHeaders())
 }
 
 // * GET all users favourites
 export const allUsersFavourites = () => {
   return axios.get(`${kebb_url}/favourites`, withHeaders())
 }
+
+//------------------------------------USER REQUESTS--------------------------------------------
+
+//* Get all POSTS
+export const getAllPosts = () => {
+  return axios.get(`${kebb_url}/posts`)
+}
+
+//* Create a POST
+export const createAPost = data => {
+  return axios.post(`${kebb_url}/posts`, data, withHeaders())
+}
+
+//* Get single POST
+export const getSinglePost = id => {
+  return axios.get(`${kebb_url}/posts/${id}`)
+}
+
+//* Edit a post
+export const editAPost = (id, data) => {
+  return axios.put(`${kebb_url}/posts/${id}`, data, withHeaders())
+}
+//* Delete a post
+export const deleteAPost = id => {
+  return axios.delete(`${kebb_url}/posts/${id}`, withHeaders())
+}
+
+// * POST Favourites to users favourite
+export const postFavorite = data => {
+return axios.post(`${kebb_url}/favourites/article`, data, withHeaders())
+}
+
+// * POST user to Friends favourite
+export const postFavoriteFriend = data => {
+return axios.post(`${kebb_url}/favourites/friends`, data, withHeaders())
+}
+
