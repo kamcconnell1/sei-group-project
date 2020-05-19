@@ -29,7 +29,6 @@ class ClothesShow extends React.Component {
   getSingleCloth = async () => {
     const clothId = this.props.match.params.id
     const res = await singleCloth(clothId)
-    console.log(res.data.comments)
       // console.log('clothes info:', res.data.user.id)
       const userId = res.data.user.id
       const user = await getUserProfile(userId)

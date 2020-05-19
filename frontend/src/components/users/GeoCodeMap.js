@@ -2,12 +2,10 @@ import 'mapbox-gl/dist/mapbox-gl.css'
 import "mapbox-gl/dist/mapbox-gl.css"
 import React from 'react'
 
-import MapGl, { Marker, GeolocateControl, NavigationControl } from 'react-map-gl'
-import DeckGL, { GeoJsonLayer } from 'deck.gl'
+import MapGl, { Marker, Popup, FlyToInterpolator } from 'react-map-gl'
+
 import Geocoder from 'react-map-gl-geocoder'
 
-import TestGeoJson from '../users/TestGeoJSON'
-import TestGeoJSON from '../users/TestGeoJSON'
 
 
 class Map extends React.Component {
@@ -18,23 +16,12 @@ class Map extends React.Component {
       zoom: 12
     },
     searchResultLayer: null,
-<<<<<<< HEAD
-
-    latitude: '',
-    longitude: ''
-  }
-
-  
-  
-  jsonData = () => {
-=======
     latitude: '',
     longitude: ''
   }
 
   
   componentDidMount() {
->>>>>>> development
     const pins = []
     
     for (let i = 0; i < 3; i++ ){
@@ -56,66 +43,39 @@ class Map extends React.Component {
         }
       })
     }
-<<<<<<< HEAD
-    console.log(this.pins);
-  }
-  
-=======
     this.setState({pins})
   }
   
   
->>>>>>> development
   //This is required as a paramter for Geocode to work
   myMap = React.createRef()
-  
+
   //This function continuously sets state as you move the viewport
   handleViewportChange = viewport => {
     this.setState({
       viewport: { ...this.state.viewport, ...viewport }
     })
   }
-  
-  // This sets state with lots of details from the users search location - probably not necessary
-  handleOnResult = event => {
-    console.log(event.result);
-    this.setState({
-      searchResultLayer: new GeoJsonLayer({
-        id: "search-result",
-        data: event.result.geometry,
-        getFillColor: [255, 0, 0, 128],
-        getRadius: 1000,
-        pointRadiusMinPixels: 10,
-        pointRadiusMaxPixels: 10
-      })
+
+  goToViewport = ({ longitude, latitude }) => {
+    this.handleViewportChange({
+      longitude,
+      latitude,
+      zoom: 12,
+      transitionInterpolator: new FlyToInterpolator({ speed: 1.2 }),
+      transitionDuration: 'auto'
     })
   }
-  
-  
   // Sets state based on the lat / long the viewport has landed on & opens the pin form modal when you add pin. Callback function passes lat / long back up to parent
   handleDropPin = event => {
     const latitude = (this.state.viewport.latitude)
     const longitude = (this.state.viewport.longitude)
     this.props.onClick()
     this.setState({ latitude, longitude }, () => {
-      this.props.onChange({ target: { name: this.state.name, value: this.state.value } })
+      this.props.location(this.state.latitude, this.state.longitude)
     })
   }
   
-<<<<<<< HEAD
-  
-  
-  // pinLayer = new GeoJsonLayer({
-    //   id:"pin-layer",
-    //   data: <TestGeoJSON />,
-    //   pickable: true
-    // })
-    
-    
-    
-    render() {
-
-=======
   // myMap.addLayer({
 
 
@@ -143,7 +103,6 @@ class Map extends React.Component {
     
     render() {
       console.log(this.state.pins);
->>>>>>> development
       
       const { viewport, searchResultLayer } = this.state
       
@@ -164,22 +123,13 @@ class Map extends React.Component {
           onViewportChange={this.handleViewportChange}
           mapboxApiAccessToken={process.env.REACT_APP_MAPBOX_ACCESS_TOKEN}
           position="top-left" />
-<<<<<<< HEAD
-        <GeolocateControl />
-        <NavigationControl />
-        <Marker
-          className="marker"
-          {...viewport} />
-        <DeckGL {...viewport} layers={[searchResultLayer], [this.pinLayer]} />
-=======
           {/* //? Don't think these are needed - left in here for now  */}
         {/* <GeolocateControl />
         <NavigationControl /> */}
         <Marker
           className="marker"
           {...viewport} />
-        <DeckGL {...viewport} layers={[searchResultLayer, this.pinLayer]} />
->>>>>>> development
+
       </MapGl>
       <button
         className="button is-primary"
@@ -188,6 +138,7 @@ class Map extends React.Component {
     </>
   )
 }
+
 }
 
 export default Map

@@ -34,7 +34,7 @@ async function postsCreate(req, res, next) {
 async function postsShow(req, res, next) {
   const postId = req.params.id
   try {
-    const post = await Post.findById(postId)
+    const post = await Post.findById(postId).populate('user')
     if (!post) throw new Error(notFound)
     res.status(200).json(post)
   } catch (err) {

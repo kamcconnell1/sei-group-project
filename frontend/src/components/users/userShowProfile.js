@@ -1,9 +1,9 @@
 import React from 'react'
 import {Link} from 'react-router-dom'
-import { getUserProfile } from '../../lib/api'
+import { getUserProfile, postFavoriteFriend } from '../../lib/api'
 
 class userShowProfile extends React.Component {
-  state = { user: null, userItems: null }
+  state = { user: null, userItems: null, friend: '' }
 
   async componentDidMount() {
     try {
@@ -15,6 +15,20 @@ class userShowProfile extends React.Component {
       console.log(err)
     }
   }
+
+  // * Function to add poster to friends
+  handleFriendSubmit = async e => {
+    try {
+      const addToList = await { ...this.state.friend, [e.target.name]: e.target.value }
+      console.log(addToList)
+      const res = await postFavoriteFriend(addToList)
+      console.log('posted data:', res)
+      console.log('clicked')
+    } catch (err) {
+      console.log(err)
+    }
+  }
+
   render() {
     if (!this.state.user) return <h1>User kidnapped, Ninja to the rescue</h1>
     const { user, userItems } = this.state
@@ -35,6 +49,7 @@ class userShowProfile extends React.Component {
           <div>
             <h4 className="title is-5">Ratings go here</h4>
           </div>
+          <button name="friend" value={user._id} onClick={this.handleFriendSubmit} className="button is-primary">Add Friend</button>
         </section>
         <section className="section">
           <div className="container">

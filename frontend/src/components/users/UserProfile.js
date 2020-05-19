@@ -1,8 +1,10 @@
 import React from 'react'
+import {Link} from 'react-router-dom'
+
 import UserClothCard from './UserClothCard'
 import EditProfile from './EditProfile'
 import { getProfile, editProfile } from '../../lib/api'
-import { getPostcodeInfo} from '../../lib/ext_api'
+import { getPostcodeInfo } from '../../lib/ext_api'
 import avatar from '../assets/avatar.png'
 // import Map from '../common/Map'
 // ! User profile, GETs data for user on mount
@@ -10,7 +12,7 @@ class UserProfile extends React.Component {
   state = {
     user: '',
     location: '',
-    latitude: '', 
+    latitude: '',
     longitude: '',
     clickAvatar: false
   }
@@ -47,7 +49,8 @@ class UserProfile extends React.Component {
     } catch (err) {
       console.log(err.response.data);
     }
-  } 
+  }
+
   // * Function to push the user to clothes add page if they want to add a new item 
   handleAddClothes = () => {
     const user = this.props.match.params.username
@@ -63,30 +66,36 @@ class UserProfile extends React.Component {
     // consts taken from state to populate user data shown on the page
     const { username, createdArticles, profilePic } = this.state.user
     const location = this.state.location
-    console.log(this.state)
+    console.log(username)
+    // console.log(this.state)
     return (
       <>
         <section className="section">
           <div className="container">
             <div className="columns">
               <div className="column is-3 is-profile-info">
-                  {/* Section for avatar or profile pic need to change to allow to change the file  & so appears over the form appears over the avatar on hover */}
+
+                {/* Section for avatar or profile pic need to change to allow to change the file  & so appears over the form appears over the avatar on hover */}
+
                 <div className="profile-img">
-                  { profilePic ?
-                  <img src={profilePic} alt="profile pic" />
-                :
-                <img src={avatar} alt="avatar" />
-                }
-                <button onClick={this.toggleModal}
-                className="button is-profile-btn"
-                >Change Profile Picture</button>
+                  {profilePic ?
+                    <img src={profilePic} alt="profile pic" />
+                    :
+                    <img src={avatar} alt="avatar" />
+
+                  }
+                  <button onClick={this.toggleModal}
+                    className="button is-profile-btn"
+                  >Change Profile Picture</button>
                 </div>
-                <EditProfile 
-                onClick={this.toggleModal}
-                modalStatus={this.state.clickAvatar}
-                onChange={this.handleChange}
+                <EditProfile
+                  onClick={this.toggleModal}
+                  modalStatus={this.state.clickAvatar}
+                  onChange={this.handleChange}
+
                 />
-            <button className="button is fullwidth"
+
+                <button className="button is fullwidth"
                   onClick={this.toggleModal}
                 >Edit Profile</button>
                 {/* Section for the user details - username, location & star rating. button to add clothes to profile   */}
@@ -100,7 +109,17 @@ class UserProfile extends React.Component {
                 <button className="button is fullwidth"
                   onClick={this.handleAddClothes}
                 >Add Clothes Now</button>
+                <hr/>
+                <div>
+                  <Link to={`/profile/${username}/friends`} className="button">Favourite User</Link>
+                </div>
+                <hr/>
+                <div>
+                  <Link to={`/profile/${username}/favourites`} className="button">Favourite Items</Link>
+                </div>
               </div>
+
+
               {/* Map over the clothes the user has uploaded - need to work on the positioning of this - need to add to allow user to edit / delete items */}
               <div className="column is-multiline is-user-clothes">
                 <div className="control">
@@ -122,7 +141,7 @@ class UserProfile extends React.Component {
           {/* Map section - which will show pins user has added - need to link to items of clothing / shops somehow  */}
           {/* <div className="control">
             Map to allow users to save locations - linked from searches on clothes show page maybe */}
-                  {/* <Map
+          {/* <Map
               latitude={this.state.latitude}
               longitude={this.state.longitude} /> */}
           {/* </div> */}
