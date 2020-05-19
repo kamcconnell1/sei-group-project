@@ -68,11 +68,15 @@ const SingleClothCard = ({ title, clothId, profilePic, username, images, image, 
         </div>
         <hr />
         <div>
-          {!isAuthenticated() && <div className="columns">
-          <Link className="column" to="/login" className="button is-danger">Sign IN</Link>
-          <p>OR</p>
-          <Link className="column" to="/register" className="button is-danger">JOIN KEBB</Link>
-          </div>}
+        <div className="columns">
+           {!isAuthenticated() && <div>
+              <Link className="column" to="/login" className="button is-danger">SIGN IN</Link>
+            </div>}
+            {!isAuthenticated() && <p>OR</p>}
+            {!isAuthenticated() && <div>
+              <Link className="column" to="/register" className="button is-danger">JOIN KEBB</Link>
+            </div>}
+          </div>
           {isAuthenticated() && <button className="button is-primary">Contact User</button>}
         </div>
         <hr />
@@ -88,7 +92,7 @@ const SingleClothCard = ({ title, clothId, profilePic, username, images, image, 
           <div className="column is-one-quarter">
             <a onClick={onSecondClick}>
               <figure className="image">
-                <img src={images[1].image ? images[1].image : images[0].image} alt={title} />
+                <img src={images[1].image} alt={title} />
               </figure>
             </a>
           </div>

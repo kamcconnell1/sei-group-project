@@ -26,7 +26,7 @@ const PinForm = ({modalStatus, handleChange, handleSubmit, onClick, title, place
             onChange={handleChange}
           />
         </div>
-        {errors.title && <small className="help is-danger">{errors.title}</small>}
+        <small className="help is-danger">Title is required</small>
       </div>
 
       <div className="field">
@@ -41,7 +41,7 @@ const PinForm = ({modalStatus, handleChange, handleSubmit, onClick, title, place
             onChange={handleChange}
           />
         </div>
-        {errors.place && <small className="help is-danger">{errors.place}</small>}
+        <small className="help is-danger">Location details are required</small>
       </div>
 
       <div className="field">
@@ -59,7 +59,11 @@ const PinForm = ({modalStatus, handleChange, handleSubmit, onClick, title, place
         </div>
       </div>
       <div className="field">
-              <button type="submit" className="button is-fullwidth is-primary">Save Location</button>
+              <button 
+              type="submit" 
+              className="button is-fullwidth is-primary"
+              onClick={onClick}
+              >Save Location</button>
               </div>
     </form>
     <button 

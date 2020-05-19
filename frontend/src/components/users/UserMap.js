@@ -1,7 +1,8 @@
 import React from 'react'
 
 import GeoCodeMap from './GeoCodeMap'
-import PinForm from '../users/PinForm'
+import PinForm from '../pins/PinForm'
+import PinCard from '../pins/PinCard'
 
 import { postPin, getProfile } from '../../lib/api'
 
@@ -15,11 +16,9 @@ class UserMap extends React.Component {
     formData: {
       title: '',
       place: '',
-      location: '',
       latitude: '',
       longitude: '',
       note: '',
-      photo: ''
     },
     modalOpen: false,
     errors: {}
@@ -33,6 +32,16 @@ class UserMap extends React.Component {
     } catch (err) {
       console.log(err)
     }
+  }
+
+  addLocation = (latitude, longitude) => {
+    this.setState(prevState => ({
+      formData: {
+        ...prevState.formData,
+        latitude: latitude,
+        longitude: longitude
+      }
+    }))
   }
 
   //Function for written input in the pin form
@@ -65,28 +74,25 @@ class UserMap extends React.Component {
   render() {
 
     if (!this.state.user) return null
-    // console.log(this.state.user.pins)
     const pins = this.state.user.pins
 
     return (
       <>
-      {/* <TestGeoJSON {...this.state.user.pins} /> */}
-         <section className="section">
-            <div className="container">
-              <h1 className="title">User Map</h1>
-              <h2 className="subtitle">
-                Saved locations & items
+        <section className="section">
+          <div className="container">
+            <h1 className="title">User Map</h1>
+            <h2 className="subtitle">
+              Add & save locations to remember later
               </h2>
-            </div>
-          </section>
+          </div>
+        </section>
         <div className="sidebar pad2">
           <div className="container">
-          <p>Your Saved Locations</p>
+            {pins.map(pin =>
+              <PinCard key={pin._id} {...pin} />
+            )}
 
-            <p>{pins[0].title}</p>
-            <p>{pins[0].place}</p>
-            <p>{pins[0].notes}</p>
-
+            {/* PinForm will pop up if a user decides to drop a pin on thr map */}
             <PinForm
               handleChange={this.handleChange}
               handleSubmit={this.handleSubmit}
@@ -96,6 +102,7 @@ class UserMap extends React.Component {
               {...this.state.formData}
             />
 
+            {/* GeoCodeMap - for user to view locations & drop pins */}
           </div>
           <div className="map pad2">
             <div className="container">
@@ -103,6 +110,7 @@ class UserMap extends React.Component {
                 onChange={this.handleChange}
                 onClick={this.toggleModal}
                 pins={this.state.user.pins}
+                location={this.addLocation}
                 name="location" />
             </div>
           </div>
