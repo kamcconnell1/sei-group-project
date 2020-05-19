@@ -26,7 +26,8 @@ const App = () => {
 
   return (
     <BrowserRouter>
-    <Navbar />
+    <Navbar className="Navbar" />
+    <div className="Main column-center">
     <Switch>
     <Route exact path='/' component={Home}/>
     <Route path='/page/:id' component={userShowProfile} />
@@ -41,7 +42,8 @@ const App = () => {
     <Route path='/login' component={Login} />
     <Route path="/*" component={Error} />
     </Switch>
-    <Footer />
+    </div>
+    <Footer className="Footer" />
     </BrowserRouter>
   )
 }

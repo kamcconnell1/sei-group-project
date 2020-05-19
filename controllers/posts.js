@@ -2,15 +2,9 @@
 const Post = require('../models/post')
 const { notFound, unauthorized } = require('../lib/errorMessages')
 
-<<<<<<< HEAD
-//* show all posts (from all users)
-//? WORKING tested
-//! ERROR not tested 
-=======
 //? Show all Posts (from all users)
 //* WORKING tested
 //* ERROR tested
->>>>>>> 8f04e88d792cb017a90b847f2376ce335979bce7
 async function postsIndex(req, res, next) {
   try {
     const posts = await Post.find().populate('user').populate('comments.user')
@@ -21,15 +15,9 @@ async function postsIndex(req, res, next) {
   }
 }
 
-<<<<<<< HEAD
-//* add a post
-//? WORKING tested
-//! ERROR not tested 
-=======
 //? Add a Post
 //* WORKING tested
 //* ERROR tested
->>>>>>> 8f04e88d792cb017a90b847f2376ce335979bce7
 async function postsCreate(req, res, next) {
   try {
     req.body.user = req.currentUser
@@ -40,15 +28,9 @@ async function postsCreate(req, res, next) {
   }
 }
 
-<<<<<<< HEAD
-//* show single post
-//? WORKING tested
-//! ERROR not tested 
-=======
 //? Show single Post
 //* WORKING tested
 //* ERROR tested
->>>>>>> 8f04e88d792cb017a90b847f2376ce335979bce7
 async function postsShow(req, res, next) {
   const postId = req.params.id
   try {
@@ -60,15 +42,9 @@ async function postsShow(req, res, next) {
   }
 }
 
-<<<<<<< HEAD
-//* update post
-//? WORKING tested
-//! ERROR not tested 
-=======
 //? Update a Post
 //* WORKING tested
 //* ERROR tested
->>>>>>> 8f04e88d792cb017a90b847f2376ce335979bce7
 async function postsUpdate(req, res, next) {
   const postId = req.params.id
   try {
@@ -83,15 +59,9 @@ async function postsUpdate(req, res, next) {
   }
 }
 
-<<<<<<< HEAD
-//* delete post
-//? WORKING tested
-//! ERROR not tested 
-=======
 //? Delete a Post
 //* WORKING tested
 //* ERROR tested
->>>>>>> 8f04e88d792cb017a90b847f2376ce335979bce7
 async function postsDelete(req, res, next) {
   const postId = req.params.id
   try {
@@ -106,18 +76,10 @@ async function postsDelete(req, res, next) {
 }
 
 
-<<<<<<< HEAD
-//* POST COMMENTS CONTROLLERS
-
-//* create a comment on a post
-//? WORKING tested
-//! ERROR not tested 
-=======
 //? POST COMMENTS CONTROLLERS
 //? Create a Comment on a Post
 //* WORKING tested
 //* ERROR tested 
->>>>>>> 8f04e88d792cb017a90b847f2376ce335979bce7
 async function postCommentCreate (req, res, next) {
   try {
     req.body.user = req.currentUser
@@ -132,15 +94,9 @@ async function postCommentCreate (req, res, next) {
   }
 }
 
-<<<<<<< HEAD
-//* delete comment from post
-//? WORKING tested
-//! ERROR not tested 
-=======
 //? Delete Comment from Post
 //* WORKING tested
 //* ERROR tested 
->>>>>>> 8f04e88d792cb017a90b847f2376ce335979bce7
 async function postCommentDelete (req, res, next) {
   console.log(req)
   try {

@@ -1,72 +1,135 @@
-<<<<<<< HEAD
-=======
+@import '~bulma/bulma.sass';
+
+//? VARS
+:root {
+  --main-bg-color: rgba(198, 187, 200, 0.548);
+  --main-bg-rgb: 198, 187, 200;
+  --navbar-color: 255, 255, 255;
+  --navbar-hover-color: grey;
+}
+
+//? LIBRARY
+
+.column-center {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.row-center {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
 
 
-//Global Styling 
+//?Global Styling 
 * {
   margin: 0;
   padding: 0;
-  font-family: 'Hind Siliguri', sans-serif;
+  // font-family: 'Hind Siliguri', sans-serif;
+  font-family: 'Poppins', sans-serif;
+
 }
-
-
 .body {
   padding: 0;
+  width: 100vw;
+  height: 100vh;
 }
 
 
-<<<<<<< HEAD
->>>>>>> 8f04e88d792cb017a90b847f2376ce335979bce7
-.marker {
-  background-color: red;
-  height: 12px;
-  width: 12px;
-  border-radius: 100%;
+//? ALL PAGES - navbar, main, footer
+
+
+.Main {
+  display: flex;
+  background-color: var(--main-bg-color);
+  min-height: 80vh;
+  min-width: 100vh;
+  }
+
+ 
+.Navbar {
+  height: 10vh;
+  display: flex;
+  align-items: center;
+  background-color: var(--navbar-color);
+
+  .Navbar-item {
+    color: inherit;
+    margin: -100px 1%;
+    font-size: 30px;
+    font-weight: 500;
+  }
+  .navbar-item {
+   margin: 0;
+   background-color:var(--navbar-color);
+  }
+  .navbar-item:hover,
+  .navbar-burger:hover {
+    background-color: var(--navbar-color);
+    color: var(--navbar-hover-color);
+  }
 }
-.siderbar {
-  width: 20%;
+
+.Footer {
+  height: 10vh;
+  display: flex;
+  justify-content: center;
+  // background-color: rgb(198, 187, 200);
 }
-.map {
-  border-left: 1px solid #fff;
-  position: absolute;
-  left: 20%;
-  width: 80%;
-  top: 0;
-  bottom: 0;
-=======
+
+.box {
+  width: 40%;
+  background-color: rgba(var(--navbar-color), 0.1);
+  .field {
+    padding: 10px;
+
+  }
+}
+
+
+
+
+//? HOME
+//* title
+
+.Home {
+  h1 {
+    color: black;
+    font-weight: bold;
+    font-size: 50px;
+    }
+  
+    //* subtitle
+    h2 {
+    color: grey;
+    }
+}
+
 
 // ?------------------------------- Clothing Pages --------------------------------------------------------
-
 // ? SLIDE IMAGE - SHOW PAGE 
 .slide-container {
-  width: 50%;
+  width: 70%;
   margin: auto; }
-
 h3 {
   text-align: center; }
-
 .each-slide div {
   display: flex;
   align-items: center;
   justify-content: center;
-  background-size: cover;
+  background-size: contain;
+  background-repeat: no-repeat;
   height: 150px;
->>>>>>> 64e477fc53d75a4126252861b4e049e618660fce
+  width: 100%;
 }
-
-
 // ? FILTERS ON CLOTHES INDEX
 .filter {
   margin-left: 0;
 }
-<<<<<<< HEAD
-=======
-
-
-
-
 //? ------------------------------- User Pages --------------------------------------------------------
-
 //? USER PROFILE PAGE 
 div.is-profile-info {
   border: 1px solid black;
@@ -91,43 +154,38 @@ div.is-profile-info {
           border-radius: 5px;
        }
       }
-
 div.is-user-clothes {
   border: 1px solid black;
 }
-
 div.is-user-chat{
   border: 1px solid black;
 }
-<<<<<<< HEAD
->>>>>>> 8f04e88d792cb017a90b847f2376ce335979bce7
-=======
-
-
 //? ------------------------------- Map Pages --------------------------------------------------------
-
 .marker {
   background-color: red;
   height: 12px;
   width: 12px;
   border-radius: 100%;
 }
-
-div.map {
+.sidebar {
+  width:30%;
+  height: 100%;
+  top: 200px;
+  left: 0;
+  overflow: hidden;
+  border-right: 1px solid rgab(0, 0, 0, 0.25)
+}
+.map {
   border-left: 1px solid #fff;
   position: absolute;
   left: 30%;
-  width: 0px;
-  top: 0;
+  width: 70%;
+  top: 200px;
   bottom: 0;
 }
-
-
-
+.pad2{
+  padding:20px
+}
 
 //? ------------------------------- Bulma Variables ------------------------------------------------------
-$modal-content-width: 500px;
-
-
->>>>>>> 64e477fc53d75a4126252861b4e049e618660fce
-@import '~bulma/bulma.sass'
+// $modal-content-width: 500px;

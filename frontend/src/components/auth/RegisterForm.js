@@ -5,14 +5,10 @@ const RegisterForm = ({handleChange, handleSubmit, username, email, postcode, pa
 
   return (
     <>
-      <section className="section">
-        <div className="container">
-          <div className="columns">
             <form 
             onSubmit={handleSubmit}
-            className="column is-half is-offset-one-quarter box"
+            className="box"
             >
-
               <div className="field">
                 <label className="label">Username</label>
                 <div className="control">
@@ -91,10 +87,6 @@ const RegisterForm = ({handleChange, handleSubmit, username, email, postcode, pa
               <button type="submit" className="button is-fullwidth is-primary">Register</button>
               </div>
             </form>
-          </div>
-          </div>
-      </section>
-
     </>
   )
 }
