@@ -75,7 +75,6 @@ export const DeleteCommentOnUser = (id, commentid) => {
   return axios.delete(`${kebb_url}/profile/${id}/comments/${commentid}`, withHeaders())
 }
 
-
 //------------------------------------POSTS--------------------------------------------
 
 //* Get all POSTS
@@ -91,7 +90,6 @@ export const getSinglePost = id => {
   return axios.get(`${kebb_url}/posts/${id}`)
 }
 //* Edit a post
-
 export const editPost = (id, data) => {
   return axios.put(`${kebb_url}/posts/${id}`, data, withHeaders())
 }

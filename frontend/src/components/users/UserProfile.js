@@ -90,6 +90,14 @@ class UserProfile extends React.Component {
 
     return (
       <>
+       <div className="Page-head">
+          <div className="Page-title">
+            <h1>My Profile</h1>
+          </div>
+          {/* <div className="Page-subtitle">
+            <h2>USERNAME?</h2>
+          </div> */}
+        </div>
         <section className="section">
           <div className="container">
             <div className="columns">

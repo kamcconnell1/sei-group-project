@@ -83,14 +83,15 @@ class UserMap extends React.Component {
 
     return (
       <>
-        <section className="section">
-          <div className="container">
-            <h1 className="title">User Map</h1>
-            <h2 className="subtitle">
-              Add & save locations to remember later
-              </h2>
+        <div className="Page-head">
+          <div className="Page-title">
+            <h1>My Saved Pins</h1>
           </div>
-        </section>
+          <div className="Page-subtitle">
+            <h2>Add & save locations to remember later</h2>
+          </div>
+        </div>
+        
         <div className="map-page">
           <div className="container">
             <GeoCodeMap
