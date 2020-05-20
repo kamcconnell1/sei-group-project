@@ -1,7 +1,7 @@
 import React from 'react'
 import PostCards from '../posts/PostsCards'
 import { getAllPosts, createPost, deleteAPost } from '../../lib/api'
-import { isOwner, isAuthenticated } from '../../lib/auth'
+
 class Posts extends React.Component {
   state = {
     posts: null,

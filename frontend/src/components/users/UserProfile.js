@@ -39,7 +39,7 @@ class UserProfile extends React.Component {
   async getUserDashboard() {
     try {
       const res = await getProfile()
-      this.setState({ user: res.data, commentsArray: res.data.comments, errors: '' })
+      this.setState({ user: res.data, commentsArray: res.data.comments, errors: ''})
       this.getLocation()
     } catch (err) {
       console.log(err)
@@ -101,11 +101,11 @@ class UserProfile extends React.Component {
   }
 
   toggleModalEdit = () => {
-    this.setState({ modalOpenEdit: !this.state.modalOpenEdit })
+    this.setState({modalOpenEdit: !this.state.modalOpenEdit})
   }
 
   handleChangeEdit = (e) => {
-    const user = { ...this.state.user, [e.target.name]: e.target.value }
+    const user = {...this.state.user, [e.target.name]: e.target.value}
     this.setState({ user })
   }
 
@@ -170,7 +170,7 @@ class UserProfile extends React.Component {
                   modalOpen={this.state.modalOpen}
                   onChange={this.handleChange}
                   onSubmit={this.handleSubmit}
-                />
+                /> 
                 {/* Section for the user details - username, location & star rating. button to add clothes to profile   */}
                 <button onClick={this.toggleModalEdit}
                   className="button is-profile-btn"

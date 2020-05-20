@@ -1,8 +1,9 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import { getUserProfile, postFavoriteFriend, commentOnUser, DeleteCommentOnUser } from '../../lib/api'
-import Comments from '../common/Comments'
+import { getUserProfile, postFavoriteFriend, commentOnUser, DeleteCommentOnUser, sendMessage } from '../../lib/api'
 import { isAuthenticated } from '../../lib/auth'
+import Comments from '../common/Comments'
+import StarRating from '../common/StarRating'
 
 class userShowProfile extends React.Component {
   state = {
@@ -12,7 +13,9 @@ class userShowProfile extends React.Component {
     comments: {
       text: ''
     },
-    commentsArray: []
+    commentsArray: [],
+    contactModalOpen: false,
+    text: ''
   }
 
   async componentDidMount() {
@@ -28,10 +31,34 @@ class userShowProfile extends React.Component {
       const userId = this.props.match.params.id
       const res = await getUserProfile(userId)
       const userItems = res.data.createdArticles
-      this.setState({ user: res.data, userItems, commentsArray: res.data.comments })
+      this.setState({ user: res.data, userItems, commentsArray: res.data.comments, })
     } catch (err) {
       console.log(err)
     }
+  }
+
+  // * Function to toggle contact modal
+  toggleContactModal = () => {
+    this.setState({ contactModalOpen: !this.state.contactModalOpen })
+  }
+
+  // * Function to handle change of contact box
+  handleContactChange = e => {
+    const text = {...this.state.text, [e.target.name]: e.target.value}
+    this.setState({text})
+  }
+
+  // * Function to submit message
+  handleContactSubmit = async e => {
+    e.preventDefault()
+    const {user} = this.state
+    const userId = user.id
+    try{
+      await sendMessage(userId, this.state.text)
+    } catch (err) {
+      console.log(err)
+    }
+    this.setState({contactModalOpen: false})
   }
 
   // * Function to add poster to friends
@@ -40,8 +67,8 @@ class userShowProfile extends React.Component {
       const addToList = await { ...this.state.friend, [e.target.name]: e.target.value }
       console.log(addToList)
       const res = await postFavoriteFriend(addToList)
-      console.log('posted data:', res)
-      console.log('clicked')
+      console.log(res.data)
+      console.log('sent')
     } catch (err) {
       console.log(err)
     }
@@ -49,7 +76,7 @@ class userShowProfile extends React.Component {
 
   //* Handle Comments on User
   handleCommentChange = e => {
-    const comments = { ...this.state.comments, [e.target.name]: e.target.value}
+    const comments = { ...this.state.comments, [e.target.name]: e.target.value }
     this.setState({ comments })
   }
 
@@ -80,10 +107,30 @@ class userShowProfile extends React.Component {
     }
   }
 
+//* Star Rating function 
+onStarClick = (nextValue) => {
+  // const newRating = this.state.user.ratings.concat(nextValue)
+
+  const ratings = { ratings: [...this.state.user.ratings, nextValue] }
+
+  this.setState({ ratings })
+}
+
+
+getUserRating = () => {
+const ratings = this.state.user.ratings
+
+if (ratings.length === 0 ) return 3
+return ratings.reduce((a, b) => {
+  return a + b
+}, 0)
+}
+
   render() {
     if (!this.state.user) return <h1>User kidnapped, Ninja to the rescue</h1>
-    const { user, userItems, comments, commentsArray } = this.state
-    console.log(userItems)
+console.log(this.state.user.ratings);
+
+    const { user, userItems, comments, commentsArray, contactModalOpen } = this.state
     return (
       <>
         <section>
@@ -98,9 +145,31 @@ class userShowProfile extends React.Component {
             <h4 className="title is-3">{user.username}</h4>
           </div>
           <div>
-            <h4 className="title is-5">Ratings go here</h4>
+            {/* Star Rating  */}
+          <StarRating 
+          rating={this.getUserRating()}
+          onStarClick={this.onStarClick}
+          />
+
           </div>
-    {isAuthenticated() && <button name="friend" value={user._id} onClick={this.handleFriendSubmit} className="button is-primary">Add Friend</button> }
+          <div className="columns">
+          <div className="column">
+            {isAuthenticated() && <button name="friend" value={user._id} onClick={this.handleFriendSubmit} className="button is-primary">Follow</button>}
+          </div>
+          <div className="column">
+            {isAuthenticated() && <button onClick={this.toggleContactModal} className="button is-primary">Message</button>}
+          </div>
+          </div>
+          <div className={contactModalOpen ? "modal is-active" : "modal"}>
+          <div className="field">
+            <form onSubmit={this.handleContactSubmit}>
+              <div className="control">
+                <textarea name="text" onChange={this.handleContactChange} name="text" className="textarea is-medium is-primary" placeholder="Message..."></textarea>
+              </div>
+              <button className="button is-info">SEND</button>
+            </form>
+          </div>
+        </div>
         </section>
         <section className="section">
           <div className="container">
@@ -152,7 +221,7 @@ class userShowProfile extends React.Component {
                 comment={comment}
                 deleteComment={this.deleteComment}
               />
-            ))} 
+            ))}
           </div>
         </section>}
       </>

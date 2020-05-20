@@ -1,11 +1,11 @@
 import React from 'react'
-import Comments from '../common/Comments'
 
 import { Slide } from 'react-slideshow-image'
-
 import { Link } from 'react-router-dom'
-
 import { isAuthenticated } from '../../lib/auth'
+
+import Comments from '../common/Comments'
+import StarRating from '../common/StarRating'
 
 // !Slideshow needs work - Benga
 
@@ -22,9 +22,9 @@ const properties = {
   }
 }
 
-const SingleClothCard = ({ deleteComment, handleContactSubmit, handleContactChange, contactModalOpen, toggleContact, commentsArray, comments, title, clothId, profilePic, username, images, image, currentUserId, onFirstClick, onSecondClick, onClick, location, handleCommentSubmit, handleCommentChange }) => {
+const SingleClothCard = ({ deleteComment, handleContactSubmit, handleContactChange, contactModalOpen, toggleContact, commentsArray, comments, title, clothId, profilePic, username, images, image, currentUserId, onFirstClick, onSecondClick, onClick, location, handleCommentSubmit, handleCommentChange, rating, onStarClick }) => {
   const slideImages = [image[0], image[0], image[0]]
-  // console.log(slideImages)
+ 
   return (
     <>
       <section className="section">
@@ -92,7 +92,10 @@ const SingleClothCard = ({ deleteComment, handleContactSubmit, handleContactChan
             <strong>{username}</strong>
           </p>
           <hr />
-          <p>Ratings go here</p>
+          <StarRating 
+          rating={rating}
+          onStarClick={onStarClick}
+          />
         </div>
         <hr />
         <div>

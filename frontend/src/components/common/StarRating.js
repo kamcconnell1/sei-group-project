@@ -4,7 +4,6 @@ import StarRatingComponent from 'react-star-rating-component'
 
 const StarRating = ({rating, onStarClick}) => {
 
- 
   return (
     <div>
       <StarRatingComponent
@@ -12,6 +11,7 @@ const StarRating = ({rating, onStarClick}) => {
         starCount={5}
         value={rating}
         onStarClick={onStarClick}
+        starColor="#708090"
       />
     </div>
   )

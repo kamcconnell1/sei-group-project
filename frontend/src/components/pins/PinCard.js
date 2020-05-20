@@ -1,8 +1,10 @@
 import React from 'react'
 
-const PinCard = ({ title, place, note, createdAt, _id, deletePin }) => {
+const PinCard = (props) => {
+  if (!props.info) return null 
 
-
+const {title, place, note, createdAt, _id} = props.info
+const {deletePin} = props
 
   return (
     <div className="pincard">

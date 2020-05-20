@@ -1,7 +1,17 @@
 import React from 'react'
 
 
-const PinForm = ({ modalStatus, handleChange, handleSubmit, onClick, title, place, notes, errors }) => {
+const PinForm = ({ modalStatus, handleChange, handleSubmit, numberOfPins, toggleModal, title, place, notes, errors }) => {
+
+  // const pinNumber = numberOfPins()
+
+  // console.log(pinNumber);
+  // console.log('all errors', errors);
+  // console.log('pin,error', errors['pins.0.place']);
+  // // ["pins.0.place"]
+  // const errorMessage = (['pins',[pinNumber],'place'])
+  // console.log(errorMessage.join());
+  
 
   return (
     <div
@@ -26,7 +36,7 @@ const PinForm = ({ modalStatus, handleChange, handleSubmit, onClick, title, plac
                 onChange={handleChange}
               />
             </div>
-            <small className="help is-danger">Title is required</small>
+            <small className="help is-light">Title is required</small>
           </div>
 
           <div className="field">
@@ -41,7 +51,7 @@ const PinForm = ({ modalStatus, handleChange, handleSubmit, onClick, title, plac
                 onChange={handleChange}
               />
             </div>
-            <small className="help is-danger">Location details are required</small>
+            <small className="help is-light">Location details are required</small>
           </div>
 
           <div className="field">
@@ -62,12 +72,14 @@ const PinForm = ({ modalStatus, handleChange, handleSubmit, onClick, title, plac
             <button
               type="submit"
               className="button is-fullwidth is-primary"
-              onClick={onClick}
             >Save Location</button>
           </div>
-
-
         </form>
+        <button
+          className="modal-close is-large"
+          onClick={toggleModal}
+          aria-label="close">
+          </button>
       </div>
     </div>
 
