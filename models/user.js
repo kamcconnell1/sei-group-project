@@ -21,8 +21,7 @@ const pinSchema = new mongoose.Schema({
   place: { type: String, required: true, maxlength: 100 },
   latitude: { type: String, required: true },
   longitude: { type: String, required: true },
-  note: { type: String, maxlength: 300 },
-  photo: { type: String }
+  note: { type: String, maxlength: 300 }
 }, {
   timestamps: true
 })

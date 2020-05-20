@@ -37,9 +37,23 @@ async function getProfile(req, res, next) {
 async function userUpdate(req, res, next) {
   try {
     const userId = req.currentUser
-    const updatedProfile = await User.findByIdAndUpdate(userId, req.body, { new: true, runValidators: true })
+    const updatedProfile = await User.findByIdAndUpdate(userId, req.body, { new: true })
     if (!updatedProfile) throw new Error(unauthorized)
     res.status(202).json(updatedProfile)
+  } catch (err) {
+    next(err)
+  }
+}
+
+//? Delete details on User Profile
+//* WORKING tested
+//* ERROR tested
+async function deleteUser(req, res, next) {
+  try {
+    const userId = req.currentUser
+    const profileToDelete = await User.findByIdAndDelete(userId)
+    if (!profileToDelete) throw new Error(notFound)
+    res.sendStatus(204)
   } catch (err) {
     next(err)
   }
@@ -251,6 +265,7 @@ module.exports = {
   updateUser: userUpdate,
   profile: currentUserProfile,
   getProfile,
+  deleteUser,
   commentCreate: userCommentCreate,
   commentDelete: userCommentDelete,
   ratingCreate: userRatingCreate,
