@@ -56,14 +56,14 @@ class UserProfile extends React.Component {
 
   // * Function to handle change of reply textbox
   handleReplyChange = e => {
-    const text = { ...this.state.text, [e.target.name]: e.target.value }
-    this.setState({ text })
+    const text = {...this.state.text, [e.target.name]: e.target.value}
+    this.setState({text})
   }
 
   // * Function to reply to messages
   handleReplySubmit = async e => {
     e.preventDefault()
-    const { replyId } = this.state
+    const {replyId} = this.state
     try {
       const res = await replyMessage(replyId, this.state.text)
       console.log(res.data)
@@ -71,7 +71,7 @@ class UserProfile extends React.Component {
     } catch (err) {
       console.log(err)
     }
-    this.setState({ replyModalOpen: false })
+    this.setState({replyModalOpen: false})
   }
 
   // * Function to GET incoming messages
@@ -169,14 +169,14 @@ class UserProfile extends React.Component {
   }
 
   render() {
-    if (!this.state.user || !this.state.location || !this.state.messages) return null
-    // consts taken from state to populate user data shown on the page
-    const { username, createdArticles, profilePic } = this.state.user
-    const { commentsArray, messages } = this.state
-    const location = this.state.location
-    const reversedCreatedArticles = createdArticles.reverse().slice(0, 6)
-    return (
-      <>
+      if (!this.state.user || !this.state.location || !this.state.messages) return null
+      // consts taken from state to populate user data shown on the page
+      const { username, createdArticles, profilePic } = this.state.user
+      const { commentsArray, messages } = this.state
+      const location = this.state.location
+      const reversedCreatedArticles = createdArticles.reverse().slice(0, 6)
+      return (
+        <>
 
         <div className="My-profile">
 
@@ -265,6 +265,17 @@ class UserProfile extends React.Component {
                   </div>
                 </section>
               </div>
+              
+              <section>
+                <div>
+                  {commentsArray.map(comment => (
+                    <Comments
+                      key={comment._id}
+                      comment={comment}
+                    />
+                  ))}
+                </div>
+              </section>
             </div>
             <div className="Center-col">
               {/* Map over the clothes the user has uploaded - need to work on the positioning of this - need to add to allow user to edit / delete items */}

@@ -3,7 +3,6 @@ const User = require('../models/user')
 const { notFound, unauthorized, duplicate } = require('../lib/errorMessages')
 const Article = require('../models/article')
 const Posts = require('../models/post')
-
 //? Show User Dashboard
 //* WORKING tested
 //* ERROR tested
@@ -16,7 +15,6 @@ async function currentUserProfile(req, res, next) {
     next(err)
   }
 }
-
 //? Show single User profile.
 //* WORKING tested
 //* ERROR tested
@@ -30,7 +28,6 @@ async function getProfile(req, res, next) {
     next(err)
   }
 }
-
 //? Update details on User profile
 //* WORKING tested
 //* ERROR tested
@@ -44,7 +41,6 @@ async function userUpdate(req, res, next) {
     next(err)
   }
 }
-
 //? Delete details on User Profile
 //* WORKING tested
 //* ERROR tested
@@ -52,9 +48,7 @@ async function deleteUser(req, res, next) {
   try {
     const userId = req.currentUser
     const postsToDelete = await Posts.find({ user: req.currentUser._id })
-    console.log(postsToDelete)
     const articlesToDelete = await Article.find({ user: req.currentUser._id })
-    console.log(articlesToDelete)
     postsToDelete.forEach(post => {
       return post.remove()
     })
@@ -68,7 +62,6 @@ async function deleteUser(req, res, next) {
     next(err)
   }
 }
-
 //? COMMENTS
 //? Comment on User profile
 //* WORKING tested
@@ -86,7 +79,6 @@ async function userCommentCreate(req, res, next) {
     next(err)
   }
 }
-
 //? Delete a Comment if you're the User who posted it
 //* WORKING tested
 //* ERROR tested
@@ -106,7 +98,6 @@ async function userCommentDelete(req, res, next) {
     next(err)
   }
 }
-
 //? RATINGS
 //? Add a Rating on a User
 //* WORKING tested
@@ -125,7 +116,6 @@ async function userRatingCreate(req, res, next) {
     next(err)
   }
 }
-
 //? Update User Rating
 //* WORKING tested
 //* ERROR tested
@@ -146,7 +136,6 @@ async function editUserRating(req, res, next) {
     next(err)
   }
 }
-
 //? FAVOURITES
 //? Get All Favs
 //* WORKING tested
@@ -178,7 +167,6 @@ async function addArticleToFavourites(req, res, next) {
     next(err)
   }
 }
-
 //? Add a User to your Favourites.
 //* WORKING tested
 //* ERROR tested
@@ -197,7 +185,6 @@ async function addUserToFavourites(req, res, next) {
     next(err)
   }
 }
-
 //? Add a Post to your Favourites
 //* WORKING tested
 //* ERROR tested
@@ -216,7 +203,6 @@ async function addPostToFavourites(req, res, next) {
     next(err)
   }
 }
-
 //? FAVOURITES DELETE FUNCTION
 //? Remove Article from your Favs
 //* WORKING tested
@@ -235,7 +221,6 @@ async function removeArticleFromFavs(req, res, next) {
     next(err)
   }
 }
-
 //? Remove User from your Friends Favs
 //* WORKING tested
 //* ERROR tested
@@ -252,7 +237,6 @@ async function removeUserFromFavs(req, res, next) {
     next(err)
   }
 }
-
 //? Remove Posts from your Posts Favs
 //* WORKING tested
 //* ERROR tested
@@ -269,7 +253,6 @@ async function removePostsFromFavs(req, res, next) {
     next(err)
   }
 }
-
 //! Exports
 module.exports = {
   updateUser: userUpdate,

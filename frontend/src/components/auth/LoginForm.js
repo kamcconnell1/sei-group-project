@@ -1,12 +1,15 @@
 import React from 'react'
 
+import { Link } from 'react-router-dom'
+
 const LoginForm = ({email, password, handleChange, handleSubmit, errors}) => {
   return (
           <form 
           className="box"
           onSubmit={handleSubmit}
           >
-            <div className="field">
+            <p>Not signed up yet? <Link to="/register">Register here</Link></p>
+            <div className="field">           
               <label className="label">Email</label>
               <div className="control">
                 <input

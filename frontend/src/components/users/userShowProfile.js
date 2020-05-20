@@ -1,6 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import { getUserProfile, postFavoriteFriend, commentOnUser, DeleteCommentOnUser, sendMessage } from '../../lib/api'
+import { getUserProfile, postFavoriteFriend, commentOnUser, DeleteCommentOnUser, sendMessage, rateUser } from '../../lib/api'
 import { isAuthenticated } from '../../lib/auth'
 import Comments from '../common/Comments'
 import StarRating from '../common/StarRating'
@@ -15,7 +15,8 @@ class userShowProfile extends React.Component {
     },
     commentsArray: [],
     contactModalOpen: false,
-    text: ''
+    text: '',
+    rating: ''
   }
 
   async componentDidMount() {
@@ -44,21 +45,21 @@ class userShowProfile extends React.Component {
 
   // * Function to handle change of contact box
   handleContactChange = e => {
-    const text = {...this.state.text, [e.target.name]: e.target.value}
-    this.setState({text})
+    const text = { ...this.state.text, [e.target.name]: e.target.value }
+    this.setState({ text })
   }
 
   // * Function to submit message
   handleContactSubmit = async e => {
     e.preventDefault()
-    const {user} = this.state
+    const { user } = this.state
     const userId = user.id
-    try{
+    try {
       await sendMessage(userId, this.state.text)
     } catch (err) {
       console.log(err)
     }
-    this.setState({contactModalOpen: false})
+    this.setState({ contactModalOpen: false })
   }
 
   // * Function to add poster to friends
@@ -107,28 +108,51 @@ class userShowProfile extends React.Component {
     }
   }
 
-//* Star Rating function 
-onStarClick = (nextValue) => {
-  // const newRating = this.state.user.ratings.concat(nextValue)
+  getUserRating = () => {
+    const ratings = this.state.user.ratings
+    if (ratings.length === 0) return 3
+    return (Math.round((Object.values(ratings).reduce((a, { rating }) =>
+      a + rating, 0) / ratings.length)))
+  }
 
-  const ratings = { ratings: [...this.state.user.ratings, nextValue] }
+  //* Star Rating function 
+  onStarClick = (nextValue) => {
+    // this.setState({ rating: [...this.state.rating, nextValue] }
+    //   , () => {
+    //     this.addUserRating()
+    //   })
+    this.setState({rating: nextValue}
+      , () => {
+        this.addUserRating()
+      })
+  }
 
-  this.setState({ ratings })
-}
+  //*POST rating on the user
+  addUserRating = async event => {
+    try {
+      const userId = this.state.user._id
+      const rating = (this.state.rating)
+      console.log(rating);
+      
+      const res = await rateUser(userId, rating)
+      console.log(res.data);
+      
+    } catch (err) {
+      console.log(err);
+
+    }
+  }
 
 
-getUserRating = () => {
-const ratings = this.state.user.ratings
-
-if (ratings.length === 0 ) return 3
-return ratings.reduce((a, b) => {
-  return a + b
-}, 0)
-}
 
   render() {
     if (!this.state.user) return <h1>User kidnapped, Ninja to the rescue</h1>
-console.log(this.state.user.ratings);
+    console.log(this.state.user);
+
+    const rating = parseInt(this.getUserRating())
+    console.log('getUserRating',rating)
+    console.log('state ratings', this.state.rating);
+    
 
     const { user, userItems, comments, commentsArray, contactModalOpen } = this.state
     return (
@@ -146,30 +170,30 @@ console.log(this.state.user.ratings);
           </div>
           <div>
             {/* Star Rating  */}
-          <StarRating 
-          rating={this.getUserRating()}
-          onStarClick={this.onStarClick}
-          />
+            <StarRating
+              rating={rating}
+              onStarClick={this.onStarClick}
+            />
 
           </div>
           <div className="columns">
-          <div className="column">
-            {isAuthenticated() && <button name="friend" value={user._id} onClick={this.handleFriendSubmit} className="button is-primary">Follow</button>}
-          </div>
-          <div className="column">
-            {isAuthenticated() && <button onClick={this.toggleContactModal} className="button is-primary">Message</button>}
-          </div>
+            <div className="column">
+              {isAuthenticated() && <button name="friend" value={user._id} onClick={this.handleFriendSubmit} className="button is-primary">Follow</button>}
+            </div>
+            <div className="column">
+              {isAuthenticated() && <button onClick={this.toggleContactModal} className="button is-primary">Message</button>}
+            </div>
           </div>
           <div className={contactModalOpen ? "modal is-active" : "modal"}>
-          <div className="field">
-            <form onSubmit={this.handleContactSubmit}>
-              <div className="control">
-                <textarea name="text" onChange={this.handleContactChange} name="text" className="textarea is-medium is-primary" placeholder="Message..."></textarea>
-              </div>
-              <button className="button is-info">SEND</button>
-            </form>
+            <div className="field">
+              <form onSubmit={this.handleContactSubmit}>
+                <div className="control">
+                  <textarea name="text" onChange={this.handleContactChange} name="text" className="textarea is-medium is-primary" placeholder="Message..."></textarea>
+                </div>
+                <button className="button is-info">SEND</button>
+              </form>
+            </div>
           </div>
-        </div>
         </section>
         <section className="section">
           <div className="container">
