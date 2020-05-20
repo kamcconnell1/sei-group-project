@@ -56,8 +56,6 @@ class UserProfile extends React.Component {
     }
   }
 
-
-
   //* Function to find user location details
   async getLocation() {
     try {
@@ -181,7 +179,7 @@ class UserProfile extends React.Component {
                   modalOpenEdit={this.state.modalOpenEdit}
                   onChangeEdit={this.handleChangeEdit}
                   onSubmitEdit={this.handleSubmitEdit}
-                > <button>Edit</button> </EditProfile>
+                />
                 <button onClick={() => { if (window.confirm("Are you sure?")) this.deleteUserProfile() }} className="button is-danger">Delete</button>
                 {/* //! NEED TO ADD STAR RATINGS HERE  */}
 
