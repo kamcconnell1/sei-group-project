@@ -149,7 +149,7 @@ class UserProfile extends React.Component {
       const { commentsArray, messages } = this.state
       const location = this.state.location
       const reversedCreatedArticles = createdArticles.reverse().slice(0, 6)
-      console.log(messages[0].createdAt)
+      // console.log(messages[0].createdAt)
       return (
         <>
 
