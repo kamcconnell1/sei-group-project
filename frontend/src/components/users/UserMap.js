@@ -92,12 +92,7 @@ class UserMap extends React.Component {
 
 
   render() {
-
     if (!this.state.user) return null
-
-
-    // console.log(this.state.user.pins)
-
     const pins = this.state.user.pins
 
     return (
@@ -111,41 +106,52 @@ class UserMap extends React.Component {
           </div>
         </div>
 
-        <div className="map-page">
-          <div className="container">
-            <GeoCodeMap
-              onChange={this.handleChange}
-              onClick={this.toggleModal}
-              pins={this.state.user.pins}
-              location={this.addLocation}
-              name="location" />
-          </div>
-          <div className="map-pins">
+        {/* Ternary with text showing if no pins have been saved yet  */}
+        <div className="pin-details">
+
+          {(pins.length === 0) ?
             <div className="container">
-              {pins.map(pin =>
-                <PinCard
-                  key={pin._id}
-                  {...pin}
-                  deletePin={this.deletePin}
-                />
-              )}
+                <h1>Looks like you haven't saved any locations yet, add now.</h1>
+                </div>
+               :
+              <div className="map-pins">
+                {pins.map(pin =>
+                  <PinCard
+                    key={pin._id}
+                    {...pin}
+                    deletePin={this.deletePin}
+                  />
+                )}
+              </div>
+              }
 
-              {/* PinForm will pop up if a user decides to drop a pin on thr map */}
-              <PinForm
-                handleChange={this.handleChange}
-                handleSubmit={this.handleSubmit}
+          <div className="map-page">
+            <div className="container">
+              <GeoCodeMap
+                onChange={this.handleChange}
                 onClick={this.toggleModal}
-                errors={this.state.errors}
-                modalStatus={this.state.modalOpen}
-                {...this.state.formData}
-              />
+                pins={this.state.user.pins}
+                location={this.addLocation}
+                name="location" />
+            </div>
 
-              {/* GeoCodeMap - for user to view locations & drop pins */}
-            </div>
-            <div className="map pad2">
-            </div>
+
+            {/* PinForm will pop up if a user decides to drop a pin on thr map */}
+            <PinForm
+              handleChange={this.handleChange}
+              handleSubmit={this.handleSubmit}
+              onClick={this.toggleModal}
+              errors={this.state.errors}
+              modalStatus={this.state.modalOpen}
+              {...this.state.formData}
+            />
+
+            {/* GeoCodeMap - for user to view locations & drop pins */}
+          </div>
+          <div className="map pad2">
           </div>
         </div>
+
       </>
     )
   }

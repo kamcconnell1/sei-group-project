@@ -112,3 +112,11 @@ export const commentOnPost = (id, data) => {
 export const DeleteCommentOnPost = (id, commentid) => {
   return axios.delete(`${kebb_url}/posts/${id}/comments/${commentid}`, withHeaders())
 }
+
+//------------------------------------MESSAGES--------------------------------------------
+
+// * Send message to user on Show page
+export const sendMessage = (id, message) => {
+  return axios.post(`${kebb_url}/${id}/messages`, message, withHeaders())
+}
+

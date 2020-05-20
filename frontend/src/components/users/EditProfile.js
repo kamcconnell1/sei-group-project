@@ -4,7 +4,7 @@ import { avatarArr } from '../common/Images'
 import { uploadClothesImage } from '../../lib/ext_api'
 import ImageUpload from '../common/ImageUpload'
 
-const EditProfile = ({ onChange, handleSubmit, toggleModal, modalOpen, profilePic }) => {
+const EditProfile = ({ onChange, onSubmit, toggleModal, modalOpen }) => {
 
   return (
 
@@ -13,15 +13,15 @@ const EditProfile = ({ onChange, handleSubmit, toggleModal, modalOpen, profilePi
     >
       <div className="modal-background"></div>
 
-      {/* <div className="edit-profile-form">
+      <div className="edit-profile-form">
         <form
           className="box"
-          onSubmit={handleSubmit}
-        > */}
-      <div className="modal-content">
+          onSubmit={onSubmit}
+        >
+          <div className="modal-content">
 
-        <div className="field">
-          <div className="is-profile-picture is-centered is-primary">
+            <div className="field">
+              {/* <div className="is-profile-picture is-centered is-primary">
             Select a New Avatar
           </div>
           <div className="columns is-multiline ">
@@ -29,20 +29,22 @@ const EditProfile = ({ onChange, handleSubmit, toggleModal, modalOpen, profilePi
               <img
                 name="profilePic"
                 src={avatarArr[0]} alt="avatar1"
-                onClick={onChange}
+                onClick={console.log('clicked avatar')
+                }
               />
             </div>
-          </div>
+          </div> */}
+              <div className="image is128x128">
+                <ImageUpload
+                  onChange={onChange}
+                  preset={uploadClothesImage}
+                  name="profilePic"
+                  labelText="Or Upload Picture"
+                />
+              </div>
+            </div>
 
-          <ImageUpload
-            onChange={onChange}
-            preset={uploadClothesImage}
-            name="profilePic"
-            labelText="Or Upload Picture"
-          />
-        </div>
-
-        {/* <div className="field">
+            {/* <div className="field">
                 <label className="label">Username</label>
                 <div className="control">
                   <input
@@ -70,22 +72,22 @@ const EditProfile = ({ onChange, handleSubmit, toggleModal, modalOpen, profilePi
                 </div>
               </div> */}
 
-        <div className="field">
-          <button type="submit"
-            className="button is-fullwidth is-primary">
-            Update Profile
+            <div className="field">
+              <button type="submit"
+                className="button is-fullwidth is-primary">
+                Update Profile
           </button>
-        </div>
-      </div >
-      {/* </div> */}
+            </div>
+          </div >
 
-      {/* </form > */}
-      <button
-        className="modal-close is-large"
-        onClick={toggleModal}
-        aria-label="close"></button>
+
+        </form >
+        <button
+          className="modal-close is-large"
+          onClick={toggleModal}
+          aria-label="close"></button>
+      </div>
     </div>
-
   )
 }
 

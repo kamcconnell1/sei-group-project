@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { singleCloth, getUserProfile, postFavorite, addCommentCloth, deleteCommentCloth } from '../../lib/api'
+import { singleCloth, sendMessage, getUserProfile, postFavorite, addCommentCloth, deleteCommentCloth } from '../../lib/api'
 
 import SingleClothCard from './SingleClothCard'
 
@@ -11,9 +11,11 @@ class ClothesShow extends React.Component {
     user: null, 
     item: '',
     comments: {
-      text: ''
+    text: ''
     },
-    commentsArray: []
+    commentsArray: [],
+    contactModalOpen: false,
+    text: ''
   }
 
   // * GET each clothing item on mount via Id
@@ -73,6 +75,32 @@ class ClothesShow extends React.Component {
     }
   }
 
+  // * Function to toggle contact button
+  toggleContactModal = () => {
+    this.setState({ contactModalOpen: !this.state.contactModalOpen })
+  }
+
+  // * Function to handle change of contact box
+  handleContactChange = e => {
+    const text = {...this.state.text, [e.target.name]: e.target.value}
+    this.setState({text})
+  }
+
+  // * Function to submit message to user
+  handleContactSubmit = async e => {
+    e.preventDefault()
+    const {user} = this.state
+    const userId = user.id
+    console.log(userId)
+    try {
+      const res = await sendMessage(userId, this.state.text)
+      console.log(res.data)
+    } catch (err) {
+      console.log(err)
+    }
+    this.setState({contactModalOpen: false})
+  }
+
   handleCommentChange = e => {
     const comments = { ...this.state.comments, [e.target.name]: e.target.value}
     this.setState({ comments })
@@ -96,7 +124,7 @@ class ClothesShow extends React.Component {
       const clothId = this.props.match.params.id
       const commentId = e.target.value
       console.log(clothId, commentId)
-      const res = await deleteCommentCloth(clothId, commentId)
+      await deleteCommentCloth(clothId, commentId)
       this.getSingleCloth()
     } catch (err) {
       console.log(err)
@@ -105,14 +133,14 @@ class ClothesShow extends React.Component {
 
   render() {
     if (!this.state.cloth) return <h1>Even more Ninjas are working on this</h1>
-    const {cloth, user, comments, commentsArray} = this.state
+    const {cloth, user, comments, commentsArray, contactModalOpen, text} = this.state
     //* Variable of images from articles user posted
     const images = user.createdArticles.map(image => {return {image: image.image, id: image._id}})
     // Current users Id
     const userId = user._id
     // console.log(userId)
     const clothId = cloth._id
-    // console.log(user)
+    console.log('current message:', text)
     return (
       <>
         <section className="hero is-light">
@@ -141,6 +169,10 @@ class ClothesShow extends React.Component {
               onSecondClick={this.handleSecondClick}
               onClick={this.handleFavouriteSubmit}
               clothId={clothId}
+              toggleContact={this.toggleContactModal}
+              contactModalOpen={contactModalOpen}
+              handleContactChange={this.handleContactChange}
+              handleContactSubmit={this.handleContactSubmit}
               />
             </div>
           </div>

@@ -1,12 +1,15 @@
 import React from 'react'
-import {Link} from 'react-router-dom'
+import { Link } from 'react-router-dom'
 
 import UserClothCard from './UserClothCard'
 import EditProfile from './EditProfile'
+
+
 import { getProfile, editProfile } from '../../lib/api'
 import { getPostcodeInfo } from '../../lib/ext_api'
-import avatar from '../assets/avatar.png'
+
 import Comments from '../common/Comments'
+import StarRating from '../common/StarRating'
 
 // ! User profile, GETs data for user on mount
 class UserProfile extends React.Component {
@@ -16,22 +19,29 @@ class UserProfile extends React.Component {
     latitude: '',
     longitude: '',
     modalOpen: false,
-    commentsArray: []
+    commentsArray: [],
+    rating: 0
   }
 
 
   // * Function to GET the users details
   async componentDidMount() {
     try {
-      const res = await getProfile()
-      console.log(res.data)
-      this.setState({ user: res.data, commentsArray: res.data.comments })
-      this.getLocation()
+     await this.getUserDashboard()
     } catch (err) {
       console.log(err)
     }
   }
 
+  async getUserDashboard() {
+  try {
+    const res = await getProfile()
+    this.setState({ user: res.data, commentsArray: res.data.comments })
+    this.getLocation()
+  } catch (err) {
+    console.log(err)
+  }
+  }
 
   //* Function to find user location details
   async getLocation() {
@@ -47,15 +57,19 @@ class UserProfile extends React.Component {
 
 
   //* Function to allow user to upload a profile picture
-  handleChange = event => {
-    const user = { ...this.state.user, profilePic: event.target.value }
-    this.setState({ user })
+  handleChange = (event) => {
+    this.setState(prevState => ({
+      user: {
+        ...prevState.user,
+        profilePic: event.target.value
+      }
+    }))
   }
-  
 
- async handleSubmit() {
+  //* Function for PUT request to update profile picture
+  handleSubmit = async event => {
+    event.preventDefault()
     try {
-      console.log(this.state.user);
       const res = await editProfile(this.state.user)
       console.log('submit event res', res)
     } catch (err) {
@@ -74,10 +88,13 @@ class UserProfile extends React.Component {
   // * Function to push the user to clothes add page if they want to add a new item 
   handleAddClothes = () => {
     const user = this.props.match.params.username
-    console.log(user);
     this.props.history.push(`/profile/${user}/add`)
   }
 
+  // * Star Rating Function
+  onStarClick = () => {
+    console.log('clicked')
+  }
 
 
 
@@ -87,10 +104,13 @@ class UserProfile extends React.Component {
     const { username, createdArticles, profilePic } = this.state.user
     const { commentsArray } = this.state
     const location = this.state.location
+    
+    console.log('state is', this.state.user);
+
 
     return (
       <>
-       <div className="Page-head">
+        <div className="Page-head">
           <div className="Page-title">
             <h1>My Profile</h1>
           </div>
@@ -105,13 +125,8 @@ class UserProfile extends React.Component {
 
                 {/* Section for avatar or profile pic need to change to allow to change the file  & so appears over the form appears over the avatar on hover */}
 
-                <div className="profile-img">
-                  {profilePic ?
-                    <img src={profilePic} alt="profile pic" />
-                    :
-                    <img src={avatar} alt="avatar" />
-
-                  }
+                <div className="profile-img image is-128x128">
+                  <img src={profilePic} alt="profile pic" />
                   <button onClick={this.toggleModal}
                     className="button is-profile-btn"
                   >Change Profile Picture</button>
@@ -120,7 +135,7 @@ class UserProfile extends React.Component {
                   toggleModal={this.toggleModal}
                   modalOpen={this.state.modalOpen}
                   onChange={this.handleChange}
-
+                  onSubmit={this.handleSubmit}
                 />
 
 
@@ -130,32 +145,49 @@ class UserProfile extends React.Component {
                   <h6 className="subtitle">{location}</h6>
                   {/* //! NEED TO ADD STAR RATINGS HERE  */}
                   <p>Star Rating</p>
+                  <StarRating 
+                  onStarClick={this.onStarClick}
+                  rating={this.state.rating}
+                  />
                   <hr />
                 </div>
                 <button className="button is fullwidth"
                   onClick={this.handleAddClothes}
                 >Add Clothes Now</button>
-                <hr/>
+                <hr />
                 <div>
-                  <Link to={`/profile/${username}/friends`} className="button">Favourite User</Link>
+                  <Link to={`/profile/${username}/friends`} className="button">Friends</Link>
                 </div>
-                <hr/>
+                <hr />
                 <div>
-                  <Link to={`/profile/${username}/favourites`} className="button">Favourite Items</Link>
+                  <Link to={`/profile/${username}/favourites`} className="button">Favourite</Link>
                 </div>
               </div>
 
 
               {/* Map over the clothes the user has uploaded - need to work on the positioning of this - need to add to allow user to edit / delete items */}
               <div className="column is-multiline is-user-clothes">
-                <div className="control">
-                  {createdArticles.map(item =>
-                    <UserClothCard
-                      {...item}
-                      key={item._id}
-                      name={profilePic}
-                    />
-                  )}
+                <div className="users-articles has-text-centered">
+                  <hr />
+                  <h2>YOUR ITMES</h2>
+                  <hr />
+                  {/* Ternary with text showing if no articles been created yet  */}
+                  {(createdArticles.length === 0) ?
+                    <div className="container">
+                      <h1>Looks like you haven't uploaded anthing yet.</h1>
+                      <p> Why don't you add some clothes now? <br /> Or browse the clothes that are on offer? </p>
+                    </div>
+                    :
+
+                    <div className="control">
+                      {createdArticles.map(item =>
+                        <UserClothCard
+                          {...item}
+                          key={item._id}
+                        />
+                      )}
+                    </div>
+                  }
                 </div>
               </div>
               {/* Notifications / chat section */}
@@ -164,24 +196,17 @@ class UserProfile extends React.Component {
           </div>
             </div>
           </div>
-          {/* Map section - which will show pins user has added - need to link to items of clothing / shops somehow  */}
-          {/* <div className="control">
-            Map to allow users to save locations - linked from searches on clothes show page maybe */}
-          {/* <Map
-              latitude={this.state.latitude}
-              longitude={this.state.longitude} /> */}
-          {/* </div> */}
         </section>
         <section>
-        <div>
-          {commentsArray.map(comment => (
-            <Comments
-              key={comment._id}
-              comment={comment}
-            />
-          ))}
-        </div>
-      </section>
+          <div>
+            {commentsArray.map(comment => (
+              <Comments
+                key={comment._id}
+                comment={comment}
+              />
+            ))}
+          </div>
+        </section>
       </>
     )
   }
