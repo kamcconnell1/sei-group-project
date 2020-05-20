@@ -2,7 +2,6 @@ import React from 'react'
 import PostCards from '../posts/PostsCards'
 import { getAllPosts, createPost, deleteAPost } from '../../lib/api'
 import { isOwner, isAuthenticated } from '../../lib/auth'
-
 class Posts extends React.Component {
   state = {
     posts: null,
@@ -12,7 +11,6 @@ class Posts extends React.Component {
       photo: ''
     }
   }
-
   async componentDidMount() {
     try {
       this.pageSetup()
@@ -20,7 +18,6 @@ class Posts extends React.Component {
       console.log(err)
     }
   }
-
   pageSetup = async () => {
     try {
       const res = await getAllPosts()
@@ -30,12 +27,10 @@ class Posts extends React.Component {
       console.log(err)
     }
   }
-
   handleChange = e => {
     const input = { ...this.state.input, [e.target.name]: e.target.value }
     this.setState({ input })
   }
-
   handleSubmit = async e => {
     e.preventDefault()
     try {
@@ -46,13 +41,11 @@ class Posts extends React.Component {
       console.log(err)
     }
   }
-
   deletePost = async e => {
     console.log(e.target.value)
     await deleteAPost(e.target.value)
     await this.pageSetup()
   }
-
   render() {
     if (!this.state.posts) return null
     return (

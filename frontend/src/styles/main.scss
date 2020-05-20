@@ -52,11 +52,11 @@
   width: 60vw;
   .Page-title {
     color: var(--title-color);
-    font-size: 70px;
+    font-size: 30px;
   }
   .Page-subtitle {
     color: var(--subtite-color);
-    font-size: 40px;
+    font-size: 15px;
   }
 }
 
@@ -66,7 +66,7 @@
   min-width: 100vh;
   }
 
- 
+
 .Navbar {
   height: 10vh;
   display: flex;
@@ -76,7 +76,7 @@
   .Navbar-item {
     color: inherit;
     margin: -100px 1%;
-    font-size: 30px;
+    font-size: 15px;
     font-weight: 500;
   }
   .navbar-item {
@@ -109,11 +109,11 @@
 //? HOME
 .Home {
   h1 {
-    font-size: 100px;
+    font-size: 40px;
     font-weight: bold;
   }
   h2 {
-    font-size: 50px;
+    font-size: 30px;
     font-weight: 200;
   }
 }
@@ -133,11 +133,11 @@
     }
   }
   .Title {
-    font-size: 40px;
+    font-size: 15px;
     margin: 20px;
   }
   .Subtitle {
-    font-size: 25px;
+    font-size: 10px;
   }
 }
 
@@ -155,10 +155,10 @@
   top: var(--main-start-point);
   .Post-form {
     .Post-input {
-      padding: 30px 100px;
+      padding: 15px 100px;
     }
     .Post-btn {
-      padding: 30px 60px;
+      padding: 15px 30px;
       background-color: var(--btn-color);
     }
   }
@@ -187,6 +187,8 @@
     margin: 50px 20px 0 0;
     border-radius: 10px; 
     .map-map {
+      max-height: 300px;
+
       #mapboxgl-control-continer {
         position: fixed;
         bottom: 100px;
@@ -198,6 +200,7 @@
   .map-pins {
     width: 300px;
     .pincard {
+      font-size: 10px;
       text-align: center;
       background-color: white;
       margin: 30px;
