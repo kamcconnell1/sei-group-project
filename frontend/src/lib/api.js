@@ -45,6 +45,10 @@ export const getProfile = () => {
 export const editProfile = user => {
   return axios.put(`${kebb_url}/profile`, user, withHeaders())
 }
+//* DELETE request to delete user profile
+export const deleteProfile = () => {
+  return axios.delete(`${kebb_url}/deleteUser`, withHeaders())
+}
 // * GET to show specific user (no need to be logged in)
 export const getUserProfile = id => {
   return axios.get(`${kebb_url}/profile/${id}`)

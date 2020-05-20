@@ -48,6 +48,9 @@ router.route('/profile')
 router.route('/profile/:id')
   .get(user.getProfile)
 
+router.route('/deleteUser')
+  .delete(secureRoute, user.deleteUser)
+
 //* Add Comment to specifc profile
 router.route('/profile/:id/comments')
   .post(secureRoute, user.commentCreate)
