@@ -7,7 +7,7 @@ const { notFound, unauthorized } = require('../lib/errorMessages')
 //* ERROR tested
 async function postsIndex(req, res, next) {
   try {
-    const posts = await Post.find().populate('user').populate('comments.user')
+    const posts = await Post.find().populate('user')
     if (!posts) throw new Error(notFound)
     res.status(200).json(posts)
   } catch (err) {
@@ -34,7 +34,7 @@ async function postsCreate(req, res, next) {
 async function postsShow(req, res, next) {
   const postId = req.params.id
   try {
-    const post = await Post.findById(postId).populate('user')
+    const post = await Post.findById(postId).populate('comments.user').populate('user')
     if (!post) throw new Error(notFound)
     res.status(200).json(post)
   } catch (err) {

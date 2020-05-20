@@ -72,6 +72,7 @@ class PostsShow extends React.Component {
     const edited = post.createdAt.split('T')
     const date = edited[0]
     const time = edited[1].split('.')[0]
+    console.log(commentsArray)
     return (
       <>
         <section className="hero is-light">

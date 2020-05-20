@@ -1,11 +1,7 @@
 import React from 'react'
 import PostCards from '../posts/PostsCards'
-import { getAllPosts, createPost } from '../../lib/api'
-import { Link } from 'react-router-dom'
-
 import { getAllPosts, createPost, deleteAPost } from '../../lib/api'
 import { isOwner, isAuthenticated } from '../../lib/auth'
-import { Link } from 'react-router-dom'
 
 class Posts extends React.Component {
   state = {

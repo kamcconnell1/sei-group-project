@@ -6,6 +6,7 @@ import EditProfile from './EditProfile'
 import { getProfile, editProfile } from '../../lib/api'
 import { getPostcodeInfo } from '../../lib/ext_api'
 import avatar from '../assets/avatar.png'
+import Comments from '../common/Comments'
 
 // ! User profile, GETs data for user on mount
 class UserProfile extends React.Component {
@@ -14,7 +15,8 @@ class UserProfile extends React.Component {
     location: '',
     latitude: '',
     longitude: '',
-    modalOpen: false
+    modalOpen: false,
+    commentsArray: []
   }
 
 
@@ -22,7 +24,8 @@ class UserProfile extends React.Component {
   async componentDidMount() {
     try {
       const res = await getProfile()
-      this.setState({ user: res.data })
+      console.log(res.data)
+      this.setState({ user: res.data, commentsArray: res.data.comments })
       this.getLocation()
     } catch (err) {
       console.log(err)
@@ -82,6 +85,7 @@ class UserProfile extends React.Component {
     if (!this.state.user || !this.state.location) return null
     // consts taken from state to populate user data shown on the page
     const { username, createdArticles, profilePic } = this.state.user
+    const { commentsArray } = this.state
     const location = this.state.location
 
     return (
@@ -160,6 +164,16 @@ class UserProfile extends React.Component {
               longitude={this.state.longitude} /> */}
           {/* </div> */}
         </section>
+        <section>
+        <div>
+          {commentsArray.map(comment => (
+            <Comments
+              key={comment._id}
+              comment={comment}
+            />
+          ))}
+        </div>
+      </section>
       </>
     )
   }

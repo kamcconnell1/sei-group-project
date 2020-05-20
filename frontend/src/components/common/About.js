@@ -18,10 +18,10 @@ class About extends React.Component {
             <div className="container">
               <h1 className="title">
                 KEBB Clothes
-           </h1>
+              </h1>
               <h2 className="subtitle">
                 A place to borrow, lend & be inspired.
-      </h2>
+              </h2>
             </div>
           </div>
         </section>
@@ -45,7 +45,7 @@ class About extends React.Component {
                     <li>See something you like? Drop the owner a direct message requesting to borrow</li>
                     <li>Upload your on clothes & start making money on your wardobe.</li>
                   </ul>
-                  <img src="https://lh3.googleusercontent.com/proxy/34ciFi1bLpunFzRFL2tACkTvInTCQXFHrzx6C2FqrSHtT-U2aPO5jTlYw_PvaIgbNuHE027Oie_izY9XUGaJ3DBX0rxqBmQ_lB_q4zNWtNACh9lUuk2mMBObUbhui9c20rTq-F8m6aijhWGfY6KJhsVD0BezerWM04d7" alt="clothes" />
+                  <img src="https://res.cloudinary.com/dsz79ulhu/image/upload/v1589934417/my_images/658124F8-ABEF-4B34-8D46-AD1BE0156CCA_cqp4tt.jpg" alt="clothes" />
                 </div>
               </div>
             </div>

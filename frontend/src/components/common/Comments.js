@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { isAuthenticated } from '../../lib/auth'
+import { isAuthenticated, isOwner } from '../../lib/auth'
 
 const Comments = ({ comment, deleteComment }) => {
 
@@ -18,8 +18,8 @@ const Comments = ({ comment, deleteComment }) => {
           <p className="date-on-comment">{time} {date}</p>
         </div>
         <div className="review-buttons-div">
-         {isAuthenticated() && <button onClick={deleteComment
-          } value={comment._id} >Delete</button> }
+          <button onClick={deleteComment
+          } value={comment._id} >Delete</button>
         </div>
       </div>
     </section >
