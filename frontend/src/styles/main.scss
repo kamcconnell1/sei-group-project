@@ -94,6 +94,9 @@
   height: 10vh;
   display: flex;
   justify-content: center;
+  align-items: center;
+  padding:0;
+
   // background-color: rgb(198, 187, 200);
 }
 
@@ -220,6 +223,144 @@
 }
 
 
+//? USER PROFILE - MY PROFILE PAGE 
+.My-profile {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.My-profile-top-row {
+  display: flex;
+  background-color: rgba(var(--navbar-color), 0.3);
+  align-items: center;
+
+  .Photo-delete-rating {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 30%;
+    margin: 20px;
+  }
+  .Welcome {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 70%;
+  }
+}
+.My-profile-columns {
+display: flex;
+  .Left-col {
+    display: flex;
+    flex-direction: column;
+    width: 20%;
+  }
+  .Center-col {
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+  }
+  .Right-col {
+    width: 2  0%;
+    display: flex;
+  flex-direction: column;
+  }
+}
+
+
+ button.is-profile-btn {
+   position: absolute;
+   top: 50%;
+   left: 50%;
+   transform: translate(-50%, -50%);
+   background-color: #555;
+    color: white;
+    font-size: 8px;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+ }
+
+
+.profile-img {
+  width: 200px;
+  height: 100px;
+  z-index: 0;
+  img {
+    width: 100%;
+  height: auto;
+  border-radius: 70px;
+
+  } 
+}
+
+.My-items-index {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  .My-items-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 5px 5px;
+    width: 150px;
+    height: 150px;
+    .img img {
+      margin: 0;
+      max-height: 150px;
+      max-width: auto;
+      object-fit: cover;
+      z-index: 0;
+      box-sizing: content-box;
+    }
+    .Card-text {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 60px;
+      width: 100%;
+      position: relative;
+      bottom: 60px;
+      z-index: 1;
+      background-color: rgba(var(--navbar-color), 0.3);
+      .Title {
+        font-size: 12px;
+      }
+      .Subtitle {
+        font-size: 10px;
+      }
+    }
+  }
+}
+
+
+
+div.is-profile-info {
+  border: 1px solid black;
+}
+
+div.is-user-clothes {
+  border: 1px solid black;
+}
+div.is-user-chat{
+  border: 1px solid black;
+}
+
+
+// .sidebar {
+//   width:30%;
+//   height: 100%;
+//   top: 200px;
+//   left: 0;
+//   overflow: hidden;
+//   border-right: 1px solid rgab(0, 0, 0, 0.25)
+// }
+
+
+
 // ?------------------------------- Clothing Pages --------------------------------------------------------
 // ? SLIDE IMAGE - SHOW PAGE 
 .slide-container {
@@ -249,47 +390,6 @@ h3 {
 
 
 
-//? ------------------------------- User Pages --------------------------------------------------------
-//? USER PROFILE PAGE 
-div.is-profile-info {
-  border: 1px solid black;
-}
-      div.profile-img {
-        position: relative;
-        width: 50%;
-       img {
-         width: 100%;
-         height: auto;
-       }
-       button.is-profile-btn {
-         position: absolute;
-         top: 50%;
-         left: 50%;
-         transform: translate(-50%, -50%);
-         background-color: #555;
-          color: white;
-          font-size: 8px;
-          border: none;
-          cursor: pointer;
-          border-radius: 5px;
-       }
-      }
-div.is-user-clothes {
-  border: 1px solid black;
-}
-div.is-user-chat{
-  border: 1px solid black;
-}
-
-
-// .sidebar {
-//   width:30%;
-//   height: 100%;
-//   top: 200px;
-//   left: 0;
-//   overflow: hidden;
-//   border-right: 1px solid rgab(0, 0, 0, 0.25)
-// }
 
 
 //? ------------------------------- Bulma Variables ------------------------------------------------------
