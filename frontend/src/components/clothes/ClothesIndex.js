@@ -94,33 +94,33 @@ class ClothesIndex extends React.Component {
         return (
           item.category.includes(category) &&
           item.color.includes(color)
-          )
+        )
       } else if (category && gender && !color && !size) {
         item.category.includes(category) &&
-        item.genderCategory.includes(gender)
+          item.genderCategory.includes(gender)
       }
-      else  
-      return (
-        item.category.includes(category) ||
-        item.color.includes(color) ||
-        item.genderCategory.includes(gender) ||
-        item.size.includes(size)
-      )
+      else
+        return (
+          item.category.includes(category) ||
+          item.color.includes(color) ||
+          item.genderCategory.includes(gender) ||
+          item.size.includes(size)
+        )
     })
     this.setState({ filteredItemsToDisplay })
   }
 
   filterChange = event => {
-    const {filteredClothes} = this.state
+    const { filteredClothes } = this.state
     const showFilter = event.value
     if (filteredClothes.length > 0) {
       const filteredCats = filteredClothes.filter(cloth => {
         const regex = RegExp(showFilter, 'i')
-        return (cloth.category.match(regex) || cloth.color[0].match(regex) || cloth.genderCategory.match(regex) || cloth.size.match(regex)) 
+        return (cloth.category.match(regex) || cloth.color[0].match(regex) || cloth.genderCategory.match(regex) || cloth.size.match(regex))
       })
-      this.setState({filteredClothes: filteredCats})
+      this.setState({ filteredClothes: filteredCats })
       console.log(event.value)
-    } else {return 'unavailable'}
+    } else { return 'unavailable' }
 
   }
 
@@ -141,7 +141,7 @@ class ClothesIndex extends React.Component {
     console.log('Filtered clothes:', filteredClothes)
     console.log('Item to display:', filteredItemsToDisplay)
 
-  
+
 
     console.log(filteredClothes)
 
@@ -165,7 +165,7 @@ class ClothesIndex extends React.Component {
     // ! Needs to include range filter to filter price - Benga
     return (
       <>
-       <div className="Page-head">
+        <div className="Page-head">
           <div className="Page-title">
             <h1>KEBB Clothes</h1>
           </div>
@@ -173,39 +173,33 @@ class ClothesIndex extends React.Component {
             <h2>Latest Items</h2>
           </div>
         </div>
-      <div className="Latest column-center">
-        <div className="column is-one-quarter">
-          <form>
-            <input
-              className="input"
-              type="text"
-              placeholder="Search for Category, Name and User"
-              value={searchClothes}
-              onChange={this.handleChange}
+        <div className="Latest column-center">
+          <div className="Clothes-filter">
+            <ClothesFilter
+              category={categoryOption}
+              color={colorOption}
+              gender={genderOption}
+              sizes={sizeOption}
+              handleCategoryFilter={(e) => this.handleFilter(e, "category")}
+              handleColorFilter={(e) => this.handleFilter(e, "color")}
+              handleGenderFilter={(e) => this.handleFilter(e, "gender")}
+              handleSizeFilter={(e) => this.handleFilter(e, "size")}
             />
-          </form>
-        </div>
-        <section className="section is-dark">
-          <div className="container">
-            <div className="columns">
-              <ClothesFilter
-                category={categoryOption}
-                color={colorOption}
-                gender={genderOption}
-                sizes={sizeOption}
-                handleCategoryFilter={(e) => this.handleFilter(e, "category")}
-                handleColorFilter={(e) => this.handleFilter(e, "color")}
-                handleGenderFilter={(e) => this.handleFilter(e, "gender")}
-                handleSizeFilter={(e) => this.handleFilter(e, "size")}
+            <form>
+              <input
+                className="input"
+                type="text"
+                placeholder="Search for Category, Name and User"
+                value={searchClothes}
+                onChange={this.handleChange}
               />
-            </div>
+            </form>
           </div>
-        </section>
-        <div className="columns is-multiline">
-          { (filteredItemsToDisplay.length) > 0 ? filteredItemsToDisplay.map(cloth => <ClothCard {...cloth} key={cloth._id} />) :  filteredClothes.map((cloth) => (
-            <ClothCard {...cloth} key={cloth._id} />
-          ))}
-        </div>
+          <div className="Clothes-index">
+            {(filteredItemsToDisplay.length) > 0 ? filteredItemsToDisplay.map(cloth => <ClothCard {...cloth} key={cloth._id} />) : filteredClothes.map((cloth) => (
+              <ClothCard {...cloth} key={cloth._id} />
+            ))}
+          </div>
         </div>
       </>
     )

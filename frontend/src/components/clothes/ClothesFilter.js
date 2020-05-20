@@ -13,35 +13,27 @@ const ClothesFilter = ({
 }) => {
   return (
     <>
-      <div className=" filter column is-one-quarter">
-        <Select
+        <Select className="Clothes-select"
           options={category}
           placeholder={"Categories"}
           onChange={handleCategoryFilter}
           name="category"
         />
-      </div>
-      <div className=" filter column is-one-quarter">
-        <Select
+        <Select className="Clothes-select"
           options={color}
           placeholder={"Colors"}
           onChange={handleColorFilter}
         />
-      </div>
-      <div className=" filter column is-one-quarter">
-        <Select
+        <Select className="Clothes-select"
           options={gender}
           placeholder={"Genders"}
           onChange={handleGenderFilter}
         />
-      </div>
-      <div className=" filter column is-one-quarter">
-        <Select
+        <Select className="Clothes-select"
           options={sizes}
           placeholder={"Size"}
           onChange={handleSizeFilter}
         />
-      </div>
     </>
   )
 }
