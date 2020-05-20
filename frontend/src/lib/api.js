@@ -61,22 +61,33 @@ export const postPin = formData => {
 export const removePin = id => {
   return axios.delete(`${kebb_url}/pins/${id}`, withHeaders())
 }
+// * GET all users favourites
+export const allUsersFavourites = () => {
+  return axios.get(`${kebb_url}/favourites`, withHeaders())
+}
 // * POST Favourites to users favourite
 export const postFavorite = data => {
   return axios.post(`${kebb_url}/favourites/article`, data, withHeaders())
 }
-// * GET all users favourites
-export const allUsersFavourites = () => {
-  return axios.get(`${kebb_url}/favourites`, withHeaders())
+//* DELETE Favourites from articleFavs
+export const deleteArticleFromFavs = id => {
+  return axios.delete(`${kebb_url}/favourites/article/${id}`, withHeaders())
 }
 // * POST user to Friends favourite
 export const postFavoriteFriend = data => {
   return axios.post(`${kebb_url}/favourites/friends`, data, withHeaders())
 }
-
+//* DELETE user fav
+export const deleteFriend = id => {
+  return axios.delete(`${kebb_url}/favourite/friend/${id}`, withHeaders())
+}
 // * POST post to users favourites
 export const postFavoritePost = data => {
   return axios.post(`${kebb_url}/favourites/posts`, data, withHeaders())
+}
+//* DELETE post from users favs
+export const deletePostFromFavs = id => {
+  return axios.delete(`${kebb_url}/favourites/posts/${id}`, withHeaders())
 }
 
 //*POST comment on USER
