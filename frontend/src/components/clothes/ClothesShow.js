@@ -15,7 +15,8 @@ class ClothesShow extends React.Component {
     },
     commentsArray: [],
     contactModalOpen: false,
-    text: ''
+    text: '', 
+    rating: 2
   }
 
   // * GET each clothing item on mount via Id
@@ -127,6 +128,14 @@ class ClothesShow extends React.Component {
     }
   }
 
+//* StarRating function
+onStarClick(nextValue, prevValue, name) {
+  // console.log(nextValue);
+  
+  console.log('name: %s, nextValue: %s, prevValue: %s', name, nextValue, prevValue);
+  // this.setState({rating: nextValue});
+}
+
   render() {
     if (!this.state.cloth) return <h1>Even more Ninjas are working on this</h1>
     const {cloth, user, comments, commentsArray, contactModalOpen } = this.state
@@ -169,6 +178,8 @@ class ClothesShow extends React.Component {
               contactModalOpen={contactModalOpen}
               handleContactChange={this.handleContactChange}
               handleContactSubmit={this.handleContactSubmit}
+              onStarClick={this.onStarClick}
+              rating={this.state.rating}
               />
             </div>
           </div>

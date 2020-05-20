@@ -66,6 +66,8 @@ class userShowProfile extends React.Component {
       const addToList = await { ...this.state.friend, [e.target.name]: e.target.value }
       console.log(addToList)
       const res = await postFavoriteFriend(addToList)
+      console.log(res.data)
+      console.log('sent')
     } catch (err) {
       console.log(err)
     }
@@ -125,7 +127,7 @@ class userShowProfile extends React.Component {
           </div>
           <div className="columns">
           <div className="column">
-            {isAuthenticated() && <button name="friend" value={user._id} onClick={this.handleFriendSubmit} className="button is-primary">Add Friend</button>}
+            {isAuthenticated() && <button name="friend" value={user._id} onClick={this.handleFriendSubmit} className="button is-primary">Follow</button>}
           </div>
           <div className="column">
             {isAuthenticated() && <button onClick={this.toggleContactModal} className="button is-primary">Message</button>}

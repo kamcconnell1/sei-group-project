@@ -1,6 +1,5 @@
 import React from 'react'
 
-import { avatarArr } from '../common/Images'
 import { uploadClothesImage } from '../../lib/ext_api'
 import ImageUpload from '../common/ImageUpload'
 

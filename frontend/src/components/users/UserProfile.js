@@ -2,7 +2,7 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import UserClothCard from './UserClothCard'
 import EditProfile from './EditProfile'
-import { getProfile, editProfile, deleteProfile } from '../../lib/api'
+import { getProfile, editProfile, deleteProfile, inboxMessage } from '../../lib/api'
 import { logout } from '../../lib/auth'
 import { getPostcodeInfo } from '../../lib/ext_api'
 import Comments from '../common/Comments'
@@ -16,12 +16,14 @@ class UserProfile extends React.Component {
     longitude: '',
     modalOpen: false,
     commentsArray: [],
-    rating: 0
+    rating: 0,
+    messages: null
   }
   // * Function to GET the users details
   async componentDidMount() {
     try {
       await this.getUserDashboard()
+      await this.getInbox()
     } catch (err) {
       console.log(err)
     }
@@ -35,6 +37,19 @@ class UserProfile extends React.Component {
       console.log(err)
     }
   }
+
+  // * Function to GET incoming messages
+  async getInbox() {
+    try {
+      const res = await inboxMessage()
+      this.setState({ messages: res.data })
+    } catch (err) {
+      console.log(err)
+    }
+  }
+
+
+
   //* Function to find user location details
   async getLocation() {
     try {
@@ -79,10 +94,10 @@ class UserProfile extends React.Component {
 
   //* Delete Profile
   deleteUserProfile = async e => {
-    try{
-    await deleteProfile()
-    await logout()
-    this.props.history.push(`/`)
+    try {
+      await deleteProfile()
+      await logout()
+      this.props.history.push(`/`)
     } catch (err) {
       console.log(err)
     }
@@ -96,19 +111,16 @@ class UserProfile extends React.Component {
   onStarClick = () => {
     console.log('clicked')
   }
-  
+
   render() {
-    if (!this.state.user || !this.state.location) return null
+    if (!this.state.user || !this.state.location || !this.state.messages) return null
     // consts taken from state to populate user data shown on the page
     const { username, createdArticles, profilePic } = this.state.user
-    const { commentsArray } = this.state
+    const { commentsArray, messages } = this.state
     const location = this.state.location
-<<<<<<< HEAD
+    console.log(messages)
 
 
-=======
-    console.log('state is', this.state.user);
->>>>>>> development
     return (
       <>
         <div className="Page-head">
@@ -140,7 +152,7 @@ class UserProfile extends React.Component {
                 <div className="control">
                   <h5 className="title">Welcome {username}</h5>
                   <h6 className="subtitle">{location}</h6>
-                  <button onClick={() => {if (window.confirm("Are you sure?")) this.deleteUserProfile()}} className="button is-danger">Delete</button>
+                  <button onClick={() => { if (window.confirm("Are you sure?")) this.deleteUserProfile() }} className="button is-danger">Delete</button>
                   {/* //! NEED TO ADD STAR RATINGS HERE  */}
                   <p>Star Rating</p>
                   <StarRating
@@ -187,7 +199,14 @@ class UserProfile extends React.Component {
               </div>
               {/* Notifications / chat section */}
               <div className="column is-3 is-user-chat">
-                Incoming Notifications
+                Messages
+                <div>
+                  {messages.map(message => 
+                    <div key={message._id}>
+                      <p>{message.text}</p>
+                    </div>
+                    )}
+                </div>
           </div>
             </div>
           </div>

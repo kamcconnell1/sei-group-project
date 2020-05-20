@@ -12,7 +12,7 @@ class PostsShow extends React.Component {
       text: ''
     },
     commentsArray: [],
-    item: ''
+    posts: ''
   }
 
   async componentDidMount() {
@@ -57,13 +57,13 @@ class PostsShow extends React.Component {
   // * Handle Favourite submit
   handleFavouriteSubmit =  async e => {
     try {
-      const addToList = await { ...this.state.item, [e.target.name]: e.target.value }
-      console.log(addToList)
+      const addToList = await { ...this.state.posts, [e.target.name]: e.target.value }
+      console.log('Post Id:',addToList)
       const res = await postFavoritePost(addToList)
-      console.log('res sent:',res)
+      console.log('res sent:',res.data)
       console.log('sent')
     } catch (err) {
-      console.log(err)
+      // console.log(err)
     }
   }
 
@@ -99,7 +99,7 @@ class PostsShow extends React.Component {
           <p>{post.text}</p>
           <Link to={`/page/${post.user._id}`}><p>Created by: {post.user.username}</p> </Link>
           <p>{date} {time}</p>
-          <button name="item" value={post._id} onClick={this.handleFavouriteSubmit} className="button">Add to Favourites</button>
+          <button name="posts" value={post._id} onClick={this.handleFavouriteSubmit} className="button">Add to Favourites</button>
           {!isOwner && <Link to={`/posts/${post._id}/edit`}><button>Edit</button></Link>}
         </section>
         {isAuthenticated && <section>

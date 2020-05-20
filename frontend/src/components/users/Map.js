@@ -1,8 +1,7 @@
 import 'mapbox-gl/dist/mapbox-gl.css'
 import "mapbox-gl/dist/mapbox-gl.css"
 import React from 'react'
-import MapGl, { Marker, Popup, FlyToInterpolator } from 'react-map-gl'
-// import DeckGL, { GeoJsonLayer } from 'deck.gl'
+import MapGl, { Marker, Popup } from 'react-map-gl'
 import Geocoder from 'react-map-gl-geocoder'
 import Pins from '../pins/pins'
 import PinCard from '../pins/PinCard'
@@ -21,26 +20,17 @@ class Map extends React.Component {
     longitude: ''
   }
 
-  //This is required as a paramter for Geocode to work
+  //* This is required as a paramter for Geocode to work
   myMap = React.createRef()
 
-  //This function continuously sets state as you move the viewport
+  //* This function continuously sets state as you move the viewport
   handleViewportChange = viewport => {
     this.setState({
       viewport: { ...this.state.viewport, ...viewport }
     })
   }
-  goToViewport = ({ longitude, latitude }) => {
-    this.handleViewportChange({
-      longitude,
-      latitude,
-      zoom: 12,
-      transitionInterpolator: new FlyToInterpolator({ speed: 1.2 }),
-      transitionDuration: 'auto'
-    })
-  }
 
-  // Sets state based on the lat / long the viewport has landed on & opens the pin form modal when you add pin. Callback function passes lat / long back up to parent
+  // * Sets state based on the lat / long the viewport has landed on & opens the pin form modal when you add pin. Callback function passes lat / long back up to parent
   handleDropPin = event => {
     const latitude = (this.state.viewport.latitude)
     const longitude = (this.state.viewport.longitude)
@@ -50,36 +40,38 @@ class Map extends React.Component {
     })
   }
 
+  //* Sets state based on which marker you click on
 onClickMarker = (pin) => {
-  console.log('clicked')
   this.setState({popupInfo: pin})
 }
 
-
-renderPopup() {
+//* Popup details
+renderPopup(props) {
   const {popupInfo} = this.state
   
   return (
     popupInfo && (
       <Popup 
       tipSize={5}
-      longitude={popupInfo.longitude}
-      latitude={popupInfo.latitude}
+      longitude={parseFloat(popupInfo.longitude)}
+      latitude={parseFloat(popupInfo.latitude)}
       closeOnClick={false}
       onClose={() => this.setState({popupInfo: null})}
       >
-      <PinCard info={popupInfo}/ >
+      <PinCard 
+      info={popupInfo}
+      deletePin={this.props.onClickDelete}
+      / >
       </Popup>
     )
-
-
   )
 }
 
+
+
   render() {
     const pins = (this.props.pins)
-    const { viewport, popupInfo } = this.state
-console.log(popupInfo);
+    const { viewport } = this.state
 
     return (
       <>
@@ -91,20 +83,21 @@ console.log(popupInfo);
           onViewportChange={this.handleViewportChange}
           mapboxApiAccessToken={process.env.REACT_APP_MAPBOX_ACCESS_TOKEN}
           mapStyle='mapbox://styles/mapbox/light-v10'
-          // onClick={() => this.goToViewport(viewport.longitude, viewport.latitude)}
         >
           <Geocoder
             mapRef={this.myMap}
             onViewportChange={this.handleViewportChange}
             mapboxApiAccessToken={process.env.REACT_APP_MAPBOX_ACCESS_TOKEN}
             position="top-left" />
+            
             <Pins 
             data={pins}
             onClick={this.onClickMarker}
             />
-            {this.renderPopup()}
-
-          {/* //! If you comment below back in it is a pin to highlight user location - helpful when adding pins */}
+            
+  {this.renderPopup()}
+  
+          {/* Pin to show where user is zooming to */}
           <Marker
             className=""
             {...viewport} >

@@ -1,9 +1,8 @@
 import React from 'react'
 
-import GeoCodeMap from './GeoCodeMap'
+import Map from './Map'
 
 import PinForm from '../pins/PinForm'
-import PinCard from '../pins/PinCard'
 
 import { postPin, getProfile, removePin } from '../../lib/api'
 
@@ -53,7 +52,7 @@ class UserMap extends React.Component {
     }))
   }
 
-  //Function for written input in the pin form
+  //* Function for written input in the pin form
   handleChange = event => {
     const formData = { ...this.state.formData, [event.target.name]: event.target.value }
     const errors = { ...this.state.errors, [event.target.name]: '' }
@@ -61,13 +60,13 @@ class UserMap extends React.Component {
   }
 
 
-  //Function to toggle the modal pin form open or close when user drops pin
+  //* Function to toggle the modal pin form open or close when user drops pin
   toggleModal = () => {
     this.setState({ modalOpen: !this.state.modalOpen })
   }
 
 
-  // handleSubmit event for submitting the registration form
+  //* handleSubmit event for submitting the registration form
   handleSubmit = async event => {
     event.preventDefault()
     try {
@@ -80,7 +79,7 @@ class UserMap extends React.Component {
     }
   }
 
-  // handleDelete on the pin
+  //* handleDelete on the pin
   deletePin = async e => {
     try {
       await removePin(e.target.value)
@@ -88,7 +87,6 @@ class UserMap extends React.Component {
     } catch (err) {
       console.log(err)
     }
-
   }
 
   numberOfPins = () => {
@@ -110,33 +108,17 @@ class UserMap extends React.Component {
           </div>
         </div>
 
-        {/* Ternary with text showing if no pins have been saved yet  */}
         <div className="pin-details">
 
-          {(pins.length === 0) ?
-            <div className="container">
-                <h1>Looks like you haven't saved any locations yet, add now.</h1>
-                </div>
-               :
-              <div className="map-pins">
-                {pins.map(pin =>
-                  <PinCard
-                    key={pin._id}
-                    {...pin}
-                    deletePin={this.deletePin}
-                  />
-                )}
-              </div>
-              }
-
-              {/* GeoCodeMap - for user to view locations & drop pins */}
+              {/* Map for user to view locations & drop pins */}
           <div className="map-page">
             <div className="container">
-              <GeoCodeMap
+              <Map
                 onChange={this.handleChange}
                 onClick={this.toggleModal}
                 pins={this.state.user.pins}
                 location={this.addLocation}
+                onClickDelete={this.deletePin}
                 name="location" />
             </div>
 
