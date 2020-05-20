@@ -48,9 +48,7 @@ async function deleteUser(req, res, next) {
   try {
     const userId = req.currentUser
     const postsToDelete = await Posts.find({ user: req.currentUser._id })
-    console.log(postsToDelete)
     const articlesToDelete = await Article.find({ user: req.currentUser._id })
-    console.log(articlesToDelete)
     postsToDelete.forEach(post => {
       return post.remove()
     })

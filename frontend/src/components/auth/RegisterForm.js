@@ -1,7 +1,8 @@
 import React from 'react'
 
-const RegisterForm = ({handlePostcodeChange, handleChange,  handleSubmit, username, email, postcode, password, passwordConfirmation, errors }) => {
+import { Link } from 'react-router-dom'
 
+const RegisterForm = ({handlePostcodeChange, handleChange,  handleSubmit, username, email, postcode, password, passwordConfirmation, errors }) => {
 
   return (
     <>
@@ -9,6 +10,7 @@ const RegisterForm = ({handlePostcodeChange, handleChange,  handleSubmit, userna
             onSubmit={handleSubmit}
             className="box"
             >
+              <p>Already have an Account? <Link to="/login">Login Here</Link></p>
               <div className="field">
                 <label className="label">Username</label>
                 <div className="control">

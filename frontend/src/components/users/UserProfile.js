@@ -84,8 +84,6 @@ class UserProfile extends React.Component {
     }
   }
 
-
-
   //* Function to find user location details
   async getLocation() {
     try {
@@ -171,14 +169,14 @@ class UserProfile extends React.Component {
   }
 
   render() {
-    if (!this.state.user || !this.state.location || !this.state.messages) return null
-    // consts taken from state to populate user data shown on the page
-    const { username, createdArticles, profilePic } = this.state.user
-    const { commentsArray, messages} = this.state
-    const location = this.state.location
-    const reversedCreatedArticles = createdArticles.reverse().slice(0, 6)
-    return (
-      <>
+      if (!this.state.user || !this.state.location || !this.state.messages) return null
+      // consts taken from state to populate user data shown on the page
+      const { username, createdArticles, profilePic } = this.state.user
+      const { commentsArray, messages } = this.state
+      const location = this.state.location
+      const reversedCreatedArticles = createdArticles.reverse().slice(0, 6)
+      return (
+        <>
 
         <div className="My-profile">
 
@@ -190,7 +188,26 @@ class UserProfile extends React.Component {
                 <img src={profilePic} alt="profile pic" />
                 <button onClick={this.toggleModal}
                   className="button is-profile-btn"
-                >Change Profile Picture</button>
+                >Update Info</button>
+                <EditProfile
+                  errors={this.state.errors}
+                  state={this.state.user}
+                  toggleModalEdit={this.toggleModalEdit}
+                  modalOpenEdit={this.state.modalOpenEdit}
+                  onChangeEdit={this.handleChangeEdit}
+                  onSubmitEdit={this.handleSubmitEdit}
+                />
+                <button onClick={() => { if (window.confirm("Are you sure?")) this.deleteUserProfile() }} className="button is-danger">Delete</button>
+                {/* //! NEED TO ADD STAR RATINGS HERE  */}
+
+                <div className="control">
+                  <p>Star Rating</p>
+                  <StarRating
+                    onStarClick={this.onStarClick}
+                    rating={this.state.rating}
+                  />
+                  <button onClick={() => { if (window.confirm("Are you sure?")) this.deleteUserProfile() }} className="button is-danger">Delete</button>
+                </div>
               </div>
               <EditProfilePicture
                 toggleModal={this.toggleModal}

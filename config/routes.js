@@ -166,6 +166,5 @@ router.route('/messages/:id')
 router.route('/profile/messages/received')
   .get(secureRoute, messages.getMessageThread)
 
-
 //! exports
 module.exports = router
