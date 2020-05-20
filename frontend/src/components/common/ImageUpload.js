@@ -1,28 +1,18 @@
 import React from 'react'
 import { postImage } from '../../lib/ext_api'
+
+
 class ImageUpload extends React.Component{
   state = {
     image: null
   }
 
 
-//   handleChange = event => {
-//     this.setState({
-//       image:event.target.files[0],
-//       loaded:0
-//     }, () => {
-//       this.handleUpload()
-//     })
-//   }
-
-//   ({ latitude, longitude }, () => {
-//     this.props.location(this.state.latitude, this.state.longitude)
-//   })
-// }
-
 
 //! Might need to add some error handling on this function 
   handleUpload = async event => {
+    console.log(this.props);
+    
     event.preventDefault()
     // Cloudinary preset passed in as props 
     const preset = (this.props.preset)

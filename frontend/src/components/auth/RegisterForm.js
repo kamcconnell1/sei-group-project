@@ -1,6 +1,6 @@
 import React from 'react'
 
-const RegisterForm = ({handleChange, handleSubmit, username, email, postcode, password, passwordConfirmation, errors }) => {
+const RegisterForm = ({handlePostcodeChange, handleChange,  handleSubmit, username, email, postcode, password, passwordConfirmation, errors }) => {
 
 
   return (
@@ -48,7 +48,7 @@ const RegisterForm = ({handleChange, handleSubmit, username, email, postcode, pa
                   placeholder="Please add your postcode" 
                   name="postcode"
                   value={postcode}
-                  onChange={handleChange}
+                  onChange={handlePostcodeChange}
                   />
                   </div>
                   {errors.postcode && <small className="help is-danger">{errors.postcode}</small>}

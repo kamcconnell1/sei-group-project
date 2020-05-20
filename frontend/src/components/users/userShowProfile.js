@@ -100,7 +100,7 @@ class userShowProfile extends React.Component {
           <div>
             <h4 className="title is-5">Ratings go here</h4>
           </div>
-          <button name="friend" value={user._id} onClick={this.handleFriendSubmit} className="button is-primary">Add Friend</button>
+    {isAuthenticated() && <button name="friend" value={user._id} onClick={this.handleFriendSubmit} className="button is-primary">Add Friend</button> }
         </section>
         <section className="section">
           <div className="container">
@@ -127,7 +127,7 @@ class userShowProfile extends React.Component {
             </div>
           </div>
         </section>
-        {isAuthenticated && <section>
+        {isAuthenticated() && <section>
           <form onSubmit={this.handleCommentSubmit}>
             <div>
               <div className="label for comments">
@@ -142,7 +142,7 @@ class userShowProfile extends React.Component {
                 value={comments.text} />
             </div>
             <div className="comments-submit-button">
-              <button>Submit Comment</button>
+              <button className="button is-primary">Submit Comment</button>
             </div>
           </form>
           <div>

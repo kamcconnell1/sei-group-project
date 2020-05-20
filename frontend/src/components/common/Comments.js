@@ -18,7 +18,7 @@ const Comments = ({ comment, deleteComment }) => {
           <p className="date-on-comment">{time} {date}</p>
         </div>
         <div className="review-buttons-div">
-          <button onClick={deleteComment
+          <button className="button is-primary" onClick={deleteComment
           } value={comment._id} >Delete</button>
         </div>
       </div>

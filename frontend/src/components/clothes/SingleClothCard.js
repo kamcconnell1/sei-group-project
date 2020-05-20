@@ -22,31 +22,31 @@ const properties = {
   }
 }
 
-const SingleClothCard = ({ deleteComment, commentsArray, comments, title, clothId, profilePic, username, images, image, currentUserId, onFirstClick, onSecondClick, onClick, location, handleCommentSubmit, handleCommentChange }) => {
+const SingleClothCard = ({ deleteComment, handleContactSubmit, handleContactChange, contactModalOpen, toggleContact, commentsArray, comments, title, clothId, profilePic, username, images, image, currentUserId, onFirstClick, onSecondClick, onClick, location, handleCommentSubmit, handleCommentChange }) => {
   const slideImages = [image[0], image[0], image[0]]
   // console.log(slideImages)
   return (
     <>
-    <section className="section">
-<div className="slide-container">
-        <Slide {...properties}>
-          <div className="each-slide">
-            <div style={{'backgroundImage': `url(${slideImages[0]})`}}>
-              <span>Slide 1</span>
+      <section className="section">
+        <div className="slide-container">
+          <Slide {...properties}>
+            <div className="each-slide">
+              <div style={{ 'backgroundImage': `url(${slideImages[0]})` }}>
+                <span>Slide 1</span>
+              </div>
             </div>
-          </div>
-          <div className="each-slide">
-            <div style={{'backgroundImage': `url(${slideImages[1]})`}}>
-              <span>Slide 2</span>
+            <div className="each-slide">
+              <div style={{ 'backgroundImage': `url(${slideImages[1]})` }}>
+                <span>Slide 2</span>
+              </div>
             </div>
-          </div>
-          <div className="each-slide">
-            <div style={{'backgroundImage': `url(${slideImages[2]})`}}>
-              <span>Slide 3</span>
+            <div className="each-slide">
+              <div style={{ 'backgroundImage': `url(${slideImages[2]})` }}>
+                <span>Slide 3</span>
+              </div>
             </div>
-          </div>
-        </Slide>
-      </div>
+          </Slide>
+        </div>
 
         {isAuthenticated() && <button name="item" value={clothId} onClick={onClick} className="button is-dark">Add to Favourites</button>}
         {isAuthenticated() && <form onSubmit={handleCommentSubmit}>
@@ -63,9 +63,9 @@ const SingleClothCard = ({ deleteComment, commentsArray, comments, title, clothI
               value={comments.text} />
           </div>
           <div className="comments-submit-button">
-            <button>Submit Comment</button>
+            <button className="button is-primary">Submit Comment</button>
           </div>
-        </form> }
+        </form>}
         <div>
           {commentsArray.map(comment => (
             <Comments
@@ -101,7 +101,17 @@ const SingleClothCard = ({ deleteComment, commentsArray, comments, title, clothI
             <p> OR </p>
             <Link className="join-button column" to="/register" className="button is-danger">JOIN KEBB</Link>
           </div>}
-          {isAuthenticated() && <button className="button is-primary">Contact User</button>}
+          {isAuthenticated() && <button onClick={toggleContact} className="button is-primary">Contact User</button>}
+        </div>
+        <div className={contactModalOpen ? "modal is-active" : "modal"}>
+          <div className="field">
+            <form onSubmit={handleContactSubmit}>
+              <div className="control">
+                <textarea name="text" onChange={handleContactChange} className="textarea is-medium is-primary" placeholder="Message..."></textarea>
+              </div>
+              <button className="button is-info">SEND</button>
+            </form>
+          </div>
         </div>
         <hr />
         <div className="columns">

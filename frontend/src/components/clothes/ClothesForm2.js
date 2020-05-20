@@ -19,7 +19,7 @@ const colorOptions = [
 const ClothesForm = ({ handleChange, handleSubmit, handleMultiChange, formData, onClick, onChange, errors }) => {
 
 
-  const { title, category, genderCategory, size, rentalPrice, image, brand } = formData
+  const { title, category, genderCategory, size, rentalPrice, brand } = formData
 
 
   return (
