@@ -1,4 +1,5 @@
 import axios from 'axios'
+
 import { getToken } from './auth'
 const kebb_url = '/api'
 //* function to add the headers to the secure routes 
@@ -145,3 +146,9 @@ export const inboxMessage = () => {
   return axios.get(`${kebb_url}/profile/messages/received`, withHeaders())
 }
 
+//------------------------------------RATINGS--------------------------------------------
+
+// * Rate a user
+export const rateUser = (userId, rating) => {
+  return axios.post(`${kebb_url}/profile/${userId}/rating`, rating, withHeaders())
+}
