@@ -51,7 +51,7 @@ module.exports = [
     email: 'paul@mail',
     password: 'pass',
     passwordConfirmation: 'pass',
-    postcode: 'SE18 1AE',
+    postcode: 'SE18 6GG',
     pins: [
       {
         title: 'Urban Outfitters Pin',
