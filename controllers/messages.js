@@ -58,10 +58,12 @@ async function getMessage(req, res, next) {
 //* ERROR tested
 async function getSentMessages(req, res, next) {
   try {
-    const messages = await Message.find().populate('user').populate('owner')
-    const filtered = await messages.filter(message => message.user.equals(req.currentUser._id) 
-    )
-    res.status(201).json(filtered)
+    const messages = await Message.find()
+    const messagestwo = await Message.find()
+    const filtered = await messages.filter(message => message.owner.equals(req.currentUser._id))
+    const filteredtwo = await messages.filter(message => message.user.equals(req.currentUser._id))
+    console.log(filtered, filteredtwo)
+    res.status(201).json(filteredtwo)
   } catch (err) {
     next(err)
   }

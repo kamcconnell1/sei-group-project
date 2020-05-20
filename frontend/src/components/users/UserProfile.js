@@ -148,7 +148,6 @@ class UserProfile extends React.Component {
     const { username, createdArticles, profilePic } = this.state.user
     const { commentsArray, messages } = this.state
     const location = this.state.location
-    console.log(messages[0].createdAt)
     return (
       <>
         <div className="Page-head">
