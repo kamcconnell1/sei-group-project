@@ -110,7 +110,7 @@ class ClothesShow extends React.Component {
     e.preventDefault()
     try {
       const res = await addCommentCloth(clothId, this.state.comments)
-      this.setState({ commentsArray: res.data.comments })
+      this.setState({ commentsArray: res.data.comments})
       this.getSingleCloth()
     } catch (err) {
       console.log(err)

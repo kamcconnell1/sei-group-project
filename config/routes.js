@@ -163,7 +163,7 @@ router.route('/messages/:id')
   .get(secureRoute, messages.getMessage)
 
 //* outbox for sent messages
-router.route('/profile/messages/sent')
+router.route('/profile/messages/received')
   .get(secureRoute, messages.getMessageThread)
 
 //! exports

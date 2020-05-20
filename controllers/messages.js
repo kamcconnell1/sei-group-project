@@ -32,9 +32,7 @@ async function sendResponse(req, res, next) {
     const response = req.body
     message.response.push(response)
     await message.save()
-    console.log(message)
     res.json(message)
-
   } catch (err) {
     next(err)
   }
