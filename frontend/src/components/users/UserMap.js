@@ -73,9 +73,10 @@ class UserMap extends React.Component {
     try {
       await postPin(this.state.formData)
       this.loadMap()
+      this.toggleModal()
     } catch (err) {
+      console.log('response errors', err.response)
       this.setState({ errors: err.response.data })
-      console.log(err.response.data)
     }
   }
 
@@ -90,11 +91,14 @@ class UserMap extends React.Component {
 
   }
 
+  numberOfPins = () => {
+    return this.state.user.pins.length
+  }
 
   render() {
     if (!this.state.user) return null
     const pins = this.state.user.pins
-
+    
     return (
       <>
         <div className="Page-head">
@@ -125,6 +129,7 @@ class UserMap extends React.Component {
               </div>
               }
 
+              {/* GeoCodeMap - for user to view locations & drop pins */}
           <div className="map-page">
             <div className="container">
               <GeoCodeMap
@@ -140,13 +145,13 @@ class UserMap extends React.Component {
             <PinForm
               handleChange={this.handleChange}
               handleSubmit={this.handleSubmit}
-              onClick={this.toggleModal}
+              toggleModal={this.toggleModal}
               errors={this.state.errors}
+              numberOfPins={this.numberOfPins}
               modalStatus={this.state.modalOpen}
               {...this.state.formData}
             />
 
-            {/* GeoCodeMap - for user to view locations & drop pins */}
           </div>
           <div className="map pad2">
           </div>

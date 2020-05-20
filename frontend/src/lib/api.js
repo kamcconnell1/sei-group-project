@@ -70,6 +70,11 @@ export const postFavoriteFriend = data => {
   return axios.post(`${kebb_url}/favourites/friends`, data, withHeaders())
 }
 
+// * POST post to users favourites
+export const postFavoritePost = data => {
+  return axios.post(`${kebb_url}/favourites/posts`, data, withHeaders())
+}
+
 //*POST comment on USER
 export const commentOnUser = (id, data) => {
   return axios.post(`${kebb_url}/profile/${id}/comments`, data, withHeaders())

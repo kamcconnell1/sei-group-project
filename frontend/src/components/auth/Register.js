@@ -18,13 +18,14 @@ class Register extends React.Component {
     errors: {}
   }
 
-  //handleChange event for inputting values on form 
+  //* handleChange event for inputting values on form 
   handleChange = event => {
     const formData = { ...this.state.formData, [event.target.name]: event.target.value }
     const errors = { ...this.state.errors, [event.target.name]: '' }
     this.setState({ formData, errors })
   }
 
+  //* handleChange event for the postcode which calls check psotcode & then randomly assigns the user
   handlePostcodeChange = event => {
     const formData = { ...this.state.formData, postcode: event.target.value }
     const errors = { ...this.state.errors, postcode: '' }
@@ -35,7 +36,7 @@ class Register extends React.Component {
     })
   }
 
-  // Function to check whether postcode exists in postcode API 
+  // * Function to check whether postcode exists in postcode API 
   getLocation = async event => {
     try {
       const postcode = this.state.formData.postcode
@@ -56,16 +57,15 @@ class Register extends React.Component {
     this.setState({ formData })
   }
 
+
+
   // handleSubmit event for submitting the registration form
   handleSubmit = async event => {
     event.preventDefault()
-    // this.getLocation()
     try {
-
       await registerUser(this.state.formData)
       this.props.history.push('/login')
       console.log('registered');
-
     } catch (err) {
       this.setState({ errors: err.response.data })
       console.log(err.response.data)

@@ -27,31 +27,37 @@ class UserProfile extends React.Component {
   // * Function to GET the users details
   async componentDidMount() {
     try {
-     await this.getUserDashboard()
+      await this.getUserDashboard()
     } catch (err) {
       console.log(err)
     }
   }
 
   async getUserDashboard() {
-  try {
-    const res = await getProfile()
-    this.setState({ user: res.data, commentsArray: res.data.comments })
-    this.getLocation()
-  } catch (err) {
-    console.log(err)
-  }
+    try {
+      const res = await getProfile()
+      this.setState({ user: res.data, commentsArray: res.data.comments })
+      this.getLocation()
+    } catch (err) {
+      console.log(err)
+    }
   }
 
   //* Function to find user location details
   async getLocation() {
-    const postcode = this.state.user.postcode
-    const response = await getPostcodeInfo(postcode)
-    const nuts = response.data.result.nuts
-    const region = response.data.result.region
-    const latitude = response.data.result.latitude
-    const longitude = response.data.result.longitude
-    this.setState({ location: `${nuts}, ${region}`, latitude, longitude })
+    try {
+      const postcode = this.state.user.postcode
+      const response = await getPostcodeInfo(postcode)
+      const nuts = response.data.result.nuts
+      const region = response.data.result.region
+      const latitude = response.data.result.latitude
+      const longitude = response.data.result.longitude
+      this.setState({ location: `${nuts}, ${region}`, latitude, longitude })
+    } catch (err) {
+      const latitude = 51.515419
+      const longitude = -0.141099
+      this.setState({ location: 'London, UK', latitude, longitude })
+    }
   }
 
 
@@ -66,11 +72,15 @@ class UserProfile extends React.Component {
     }))
   }
 
+
+
   //* Function for PUT request to update profile picture
   handleSubmit = async event => {
     event.preventDefault()
     try {
       const res = await editProfile(this.state.user)
+      this.toggleModal()
+      this.getUserDashboard()
       console.log('submit event res', res)
     } catch (err) {
       console.log(err.response.data);
@@ -104,8 +114,6 @@ class UserProfile extends React.Component {
     const { username, createdArticles, profilePic } = this.state.user
     const { commentsArray } = this.state
     const location = this.state.location
-    
-    console.log('state is', this.state.user);
 
 
     return (
@@ -145,9 +153,9 @@ class UserProfile extends React.Component {
                   <h6 className="subtitle">{location}</h6>
                   {/* //! NEED TO ADD STAR RATINGS HERE  */}
                   <p>Star Rating</p>
-                  <StarRating 
-                  onStarClick={this.onStarClick}
-                  rating={this.state.rating}
+                  <StarRating
+                    onStarClick={this.onStarClick}
+                    rating={this.state.rating}
                   />
                   <hr />
                 </div>

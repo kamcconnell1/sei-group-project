@@ -2,7 +2,7 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import Comments  from '../common/Comments'
 
-import { getSinglePost, commentOnPost, DeleteCommentOnPost } from '../../lib/api'
+import { getSinglePost, commentOnPost, DeleteCommentOnPost, postFavoritePost } from '../../lib/api'
 import { isOwner, isAuthenticated } from '../../lib/auth'
 
 class PostsShow extends React.Component {
@@ -11,7 +11,8 @@ class PostsShow extends React.Component {
     comments: {
       text: ''
     },
-    commentsArray: []
+    commentsArray: [],
+    item: ''
   }
 
   async componentDidMount() {
@@ -53,6 +54,19 @@ class PostsShow extends React.Component {
     }
   }
 
+  // * Handle Favourite submit
+  handleFavouriteSubmit =  async e => {
+    try {
+      const addToList = await { ...this.state.item, [e.target.name]: e.target.value }
+      console.log(addToList)
+      const res = await postFavoritePost(addToList)
+      console.log('res sent:',res)
+      console.log('sent')
+    } catch (err) {
+      console.log(err)
+    }
+  }
+
   //* Delete Comments on Posts
   deleteComment = async e => {
     try {
@@ -72,7 +86,7 @@ class PostsShow extends React.Component {
     const edited = post.createdAt.split('T')
     const date = edited[0]
     const time = edited[1].split('.')[0]
-    console.log(commentsArray)
+    console.log(post._id)
     return (
       <>
         <section className="hero is-light">
@@ -85,6 +99,7 @@ class PostsShow extends React.Component {
           <p>{post.text}</p>
           <Link to={`/page/${post.user._id}`}><p>Created by: {post.user.username}</p> </Link>
           <p>{date} {time}</p>
+          <button name="item" value={post._id} onClick={this.handleFavouriteSubmit} className="button">Add to Favourites</button>
           {!isOwner && <Link to={`/posts/${post._id}/edit`}><button>Edit</button></Link>}
         </section>
         {isAuthenticated && <section>

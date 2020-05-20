@@ -85,7 +85,8 @@ const EditProfile = ({ onChange, onSubmit, toggleModal, modalOpen }) => {
         <button
           className="modal-close is-large"
           onClick={toggleModal}
-          aria-label="close"></button>
+          aria-label="close">
+          </button>
       </div>
     </div>
   )
