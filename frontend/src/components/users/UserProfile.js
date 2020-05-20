@@ -209,7 +209,11 @@ class UserProfile extends React.Component {
                 </div>
                 <hr />
                 <div>
-                  <Link to={`/profile/${username}/favourites`} className="button">Favourite</Link>
+                  <Link to={`/profile/${username}/favourites`} className="button">Favourite Clothes</Link>
+                </div>
+                <hr />
+                <div>
+                  <Link to={`/profile/${username}/favouriteposts`} className="button">Favourite Posts</Link>
                 </div>
               </div>
               {/* Map over the clothes the user has uploaded - need to work on the positioning of this - need to add to allow user to edit / delete items */}
