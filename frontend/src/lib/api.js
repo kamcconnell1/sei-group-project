@@ -65,14 +65,10 @@ export const allUsersFavourites = () => {
 export const postFavoriteFriend = data => {
   return axios.post(`${kebb_url}/favourites/friends`, data, withHeaders())
 }
-<<<<<<< HEAD
-//------------------------------------USER REQUESTS--------------------------------------------
-=======
 
 
 //------------------------------------POSTS--------------------------------------------
 
->>>>>>> development
 //* Get all POSTS
 export const getAllPosts = () => {
   return axios.get(`${kebb_url}/posts`)
@@ -86,10 +82,6 @@ export const getSinglePost = id => {
   return axios.get(`${kebb_url}/posts/${id}`)
 }
 //* Edit a post
-<<<<<<< HEAD
-export const editAPost = (id, data) => {
-  return axios.put(`${kebb_url}/posts/${id}`, data, withHeaders())
-=======
 export const editPost = (id, data) => {
   return axios.put(`${kebb_url}/posts/${id}`, data, withHeaders())
 }
@@ -107,9 +99,4 @@ export const commentOnPost = (id, data) => {
 //* Delete Comment on post
 export const DeleteCommentOnPost = (id, commentid) => {
   return axios.delete(`${kebb_url}/posts/${id}/comments/${commentid}`, withHeaders())
->>>>>>> development
-}
-//* Delete a post
-export const deleteAPost = id => {
-  return axios.delete(`${kebb_url}/posts/${id}`, withHeaders())
 }

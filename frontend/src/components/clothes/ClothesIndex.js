@@ -165,14 +165,15 @@ class ClothesIndex extends React.Component {
     // ! Needs to include range filter to filter price - Benga
     return (
       <>
-        <section className="hero is-light">
-          <div className="hero-body">
-            <div className="container">
-              <h1 className="title">KEBB Clothes</h1>
-              <h2 className="subtitle">Latest Items</h2>
-            </div>
+       <div className="Page-head">
+          <div className="Page-title">
+            <h1>KEBB Clothes</h1>
           </div>
-        </section>
+          <div className="Page-subtitle">
+            <h2>Latest Items</h2>
+          </div>
+        </div>
+      <div className="Latest column-center">
         <div className="column is-one-quarter">
           <form>
             <input
@@ -204,6 +205,7 @@ class ClothesIndex extends React.Component {
           { (filteredItemsToDisplay.length) > 0 ? filteredItemsToDisplay.map(cloth => <ClothCard {...cloth} key={cloth._id} />) :  filteredClothes.map((cloth) => (
             <ClothCard {...cloth} key={cloth._id} />
           ))}
+        </div>
         </div>
       </>
     )

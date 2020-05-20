@@ -1,14 +1,9 @@
 import React from 'react'
 import PostCards from '../posts/PostsCards'
-<<<<<<< HEAD
-import { getAllPosts, createPost } from '../../lib/api'
-import { Link } from 'react-router-dom'
-=======
 
 import { getAllPosts, createPost, deleteAPost } from '../../lib/api'
 import { Link } from 'react-router-dom'
 
->>>>>>> development
 class Posts extends React.Component {
   state = {
     posts: null,
@@ -42,20 +37,12 @@ class Posts extends React.Component {
     e.preventDefault()
     try {
       const res = await createPost(this.state.input)
-<<<<<<< HEAD
       console.log(res.data)
-=======
       this.pageSetup()
->>>>>>> development
     } catch (err) {
       console.log(err)
     }
   }
-<<<<<<< HEAD
-  deletePost = e => {
-    console.log(e.target.value)
-  }
-=======
 
   deletePost = async e => {
     console.log(e.target.value)
@@ -63,48 +50,52 @@ class Posts extends React.Component {
     this.props.history.push(`/posts`)
   }
 
->>>>>>> development
   render() {
     if (!this.state.posts) return null
     return (
       <>
-        <section className="hero is-light">
-          <div className="hero-body">
-            <div className="container">
-              <div className="columns is-multiline">
-                <h1>Posts</h1>
-                <form onSubmit={this.handleSubmit} >
-                  <input
-                    name="title"
-                    value={this.state.input.title}
-                    place="Title"
-                    onChange={this.handleChange}
-                  />
-                  <input
-                    name="text"
-                    value={this.state.input.text}
-                    onChange={this.handleChange}
-                  />
-                  <input
-                    name="photo"
-                    value={this.state.input.photo}
-                    onChange={this.handleChange}
-                  />
-                  <button>Submit Post</button>
-                </form>
-                <div>
-                  {this.state.posts.map(post => (
-                    <PostCards
-                      deletePost={this.deletePost}
-                      key={post._id}
-                      {...post}
-                    />
-                  ))}
-                </div>
-              </div>
-            </div>
+        <div className="Page-head">
+          <div className="Page-title">
+            <h1>My Saved Pins</h1>
           </div>
-        </section>
+          <div className="Page-subtitle">
+            <h2>Add & save locations to remember later</h2>
+          </div>
+        </div>
+        <div className="Posts column-center">
+            <form className="Post-form row-center"
+              onSubmit={this.handleSubmit} >
+              <input className="Post-input"
+                name="title"
+                value={this.state.input.title}
+                placeholder="Title"
+                onChange={this.handleChange}
+              />
+              <input className="Post-input"
+                name="text"
+                value={this.state.input.text}
+                placeholder="Text"
+                onChange={this.handleChange}
+              />
+              <input className="Post-input"
+                name="photo"
+                value={this.state.input.photo}
+                placeholder="Upload an image"
+                onChange={this.handleChange}
+              />
+              <button className="Post-btn">Submit Post</button>
+            </form>
+            <div className="Post-cards">
+              {this.state.posts.map(post => (
+                <PostCards 
+                  deletePost={this.deletePost}
+                  key={post._id}
+                  {...post}
+                />
+              ))}
+            </div>
+        </div>
+
       </>
     )
   }

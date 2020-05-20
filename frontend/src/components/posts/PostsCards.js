@@ -4,8 +4,7 @@ import { Link } from 'react-router-dom'
 
 const PostCards = ({ deletePost, photo, text, user, title, _id }) => {
   return (
-    <div className="column is-one-quarter-desktop is-one-third-tablet is-half-mobile">
-      <div className="card">
+      <div className="Card">
         <Link to={`/posts/${_id}`}>
           <div className="card-header">
             <h2>{title}</h2>
@@ -22,7 +21,6 @@ const PostCards = ({ deletePost, photo, text, user, title, _id }) => {
         </Link>
         <button onClick={deletePost} value={_id}>Delete</button>
       </div>
-    </div>
   )
 }
 
