@@ -143,26 +143,21 @@ class UserProfile extends React.Component {
   }
 
   render() {
-    if (!this.state.user || !this.state.location || !this.state.messages) return null
-    // consts taken from state to populate user data shown on the page
-    const { username, createdArticles, profilePic } = this.state.user
-    const { commentsArray, messages } = this.state
-    const location = this.state.location
-    return (
-      <>
-        <div className="Page-head">
-          <div className="Page-title">
-            <h1>My Profile</h1>
-          </div>
-          {/* <div className="Page-subtitle">
-            <h2>USERNAME?</h2>
-          </div> */}
-        </div>
-        <section className="section">
-          <div className="container">
-            <div className="columns">
-              <div className="column is-3 is-profile-info">
-                {/* Section for avatar or profile pic need to change to allow to change the file  & so appears over the form appears over the avatar on hover */}
+      if (!this.state.user || !this.state.location || !this.state.messages) return null
+      // consts taken from state to populate user data shown on the page
+      const { username, createdArticles, profilePic } = this.state.user
+      const { commentsArray, messages } = this.state
+      const location = this.state.location
+      const reversedCreatedArticles = createdArticles.reverse().slice(0, 6)
+      return (
+        <>
+
+          <div className="My-profile">
+
+            <div className="My-profile-top-row">
+
+              {/* Section for avatar or profile pic need to change to allow to change the file  & so appears over the form appears over the avatar on hover */}
+              <div className="Photo-delete-rating">
                 <div className="profile-img image is-128x128">
                   <img src={profilePic} alt="profile pic" />
                   <button onClick={this.toggleModal}
@@ -176,29 +171,72 @@ class UserProfile extends React.Component {
                   onSubmit={this.handleSubmit}
                 /> 
                 {/* Section for the user details - username, location & star rating. button to add clothes to profile   */}
-                <div className="control">
-                  <h5 className="title">Welcome {username}</h5>
-                  <h6 className="subtitle">{location}</h6>
-                  <button onClick={this.toggleModalEdit}
-                    className="button is-profile-btn"
-                  >Update Info</button>
-                  <EditProfile
+                <button onClick={this.toggleModalEdit}
+                  className="button is-profile-btn"
+                >Update Info</button>
+                <EditProfile
                   errors={this.state.errors}
                   state={this.state.user}
                   toggleModalEdit={this.toggleModalEdit}
                   modalOpenEdit={this.state.modalOpenEdit}
                   onChangeEdit={this.handleChangeEdit}
                   onSubmitEdit={this.handleSubmitEdit}
-                  > <button>Edit</button> </EditProfile>
-                  <button onClick={() => {if (window.confirm("Are you sure?")) this.deleteUserProfile()}} className="button is-danger">Delete</button>
-                  {/* //! NEED TO ADD STAR RATINGS HERE  */}
+                > <button>Edit</button> </EditProfile>
+                <button onClick={() => { if (window.confirm("Are you sure?")) this.deleteUserProfile() }} className="button is-danger">Delete</button>
+                {/* //! NEED TO ADD STAR RATINGS HERE  */}
+
+                <div className="control">
                   <p>Star Rating</p>
                   <StarRating
                     onStarClick={this.onStarClick}
                     rating={this.state.rating}
                   />
-                  <hr />
+                  <button onClick={() => { if (window.confirm("Are you sure?")) this.deleteUserProfile() }} className="button is-danger">Delete</button>
                 </div>
+              </div>
+              <div className="Welcome">
+                <h5 className="title">Welcome {username}</h5>
+                <h6 className="subtitle">{location}</h6>
+              </div>
+            </div>
+            <div className="My-profile-columns">
+              <div className="Left-col">
+                <h1>left column</h1>
+                <h1>left column</h1>
+                <h1>left column</h1>
+                <h1>left column</h1>
+              </div>
+
+              <div className="Center-col">
+                {/* Map over the clothes the user has uploaded - need to work on the positioning of this - need to add to allow user to edit / delete items */}
+                <div className="My-items">
+                  <div className="My-items-title">
+                    <h2>My Items</h2>
+                    <hr />
+                  </div>
+
+                  <div>
+                    {/* Ternary with text showing if no articles been created yet  */}
+                    {(reversedCreatedArticles.length === 0) ?
+                      <div className="">
+                        <h1>Looks like you haven't uploaded anthing yet.</h1>
+                        <p> Why don't you add some clothes now? <br /> Or browse the clothes that are on offer? </p>
+                      </div>
+                      :
+                      <div className="My-items-index">
+                        {reversedCreatedArticles.map(item =>
+                          <UserClothCard
+                            {...item}
+                            key={item._id}
+                          />
+                        )}
+                      </div>
+                    }
+                  </div>
+                </div>
+              </div>
+
+              <div className="Right-col">
                 <button className="button is fullwidth"
                   onClick={this.handleAddClothes}
                 >Add Clothes Now</button>
@@ -214,59 +252,38 @@ class UserProfile extends React.Component {
                 <div>
                   <Link to={`/profile/${username}/favouriteposts`} className="button">Favourite Posts</Link>
                 </div>
-              </div>
-              {/* Map over the clothes the user has uploaded - need to work on the positioning of this - need to add to allow user to edit / delete items */}
-              <div className="column is-multiline is-user-clothes">
-                <div className="users-articles has-text-centered">
-                  <hr />
-                  <h2>YOUR ITMES</h2>
-                  <hr />
-                  {/* Ternary with text showing if no articles been created yet  */}
-                  {(createdArticles.length === 0) ?
-                    <div className="container">
-                      <h1>Looks like you haven't uploaded anthing yet.</h1>
-                      <p> Why don't you add some clothes now? <br /> Or browse the clothes that are on offer? </p>
-                    </div>
-                    :
-                    <div className="control">
-                      {createdArticles.map(item =>
-                        <UserClothCard
-                          {...item}
-                          key={item._id}
-                        />
-                      )}
-                    </div>
-                  }
-                </div>
-              </div>
-              {/* Notifications / chat section */}
-              <div className="column is-3 is-user-chat">
-                Messages
-                <div>
-                  {messages.map(message => 
-                  <MessageCard 
-                  key={message._id}
-                  {...message}
-                  />
-                  )}
+
+
+                {/* Notifications / chat section */}
+                <div className="column is-3 is-user-chat">
+                  Messages
+                  <div>
+                    {messages.map(message =>
+                      <MessageCard
+                        key={message._id}
+                        {...message}
+                      />
+                    )}
+                  </div>
                 </div>
 
-          </div>
+                <section>
+                  <div>
+                    {commentsArray.map(comment => (
+                      <Comments
+                        key={comment._id}
+                        comment={comment}
+                      />
+                    ))}
+                  </div>
+                </section>
+              </div>
             </div>
+
           </div>
-        </section>
-        <section>
-          <div>
-            {commentsArray.map(comment => (
-              <Comments
-                key={comment._id}
-                comment={comment}
-              />
-            ))}
-          </div>
-        </section>
-      </>
-    )
+
+        </>
+      )
+    }
   }
-}
-export default UserProfile
+  export default UserProfile

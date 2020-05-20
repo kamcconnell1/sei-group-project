@@ -15,7 +15,8 @@ class userShowProfile extends React.Component {
     },
     commentsArray: [],
     contactModalOpen: false,
-    text: ''
+    text: '',
+    ratings: []
   }
 
   async componentDidMount() {
@@ -107,28 +108,41 @@ class userShowProfile extends React.Component {
     }
   }
 
+  getUserRating = () => {
+    const ratings = this.state.user.ratings
+    // this.setState({ratings})
+  if (ratings.length === 0 ) return 3
+  return ratings.reduce((a, b) => {
+    return a + b
+  }, 0)
+  }
+
 //* Star Rating function 
 onStarClick = (nextValue) => {
-  // const newRating = this.state.user.ratings.concat(nextValue)
-
-  const ratings = { ratings: [...this.state.user.ratings, nextValue] }
-
-  this.setState({ ratings })
+  this.setState({ratings: [ ...this.state.ratings,  nextValue ]}
+    , () => {
+this.addUserRating()
+    })
 }
 
+//*POST rating on the user
+addUserRating = async event => {
+  try {
+    const userId = this.state.user._id
+    console.log(userId);
+  } catch (err) {
+    console.log(err);
+    
+  }
+  }
+  
 
-getUserRating = () => {
-const ratings = this.state.user.ratings
-
-if (ratings.length === 0 ) return 3
-return ratings.reduce((a, b) => {
-  return a + b
-}, 0)
-}
 
   render() {
-    if (!this.state.user) return <h1>User kidnapped, Ninja to the rescue</h1>
-console.log(this.state.user.ratings);
+    if (!this.state.user ) return <h1>User kidnapped, Ninja to the rescue</h1>
+console.log(this.state.user);
+
+const rating = parseInt(this.getUserRating())
 
     const { user, userItems, comments, commentsArray, contactModalOpen } = this.state
     return (
@@ -147,7 +161,7 @@ console.log(this.state.user.ratings);
           <div>
             {/* Star Rating  */}
           <StarRating 
-          rating={this.getUserRating()}
+          rating={rating}
           onStarClick={this.onStarClick}
           />
 
