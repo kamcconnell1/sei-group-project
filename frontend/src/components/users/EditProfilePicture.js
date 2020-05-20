@@ -1,28 +1,31 @@
 import React from 'react'
 
-const EditProfile = ({ onChangeEdit, onSubmitEdit, toggleModalEdit, modalOpenEdit, username }) => {
+import { uploadClothesImage } from '../../lib/ext_api'
+import ImageUpload from '../common/ImageUpload'
+
+const EditProfile = ({ onChange, onSubmit, toggleModal, modalOpen }) => {
+
   return (
+
     <div
-      className={modalOpenEdit ? "modal is-active" : "modal"}
+      className={modalOpen ? "modal is-active" : "modal"}
     >
       <div className="modal-background"></div>
 
       <div className="edit-profile-form">
         <form
           className="box"
-          onSubmit={onSubmitEdit}
+          onSubmit={onSubmit}
         >
           <div className="modal-content">
-            <div className="field" >
-              <label className="label">Username</label>
-              <div className="control">
-                <input
-                  className="input"
-                  type="text"
-                  placeholder="Enter Username here"
-                  name="username"
-                  value={username}
-                  onChange={onChangeEdit}
+
+            <div className="field">
+              <div className="image is128x128">
+                <ImageUpload
+                  onChange={onChange}
+                  preset={uploadClothesImage}
+                  name="profilePic"
+                  labelText="Or Upload Picture"
                 />
               </div>
             </div>
@@ -36,7 +39,7 @@ const EditProfile = ({ onChangeEdit, onSubmitEdit, toggleModalEdit, modalOpenEdi
         </form >
         <button
           className="modal-close is-large"
-          onClick={toggleModalEdit}
+          onClick={toggleModal}
           aria-label="close"></button>
       </div>
     </div>

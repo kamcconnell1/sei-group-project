@@ -1,6 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import UserClothCard from './UserClothCard'
+import EditProfilePicture from './EditProfilePicture'
 import EditProfile from './EditProfile'
 import { getProfile, editProfile, deleteProfile } from '../../lib/api'
 import { logout } from '../../lib/auth'
@@ -15,6 +16,7 @@ class UserProfile extends React.Component {
     latitude: '',
     longitude: '',
     modalOpen: false,
+    modalOpenEdit: false,
     commentsArray: [],
     rating: 0
   }
@@ -77,6 +79,28 @@ class UserProfile extends React.Component {
     this.setState({ modalOpen: !this.state.modalOpen })
   }
 
+  toggleModalEdit = () => {
+    this.setState({modalOpenEdit: !this.state.modalOpenEdit})
+  }
+
+  handleChangeEdit = (e) => {
+    const user = {...this.state.user, [e.target.name]: e.target.value}
+    this.setState({ user })
+  }
+
+  handleSubmitEdit = async e => {
+    e.preventDefault()
+    try {
+      console.log('presub', this.state.user)
+      const res = await editProfile(this.state.user)
+      console.log(res.data)
+      this.toggleModalEdit()
+      this.getUserDashboard()
+    } catch (err) {
+      console.log(err.response.data);
+    }
+  }
+
   //* Delete Profile
   deleteUserProfile = async e => {
     try{
@@ -103,7 +127,6 @@ class UserProfile extends React.Component {
     const { username, createdArticles, profilePic } = this.state.user
     const { commentsArray } = this.state
     const location = this.state.location
-    console.log('state is', this.state.user);
     return (
       <>
         <div className="Page-head">
@@ -125,16 +148,26 @@ class UserProfile extends React.Component {
                     className="button is-profile-btn"
                   >Change Profile Picture</button>
                 </div>
-                <EditProfile
+                <EditProfilePicture
                   toggleModal={this.toggleModal}
                   modalOpen={this.state.modalOpen}
                   onChange={this.handleChange}
                   onSubmit={this.handleSubmit}
-                />
+                /> 
                 {/* Section for the user details - username, location & star rating. button to add clothes to profile   */}
                 <div className="control">
                   <h5 className="title">Welcome {username}</h5>
                   <h6 className="subtitle">{location}</h6>
+                  <button onClick={this.toggleModalEdit}
+                    className="button is-profile-btn"
+                  >Edit Profile</button>
+                  <EditProfile
+                  state={this.state.user}
+                  toggleModalEdit={this.toggleModalEdit}
+                  modalOpenEdit={this.state.modalOpenEdit}
+                  onChangeEdit={this.handleChangeEdit}
+                  onSubmitEdit={this.handleSubmitEdit}
+                  > <button>Edit</button> </EditProfile>
                   <button onClick={() => {if (window.confirm("Are you sure?")) this.deleteUserProfile()}} className="button is-danger">Delete</button>
                   {/* //! NEED TO ADD STAR RATINGS HERE  */}
                   <p>Star Rating</p>
