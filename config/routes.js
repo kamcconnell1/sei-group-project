@@ -164,11 +164,7 @@ router.route('/messages/:id')
 
 //* outbox for sent messages
 router.route('/profile/messages/sent')
-  .get(secureRoute, messages.getSentMessages)
-
-//* inbox for received messages
-router.route('/profile/messages/received')
-  .get(secureRoute, messages.getReceivedMessages)
+  .get(secureRoute, messages.getMessageThread)
 
 //! exports
 module.exports = router
