@@ -53,6 +53,10 @@ export const getUserProfile = id => {
 export const postPin = formData => {
   return axios.post(`${kebb_url}/pins`, formData, withHeaders())
 }
+//* DELETE for user to remove pin from their map.
+export const removePin = id => {
+  return axios.delete(`${kebb_url}/pins/${id}`, withHeaders())
+}
 // * POST Favourites to users favourite
 export const postFavorite = data => {
   return axios.post(`${kebb_url}/favourites/article`, data, withHeaders())

@@ -5,7 +5,7 @@ import GeoCodeMap from './GeoCodeMap'
 import PinForm from '../pins/PinForm'
 import PinCard from '../pins/PinCard'
 
-import { postPin, getProfile } from '../../lib/api'
+import { postPin, getProfile, removePin } from '../../lib/api'
 
 import 'mapbox-gl/dist/mapbox-gl.css'
 
@@ -27,6 +27,14 @@ class UserMap extends React.Component {
 
   // * Function to GET the users details
   async componentDidMount() {
+    try {
+      this.loadMap()
+    } catch (err) {
+      console.log(err)
+    }
+  }
+
+  loadMap = async () => {
     try {
       const res = await getProfile()
       this.setState({ user: res.data })
@@ -64,11 +72,22 @@ class UserMap extends React.Component {
     event.preventDefault()
     try {
       await postPin(this.state.formData)
-      // this.props.history.push('/login')
+      this.loadMap()
     } catch (err) {
       this.setState({ errors: err.response.data })
       console.log(err.response.data)
     }
+  }
+
+  // handleDelete on the pin
+  deletePin = async e => {
+    try {
+      await removePin(e.target.value)
+      this.loadMap()
+    } catch (err) {
+      console.log(err)
+    }
+
   }
 
 
@@ -91,7 +110,7 @@ class UserMap extends React.Component {
             <h2>Add & save locations to remember later</h2>
           </div>
         </div>
-        
+
         <div className="map-page">
           <div className="container">
             <GeoCodeMap
@@ -104,7 +123,11 @@ class UserMap extends React.Component {
           <div className="map-pins">
             <div className="container">
               {pins.map(pin =>
-                <PinCard key={pin._id} {...pin} />
+                <PinCard
+                  key={pin._id}
+                  {...pin}
+                  deletePin={this.deletePin}
+                />
               )}
 
               {/* PinForm will pop up if a user decides to drop a pin on thr map */}
