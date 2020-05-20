@@ -95,7 +95,6 @@ class UserMap extends React.Component {
 
   render() {
     if (!this.state.user) return null
-    const pins = this.state.user.pins
     
     return (
       <>

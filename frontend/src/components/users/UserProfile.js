@@ -1,13 +1,15 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import UserClothCard from './UserClothCard'
+import MessageCard from './MessageCard'
 import EditProfilePicture from './EditProfilePicture'
 import EditProfile from './EditProfile'
-import { getProfile, editProfile, deleteProfile, inboxMessage } from '../../lib/api'
+import { getProfile, editProfile, deleteProfile, inboxMessage, getUserProfile } from '../../lib/api'
 import { logout } from '../../lib/auth'
 import { getPostcodeInfo } from '../../lib/ext_api'
 import Comments from '../common/Comments'
 import StarRating from '../common/StarRating'
+
 // ! User profile, GETs data for user on mount
 class UserProfile extends React.Component {
   state = {
@@ -27,10 +29,13 @@ class UserProfile extends React.Component {
     try {
       await this.getUserDashboard()
       await this.getInbox()
+      this.interval = setInterval(this.getInbox, 120000)
     } catch (err) {
       console.log(err)
     }
   }
+
+
   async getUserDashboard() {
     try {
       const res = await getProfile()
@@ -143,6 +148,7 @@ class UserProfile extends React.Component {
     const { username, createdArticles, profilePic } = this.state.user
     const { commentsArray, messages } = this.state
     const location = this.state.location
+    console.log(messages[0].createdAt)
     return (
       <>
         <div className="Page-head">
@@ -235,11 +241,13 @@ class UserProfile extends React.Component {
                 Messages
                 <div>
                   {messages.map(message => 
-                    <div key={message._id}>
-                      <p>{message.text}</p>
-                    </div>
-                    )}
+                  <MessageCard 
+                  key={message._id}
+                  {...message}
+                  />
+                  )}
                 </div>
+
           </div>
             </div>
           </div>

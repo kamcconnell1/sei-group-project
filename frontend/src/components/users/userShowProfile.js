@@ -1,8 +1,9 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import { getUserProfile, postFavoriteFriend, commentOnUser, DeleteCommentOnUser, sendMessage } from '../../lib/api'
-import Comments from '../common/Comments'
 import { isAuthenticated } from '../../lib/auth'
+import Comments from '../common/Comments'
+import StarRating from '../common/StarRating'
 
 class userShowProfile extends React.Component {
   state = {
@@ -30,7 +31,7 @@ class userShowProfile extends React.Component {
       const userId = this.props.match.params.id
       const res = await getUserProfile(userId)
       const userItems = res.data.createdArticles
-      this.setState({ user: res.data, userItems, commentsArray: res.data.comments })
+      this.setState({ user: res.data, userItems, commentsArray: res.data.comments, })
     } catch (err) {
       console.log(err)
     }
@@ -53,7 +54,7 @@ class userShowProfile extends React.Component {
     const {user} = this.state
     const userId = user.id
     try{
-    const res = await sendMessage(userId, this.state.text)
+      await sendMessage(userId, this.state.text)
     } catch (err) {
       console.log(err)
     }
@@ -106,8 +107,29 @@ class userShowProfile extends React.Component {
     }
   }
 
+//* Star Rating function 
+onStarClick = (nextValue) => {
+  // const newRating = this.state.user.ratings.concat(nextValue)
+
+  const ratings = { ratings: [...this.state.user.ratings, nextValue] }
+
+  this.setState({ ratings })
+}
+
+
+getUserRating = () => {
+const ratings = this.state.user.ratings
+
+if (ratings.length === 0 ) return 3
+return ratings.reduce((a, b) => {
+  return a + b
+}, 0)
+}
+
   render() {
     if (!this.state.user) return <h1>User kidnapped, Ninja to the rescue</h1>
+console.log(this.state.user.ratings);
+
     const { user, userItems, comments, commentsArray, contactModalOpen } = this.state
     return (
       <>
@@ -123,7 +145,12 @@ class userShowProfile extends React.Component {
             <h4 className="title is-3">{user.username}</h4>
           </div>
           <div>
-            <h4 className="title is-5">Ratings go here</h4>
+            {/* Star Rating  */}
+          <StarRating 
+          rating={this.getUserRating()}
+          onStarClick={this.onStarClick}
+          />
+
           </div>
           <div className="columns">
           <div className="column">

@@ -25,7 +25,7 @@ async function createMessage(req, res, next) {
 //* ERROR tested
 async function sendResponse(req, res, next) {
   try {
-    const message = await Message.findById(req.params.id)
+    const message = await Message.findById(req.params.id).populate('user').populate('owner')
     if (!message) throw new Error(notFound)
     if (!message.user.equals(req.currentUser._id) && !message.owner.equals(req.currentUser._id)) throw new Error(unauthorized)
     const response = req.body
@@ -72,7 +72,7 @@ async function getSentMessages(req, res, next) {
 //* ERROR tested
 async function getReceivedMessages(req, res, next) {
   try {
-    const messages = await Message.find()
+    const messages = await Message.find().populate('user').populate('owner')
     const filtered = await messages.filter(message => message.owner.equals(req.currentUser._id))
     res.status(201).json(filtered)
   } catch (err) {

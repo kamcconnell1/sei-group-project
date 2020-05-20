@@ -1,6 +1,5 @@
 import React from 'react'
 
-import { isAuthenticated, isOwner } from '../../lib/auth'
 
 const Comments = ({ comment, deleteComment }) => {
 

@@ -1,7 +1,7 @@
 import React from 'react'
 
 import { Link } from 'react-router-dom'
-import { isOwner, isAuthenticated } from '../../lib/auth'
+import { isOwner } from '../../lib/auth'
 
 const PostCards = ({ deletePost, photo, text, user, title, _id }) => {
   return (
@@ -20,7 +20,7 @@ const PostCards = ({ deletePost, photo, text, user, title, _id }) => {
             <h5 className=""><strong>Posted by</strong> {user.username}</h5>
           </div>
         </Link>
-        {isOwner(user._id) && <button onClick={deletePost} value={_id}>Delete</button>}
+        {isOwner() && (user._id) && <button onClick={deletePost} value={_id}>Delete</button>}
       </div>
   )
 }
