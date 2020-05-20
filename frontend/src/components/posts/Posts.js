@@ -56,7 +56,7 @@ class Posts extends React.Component {
       <>
         <div className="Page-head">
           <div className="Page-title">
-            <h1>My Saved Pins</h1>
+            <h1>My Saved Pinsn</h1>
           </div>
           <div className="Page-subtitle">
             <h2>Add & save locations to remember later</h2>

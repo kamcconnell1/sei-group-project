@@ -35,7 +35,7 @@ class About extends React.Component {
 
             <div className="How-it-works column-center">
               <h3 className="Title">HOW IT WORKS</h3>
-              <ul>
+              <ul className="Subtitle">
                 <li>Browse through all the items uploaded online</li>
                 <li>See something you like? Drop the owner a direct message requesting to borrow</li>
                 <li>Upload your on clothes & start making money on your wardobe.</li>
