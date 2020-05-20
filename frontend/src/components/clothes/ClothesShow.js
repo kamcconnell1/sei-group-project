@@ -15,7 +15,8 @@ class ClothesShow extends React.Component {
     },
     commentsArray: [],
     contactModalOpen: false,
-    text: ''
+    text: '', 
+    rating: 2
   }
 
   // * GET each clothing item on mount via Id
@@ -91,10 +92,8 @@ class ClothesShow extends React.Component {
     e.preventDefault()
     const {user} = this.state
     const userId = user.id
-    console.log(userId)
     try {
-      const res = await sendMessage(userId, this.state.text)
-      console.log(res.data)
+      await sendMessage(userId, this.state.text)
     } catch (err) {
       console.log(err)
     }
@@ -111,7 +110,6 @@ class ClothesShow extends React.Component {
     e.preventDefault()
     try {
       const res = await addCommentCloth(clothId, this.state.comments)
-      console.log(res.data)
       this.setState({ commentsArray: res.data.comments })
       this.getSingleCloth()
     } catch (err) {
@@ -123,7 +121,6 @@ class ClothesShow extends React.Component {
     try {
       const clothId = this.props.match.params.id
       const commentId = e.target.value
-      console.log(clothId, commentId)
       await deleteCommentCloth(clothId, commentId)
       this.getSingleCloth()
     } catch (err) {
@@ -131,16 +128,24 @@ class ClothesShow extends React.Component {
     }
   }
 
+//* StarRating function
+onStarClick(nextValue, prevValue, name) {
+  // console.log(nextValue);
+  
+  console.log('name: %s, nextValue: %s, prevValue: %s', name, nextValue, prevValue);
+  // this.setState({rating: nextValue});
+}
+
   render() {
     if (!this.state.cloth) return <h1>Even more Ninjas are working on this</h1>
-    const {cloth, user, comments, commentsArray, contactModalOpen, text} = this.state
+    const {cloth, user, comments, commentsArray, contactModalOpen } = this.state
+
     //* Variable of images from articles user posted
     const images = user.createdArticles.map(image => {return {image: image.image, id: image._id}})
     // Current users Id
     const userId = user._id
-    // console.log(userId)
+    // Cloth Id
     const clothId = cloth._id
-    console.log('current message:', text)
     return (
       <>
         <section className="hero is-light">
@@ -173,6 +178,8 @@ class ClothesShow extends React.Component {
               contactModalOpen={contactModalOpen}
               handleContactChange={this.handleContactChange}
               handleContactSubmit={this.handleContactSubmit}
+              onStarClick={this.onStarClick}
+              rating={this.state.rating}
               />
             </div>
           </div>

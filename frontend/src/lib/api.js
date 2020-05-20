@@ -74,6 +74,11 @@ export const postFavoriteFriend = data => {
   return axios.post(`${kebb_url}/favourites/friends`, data, withHeaders())
 }
 
+// * POST post to users favourites
+export const postFavoritePost = data => {
+  return axios.post(`${kebb_url}/favourites/posts`, data, withHeaders())
+}
+
 //*POST comment on USER
 export const commentOnUser = (id, data) => {
   return axios.post(`${kebb_url}/profile/${id}/comments`, data, withHeaders())
@@ -122,5 +127,10 @@ export const DeleteCommentOnPost = (id, commentid) => {
 // * Send message to user on Show page
 export const sendMessage = (id, message) => {
   return axios.post(`${kebb_url}/${id}/messages`, message, withHeaders())
+}
+
+// * Function for inbox messages
+export const inboxMessage = () => {
+  return axios.get(`${kebb_url}/profile/messages/received`, withHeaders())
 }
 
