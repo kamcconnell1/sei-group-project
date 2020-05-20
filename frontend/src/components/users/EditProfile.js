@@ -1,6 +1,6 @@
 import React from 'react'
 
-const EditProfile = ({ onChangeEdit, onSubmitEdit, toggleModalEdit, modalOpenEdit, username }) => {
+const EditProfile = ({ onChangeEdit, onSubmitEdit, toggleModalEdit, modalOpenEdit, username, errors }) => {
   return (
     <div
       className={modalOpenEdit ? "modal is-active" : "modal"}
@@ -17,7 +17,7 @@ const EditProfile = ({ onChangeEdit, onSubmitEdit, toggleModalEdit, modalOpenEdi
               <label className="label">Username</label>
               <div className="control">
                 <input
-                  className="input"
+                  className={`input ${errors ? 'is-danger' : '' }`}
                   type="text"
                   placeholder="Enter Username here"
                   name="username"

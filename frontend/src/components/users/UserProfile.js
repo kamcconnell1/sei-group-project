@@ -18,7 +18,8 @@ class UserProfile extends React.Component {
     modalOpen: false,
     modalOpenEdit: false,
     commentsArray: [],
-    rating: 0
+    rating: 0,
+    errors: {}
   }
   // * Function to GET the users details
   async componentDidMount() {
@@ -31,7 +32,7 @@ class UserProfile extends React.Component {
   async getUserDashboard() {
     try {
       const res = await getProfile()
-      this.setState({ user: res.data, commentsArray: res.data.comments })
+      this.setState({ user: res.data, commentsArray: res.data.comments, errors: ''})
       this.getLocation()
     } catch (err) {
       console.log(err)
@@ -71,7 +72,7 @@ class UserProfile extends React.Component {
       this.getUserDashboard()
       console.log('submit event res', res)
     } catch (err) {
-      console.log(err.response.data);
+      console.log(err.response.data)
     }
   }
   //* Function to toggle state to show the image upload form or not
@@ -97,7 +98,7 @@ class UserProfile extends React.Component {
       this.toggleModalEdit()
       this.getUserDashboard()
     } catch (err) {
-      console.log(err.response.data);
+      this.setState({ errors: 'username' })
     }
   }
 
@@ -160,8 +161,9 @@ class UserProfile extends React.Component {
                   <h6 className="subtitle">{location}</h6>
                   <button onClick={this.toggleModalEdit}
                     className="button is-profile-btn"
-                  >Edit Profile</button>
+                  >Update Info</button>
                   <EditProfile
+                  errors={this.state.errors}
                   state={this.state.user}
                   toggleModalEdit={this.toggleModalEdit}
                   modalOpenEdit={this.state.modalOpenEdit}
