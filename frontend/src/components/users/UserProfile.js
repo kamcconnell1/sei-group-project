@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom'
 import UserClothCard from './UserClothCard'
 import MessageCard from './MessageCard'
 import EditProfilePicture from './EditProfilePicture'
-import EditProfile from './EditProfile'
 import { getProfile, editProfile, deleteProfile, inboxMessage, replyMessage } from '../../lib/api'
 import { logout } from '../../lib/auth'
 import { getPostcodeInfo } from '../../lib/ext_api'
@@ -129,10 +128,6 @@ class UserProfile extends React.Component {
     const user = this.props.match.params.username
     this.props.history.push(`/profile/${user}/add`)
   }
-  // * Star Rating Function
-  onStarClick = () => {
-    console.log('clicked')
-  }
   //* Function to get the page Users ratings - I they haven't been rated yet you start on 3 stars
   getUserRating = () => {
     const ratings = this.state.user.ratings
@@ -152,7 +147,7 @@ class UserProfile extends React.Component {
     if (!this.state.user || !this.state.location || !this.state.messages) return null
     const { username, createdArticles, profilePic } = this.state.user
     const { commentsArray, messages, location } = this.state
-    const reversedCreatedArticles = createdArticles.reverse().slice(0, 6)
+    const reversedCreatedArticles = createdArticles.slice(0, 6).reverse()
     const rating = parseInt(this.getUserRating())
     // * Sorted messages by date
     const sortedMessages = messages.sort((a, b) => b.createdAt - a.createdAt)
@@ -183,14 +178,6 @@ class UserProfile extends React.Component {
                 <button onClick={this.handleEditProfile}
                   className="My-profile-update-btn"
                 >Update Profile</button>
-                {/* <EditProfile
-                  errors={this.state.errors}
-                  state={this.state.user}
-                  toggleModalEdit={this.toggleModalEdit}
-                  modalOpenEdit={this.state.modalOpenEdit}
-                  onChangeEdit={this.handleChangeEdit}
-                  onSubmitEdit={this.handleSubmitEdit}
-                /> */}
                 <button onClick={() => { if (window.confirm("Are you sure?")) this.deleteUserProfile() }} className="My-profile-delete-btn">Delete</button>
               </div>
             </div>

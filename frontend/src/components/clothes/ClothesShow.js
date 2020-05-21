@@ -144,7 +144,7 @@ class ClothesShow extends React.Component {
     const {cloth, user, comments, commentsArray, contactModalOpen } = this.state
     const rating = parseInt(this.getUserRating())
 
-
+    console.log(this.state.cloth)
     //* Variable of images from articles user posted
     const images = user.createdArticles.map(image => {return {image: image.image, id: image._id}})
     // Current users Id

@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 const MessageCard = ({ user, text, createdAt, reply, _id, sendReply, replyModal, replyChange, response }) => {
   const edited = createdAt.split('T')
@@ -18,7 +19,7 @@ const MessageCard = ({ user, text, createdAt, reply, _id, sendReply, replyModal,
             <img src={user.profilePic} alt={user.username} />
 
             <div className="Message-top-right">
-              <h4>From {user.username}</h4>
+              <Link to={`/page/${user.username}`}><h4>From {user.username}</h4></Link>
               <h5>{`${date} at ${time}`}:</h5>
             </div>
 

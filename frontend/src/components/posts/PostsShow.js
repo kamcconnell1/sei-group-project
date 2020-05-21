@@ -81,7 +81,7 @@ class PostsShow extends React.Component {
   }
 
   render() {
-    const { post, comments, commentsArray } = this.state
+    const { post, commentsArray } = this.state
     if (!this.state.post) return <h1>loading</h1>
     const edited = post.createdAt.split('T')
     const date = edited[0]

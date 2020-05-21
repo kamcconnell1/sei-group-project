@@ -26,6 +26,10 @@ export const deleteCloth = id => {
 export const singleCloth = id => {
   return axios.get(`${kebb_url}/clothes/${id}`)
 }
+//* Function to edit clothing item
+export const editCloth = (id, data) => {
+  return axios.put(`${kebb_url}/clothes/${id}`, data, withHeaders())
+}
 //* comment on single clothing item
 export const addCommentCloth = (id, data) => {
   return axios.post(`${kebb_url}/clothes/${id}/comments`, data, withHeaders())

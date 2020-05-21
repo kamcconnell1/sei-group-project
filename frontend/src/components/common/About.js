@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 import { isAuthenticated } from '../../lib/auth'
 
@@ -45,12 +46,8 @@ class About extends React.Component {
           </div>
 
           <div className="Join-us Title">
-            <p>Join us now and see where your new wardrobe could take you!</p>
+            <p><Link to="/register">Join us </Link> now and see where your new wardrobe could take you!</p>
             <div className="container">
-              {!isAuthenticated() &&
-                <button className="button is fullwidth"
-                  onClick={this.handleClick}
-                >Join Us Now</button>}
             </div>
 
           </div>
