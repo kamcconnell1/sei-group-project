@@ -24,7 +24,8 @@ class UserProfile extends React.Component {
     messages: null,
     replyModalOpen: false,
     replyId: '',
-    text: ''
+    text: '',
+    messagesModalOpen: false
   }
   // * Function to GET the users details
   async componentDidMount() {
@@ -113,6 +114,7 @@ class UserProfile extends React.Component {
   toggleModal = () => {
     this.setState({ modalOpen: !this.state.modalOpen })
   }
+<<<<<<< HEAD
   // toggleModalEdit = () => {
   //   this.setState({ modalOpenEdit: !this.state.modalOpenEdit })
   // }
@@ -132,6 +134,10 @@ class UserProfile extends React.Component {
       this.setState({ errors: 'username' })
     }
   }
+=======
+
+
+>>>>>>> development
   //* Delete Profile
   deleteUserProfile = async e => {
     try {
@@ -151,6 +157,10 @@ class UserProfile extends React.Component {
   onStarClick = () => {
     console.log('clicked')
   }
+<<<<<<< HEAD
+=======
+
+>>>>>>> development
   //* Function to get the page Users ratings - I they haven't been rated yet you start on 3 stars
   getUserRating = () => {
     const ratings = this.state.user.ratings
@@ -158,10 +168,15 @@ class UserProfile extends React.Component {
     return (Math.round((Object.values(ratings).reduce((a, { rating }) =>
       a + rating, 0) / ratings.length)))
   }
+<<<<<<< HEAD
+=======
+
+>>>>>>> development
   handleEditProfile = () => {
     const user = this.props.match.params.username
     this.props.history.push(`/profile/${user}/edit`)
   }
+<<<<<<< HEAD
   render() {
     if (!this.state.user || !this.state.location || !this.state.messages) return null
     const { username, createdArticles, profilePic } = this.state.user
@@ -172,6 +187,30 @@ class UserProfile extends React.Component {
     const sortedMessages = messages.sort((a, b) => b.createdAt - a.createdAt )
     return (
       <>
+=======
+
+  // * function to toggle messages modal
+  toggleMessagesModal = () => {
+    this.setState({ messagesModalOpen: !this.state.messagesModalOpen})
+  }
+
+  render() {
+    if (!this.state.user || !this.state.location || !this.state.messages) return null
+
+    const { username, createdArticles, profilePic } = this.state.user
+    const { commentsArray, messages, location } = this.state
+
+    const reversedCreatedArticles = createdArticles.reverse().slice(0, 6)
+    const rating = parseInt(this.getUserRating())
+
+    // * Sorted messages by date
+    const sortedMessages = messages.sort((a, b) => b.createdAt - a.createdAt )
+  
+
+    return (
+      <>
+
+>>>>>>> development
         <div className="My-profile">
           <div className="My-profile-top-row">
             <div className="Photo-delete-rating">
@@ -225,8 +264,13 @@ class UserProfile extends React.Component {
               <div>
                 {/* Notifications / chat section */}
                 <div className="My-profile-message-board">
+<<<<<<< HEAD
                   <button>Messages <span>{`(${messages.length})`}</span></button>
                   <div>
+=======
+                  <button onClick={this.toggleMessagesModal} className="button is-info">Messages <span>{`(${messages.length})`}</span></button>
+                  <div className={this.messagesModalOpen ? "modal is-active" : "modal"}>
+>>>>>>> development
                     {sortedMessages.map((message, i) =>
                       <MessageCard
                         key={i}
@@ -239,6 +283,10 @@ class UserProfile extends React.Component {
                     )}
                   </div>
                 </div>
+<<<<<<< HEAD
+=======
+
+>>>>>>> development
                 <section>
                   <div>
                     {commentsArray.map(comment => (
@@ -250,6 +298,10 @@ class UserProfile extends React.Component {
                   </div>
                 </section>
               </div>
+<<<<<<< HEAD
+=======
+
+>>>>>>> development
               <section>
                 <div>
                   {commentsArray.map(comment => (

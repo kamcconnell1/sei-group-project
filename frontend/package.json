@@ -4,9 +4,7 @@
   "private": true,
   "dependencies": {
     "axios": "^0.19.2",
-    "bootstrap": "^4.5.0",
     "bulma": "^0.8.2",
-    "deck.gl": "^8.1.7",
     "eslint-plugin-react": "^7.20.0",
     "http-proxy-middleware": "^1.0.3",
     "node-sass": "^4.14.1",
@@ -20,8 +18,7 @@
     "react-scripts": "3.4.1",
     "react-select": "^3.1.0",
     "react-slideshow-image": "^1.4.2",
-    "react-star-rating-component": "^1.4.1",
-    "react-star-ratings": "^2.3.0"
+    "react-star-rating-component": "^1.4.1"
   },
   "scripts": {
     "start": "react-scripts start",

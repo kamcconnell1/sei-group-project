@@ -101,9 +101,9 @@ const SingleClothCard = ({ deleteComment, handleContactSubmit, handleContactChan
         <hr />
         <div>
           {!isAuthenticated() && <div className="columns">
-            <Link className="sign-in-button column" to="/login" className="button is-danger">SIGN IN</Link>
+            <Link className="sign-in-button column" to="/login" className="button is-info">SIGN IN</Link>
             <p> OR </p>
-            <Link className="join-button column" to="/register" className="button is-danger">JOIN KEBB</Link>
+            <Link className="join-button column" to="/register" className="button is-primary">JOIN KEBB</Link>
           </div>}
           {isAuthenticated() && <button onClick={toggleContact} className="button is-primary">Contact User</button>}
         </div>

@@ -3,47 +3,48 @@ import React from 'react'
 import { uploadClothesImage } from '../../lib/ext_api'
 import ImageUpload from '../common/ImageUpload'
 
-const EditProfile = ({ onChange, onSubmit, toggleModal, modalOpen }) => {
+const EditProfilePicture = ({ onChange, onSubmit, toggleModal, modalOpen }) => {
 
   return (
-
     <div
-      className={modalOpen ? "modal is-active" : "modal"}
+      className={modalOpen ? "Modal Modal-inactive" : "Modal"}
     >
-      <div className="modal-background"></div>
-
-      <div className="edit-profile-form">
+      <div className="Edit-profile-pic-form">
         <form
-          className="box"
+          className=""
           onSubmit={onSubmit}
         >
-          <div className="modal-content">
+          <div className="Modal-content">
 
-            <div className="field">
+            <div className="Field">
               <div className="image is128x128">
                 <ImageUpload
                   onChange={onChange}
                   preset={uploadClothesImage}
                   name="profilePic"
-                  labelText="Or Upload Picture"
                 />
               </div>
             </div>
-            <div className="field">
-              <button type="submit"
-                className="button is-fullwidth is-primary">
-                Update Profile
+            <div className="Submit">
+              <button type="Submit"
+                className="Modal-submit-btn">
+                Update My Picture
           </button>
             </div>
           </div >
         </form >
         <button
-          className="modal-close is-large"
+          className="Modal-close"
           onClick={toggleModal}
-          aria-label="close"></button>
+          aria-label="close">close</button>
       </div>
     </div>
   )
 }
 
+<<<<<<< HEAD
+
 export default EditProfile
+=======
+export default EditProfilePicture
+>>>>>>> development

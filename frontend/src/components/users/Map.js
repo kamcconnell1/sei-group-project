@@ -68,9 +68,6 @@ renderPopup(props) {
     )
   )
 }
-
-
-
   render() {
     const pins = (this.props.pins)
     const { viewport } = this.state
