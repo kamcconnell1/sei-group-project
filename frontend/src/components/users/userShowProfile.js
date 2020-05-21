@@ -110,7 +110,7 @@ class userShowProfile extends React.Component {
     try {
       const res = await commentOnUser(this.state.user._id, this.state.comments)
       console.log(res.data)
-      this.setState({ commentsArray: res.data.comments, comments: {...this.state.comments, text: ''} })
+      this.setState({ commentsArray: res.data.comments, comments: { ...this.state.comments, text: '' } })
       this.getUser()
     } catch (err) {
       console.log(err)
@@ -322,36 +322,34 @@ class userShowProfile extends React.Component {
 
               </div>
             </div>
-            
+
             <div className="Comments">
               {
                 isAuthenticated() && <section>
                   <form onSubmit={this.handleCommentSubmit}>
-                    <div className="Comment-top">
-                      <p> Leave a comment about {user.username} </p>
-                    </div>
-                    <input
-                      className="Comment-text"
-                      type="textArea"
-                      maxLength="250"
-                      name="text"
-                      onChange={this.handleCommentChange}
-                      value={comments.text} />
 
-                    <div className="Comment-bottom">
+                    <div className="Comment-left">
+                      <p> Leave a comment about {user.username} </p>
+                      <input
+                        className="Comment-text"
+                        type="textArea"
+                        maxLength="250"
+                        name="text"
+                        onChange={this.handleCommentChange}
+                        value={comments.text} />
                       <button className="Submit">Submit Comment</button>
                     </div>
                   </form>
-                  <div>
-                    <div className="Comments-on-user">
-                      {commentsArray.map(comment => (
-                        <Comments
-                          key={comment._id}
-                          comment={comment}
-                          deleteComment={this.deleteComment}
-                        />
-                      ))}
-                    </div>
+
+
+                  <div className="Comments-on-user">
+                    {commentsArray.map(comment => (
+                      <Comments
+                        key={comment._id}
+                        comment={comment}
+                        deleteComment={this.deleteComment}
+                      />
+                    ))}
 
                   </div>
                 </section>
@@ -366,12 +364,12 @@ class userShowProfile extends React.Component {
                 <div key={item._id}>
                   <Link to={`/clothes/${item._id}`}>
                     <div className="Card">
-                        <h4 className="Title">{item.title}</h4>
                       <div className="img">
                         <img src={item.image} alt={item.title} loading="lazy" width="255" height="255" />
                       </div>
                       <div className="Card-text">
-                        <h5 className=""><strong>Rental Price:</strong> {`£${item.rentalPrice}`}</h5>
+                        <h4 className="Title">{item.title}</h4>
+                        <h5 className="Subtitle">Rent it for: <strong>{`£${item.rentalPrice}`}</strong></h5>
                       </div>
                     </div>
                   </Link>

@@ -596,8 +596,7 @@ module.exports = [
     color: 'Grey',
     rentalPrice: 30,
     image: 'https://i.pinimg.com/564x/63/0b/f4/630bf4d199806e1d80e1de449042ede3.jpg'
-  }, 
-  {
+  }, {
     title: 'Checked Three Piece Suit',
     category: 'Suit',
     brand: 'REISS',

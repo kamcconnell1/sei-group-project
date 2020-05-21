@@ -141,7 +141,7 @@ class UserProfile extends React.Component {
   }
   // * function to toggle messages modal
   toggleMessagesModal = () => {
-    this.setState({ messagesModalOpen: !this.state.messagesModalOpen})
+    this.setState({ messagesModalOpen: !this.state.messagesModalOpen })
   }
   render() {
     if (!this.state.user || !this.state.location || !this.state.messages) return null
@@ -150,7 +150,7 @@ class UserProfile extends React.Component {
     const reversedCreatedArticles = createdArticles.slice(0, 6).reverse()
     const rating = parseInt(this.getUserRating())
     // * Sorted messages by date
-    const sortedMessages = messages.sort((a, b) => b.createdAt - a.createdAt )
+    const sortedMessages = messages.sort((a, b) => b.createdAt - a.createdAt)
     return (
       <>
         <div className="My-profile">
@@ -198,7 +198,7 @@ class UserProfile extends React.Component {
               <div>
                 {/* Notifications / chat section */}
                 <div className="My-profile-message-board">
-                  <button className="button is-info">Messages <span>{`(${messages.length})`}</span></button>
+                  <h3 className="Title"> {`${messages.length}`} Messages</h3>
                   <div>
                     {sortedMessages.map((message, i) =>
                       <MessageCard
@@ -213,16 +213,7 @@ class UserProfile extends React.Component {
                   </div>
                 </div>
               </div>
-              <section>
-                <div>
-                  {commentsArray.map(comment => (
-                    <Comments
-                      key={comment._id}
-                      comment={comment}
-                    />
-                  ))}
-                </div>
-              </section>
+
             </div>
             <div className="Center-col">
               {/* Map over the clothes the user has uploaded - need to work on the positioning of this - need to add to allow user to edit / delete items */}
@@ -254,6 +245,20 @@ class UserProfile extends React.Component {
                   }
                 </div>
               </div>
+              <div className="My-comments">
+              <div className="My-comments-title">
+                <h3>User's comments About Me</h3>
+              </div>
+              <div className="Comments-users">
+                {commentsArray.map(comment => (
+                  <Comments
+                    key={comment._id}
+                    comment={comment}
+                  />
+                ))}
+              </div>
+              </div>
+              
             </div>
           </div>
         </div>
