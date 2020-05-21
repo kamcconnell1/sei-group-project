@@ -297,10 +297,10 @@ class userShowProfile extends React.Component {
             </div>
             <div className="Follow-message-comment">
               <div className="Follow-btn">
-                {isAuthenticated() && <button name="friend" value={user._id} onClick={this.handleFriendSubmit} className="button is-primary">Follow</button>}
+                {isAuthenticated() && <button name="friend" value={user._id} onClick={this.handleFriendSubmit} className="button is-danger is-small">Follow</button>}
               </div>
               <div className="Message">
-                {isAuthenticated() && <button onClick={this.toggleContactModal} className="button is-primary">Message</button>}
+                {isAuthenticated() && <button onClick={this.toggleContactModal} className="button is-small is-primary">Message</button>}
 
                 <div className="Modal-Message">
                   <div className={contactModalOpen ? "modal is-active" : "modal"}>
@@ -313,7 +313,8 @@ class userShowProfile extends React.Component {
                             className="textarea is-medium is-primary"
                             placeholder="Message..."></textarea>
                         </div>
-                        <button className="button is-info">SEND</button>
+                        <br/>
+                        <button className="button is-info is-small">SEND</button>
                       </form>
                     </div>
                   </div>
@@ -328,15 +329,18 @@ class userShowProfile extends React.Component {
                   <form onSubmit={this.handleCommentSubmit}>
 
                     <div className="Comment-left">
-                      <p> Leave a comment about {user.username} </p>
-                      <input
-                        className="Comment-text"
+                      <p> Review {user.username} </p>
+                      <textarea
+                        className="textarea is-small is-info"
                         type="textArea"
                         maxLength="250"
                         name="text"
                         onChange={this.handleCommentChange}
-                        value={comments.text} />
-                      <button className="Submit">Submit Comment</button>
+                        value={comments.text}
+                        placeholder="Add Comment..."
+                        ></textarea>
+                        <br/>
+                      <button className="button is-info is-small">Submit Comment</button>
                     </div>
                   </form>
 
@@ -368,7 +372,7 @@ class userShowProfile extends React.Component {
                       </div>
                       <div className="Card-text">
                         <h4 className="Title">{item.title}</h4>
-                        <h5 className="Subtitle">Rent it for: <strong>{`£${item.rentalPrice}`}</strong></h5>
+                        <h5 className="Subtitle"><strong>Rental price: </strong><p>{`£${item.rentalPrice}`}</p></h5>
                       </div>
                     </div>
                   </Link>

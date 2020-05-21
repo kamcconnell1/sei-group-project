@@ -178,7 +178,8 @@ class ClothesIndex extends React.Component {
               />
             </form>
           </div>
-          <button onClick={this.resetFilter} className="button is-primary">Reset Filter</button>
+          <button onClick={this.resetFilter} className="button is-small is-dark">Reset Filter</button>
+          <br />
           <div className="Clothes-index">
             {filteredItemsToDisplay.length > 0 ? (
               filteredItemsToDisplay.sort((a, b) => a.rentalPrice - b.rentalPrice ).map((cloth) => (
