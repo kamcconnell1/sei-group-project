@@ -65,8 +65,6 @@ class ClothesIndex extends React.Component {
     })
     this.setState({ searchClothes, filteredClothes })
   }
-
-
   // * Function to allow user to filter clothing items
   // ! To be completed - by Benga
   handleFilter = (e, field) => {
@@ -92,7 +90,6 @@ class ClothesIndex extends React.Component {
     })
     this.setState({ filteredItemsToDisplay: resultOfFilteredItemsToDisplay })
   }
-
   // * Function to change each filter
   filterChange = (event) => {
     const { filteredClothes } = this.state
@@ -113,13 +110,10 @@ class ClothesIndex extends React.Component {
       return "unavailable"
     }
   }
-
   // * Function to reset filter
   resetFilter = () => {
     this.setState({ filteredItemsToDisplay: this.state.clothes })
   }
-
-
   render() {
     if (!this.state.filteredClothes)
       return <h1>Some Ninjas are working on this</h1>

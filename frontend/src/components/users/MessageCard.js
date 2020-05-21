@@ -28,7 +28,6 @@ const MessageCard = ({ user, text, createdAt, reply, _id, sendReply, replyModal,
       </div>
       <div className="Message-reply-delete">
         <button value={_id} onClick={reply} className="button is-info">Reply</button>
-        <button className="button is-danger">Delete</button>
         <div className={replyModal ? "modal is-active" : "modal"}>
           <div className="field">
             <form onSubmit={sendReply}>

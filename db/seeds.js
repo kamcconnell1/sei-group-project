@@ -42,7 +42,7 @@ mongoose.connect(
 
 
       //* Articles By Paul
-      const articlesForPaul = articleData.slice(17, 24).map(article => {
+      const articlesForPaul = articleData.slice(17).map(article => {
         return { ...article, user: users[3]._id }
       })
       const articlesPaul = await Article.create(articlesForPaul)
