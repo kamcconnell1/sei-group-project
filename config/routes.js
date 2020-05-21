@@ -44,15 +44,18 @@ router.route('/profile')
   .get(secureRoute, user.profile)
   .put(secureRoute, user.updateUser)
 
+router.route('/editprofilepic')
+  .put(secureRoute, user.userUpdateProfilePic)
+
 //* Get Specific Profile
-router.route('/profile/:id')
+router.route('/profile/:username')
   .get(user.getProfile)
 
 router.route('/deleteUser')
   .delete(secureRoute, user.deleteUser)
 
 //* Add Comment to specifc profile
-router.route('/profile/:id/comments')
+router.route('/profile/comments/:id')
   .post(secureRoute, user.commentCreate)
 
 //* Delete specific comment on specific user.

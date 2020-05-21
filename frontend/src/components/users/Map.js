@@ -39,6 +39,7 @@ class Map extends React.Component {
       this.props.location(this.state.latitude, this.state.longitude)
     })
   }
+  
 
   //* Sets state based on which marker you click on
 onClickMarker = (pin) => {
