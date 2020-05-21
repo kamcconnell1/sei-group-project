@@ -1,9 +1,8 @@
-//* USERS SEED: 5 users
-//* users: admin, john, mary, paul, emma
+
 module.exports = [
   {
-    username: 'admin',
-    email: 'admin@mail',
+    username: 'tom',
+    email: 'tom@mail',
     password: 'pass',
     passwordConfirmation: 'pass',
     postcode: 'E1 7PT',
@@ -13,9 +12,29 @@ module.exports = [
         place: 'H&M',
         latitude: '51.500193113059076',
         longitude: '0.11085416633009527'
+      },{
+        title: 'Top for Mums Birthday',
+        place: 'Oliver Bonas',
+        latitude: '51.518226',
+        longitude: '-0.083148'
+      }, {
+        title: 'Zara Pin',
+        place: 'Zara',
+        latitude: '51.49716106826442',
+        longitude: '-0.16041554906063296'
+      },{
+        title: 'Trainers',
+        place: 'Office',
+        latitude: '51.52269095532998',
+        longitude: '-0.07778637786653057'
+      },{
+        title: 'Photo Frame',
+        place: 'Habitat',
+        latitude: '51.52269095532998',
+        longitude: '-0.07778637786653057'
       }
     ],
-    profilePic: 'https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcR-6wOL0HGj3DLwrc-fKSkw6BH5qmrW0Zqjy9MGF1wDdHGzP3ce&usqp=CAU'
+    profilePic: 'https://lh3.googleusercontent.com/proxy/MCYlxBYLuRa5SC8PZ4oCcTKFdJUo7coyNVIPWrS6YOpA4cSh0lARH2PyTNAqlYHHARlpx6BfL09-wcl_HSKfI5P3Sxwm6eR1mJAxhHFnTyRSMwnj23wYbE_l9xUo'
   }, {
     username: 'john',
     email: 'john@mail',
@@ -24,13 +43,33 @@ module.exports = [
     postcode: 'E3 3RJ',
     pins: [
       {
-        title: 'Zara Pin',
-        place: 'Zara',
-        latitude: '51.49716106826442',
-        longitude: '-0.16041554906063296'
+        title: 'Wedding Suit',
+        place: 'Suit Supply',
+        latitude: ' -0.139314',
+        longitude: '51.510136'
+      },{
+        title: 'Jewellery for Mrs',
+        place: 'Monica Vinader',
+        latitude: '51.52269095532998',
+        longitude: '-0.07778637786653057'
+      } , {
+        title: 'Work Shoes',
+        place: 'Todds',
+        latitude: '51.484982808916385',
+        longitude: '-0.11230258856636263'
+      },{
+        title: 'Record Shop',
+        place: 'Old Street Records',
+        latitude: '51.526596',
+        longitude: '-0.080906'
+      },{
+        title: 'Chocolates',
+        place: 'Hotel Chocolat',
+        latitude: '51.50546406734942',
+        longitude: '-0.11276300019930868'
       }
     ],
-    profilePic: 'https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQ9BZ7pyz2W1XpAK5NpW5qOYVwbt_-gutBaZP0m9HYaTY7xwCj1&usqp=CAU'
+    profilePic: 'https://www.gqmiddleeast.com/public/styles/766_431_landscape/public/images/2018/12/18/Mo-FB.jpg?itok=_GeKi8rB'
   }, {
     username: 'mary',
     email: 'mary@mail',
@@ -39,13 +78,33 @@ module.exports = [
     postcode: 'N1 7GU',
     pins: [
       {
-        title: 'JD Sports Pin',
+        title: 'Trainersn',
         place: 'JD Sports',
-        latitude: '51.50067758261859',
-        longitude: '-0.11709747826429706'
+        latitude: '51.5109050919409',
+        longitude: '-0.06764266047389358'
+      },{
+        title: 'Work Shoes',
+        place: 'Russel & Bromley',
+        latitude: '51.52269095532998',
+        longitude: '-0.07778637786653057'
+      } , {
+        title: 'Vase',
+        place: 'Oliver Bonas',
+        latitude: '51.49716106826442',
+        longitude: '-0.16041554906063296'
+      },{
+        title: 'Vintage Jeans',
+        place: 'Brick Lane',
+        latitude: '51.525193644052095',
+        longitude: '-0.07802505817643898'
+      },{
+        title: 'Dads Birthday Present',
+        place: 'East London Liquor Company',
+        latitude: '51.53473131727723',
+        longitude: '-0.03387619596685511'
       }
     ],
-    profilePic: 'https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTKFywLFGZpIlGL4OH3ADorjBp5lZQXmTSizkC3fFnC5Xml1jtd&usqp=CAU'
+    profilePic: 'https://reductress.com/wp-content/uploads/2016/10/woman-outside-serious-820x500.jpg'
   }, {
     username: 'paul',
     email: 'paul@mail',
@@ -56,14 +115,34 @@ module.exports = [
       {
         title: 'Urban Outfitters Pin',
         place: 'Urban Outfitters',
-        latitude: '51.516483100306665',
-        longitude: '-0.12892603809067363'
+        latitude: '51.51261580641044',
+        longitude: '-0.12361748605933259'
+      },{
+        title: 'Trainers',
+        place: 'Office',
+        latitude: '51.52269095532998',
+        longitude: '-0.07778637786653057'
+      } , {
+        title: 'Zara Pin',
+        place: 'Zara',
+        latitude: '51.49716106826442',
+        longitude: '-0.16041554906063296'
+      },{
+        title: 'Dress for Office Party',
+        place: 'Mango',
+        latitude: '51.520089578199645',
+        longitude: '-0.1370254679140282'
+      },{
+        title: 'Top for Mums Birthday',
+        place: 'Oliver Bonas',
+        latitude: '51.52269095532998',
+        longitude: '-0.07778637786653057'
       }
     ],
-    profilePic: 'https://image.flaticon.com/icons/png/512/168/168732.png'
+    profilePic: 'https://images.pexels.com/photos/736716/pexels-photo-736716.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500'
   }, {
     username: 'emma',
-    email: 'emma1@mail',
+    email: 'emma@mail',
     password: 'pass',
     passwordConfirmation: 'pass',
     postcode: 'SW20 8DN',
@@ -73,8 +152,28 @@ module.exports = [
         place: 'Matalan',
         latitude: '51.530641830317094',
         longitude: '-0.16895069557877013'
+      },{
+        title: 'Trainers',
+        place: 'Office',
+        latitude: '51.52269095532998',
+        longitude: '-0.07778637786653057'
+      } , {
+        title: 'Zara Pin',
+        place: 'Zara',
+        latitude: '51.49716106826442',
+        longitude: '-0.16041554906063296'
+      },{
+        title: 'Trainers',
+        place: 'Office',
+        latitude: '51.52269095532998',
+        longitude: '-0.07778637786653057'
+      },{
+        title: 'Top for Mums Birthday',
+        place: 'Oliver Bonas',
+        latitude: '51.52269095532998',
+        longitude: '-0.07778637786653057'
       }
     ],
-    profilePic: 'https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcR-6wOL0HGj3DLwrc-fKSkw6BH5qmrW0Zqjy9MGF1wDdHGzP3ce&usqp=CAU'
+    profilePic: 'https://images.unsplash.com/photo-1500522144261-ea64433bbe27?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1000&q=80'
   }
 ]

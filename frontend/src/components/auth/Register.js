@@ -52,7 +52,6 @@ class Register extends React.Component {
   // Randomly assign the user an avatar profile picture 
   assignAvatar = () => {
     const avatar = avatarArr[Math.floor(Math.random() * avatarArr.length)]
-    console.log(avatar);
     const formData = { ...this.state.formData, profilePic: avatar }
     this.setState({ formData })
   }
@@ -65,7 +64,6 @@ class Register extends React.Component {
     try {
       await registerUser(this.state.formData)
       this.props.history.push('/login')
-      console.log('registered');
     } catch (err) {
       this.setState({ errors: err.response.data })
       console.log(err.response.data)
@@ -73,7 +71,6 @@ class Register extends React.Component {
   }
 
   render() {
-    console.log(this.state.errors);
 
     return (
       <>

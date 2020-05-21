@@ -14,7 +14,11 @@ const colorOptions = [
   { value: 'purple', label: 'Purple' },
   { value: 'brown', label: 'Brown' },
   { value: 'silver', label: 'Silver' },
-  { value: 'gold', label: 'Gold' }
+  { value: 'gold', label: 'Gold' },
+  { value: 'pink', label: 'Pink' },
+  { value: 'camel', label: 'Camel' },
+  { value: 'grey', label: 'Grey' },
+  { value: 'stone', label: 'Stone' }
 ]
 const ClothesForm = ({ handleChange, handleSubmit, handleMultiChange, formData, onChange, errors }) => {
 
