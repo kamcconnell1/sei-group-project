@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import UserClothCard from './UserClothCard'
 import MessageCard from './MessageCard'
 import EditProfilePicture from './EditProfilePicture'
-
+import EditProfile from './EditProfile'
 import { getProfile, editProfile, deleteProfile, inboxMessage, replyMessage } from '../../lib/api'
 import { logout } from '../../lib/auth'
 import { getPostcodeInfo } from '../../lib/ext_api'
@@ -24,7 +24,8 @@ class UserProfile extends React.Component {
     messages: null,
     replyModalOpen: false,
     replyId: '',
-    text: ''
+    text: '',
+    messagesModalOpen: false
   }
   // * Function to GET the users details
   async componentDidMount() {
@@ -113,20 +114,6 @@ class UserProfile extends React.Component {
   toggleModal = () => {
     this.setState({ modalOpen: !this.state.modalOpen })
   }
-
-  handleSubmitEdit = async e => {
-    e.preventDefault()
-    try {
-      console.log('presub', this.state.user)
-      const res = await editProfile(this.state.user)
-      console.log(res.data)
-      this.toggleModalEdit()
-      this.getUserDashboard()
-    } catch (err) {
-      this.setState({ errors: 'username' })
-    }
-  }
-
   //* Delete Profile
   deleteUserProfile = async e => {
     try {
@@ -157,6 +144,10 @@ class UserProfile extends React.Component {
     const user = this.props.match.params.username
     this.props.history.push(`/profile/${user}/edit`)
   }
+  // * function to toggle messages modal
+  toggleMessagesModal = () => {
+    this.setState({ messagesModalOpen: !this.state.messagesModalOpen})
+  }
   render() {
     if (!this.state.user || !this.state.location || !this.state.messages) return null
     const { username, createdArticles, profilePic } = this.state.user
@@ -164,7 +155,7 @@ class UserProfile extends React.Component {
     const reversedCreatedArticles = createdArticles.reverse().slice(0, 6)
     const rating = parseInt(this.getUserRating())
     // * Sorted messages by date
-    const sortedMessages = messages.sort((a, b) => b.createdAt - a.createdAt)
+    const sortedMessages = messages.sort((a, b) => b.createdAt - a.createdAt )
     return (
       <>
         <div className="My-profile">
@@ -192,6 +183,14 @@ class UserProfile extends React.Component {
                 <button onClick={this.handleEditProfile}
                   className="My-profile-update-btn"
                 >Update Profile</button>
+                {/* <EditProfile
+                  errors={this.state.errors}
+                  state={this.state.user}
+                  toggleModalEdit={this.toggleModalEdit}
+                  modalOpenEdit={this.state.modalOpenEdit}
+                  onChangeEdit={this.handleChangeEdit}
+                  onSubmitEdit={this.handleSubmitEdit}
+                /> */}
                 <button onClick={() => { if (window.confirm("Are you sure?")) this.deleteUserProfile() }} className="My-profile-delete-btn">Delete</button>
               </div>
             </div>
@@ -212,76 +211,60 @@ class UserProfile extends React.Component {
               <div>
                 {/* Notifications / chat section */}
                 <div className="My-profile-message-board">
-                  <button>Messages <span>{`(${messages.length})`}</span></button>
+                  <button className="button is-info">Messages <span>{`(${messages.length})`}</span></button>
                   <div>
-                    <button onClick={this.toggleMessagesModal} className="button is-info">Messages <span>{`(${messages.length})`}</span></button>
-                    <div className={this.messagesModalOpen ? "modal is-active" : "modal"}>
-                      <button className="button is-info">Messages <span>{`(${messages.length})`}</span></button>
-                      <div>
-                        {sortedMessages.map((message, i) =>
-                          <MessageCard
-                            key={i}
-                            {...message}
-                            reply={this.toggleReplyModal}
-                            sendReply={this.handleReplySubmit}
-                            replyModal={this.state.replyModalOpen}
-                            replyChange={this.handleReplyChange}
-                          />
-                        )}
-                      </div>
-                    </div>
-                    <section>
-                      <div>
-                        {commentsArray.map(comment => (
-                          <Comments
-                            key={comment._id}
-                            comment={comment}
-                          />
-                        ))}
-                      </div>
-                    </section>
+                    {sortedMessages.map((message, i) =>
+                      <MessageCard
+                        key={i}
+                        {...message}
+                        reply={this.toggleReplyModal}
+                        sendReply={this.handleReplySubmit}
+                        replyModal={this.state.replyModalOpen}
+                        replyChange={this.handleReplyChange}
+                      />
+                    )}
                   </div>
-                  <section>
-                    <div>
-                      {commentsArray.map(comment => (
-                        <Comments
-                          key={comment._id}
-                          comment={comment}
-                        />
-                      ))}
-                    </div>
-                  </section>
                 </div>
-                <div className="Center-col">
-                  {/* Map over the clothes the user has uploaded - need to work on the positioning of this - need to add to allow user to edit / delete items */}
-                  <div className="My-items">
-                    <div className="My-items-top">
-                      <div className="My-items-title">
-                        <h3>My Items</h3>
-                      </div>
-                      <button className="Add-clothes-btn"
-                        onClick={this.handleAddClothes}
-                      >Add Clothes Now</button>
-                    </div>
-                    <div>
-                      {/* Ternary with text showing if no articles been created yet  */}
-                      {(reversedCreatedArticles.length === 0) ?
-                        <div className="">
-                          <h1>Looks like you haven't uploaded anthing yet.</h1>
-                          <p> Why don't you add some clothes now? <br /> Or browse the clothes that are on offer? </p>
-                        </div>
-                        :
-                        <div className="My-items-index">
-                          {reversedCreatedArticles.map(item =>
-                            <UserClothCard
-                              {...item}
-                              key={item._id}
-                            />
-                          )}
-                        </div>
-                      }
-                    </div>
+              </div>
+              <section>
+                <div>
+                  {commentsArray.map(comment => (
+                    <Comments
+                      key={comment._id}
+                      comment={comment}
+                    />
+                  ))}
+                </div>
+              </section>
+            </div>
+            <div className="Center-col">
+              {/* Map over the clothes the user has uploaded - need to work on the positioning of this - need to add to allow user to edit / delete items */}
+              <div className="My-items">
+                <div className="My-items-top">
+                  <div className="My-items-title">
+                    <h3>My Items</h3>
                   </div>
+                  <button className="Add-clothes-btn"
+                    onClick={this.handleAddClothes}
+                  >Add Clothes Now</button>
+                </div>
+                <div>
+                  {/* Ternary with text showing if no articles been created yet  */}
+                  {(reversedCreatedArticles.length === 0) ?
+                    <div className="">
+                      <h1>Looks like you haven't uploaded anthing yet.</h1>
+                      <p> Why don't you add some clothes now? <br /> Or browse the clothes that are on offer? </p>
+                    </div>
+                    :
+                    <div className="My-items-index">
+                      {reversedCreatedArticles.map(item =>
+                        <UserClothCard
+                          {...item}
+                          key={item._id}
+                        />
+                      )}
+                    </div>
+                  }
                 </div>
               </div>
             </div>
