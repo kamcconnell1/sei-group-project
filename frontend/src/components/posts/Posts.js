@@ -1,7 +1,5 @@
 import React from 'react'
 import PostCards from '../posts/PostsCards'
-import ImageUpload from '../common/ImageUpload'
-import { uploadClothesImage } from '../../lib/ext_api'
 import { getAllPosts, createPost, deleteAPost } from '../../lib/api'
 class Posts extends React.Component {
   state = {

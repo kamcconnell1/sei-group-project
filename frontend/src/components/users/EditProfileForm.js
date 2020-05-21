@@ -1,6 +1,6 @@
 import React from 'react'
 
-const EditProfileForm = ({ onChange, onSubmit, username, postcode, password, passwordConfirmation, errors }) => {
+const EditProfileForm = ({ onPostcodeChange, onChange, onSubmit, username, postcode, password, passwordConfirmation, errors }) => {
   
   return (
     <div className="edit-profile-form">
@@ -36,7 +36,7 @@ const EditProfileForm = ({ onChange, onSubmit, username, postcode, password, pas
                   placeholder="Update Postcode here"
                   name="postcode"
                   value={postcode}
-                  onChange={onChange}
+                  onChange={onPostcodeChange}
                 />
               </div>
             </div>

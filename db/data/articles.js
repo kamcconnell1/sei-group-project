@@ -104,9 +104,9 @@ module.exports = [
     brand: 'H&M',
     genderCategory: 'Women',
     size: '8',
-    color: 'Blue',
+    color: ['Blue'],
     rentalPrice: 10,
-    image: 'https://images.topshop.com/i/TopShop/TS16J34SBLE_M_1.jpg?$w1300$&fmt=webp&qlt=80'
+    image: ['https://images.topshop.com/i/TopShop/TS16J34SBLE_M_1.jpg?$w1300$&fmt=webp&qlt=80']
   },
   {
     title: 'Ripped Jeans',
@@ -164,9 +164,9 @@ module.exports = [
     brand: 'Balenciaga',
     genderCategory: 'Men',
     size: 'XL',
-    color: 'Black',
+    color: ['Black'],
     rentalPrice: 15,
-    image: 'https://images.selfridges.com/is/image/selfridges/R00059112_BLACK_ALT10?$PDP_M_ZOOM$'
+    image: ['https://images.selfridges.com/is/image/selfridges/R00059112_BLACK_ALT10?$PDP_M_ZOOM$']
   },
   {
     title: 'Ralph Lauren Polo',
@@ -376,7 +376,7 @@ module.exports = [
     size: '10',
     color: 'Red, Purple',
     rentalPrice: 34,
-    image: 'https://i.pinimg.com/564x/d9/f1/ef/d9f1efb2c34b5cc288a71fc0d07de91b.jpg'
+    image: ['https://i.pinimg.com/564x/d9/f1/ef/d9f1efb2c34b5cc288a71fc0d07de91b.jpg']
   },
   {
     title: 'Summer Shirt Dress',
@@ -574,9 +574,9 @@ module.exports = [
     brand: 'Massimo Dutti',
     genderCategory: 'Men',
     size: 'S',
-    color: 'Red',
+    color: ['Red'],
     rentalPrice: 36,
-    image: 'https://i.pinimg.com/564x/ec/a9/2a/eca92a6982f63d438d98a253534827e8.jpg'
+    image: ['https://i.pinimg.com/564x/ec/a9/2a/eca92a6982f63d438d98a253534827e8.jpg']
   },
   {
     title: 'Floral Festival Casual Shirt',
@@ -616,7 +616,7 @@ module.exports = [
     size: 'XL',
     color: ['White', 'Blue', 'Black'],
     rentalPrice: 50,
-    image: 'https://i.pinimg.com/564x/13/bf/43/13bf43a449f35facc14be51d0d283ac8.jpg'
+    image: ['https://i.pinimg.com/564x/13/bf/43/13bf43a449f35facc14be51d0d283ac8.jpg']
   },
   {
     title: 'Funky Festival Shirt',
@@ -716,7 +716,7 @@ module.exports = [
     size: '16',
     color: ['Yellow', 'Orange', 'Blue', 'Green'],
     rentalPrice: 30,
-    image: 'https://i.pinimg.com/564x/c4/5c/96/c45c96633541ed3482d2f0730d2f50ba.jpg'
+    image: ['https://i.pinimg.com/564x/c4/5c/96/c45c96633541ed3482d2f0730d2f50ba.jpg']
   },
   {
     title: 'Checked Tartan Casual Suit',

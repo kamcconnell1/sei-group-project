@@ -51,7 +51,7 @@ async function userUpdate(req, res, next) {
     req.body.user = req.currentUser
     const userId = req.currentUser
     console.log(req.body.username)
-    const updatedProfile = await User.findByIdAndUpdate(userId, req.body, { new: true })
+    const updatedProfile = await User.findByIdAndUpdate(userId, req.body, { new: true, runValidators: true, context: 'query' })
     if (!updatedProfile) throw new Error(unauthorized)
     res.status(202).json(updatedProfile)
   } catch (err) {

@@ -23,7 +23,7 @@ const properties = {
 }
 
 
-const SingleClothCard = ({ deleteComment, handleContactSubmit, handleContactChange, contactModalOpen, toggleContact, commentsArray, comments, title, clothId, profilePic, username, images, image, currentUserId, onFirstClick, onSecondClick, onClick, location, handleCommentSubmit, handleCommentChange, rating, commentText }) => {
+const SingleClothCard = ({ deleteComment, handleContactSubmit, handleContactChange, contactModalOpen, toggleContact, commentsArray, title, clothId, profilePic, username, images, image, currentUserId, onFirstClick, onSecondClick, onClick, location, handleCommentSubmit, handleCommentChange, rating, commentText, brand, color, category, genderCategory, size }) => {
   const slideImages = [image[0], image[0], image[0]]
 
   console.log(!isOwner());
@@ -32,6 +32,10 @@ const SingleClothCard = ({ deleteComment, handleContactSubmit, handleContactChan
     <>
       <section className="section">
         <div className="slide-container">
+          <p>{brand}</p>
+          <p>{category} for {genderCategory}</p>
+          <p>{color}</p>
+          <p>{size}</p>
           <Slide {...properties}>
             <div className="each-slide">
               <div style={{ 'backgroundImage': `url(${slideImages[0]})` }}>
@@ -92,7 +96,7 @@ const SingleClothCard = ({ deleteComment, handleContactSubmit, handleContactChan
         <div>
           <br />
           <p>
-            <strong>{username}</strong>
+          <Link to={`/page/${username}`}><strong>{username}</strong></Link>
           </p>
           <hr />
           <StarRating 
