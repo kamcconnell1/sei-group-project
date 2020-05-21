@@ -4,7 +4,7 @@
 :root {
   --main-bg-color: rgba(198, 187, 200, 0.548);
   --main-bg-rgb: 198, 187, 200;
-  --navbar-color: 255, 255, 255;
+  --navbar-color: rgba(255, 255, 255, 1);
   --navbar-hover-color: grey;
   --title-color: white;
   --subtite-color: grey;
@@ -25,7 +25,6 @@
 
 .row-center {
   display: flex;
-  flex-direction: column;
   justify-content: center;
 }
 
@@ -40,8 +39,7 @@
 }
 .body {
   padding: 0;
-  width: 100vw;
-  height: 100vh;
+
 }
 
 
@@ -64,12 +62,16 @@
 
 .Main {
   background-color: var(--main-bg-color);
-  min-height: 80vh;
+  min-height: 100vh;
+  height: 100%;
   min-width: 100vh;
+  
   }
 
 
 .Navbar {
+  position: sticky;
+  top: 0;
   height: 10vh;
   display: flex;
   align-items: center;
@@ -93,11 +95,16 @@
 }
 
 .Footer {
-  height: 10vh;
+  height: 5vh;
+  width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
   padding:0;
+  position: fixed;
+  bottom: 0;
+  background-color: var(--navbar-color);
+
 
   // background-color: rgb(198, 187, 200);
 }
@@ -212,11 +219,27 @@
 //? POSTS
 
 .Posts {
+
+  .Post-form {
+    display: column;
+    justify-content:right;
+    align-items: center;
+    padding: 60px 30px;
+  }
   position: absolute;
   top: var(--main-start-point);
   .Post-form {
-    .Post-input {
-      padding: 15px 100px;
+    .Post-input-title {
+     width: 300px;
+     height: 30px;
+    }
+    .Post-input-text {
+      width: 300px;
+
+    }
+    .Post-input-image {
+      width: 300px;
+
     }
     .Post-btn {
       padding: 15px 30px;
@@ -225,10 +248,44 @@
   }
   .Post-cards {
     display: flex;
+    justify-content: center;
     flex-wrap: wrap;
+    .Post-bottom {
+      display: flex;
+    }
   }
   .Card {
-    width: 30%;
+    background-color: rgba(var(--navbar-color), 0.3);
+    margin: 20px;
+    padding: 20px;
+    width: 40%;
+    .Title {
+      color: white;
+      text-shadow: 1px 1px 2px rgb(175, 170, 170);
+    }
+    .Post-image {
+      width: 35%;
+      margin-right: 10px;
+      img {
+
+      }
+
+    }
+    .Text {
+      width: 65%;
+      .Post-content {
+        font-size: 9px;
+        font-weight: 200;
+        color: black;
+        max-height: 100px;
+        overflow: hidden;
+      }
+      .Post-author {
+        font-size: 10px;
+        color: white;
+      }
+
+    }
   }
 }
 
@@ -296,6 +353,16 @@
 
 
   .Photo-delete-rating {
+    .profile-img {
+      z-index: 0;
+      img {
+        width: 100%;
+        height: auto;
+        border-radius: 70px;
+    
+      } 
+    }
+    
     .is-profile-btn {
       position: absolute;
       top: 50%;
@@ -323,11 +390,12 @@
         text-align: center;
         font-size: 10px;
         font-family: inherit;
-        font-weight: 600;
+        font-weight: 200;
         padding: 10px 15px;
         background-color: rgba(66, 48, 48, 0.327);
         border-radius: 10px;
         margin: 5px;
+        color: white;
       }
       .My-profile-update-btn {
         background-color: rgb(87, 170, 87);
@@ -358,11 +426,11 @@
       text-align: center;
       font-size: 20px;
       font-family: inherit;
-      font-weight: 600;
+      font-weight: 200;
       background-color: rgba(66, 48, 48, 0.327);
       border-radius: 10px;
       margin: 5px;
-      color: black;
+      color: white;
     }
   }
 }
@@ -375,33 +443,41 @@ display: flex;
     display: flex;
     flex-direction: column;
     width: 30%;
+    height: auto;
+
   }
   .Center-col {
     width: 70%;
+    height: auto;
     display: flex;
     flex-direction: column;
   }
 }
 
+.My-profile-message-board {
+  background-color: black;
+  height: 100vh;
+  background-color: rgba(var(--navbar-color), 0.3);
+  padding-top: 50px;
 
-
-.profile-img {
-  width: 200px;
-  height: 100px;
-  z-index: 0;
-  img {
-    width: 100%;
-  height: auto;
-  border-radius: 70px;
-
-  } 
+  h3 {
+    font-weight: 600;
+    font-size: 20px;
+  }
 }
 
+.My-items {
+  padding: 50px;
+}
 
 .My-items-top {
   display: flex;
   justify-content: space-between;
   margin: 0 20px;
+  h3 {
+    font-weight: 600;
+    font-size: 20px;
+  }
   .Add-clothes-btn {
       padding: 10px;
       text-align: center;
@@ -459,16 +535,6 @@ display: flex;
 
 
 
-div.is-profile-info {
-  border: 1px solid black;
-}
-
-div.is-user-clothes {
-  border: 1px solid black;
-}
-div.is-user-chat{
-  border: 1px solid black;
-}
 
 
 // .sidebar {

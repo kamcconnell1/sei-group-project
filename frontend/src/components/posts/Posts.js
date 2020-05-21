@@ -58,22 +58,26 @@ class Posts extends React.Component {
             <h2>Add & save locations to remember later</h2>
           </div>
         </div>
-        <div className="Posts column-center">
-          <form className="Post-form row-center"
+        <div className="Posts row-center">
+          <form className="Post-form"
             onSubmit={this.handleSubmit} >
-            <input className="Post-input"
+            <label>Title</label>
+            <input className="Post-input-title"
               name="title"
               value={this.state.input.title}
               placeholder="Title"
               onChange={this.handleChange}
             />
-            <input className="Post-input"
+            <label>Content</label>
+            <textarea className="Post-input-text"
               name="text"
+              rows="15"
               value={this.state.input.text}
               placeholder="Text"
               onChange={this.handleChange}
             />
-            <input className="Post-input"
+            <label>Upload an image</label>
+            <input className="Post-input-image"
               name="photo"
               value={this.state.input.photo}
               placeholder="Upload an image"

@@ -238,8 +238,8 @@ class UserProfile extends React.Component {
             <div className="Left-col">
               <div>
                 {/* Notifications / chat section */}
-                <div className="column is-3 is-user-chat">
-                Messages
+                <div className="My-profile-message-board">
+                <h3>Messages</h3>
                   <div>
                   {messages.map(message =>
                     <MessageCard
@@ -282,7 +282,7 @@ class UserProfile extends React.Component {
               <div className="My-items">
                 <div className="My-items-top">
                   <div className="My-items-title">
-                    <h2>My Items</h2>
+                    <h3>My Items</h3>
                   </div>
                   <button className="Add-clothes-btn"
                     onClick={this.handleAddClothes}
