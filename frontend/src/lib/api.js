@@ -51,13 +51,17 @@ export const getProfile = () => {
 export const editProfile = user => {
   return axios.put(`${kebb_url}/profile`, user, withHeaders())
 }
+
+export const editProfilePicture = user => {
+  return axios.put(`${kebb_url}/editprofilepic`, user, withHeaders())
+}
 //* DELETE request to delete user profile
 export const deleteProfile = () => {
   return axios.delete(`${kebb_url}/deleteUser`, withHeaders())
 }
 // * GET to show specific user (no need to be logged in)
-export const getUserProfile = id => {
-  return axios.get(`${kebb_url}/profile/${id}`)
+export const getUserProfile = username => {
+  return axios.get(`${kebb_url}/profile/${username}`)
 }
 
 //------------------------------------PIN REQUESTS--------------------------------------------
@@ -103,7 +107,7 @@ export const deletePostFromFavs = id => {
 //------------------------------------COMMENT REQUESTS--------------------------------------------
 //*POST comment on USER
 export const commentOnUser = (id, data) => {
-  return axios.post(`${kebb_url}/profile/${id}/comments`, data, withHeaders())
+  return axios.post(`${kebb_url}/profile/comments/${id}`, data, withHeaders())
 }
 //* DELETE Comment on USER
 export const DeleteCommentOnUser = (id, commentid) => {

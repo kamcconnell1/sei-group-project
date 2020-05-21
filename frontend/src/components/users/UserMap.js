@@ -17,9 +17,7 @@ class UserMap extends React.Component {
     formData: {
       title: '',
       place: '',
-      latitude: '',
-      longitude: '',
-      note: '',
+      note: ''
     },
     modalOpen: false,
     errors: {}
@@ -74,7 +72,7 @@ class UserMap extends React.Component {
       await postPin(this.state.formData)
       this.loadMap()
       this.toggleModal()
-      this.setState({...this.state.formData, title: ''})
+      this.setState({formData: {...this.state.formData, title: '', place: '', note: '' }})
     } catch (err) {
       console.log('response errors', err.response)
       this.setState({ errors: err.response.data })
@@ -133,7 +131,7 @@ class UserMap extends React.Component {
               errors={this.state.errors}
               numberOfPins={this.numberOfPins}
               modalStatus={this.state.modalOpen}
-              {...this.state.formData}
+              form={this.state.formData}
             />
 
           </div>

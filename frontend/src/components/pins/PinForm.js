@@ -1,7 +1,7 @@
 import React from 'react'
 
 
-const PinForm = ({ modalStatus, handleChange, handleSubmit, numberOfPins, toggleModal, title, place, notes, errors }) => {
+const PinForm = ({ modalStatus, handleChange, handleSubmit, numberOfPins, toggleModal, errors, form }) => {
 
   // const pinNumber = numberOfPins()
 
@@ -32,7 +32,7 @@ const PinForm = ({ modalStatus, handleChange, handleSubmit, numberOfPins, toggle
                 type="text"
                 placeholder="What was it you found here?"
                 name="title"
-                value={title}
+                value={form.title}
                 onChange={handleChange}
               />
             </div>
@@ -47,7 +47,7 @@ const PinForm = ({ modalStatus, handleChange, handleSubmit, numberOfPins, toggle
                 type="text"
                 placeholder="Where?"
                 name="place"
-                value={place}
+                value={form.place}
                 onChange={handleChange}
               />
             </div>
@@ -62,8 +62,8 @@ const PinForm = ({ modalStatus, handleChange, handleSubmit, numberOfPins, toggle
                 rows="3"
                 type="text"
                 placeholder="Notes"
-                name="notes"
-                value={notes}
+                name="note"
+                value={form.note}
                 onChange={handleChange}
               />
             </div>
