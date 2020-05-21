@@ -23,7 +23,7 @@ const Comments = ({ comment, deleteComment }) => {
         <p>{comment.text}</p>
       </div>
       <div className="Delete">
-        <button className="" onClick={deleteComment
+        <button className="Button" onClick={deleteComment
         } value={comment._id} >Delete</button>
       </div>
     </div>

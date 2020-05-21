@@ -165,117 +165,6 @@ class userShowProfile extends React.Component {
   }
 
 
-
-  // render() {
-  //   if (!this.state.user) return <h1>User kidnapped, Ninja to the rescue</h1>
-
-  //   const rating = parseInt(this.getUserRating())
-  //   const { user, userItems, comments, commentsArray, contactModalOpen } = this.state
-  //   const {location} = this.state
-  //   return (
-  //     <>
-  //       <section>
-  //         <div className="container">
-  //           <figure className="media-right">
-  //             <p className="image is-64x64">
-  //               <img src={user.profilePic} alt={user.username} />
-  //             </p>
-  //           </figure>
-  //         </div>
-  //         <div>
-  //           <h4 className="title is-3">{user.username}</h4>
-  //         </div>
-  //         <div>
-  //           <StarRating
-  //             rating={rating}
-  //             onStarClick={this.onStarClick}
-  //           />
-  //         </div>
-  //         <div>
-  //         <h6 className="subtitle">{location}</h6>
-  //         </div>
-  //         <div className="columns">
-  //           <div className="column">
-  //             {isAuthenticated() && <button name="friend" value={user._id} onClick={this.handleFriendSubmit} className="button is-primary">Follow</button>}
-  //           </div>
-  //           <div className="column">
-  //             {isAuthenticated() && <button onClick={this.toggleContactModal} className="button is-primary">Message</button>}
-  //           </div>
-  //         </div>
-  //         <div className={contactModalOpen ? "modal is-active" : "modal"}>
-  //           <div className="field">
-  //             <form onSubmit={this.handleContactSubmit}>
-  //               <div className="control">
-  //                 <textarea 
-  //                 name="text" 
-  //                 onChange={this.handleContactChange} 
-  //                 name="text" 
-  //                 className="textarea is-medium is-primary" 
-  //                 placeholder="Message..."></textarea>
-  //               </div>
-  //               <button className="button is-info">SEND</button>
-  //             </form>
-  //           </div>
-  //         </div>
-  //       </section>
-  //       <section className="section">
-  //         <div className="container">
-  //           <div className="columns is-multiline">
-  //             {userItems.map(item =>
-  //               <div key={item._id} className="column is-one-quarter-desktop is-one-third-tablet is-half-mobile">
-  //                 <Link to={`/clothes/${item._id}`}>
-  //                   <div className="card">
-  //                     <div className="card-header">
-  //                       <h4 className="card-header-title">{item.title}</h4>
-  //                     </div>
-  //                     <div className="card-image">
-  //                       <figure className="image image is-1by1">
-  //                         <img src={item.image} alt={item.title} loading="lazy" width="255" height="255" />
-  //                       </figure>
-  //                     </div>
-  //                     <div className="card-content">
-  //                       <h5 className=""><strong>Rental Price:</strong> {`£${item.rentalPrice}`}</h5>
-  //                     </div>
-  //                   </div>
-  //                 </Link>
-  //               </div>
-  //             )}
-  //           </div>
-  //         </div>
-  //       </section>
-  //       {isAuthenticated() && <section>
-  //         <form onSubmit={this.handleCommentSubmit}>
-  //           <div>
-  //             <div className="label for comments">
-  //               <p> Comment on {user.username} </p>
-  //             </div>
-  //             <input
-  //               className="comments-input"
-  //               type="textArea"
-  //               maxLength="250"
-  //               name="text"
-  //               onChange={this.handleCommentChange}
-  //               value={comments.text} />
-  //           </div>
-  //           <div className="comments-submit-button">
-  //             <button className="button is-primary">Submit Comment</button>
-  //           </div>
-  //         </form>
-  //         <div>
-  //           {commentsArray.map(comment => (
-  //             <Comments
-  //               key={comment._id}
-  //               comment={comment}
-  //               deleteComment={this.deleteComment}
-  //             />
-  //           ))}
-  //         </div>
-  //       </section>}
-  //     </>
-  //   )
-  // }
-
-
   render() {
     if (!this.state.user) return <h1>User kidnapped, Ninja to the rescue</h1>
 
@@ -288,57 +177,60 @@ class userShowProfile extends React.Component {
           <div className="Show-profile-top">
             <div className="Photo-user-rating">
               <img src={user.profilePic} alt={user.username} />
-              <h4 className="title is-3">{user.username}</h4>
-              <h6 className="subtitle">{location}</h6>
+              <h4 className="Username">{user.username}</h4>
+              <h6 className="User-location">{location}</h6>
               <StarRating
                 rating={rating}
                 onStarClick={this.onStarClick}
               />
-            </div>
-            <div className="Follow-message-comment">
-              <div className="Follow-btn">
-                {isAuthenticated() && <button name="friend" value={user._id} onClick={this.handleFriendSubmit} className="button is-primary">Follow</button>}
-              </div>
-              <div className="Message">
-                {isAuthenticated() && <button onClick={this.toggleContactModal} className="button is-primary">Message</button>}
 
-                <div className="Modal-Message">
-                  <div className={contactModalOpen ? "modal is-active" : "modal"}>
-                    <div className="field">
-                      <form onSubmit={this.handleContactSubmit}>
-                        <div className="control">
-                          <textarea
-                            name="text"
-                            onChange={this.handleContactChange}
-                            name="text"
-                            className="textarea is-medium is-primary"
-                            placeholder="Message..."></textarea>
-                        </div>
-                        <button className="button is-info">SEND</button>
-                      </form>
+              <div className="Follow-message">
+                <div className="Follow-btn">
+                  {isAuthenticated() && <button name="friend" value={user._id} onClick={this.handleFriendSubmit} className="Button">Follow</button>}
+                </div>
+                <div className="Message">
+                  {isAuthenticated() && <button onClick={this.toggleContactModal} className="Button">Message</button>}
+
+                  <div className="Modal-Message">
+                    <div className={contactModalOpen ? "modal is-active" : "modal"}>
+                      <div className="field">
+                        <form onSubmit={this.handleContactSubmit}>
+                          <div className="control">
+                            <textarea
+                              name="text"
+                              onChange={this.handleContactChange}
+                              name="text"
+                              className="textarea is-medium is-primary"
+                              placeholder="Message..."></textarea>
+                          </div>
+                          <button className="button is-info">SEND</button>
+                        </form>
+                      </div>
                     </div>
                   </div>
                 </div>
-
               </div>
+
             </div>
 
 
+            <div className="Comments-container">
+              <h3>{user.username}'s Reviews</h3>
               {
                 isAuthenticated() && <section className="Comments">
-                  <form 
-                  className="Comment-left"
-                  onSubmit={this.handleCommentSubmit}>
-                      <p> Leave your comment about {user.username} </p>
-                      <textarea
-                        className="Comment-text"
-                        rows="10"
-                        type="textArea"
-                        maxLength="250"
-                        name="text"
-                        onChange={this.handleCommentChange}
-                        value={comments.text} />
-                      <button className="Submit">Submit Comment</button>
+                  <form
+                    className="Comment-left"
+                    onSubmit={this.handleCommentSubmit}>
+                    <p> Your review for {user.username}:</p>
+                    <textarea
+                      className="Comment-text"
+                      rows="5"
+                      type="textArea"
+                      maxLength="200"
+                      name="text"
+                      onChange={this.handleCommentChange}
+                      value={comments.text} />
+                    <button className="Submit">Submit Comment</button>
                   </form>
 
                   <div className="Comments-on-user">
@@ -353,6 +245,8 @@ class userShowProfile extends React.Component {
                   </div>
                 </section>
               }
+
+            </div>
 
           </div>
 
