@@ -26,9 +26,9 @@ class UserMap extends React.Component {
   // * Function to GET the users details
   async componentDidMount() {
     try {
-      this.loadMap()
+    await this.loadMap()
     } catch (err) {
-      console.log(err)
+      this.props.history.push('/notfound')
     }
   }
 
@@ -37,7 +37,7 @@ class UserMap extends React.Component {
       const res = await getProfile()
       this.setState({ user: res.data })
     } catch (err) {
-      console.log(err)
+      this.props.history.push('/notfound')
     }
   }
 

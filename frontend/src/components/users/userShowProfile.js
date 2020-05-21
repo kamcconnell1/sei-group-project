@@ -43,7 +43,7 @@ class userShowProfile extends React.Component {
       this.setState({ user: res.data, userItems, commentsArray: res.data.comments, })
       this.getLocation()
     } catch (err) {
-      console.log(err)
+      this.props.history.push('/notfound')
     }
   }
 
@@ -310,7 +310,6 @@ class userShowProfile extends React.Component {
                           <textarea
                             name="text"
                             onChange={this.handleContactChange}
-                            name="text"
                             className="textarea is-medium is-primary"
                             placeholder="Message..."></textarea>
                         </div>
