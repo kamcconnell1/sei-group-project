@@ -212,7 +212,22 @@ class UserProfile extends React.Component {
               <div>
                 {/* Notifications / chat section */}
                 <div className="My-profile-message-board">
-                  <button>Messages <span>{`(${messages.length})`}</span></button>
+                  <button className="button is-info">Messages <span>{`(${messages.length})`}</span></button>
+                  <div>
+                    {sortedMessages.map((message, i) =>
+                      <MessageCard
+                        key={i}
+                        {...message}
+                        reply={this.toggleReplyModal}
+                        sendReply={this.handleReplySubmit}
+                        replyModal={this.state.replyModalOpen}
+                        replyChange={this.handleReplyChange}
+                      />
+                    )}
+                  </div>
+                </div>
+
+                <section>
                   <div>
                     <button onClick={this.toggleMessagesModal} className="button is-info">Messages <span>{`(${messages.length})`}</span></button>
                     <div className={this.messagesModalOpen ? "modal is-active" : "modal"}>
@@ -251,7 +266,8 @@ class UserProfile extends React.Component {
                       ))}
                     </div>
                   </section>
-                </div>
+                  </section>
+                
                 <div className="Center-col">
                   {/* Map over the clothes the user has uploaded - need to work on the positioning of this - need to add to allow user to edit / delete items */}
                   <div className="My-items">

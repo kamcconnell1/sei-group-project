@@ -4,32 +4,55 @@ import { showAllClothes } from "../../lib/api"
 import ClothCard from "./ClothCard"
 // import Select from 'react-select'
 import ClothesFilter from "./ClothesFilter"
+
+
 class ClothesIndex extends React.Component {
   state = {
     clothes: null,
     filteredClothes: null,
     filteredCategories: null,
     searchClothes: "",
-    filteredItemsToDisplay: []
+    filteredItemsToDisplay: [],
   }
+
   // * Function to GET all clothes and get data for filter functions
   async componentDidMount() {
     try {
       const res = await showAllClothes()
-      const category = res.data.map(cat => cat.category)
-      const filteredCategory = category.filter((cat, index) => category.indexOf(cat) === index)
-      const color = res.data.map(col => col.color)
-      const colorArray = color.reduce((acc, col) => { return acc.concat(col) }, [])
-      const filteredColor = colorArray.filter((col, index) => colorArray.indexOf(col) === index)
-      const gender = res.data.map(gen => gen.genderCategory)
-      const filteredGender = gender.filter((gen, index) => gender.indexOf(gen) === index)
-      const sizes = res.data.map(size => size.size)
-      const filteredSize = sizes.filter((size, index) => sizes.indexOf(size) === index)
-      this.setState({ clothes: res.data, filteredClothes: res.data, categories: filteredCategory, colors: filteredColor, genders: filteredGender, sizes: filteredSize, filteredCategories: filteredCategory })
+      const category = res.data.map((cat) => cat.category)
+      const filteredCategory = category.filter(
+        (cat, index) => category.indexOf(cat) === index
+      )
+      const color = res.data.map((col) => col.color)
+      const colorArray = color.reduce((acc, col) => {
+        return acc.concat(col)
+      }, [])
+      const filteredColor = colorArray.filter(
+        (col, index) => colorArray.indexOf(col) === index
+      )
+      const gender = res.data.map((gen) => gen.genderCategory)
+      const filteredGender = gender.filter(
+        (gen, index) => gender.indexOf(gen) === index
+      )
+      const sizes = res.data.map((size) => size.size)
+      const filteredSize = sizes.filter(
+        (size, index) => sizes.indexOf(size) === index
+      )
+      this.setState({
+        clothes: res.data,
+        filteredClothes: res.data,
+        categories: filteredCategory,
+        colors: filteredColor,
+        genders: filteredGender,
+        sizes: filteredSize,
+        filteredCategories: filteredCategory,
+      })
     } catch (err) {
       console.log(err)
     }
   }
+
+
   // * Function to handle search box input - user can search by category, title and username
   handleChange = (event) => {
     const { clothes } = this.state
@@ -44,89 +67,61 @@ class ClothesIndex extends React.Component {
     })
     this.setState({ searchClothes, filteredClothes })
   }
+
+
   // * Function to allow user to filter clothing intems
   // ! To be completed - by Benga
-
-  // filterChange = event => {
-  //   const {filteredClothes} = this.state
-  //   const showFilter = event.value
-  //   if (filteredClothes.length > 0) {
-  //     const filteredCats = filteredClothes.filter(cloth => {
-  //       const regex = RegExp(showFilter, 'i')
-  //       return (cloth.category.match(regex) || cloth.color[0].match(regex) || cloth.genderCategory.match(regex) || cloth.size.match(regex))
-  //     })
-  //     console.log(event.value)
-  //   } else {return 'unavailable'}
-  //   this.setState({filteredClothes: filteredCats})
-  // }
-  // handleFilter = (e, field) => {
-  //   this.setState({[field]: e.value}, )
-  // }
-  // filterValues = () => {
-  //   const {filteredClothes} = this.state
-  //   const filteredItems = filteredClothes.filter((cloth) => {
-  //     if (!filteredClothes) {
-  //       return true
-  //     }
-  //     if (filteredClothes) {
-  //       return cloth.ca
-  //     }
-  //   })
-  // }
   handleFilter = (e, field) => {
     this.setState({ [field]: e.value }, this.getFilteredItems)
   }
   getFilteredItems = () => {
-    const { category, color, gender, size, clothes } = this.state
-    const filteredItemsToDisplay = clothes.filter((item) => {
+    const {
+      category,
+      color,
+      gender,
+      size,
+      clothes,
+    } = this.state
+    const resultOfFilteredItemsToDisplay = clothes.filter((item) => {
       if (!category && !color && !gender && !size) {
         return true
       }
-      if (category && color && gender && size) {
-        return (
-          item.category.includes(category) &&
-          item.color.includes(color) &&
-          item.genderCategory.includes(gender) &&
-          item.size.includes(size)
-        )
-      }
-      if (category && color && !gender && !size) {
-        return (
-          item.category.includes(category) &&
-          item.color.includes(color)
-        )
-      } else if (category && gender && !color && !size) {
-        item.category.includes(category) &&
-          item.genderCategory.includes(gender)
-      }
-      else
-        return (
-          item.category.includes(category) ||
-          item.color.includes(color) ||
-          item.genderCategory.includes(gender) ||
-          item.size.includes(size)
-        )
+      const categoryFilter = category ? item.category.includes(category) : true
+      const colorFilter = color ? item.color.includes(color) : true
+      const genderFilter = gender ? item.genderCategory.includes(gender) : true
+      const sizeFilter = size ? item.size.includes(size) : true
+      return categoryFilter && colorFilter && genderFilter && sizeFilter
     })
-    this.setState({ filteredItemsToDisplay })
+    this.setState({ filteredItemsToDisplay: resultOfFilteredItemsToDisplay})
   }
 
-  filterChange = event => {
+  filterChange = (event) => {
     const { filteredClothes } = this.state
     const showFilter = event.value
     if (filteredClothes.length > 0) {
-      const filteredCats = filteredClothes.filter(cloth => {
-        const regex = RegExp(showFilter, 'i')
-        return (cloth.category.match(regex) || cloth.color[0].match(regex) || cloth.genderCategory.match(regex) || cloth.size.match(regex))
+      const filteredCats = filteredClothes.filter((cloth) => {
+        const regex = RegExp(showFilter, "i")
+        return (
+          cloth.category.match(regex) ||
+          cloth.color[0].match(regex) ||
+          cloth.genderCategory.match(regex) ||
+          cloth.size.match(regex)
+        )
       })
       this.setState({ filteredClothes: filteredCats })
       console.log(event.value)
-    } else { return 'unavailable' }
+    } else {
+      return "unavailable"
+    }
+  }
 
+  // * Function to reset filter button
+  resetFilter = () => {
+    this.setState({filteredItemsToDisplay: this.state.clothes })
   }
 
 
   render() {
-
     if (!this.state.filteredClothes)
       return <h1>Some Ninjas are working on this</h1>
     const {
@@ -136,7 +131,11 @@ class ClothesIndex extends React.Component {
       genders,
       searchClothes,
       sizes,
-      filteredItemsToDisplay
+      filteredItemsToDisplay,
+      color,
+      size,
+      gender,
+      category,
     } = this.state
     // console.log('Filtered clothes:', filteredClothes)
     // console.log('Item to display:', filteredItemsToDisplay)
@@ -190,10 +189,19 @@ class ClothesIndex extends React.Component {
               />
             </form>
           </div>
+          <button onClick={this.resetFilter} className="button is-dark">Reset Filter</button>
           <div className="Clothes-index">
-            {(filteredItemsToDisplay.length) > 0 ? filteredItemsToDisplay.map(cloth => <ClothCard {...cloth} key={cloth._id} />) : filteredClothes.map((cloth) => (
-              <ClothCard {...cloth} key={cloth._id} />
-            ))}
+            {filteredItemsToDisplay.length > 0 ? (
+              filteredItemsToDisplay.map((cloth) => (
+                <ClothCard {...cloth} key={cloth._id} />
+              ))
+            ) : anyFilterSet ? (
+              <p>No items found with your filters</p>
+            ) : (
+              filteredClothes.map((cloth) => (
+                <ClothCard {...cloth} key={cloth._id} />
+              ))
+            )}
           </div>
         </div>
       </>
