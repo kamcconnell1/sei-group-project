@@ -11,6 +11,7 @@ import About from './components/common/About'
 import ClothesAdd from './components/clothes/ClothesAdd'
 import ClothesIndex from './components/clothes/ClothesIndex'
 import ClothesShow from './components/clothes/ClothesShow'
+import ClothesEdit from './components/clothes/ClothesEdit'
 
 import UserProfile from './components/users/UserProfile'
 import EditProfile from './components/users/EditProfile'
@@ -43,6 +44,7 @@ const App = () => {
     <SecureRoute path='/profile/:username/map' component={UserMap} />
     <SecureRoute path='/profile/:username/edit' component={EditProfile} />
     <Route path='/profile/:username' component={UserProfile} />
+    <Route path='/clothes/:id/edit' component={ClothesEdit} />
     <Route path='/clothes/:id' component={ClothesShow} />
     <Route path='/clothes' component={ClothesIndex} />
     <Route path='/about' component={About} />

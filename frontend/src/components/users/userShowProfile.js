@@ -76,7 +76,6 @@ class userShowProfile extends React.Component {
   // * Function to submit message
   handleContactSubmit = async e => {
     e.preventDefault()
-    const { user } = this.state
     const userId = this.state.user._id
     try {
       await sendMessage(userId, this.state.text)

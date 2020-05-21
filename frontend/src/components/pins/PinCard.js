@@ -3,7 +3,7 @@ import React from 'react'
 const PinCard = (props) => {
   if (!props.info) return null 
 
-const {title, place, note, createdAt, _id} = props.info
+const {title, place, note, createdAt} = props.info
 const {deletePin} = props
 
   return (
