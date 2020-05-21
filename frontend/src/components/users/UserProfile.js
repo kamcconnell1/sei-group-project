@@ -252,17 +252,6 @@ class UserProfile extends React.Component {
                     )}
                   </div>
                 </div>
-
-                <section>
-                  <div>
-                    {commentsArray.map(comment => (
-                      <Comments
-                        key={comment._id}
-                        comment={comment}
-                      />
-                    ))}
-                  </div>
-                </section>
               </div>
 
               <section>

@@ -42,9 +42,4 @@ const EditProfilePicture = ({ onChange, onSubmit, toggleModal, modalOpen }) => {
   )
 }
 
-<<<<<<< HEAD
-
-export default EditProfile
-=======
 export default EditProfilePicture
->>>>>>> development
