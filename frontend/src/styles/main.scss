@@ -1,17 +1,21 @@
-@import '~bulma/bulma.sass';
-
 //? VARS
 :root {
-  --main-bg-color: rgba(198, 187, 200, 0.548);
+  --main-bg-color: rgba(var(--main-bg-rgb), 0.2);
   --main-bg-rgb: 198, 187, 200;
   --navbar-color: rgba(255, 255, 255, 1);
+  --navbar-color-rgb: 255, 255, 255;
   --navbar-hover-color: grey;
   --title-color: white;
   --subtite-color: grey;
   --main-start-point: 25vh;
   --btn-color: lightgrey;
   --cards-text-color: rgb(86, 80, 87);
+  --section-titles-profile-size: 3vw;
+}
 
+html {
+  background-color: var(--main-bg-color);
+  position: relative;
 }
 
 //? LIBRARY
@@ -28,27 +32,23 @@
   justify-content: center;
 }
 
-
-//?Global Styling 
+//?Global Styling
 * {
   margin: 0;
   padding: 0;
   // font-family: 'Hind Siliguri', sans-serif;
-  font-family: 'Poppins', sans-serif;
-
+  font-family: "Poppins", sans-serif;
 }
 .body {
   padding: 0;
-
 }
-
 
 //? ALL PAGES - navbar, main, footer
 
 .Page-head {
   position: absolute;
   text-align: center;
-  top: 15vh;
+  top: 12vw;
   width: 60vw;
   .Page-title {
     color: var(--title-color);
@@ -61,31 +61,35 @@
 }
 
 .Main {
+  display: flex;
+  flex-direction: column;
+  justify-content: left;
+  align-items: center;
   background-color: var(--main-bg-color);
   min-height: 100vh;
-  height: 100%;
   min-width: 100vh;
-  
-  }
-
+}
 
 .Navbar {
   position: sticky;
   top: 0;
-  height: 10vh;
+  height: 7vh;
   display: flex;
   align-items: center;
-  background-color: var(--navbar-color);
+  background-color: rgba(var(--navbar-color-rgb), 0.3);
+
+  .navbar-brand {
+  }
 
   .Navbar-item {
     color: inherit;
-    margin: -100px 1%;
+    margin: -7vw 1%;
     font-size: 15px;
     font-weight: 500;
   }
   .navbar-item {
-   margin: 0;
-   background-color:var(--navbar-color);
+    margin: 0;
+    background-color: rgba(var(--navbar-color-rgb), 0.3);
   }
   .navbar-item:hover,
   .navbar-burger:hover {
@@ -100,21 +104,19 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  padding:0;
+  padding: 0;
   position: fixed;
   bottom: 0;
   background-color: var(--navbar-color);
-
 
   // background-color: rgb(198, 187, 200);
 }
 
 .box {
   width: 40%;
-  background-color: rgba(var(--navbar-color), 0.1);
+  background-color: rgba(var(--navbar-color-rgb), 0.1);
   .field {
     padding: 10px;
-
   }
 }
 
@@ -138,10 +140,10 @@
     align-items: center;
     justify-content: center;
     .Our-mission {
-      width: 30%;  
-  }
+      width: 30%;
+    }
     .How-it-works {
-      width: 30%;  
+      width: 30%;
     }
   }
   .Title {
@@ -157,7 +159,7 @@
 
 .Latest {
   position: absolute;
-  top: var(--main-start-point)
+  top: var(--main-start-point);
 }
 
 .Clothes-filter {
@@ -174,7 +176,7 @@
 }
 
 .Clothes-index {
-  display:flex;
+  display: flex;
   justify-content: center;
   flex-wrap: wrap;
 }
@@ -203,8 +205,8 @@
     position: relative;
     bottom: 60px;
     z-index: 1;
-    background-color: rgba(var(--navbar-color), 0.5);
-    color:var(--cards-text-color);
+    background-color: rgba(var(--navbar-color-rgb), 0.5);
+    color: var(--cards-text-color);
     .Title {
       font-size: 11px;
       font-weight: 600;
@@ -219,10 +221,9 @@
 //? POSTS
 
 .Posts {
-
   .Post-form {
     display: column;
-    justify-content:right;
+    justify-content: right;
     align-items: center;
     padding: 60px 30px;
   }
@@ -230,16 +231,14 @@
   top: var(--main-start-point);
   .Post-form {
     .Post-input-title {
-     width: 300px;
-     height: 30px;
+      width: 300px;
+      height: 30px;
     }
     .Post-input-text {
       width: 300px;
-
     }
     .Post-input-image {
       width: 300px;
-
     }
     .Post-btn {
       padding: 15px 30px;
@@ -255,7 +254,7 @@
     }
   }
   .Card {
-    background-color: rgba(var(--navbar-color), 0.3);
+    background-color: rgba(var(--navbar-color-rgb), 0.3);
     margin: 20px;
     padding: 20px;
     width: 40%;
@@ -267,9 +266,7 @@
       width: 35%;
       margin-right: 10px;
       img {
-
       }
-
     }
     .Text {
       width: 65%;
@@ -284,7 +281,6 @@
         font-size: 10px;
         color: white;
       }
-
     }
   }
 }
@@ -303,7 +299,7 @@
     background-color: black;
     overflow: hidden;
     margin: 50px 20px 0 0;
-    border-radius: 10px; 
+    border-radius: 10px;
     .map-map {
       max-height: 300px;
 
@@ -311,9 +307,7 @@
         position: fixed;
         bottom: 100px;
       }
-      
     }
-
   }
   .map-pins {
     width: 300px;
@@ -323,12 +317,11 @@
       background-color: white;
       margin: 30px;
       padding: 10px;
-      box-shadow: 0 10px 20px #777;   
-      border-radius: 10px; 
+      box-shadow: 0 10px 20px #777;
+      border-radius: 10px;
     }
   }
 }
-
 
 .marker {
   background-color: red;
@@ -337,8 +330,7 @@
   border-radius: 100%;
 }
 
-
-//? USER PROFILE - MY PROFILE PAGE 
+//? USER PROFILE - MY PROFILE PAGE
 
 .My-profile {
   display: flex;
@@ -348,29 +340,60 @@
 
 .My-profile-top-row {
   display: flex;
-  background-color: rgba(var(--navbar-color), 0.3);
   align-items: center;
 
-
   .Photo-delete-rating {
+    .Modal {
+      display: none;
+      z-index: 99;
+      width: 60vw;
+      height: 40vw;
+      position: fixed;
+      top: 23vh;
+      left: 30vw;
+      background-color: rgba(var(--navbar-color-rgb), 0.9);
+      border-radius: 20px;
+      .Modal-content {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        width: 60vw;
+        height: 40vw;
+      }
+      .Modal-close {
+        position: absolute;
+        right: 2vw;
+        top: 2vw;
+        width: 6vw;
+        height: 3vw;
+        background-color: var(--main-bg-color);
+        border-radius: 5px;
+        font-size: 1.4vw;
+      
+      }
+    }
+    .Modal-inactive {
+      display: block;
+    }
+
+
     .profile-img {
-      z-index: 0;
       img {
         width: 100%;
         height: auto;
         border-radius: 70px;
-    
-      } 
+      }
     }
-    
+
     .is-profile-btn {
       position: absolute;
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
-      background-color: #555;
+      background-color: rgba(var(--navbar-color-rgb), 0.3);
       color: white;
-      font-size: 8px;
+      font-size: 1.2vw;
       border: none;
       cursor: pointer;
       border-radius: 5px;
@@ -380,21 +403,21 @@
     align-items: center;
     justify-content: center;
     width: 30%;
-    margin: 20px;
-    padding: 30px;
+    margin: 2vw;
+    padding: 1vw;
     .Edit-delete {
       display: flex;
       justify-content: center;
       .My-profile-update-btn,
       .My-profile-delete-btn {
         text-align: center;
-        font-size: 10px;
+        font-size: 1.3vw;
         font-family: inherit;
         font-weight: 200;
-        padding: 10px 15px;
+        padding: 0.5vw 0.7vw;
         background-color: rgba(66, 48, 48, 0.327);
         border-radius: 10px;
-        margin: 5px;
+        margin: 0.7vw;
         color: white;
       }
       .My-profile-update-btn {
@@ -402,49 +425,49 @@
       }
       .My-profile-delete-btn {
         background-color: rgb(168, 86, 100);
+      }
     }
-  }
-  .My-profile-rating {
-    font-size: 12px;
-    margin-top: 10px;
-  }
-}
-.Welcome {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  width: 70%;
+    .My-profile-rating {
+      font-size: 1.5vw;
+      margin-top: 1vw;
+    }
 
-  .My-profile-favs {
-    margin-top: 50px;
+  }
+
+  .Welcome {
     display: flex;
-    justify-content: space-evenly;
-    .Favs-btn {
-      width: 200px;
-      padding: 10px;
-      text-align: center;
-      font-size: 20px;
-      font-family: inherit;
-      font-weight: 200;
-      background-color: rgba(66, 48, 48, 0.327);
-      border-radius: 10px;
-      margin: 5px;
-      color: white;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 70%;
+
+    .My-profile-favs {
+      margin-top: 5vw;
+      display: flex;
+      justify-content: space-evenly;
+      .Favs-btn {
+        width: 20vw;
+        padding: 1vw;
+        text-align: center;
+        font-size: 2vw;
+        font-family: inherit;
+        font-weight: 200;
+        background-color: rgba(66, 48, 48, 0.327);
+        border-radius: 10px;
+        margin: 1vw;
+        color: white;
+      }
     }
   }
 }
-}
-
 
 .My-profile-columns {
-display: flex;
+  display: flex;
   .Left-col {
     display: flex;
     flex-direction: column;
     width: 30%;
     height: auto;
-
   }
   .Center-col {
     width: 70%;
@@ -455,40 +478,86 @@ display: flex;
 }
 
 .My-profile-message-board {
-  background-color: black;
   height: 100vh;
-  background-color: rgba(var(--navbar-color), 0.3);
-  padding-top: 50px;
+  padding-top: 3vw;
+  margin-left: 2vw;
 
   h3 {
     font-weight: 600;
-    font-size: 20px;
+    font-size: var(--section-titles-profile-size);
+  }
+}
+
+.My-profile-messages {
+  display: flex;
+  flex-direction: column;
+  margin-top: 2vw;
+}
+
+.Message {
+  display: flex;
+  flex-direction: column;
+  margin: 2vw;
+  padding: 1.8vw;
+  background-color: rgba(var(--navbar-color-rgb), 0.3);
+
+  .Message-top {
+    display: flex;
+    justify-content: space-between;
+    height: 15%;
+
+    .Message-user-avatar {
+      width: 4vw;
+      height: 4vw;
+      border-radius: 50px;
+    }
+
+    .Message-from-date {
+      display: flex;
+      flex-direction: column;
+      font-size: 1vw;
+      h3 {
+        font-size: 1.4vw;
+      }
+    }
+  }
+  .Message-content {
+    height: 55%;
+    text-align: center;
+    font-weight: normal;
+    font-size: 1.3vw;
+  }
+
+  .Message-reply-delete {
+    height: 15%;
+    display: flex;
+    justify-content: center;
   }
 }
 
 .My-items {
-  padding: 50px;
+  padding: 3vw;
 }
 
 .My-items-top {
   display: flex;
   justify-content: space-between;
-  margin: 0 20px;
+  margin: 0 3vw;
   h3 {
     font-weight: 600;
     font-size: 20px;
   }
   .Add-clothes-btn {
-      padding: 10px;
-      text-align: center;
-      font-size: 10px;
-      font-family: inherit;
-      font-weight: 600;
-      background-color: rgba(255, 255, 255, 0.605);
-      border-radius: 10px;
-      border: none;
-      margin: 5px;
-      color: black;
+    padding: 10px;
+    text-align: center;
+    font-size: 10px;
+    font-family: inherit;
+    font-weight: 600;
+    background-color: rgba(255, 255, 255, 0.605);
+    border-radius: 10px;
+    border: none;
+    margin: 5px;
+    color: black;
   }
 }
 .My-items-index {
@@ -519,8 +588,8 @@ display: flex;
       position: relative;
       bottom: 60px;
       z-index: 1;
-      background-color: rgba(var(--navbar-color), 0.5);
-      color:var(--cards-text-color);
+      background-color: rgba(var(--navbar-color-rgb), 0.5);
+      color: var(--cards-text-color);
       .Title {
         font-size: 11px;
         font-weight: 600;
@@ -533,10 +602,6 @@ display: flex;
   }
 }
 
-
-
-
-
 // .sidebar {
 //   width:30%;
 //   height: 100%;
@@ -546,16 +611,16 @@ display: flex;
 //   border-right: 1px solid rgab(0, 0, 0, 0.25)
 // }
 
-
-
 // ?------------------------------- Clothing Pages --------------------------------------------------------
-// ? SLIDE IMAGE - SHOW PAGE 
+// ? SLIDE IMAGE - SHOW PAGE
 .slide-container {
   width: 75%;
-  margin: auto; }
+  margin: auto;
+}
 
 h3 {
-  text-align: center; }
+  text-align: center;
+}
 
 .each-slide > div {
   display: flex;
@@ -569,15 +634,11 @@ h3 {
   margin-left: 0;
 }
 
-
-
-
-
-
-
-
-
-
+.Is-active {
+  display: block;
+}
 
 //? ------------------------------- Bulma Variables ------------------------------------------------------
 // $modal-content-width: 500px;
+// $modal-content-width: 300px;
+@import "~bulma/bulma.sass";

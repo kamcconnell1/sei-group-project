@@ -250,7 +250,7 @@ class UserProfile extends React.Component {
                 {/* Notifications / chat section */}
                 <div className="My-profile-message-board">
                 <h3>Messages</h3>
-                  <div>
+                  <div className="My-profile-messages">
                   {messages.map(message =>
                     <MessageCard
                       key={message._id}

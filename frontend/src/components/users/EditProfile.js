@@ -5,9 +5,9 @@ const EditProfile = ({ onChangeEdit, onSubmitEdit, toggleModalEdit, modalOpenEdi
     <div
       className={modalOpenEdit ? "modal is-active" : "modal"}
     >
+      
+      <div className="Edit-profile-form">
       <div className="modal-background"></div>
-
-      <div className="edit-profile-form">
         <form
           className="box"
           onSubmit={onSubmitEdit}
