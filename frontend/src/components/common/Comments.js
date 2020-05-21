@@ -8,20 +8,24 @@ const Comments = ({ comment, deleteComment }) => {
   const date = edited[0]
   const time = edited[1].split('.')[0]
   return (
-    <section className="comments-section">
-      <div className="comments-each">
+    <div className="Comment">
+      <div className="Comment-top">
         <img src={comment.user.profilePic} alt={comment.user.username} height="100" width="100" />
-        <div className="comments-content">
-          <h6 className="author-of-comment">Written by <span className="username-span">{comment.user.username}</span></h6>
-          <p className="main-review-words">{comment.text}</p>
-          <p className="date-on-comment">{time} {date}</p>
-        </div>
-        <div className="review-buttons-div">
-          <button className="button is-primary" onClick={deleteComment
-          } value={comment._id} >Delete</button>
-        </div>
+        <div className="Comment-top-right">
+        <h4>By {comment.user.username}</h4>
+        <h5 className="Date">{time} {date}</h5>
       </div>
-    </section >
+      </div>
+      
+
+      <div className="Comment-text">
+        <p>{comment.text}</p>
+      </div>
+      <div className="Delete">
+        <button className="" onClick={deleteComment
+        } value={comment._id} >Delete</button>
+      </div>
+    </div>
   )
 }
 

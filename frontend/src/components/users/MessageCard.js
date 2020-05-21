@@ -11,35 +11,50 @@ const MessageCard = ({ user, text, createdAt, reply, _id, sendReply, replyModal,
 
   return (
     <>
-    <div>
-      <h4>From <strong>{user.username}</strong></h4>
-      <div className="Message">
-        <img src={user.profilePic} alt={user.username} />
+      <div>
 
-        <div className="Message-from-date">
-          <p><span>{`${date} - ${time}`}: </span>{text}</p>
-          <hr />
-          {response.map((res, i) => <div key={i}> <span>Reply: </span>  <p> <span>{res.createdAt.split('T')}</span> {res.text}</p><hr /></div>)}
+        <div className="Message">
+          <div className="Message-top">
+            <img src={user.profilePic} alt={user.username} />
+
+            <div className="Message-top-right">
+              <h4>From {user.username}</h4>
+              <h5>{`${date} at ${time}`}:</h5>
+            </div>
+
+          </div>
+
+          <div className="Message-text">
+            <p>{text}</p>
+            <hr />
+          </div>
+          <div className="Message-reply">
+            {response.map((res, i) =>
+              <div key={i}>
+                <h5>reply: {res.createdAt.split('T')}</h5>
+                <p>{res.text}</p><hr />
+              </div>)}
+          </div>
+
         </div>
-      </div>
 
-      <div className="Message-content">
-        {response.map((res, i) => <p key={i} >{res.text}</p>)}
-      </div>
-      <div className="Message-reply-delete">
-        <button value={_id} onClick={reply} className="button is-info">Reply</button>
-        <div className={replyModal ? "modal is-active" : "modal"}>
-          <div className="field">
-            <form onSubmit={sendReply}>
-              <div className="control">
-                <textarea onChange={replyChange} name="text" className="textarea is-medium is-primary" placeholder="Message..."></textarea>
-              </div>
-              <button className="button is-info">SEND</button>
-            </form>
+        <div className="Message-content">
+          {response.map((res, i) => <p key={i} >{res.text}</p>)}
+        </div>
+        <div className="Message-reply-delete">
+          <button value={_id} onClick={reply} className="Reply-btn">Reply</button>
+          <div className={replyModal ? "modal is-active" : "modal"}>
+            <div className="field">
+              <form onSubmit={sendReply}>
+                <div className="control">
+                  <textarea onChange={replyChange} name="text" className="textarea is-medium is-primary" placeholder="Message..."></textarea>
+                </div>
+                <button className="button is-info">SEND</button>
+              </form>
+            </div>
           </div>
         </div>
       </div>
-    </div>
     </>
 
   )
