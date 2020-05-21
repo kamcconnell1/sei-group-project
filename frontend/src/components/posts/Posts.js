@@ -12,6 +12,8 @@ class Posts extends React.Component {
       photo: ''
     }
   }
+
+
   async componentDidMount() {
     try {
       this.pageSetup()
@@ -19,6 +21,8 @@ class Posts extends React.Component {
       console.log(err)
     }
   }
+
+
   pageSetup = async () => {
     try {
       const res = await getAllPosts()
@@ -30,10 +34,12 @@ class Posts extends React.Component {
       console.log(err)
     }
   }
+
   handleChange = e => {
     const input = { ...this.state.input, [e.target.name]: e.target.value }
     this.setState({ input })
   }
+
   handleSubmit = async e => {
     e.preventDefault()
     try {
@@ -45,10 +51,12 @@ class Posts extends React.Component {
       console.log(err)
     }
   }
+
   deletePost = async e => {
     await deleteAPost(e.target.value)
     await this.pageSetup()
   }
+  
   render() {
     if (!this.state.posts) return null
     return (

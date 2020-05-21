@@ -4,6 +4,7 @@ import { showAllClothes } from "../../lib/api"
 import ClothCard from "./ClothCard"
 // import Select from 'react-select'
 import ClothesFilter from "./ClothesFilter"
+
 class ClothesIndex extends React.Component {
   state = {
     clothes: null,
@@ -12,6 +13,7 @@ class ClothesIndex extends React.Component {
     searchClothes: "",
     filteredItemsToDisplay: [],
   }
+
   // * Function to GET all clothes and get data for filter functions
   async componentDidMount() {
     try {
@@ -48,6 +50,7 @@ class ClothesIndex extends React.Component {
       console.log(err)
     }
   }
+
   // * Function to handle search box input - user can search by category, title and username
   handleChange = (event) => {
     const { clothes } = this.state

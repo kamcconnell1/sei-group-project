@@ -47,7 +47,7 @@ class PostsShow extends React.Component {
       console.log(postId)
       const res = await commentOnPost(postId, this.state.comments)
       console.log(res.data)
-      this.setState({ commentsArray: res.data.comments })
+      this.setState({ commentsArray: res.data.comments, comments: {...this.state.comments, text: ''} })
       this.getPost()
     } catch (err) {
       console.log(err)
@@ -97,7 +97,7 @@ class PostsShow extends React.Component {
           </div>
           <img src={post.photo} alt={post.title} height="200" width="100" />
           <p>{post.text}</p>
-          <Link to={`/page/${post.user._id}`}><p>Created by: {post.user.username}</p> </Link>
+          <Link to={`/page/${post.user.username}`}><p>Created by: {post.user.username}</p> </Link>
           <p>{date} {time}</p>
           <button name="posts" value={post._id} onClick={this.handleFavouriteSubmit} className="button">Add to Favourites</button>
           {!isOwner && <Link to={`/posts/${post._id}/edit`}><button>Edit</button></Link>}
@@ -114,7 +114,7 @@ class PostsShow extends React.Component {
               maxLength="250"
               name="text"
               onChange={this.handleCommentChange}
-              value={comments.text} />
+              value={this.state.comments.text} />
           </div>
           <div className="comments-submit-button">
             <button>Submit Comment</button>

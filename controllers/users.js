@@ -1,6 +1,6 @@
 //! Required
 const User = require('../models/user')
-const { notFound, unauthorized, duplicate } = require('../lib/errorMessages')
+const { notFound, unauthorized, duplicate, cantAddYourself } = require('../lib/errorMessages')
 const Article = require('../models/article')
 const Posts = require('../models/post')
 //? Show User Dashboard
@@ -20,8 +20,8 @@ async function currentUserProfile(req, res, next) {
 //* ERROR tested
 async function getProfile(req, res, next) {
   try {
-    const user = req.params.id
-    const userProfile = await User.findById(user).populate('createdArticles').populate('createdPosts').populate('comments.user')
+    const user = req.params.username
+    const userProfile = await User.findOne({ username: user }).populate('createdArticles').populate('createdPosts').populate('comments.user').populate('user')
     if (!userProfile) throw new Error(notFound)
     res.status(200).json(userProfile)
   } catch (err) {
@@ -31,9 +31,26 @@ async function getProfile(req, res, next) {
 //? Update details on User profile
 //* WORKING tested
 //* ERROR tested
-async function userUpdate(req, res, next) {
+async function userUpdateProfilePic(req, res, next) {
   try {
     const userId = req.currentUser
+    const updatedProfile = await User.findByIdAndUpdate(userId, req.body, { new: true })
+    if (!updatedProfile) throw new Error(unauthorized)
+    res.status(202).json(updatedProfile)
+  } catch (err) {
+    next(err)
+  }
+}
+
+//? Update details on User profile
+//* WORKING tested
+//* ERROR tested
+async function userUpdate(req, res, next) {
+  try {
+    console.log('here')
+    req.body.user = req.currentUser
+    const userId = req.currentUser
+    console.log(req.body.username)
     const updatedProfile = await User.findByIdAndUpdate(userId, req.body, { new: true })
     if (!updatedProfile) throw new Error(unauthorized)
     res.status(202).json(updatedProfile)
@@ -68,9 +85,10 @@ async function deleteUser(req, res, next) {
 //* ERROR tested
 async function userCommentCreate(req, res, next) {
   try {
+    console.log('entered')
     req.body.user = req.currentUser
-    const Id = await req.params.id
-    const user = await User.findById(Id)
+    const id = await req.params.id
+    const user = await User.findById(id).populate('comments.user')
     if (!user) throw new Error(notFound)
     user.comments.push(req.body)
     await user.save()
@@ -172,11 +190,13 @@ async function addArticleToFavourites(req, res, next) {
 //* ERROR tested
 async function addUserToFavourites(req, res, next) {
   try {
-    const id = req.currentUser.id
+    const id = req.currentUser._id
     const user = await User.findById(id)
     if (!user) throw new Error(unauthorized)
     const friend = await User.findById(req.body.friend)
     if (!friend) throw new Error(notFound)
+    console.log(user, friend)
+    if (user._id.equals(friend._id)) throw new Error(cantAddYourself)
     if (user.favourites.favUsers.includes(friend._id)) throw new Error(duplicate)
     user.favourites.favUsers.push(friend)
     await user.save()
@@ -256,6 +276,7 @@ async function removePostsFromFavs(req, res, next) {
 //! Exports
 module.exports = {
   updateUser: userUpdate,
+  userUpdateProfilePic,
   profile: currentUserProfile,
   getProfile,
   deleteUser,

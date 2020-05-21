@@ -67,7 +67,7 @@ class FavouriteFriends extends React.Component {
                       </div>
                     </Link>
                   </div>
-                  <button onClick={this.removeFromFavs} value={friend._id} >Remove this post</button>
+                  <button onClick={this.removeFromFavs} value={friend._id}>Remove from favourites</button>
                 </div>
               )}
             </div>

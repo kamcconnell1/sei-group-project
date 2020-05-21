@@ -17,6 +17,11 @@ export const showAllClothes = () => {
 export const addClothes = formData => {
   return axios.post(`${kebb_url}/clothes`, formData, withHeaders())
 }
+
+//* DELETE item of clothing
+export const deleteCloth = id => {
+  return axios.delete(`${kebb_url}/clothes/${id}`,  withHeaders())
+}
 // * Function to get single clothing item
 export const singleCloth = id => {
   return axios.get(`${kebb_url}/clothes/${id}`)
@@ -46,14 +51,20 @@ export const getProfile = () => {
 export const editProfile = user => {
   return axios.put(`${kebb_url}/profile`, user, withHeaders())
 }
+
+export const editProfilePicture = user => {
+  return axios.put(`${kebb_url}/editprofilepic`, user, withHeaders())
+}
 //* DELETE request to delete user profile
 export const deleteProfile = () => {
   return axios.delete(`${kebb_url}/deleteUser`, withHeaders())
 }
 // * GET to show specific user (no need to be logged in)
-export const getUserProfile = id => {
-  return axios.get(`${kebb_url}/profile/${id}`)
+export const getUserProfile = username => {
+  return axios.get(`${kebb_url}/profile/${username}`)
 }
+
+//------------------------------------PIN REQUESTS--------------------------------------------
 //* POST for user to add pin to their map 
 export const postPin = formData => {
   return axios.post(`${kebb_url}/pins`, formData, withHeaders())
@@ -62,6 +73,8 @@ export const postPin = formData => {
 export const removePin = id => {
   return axios.delete(`${kebb_url}/pins/${id}`, withHeaders())
 }
+
+//------------------------------------FAVOURITES REQUESTS--------------------------------------------
 // * GET all users favourites
 export const allUsersFavourites = () => {
   return axios.get(`${kebb_url}/favourites`, withHeaders())
@@ -91,9 +104,10 @@ export const deletePostFromFavs = id => {
   return axios.delete(`${kebb_url}/favourites/posts/${id}`, withHeaders())
 }
 
+//------------------------------------COMMENT REQUESTS--------------------------------------------
 //*POST comment on USER
 export const commentOnUser = (id, data) => {
-  return axios.post(`${kebb_url}/profile/${id}/comments`, data, withHeaders())
+  return axios.post(`${kebb_url}/profile/comments/${id}`, data, withHeaders())
 }
 //* DELETE Comment on USER
 export const DeleteCommentOnUser = (id, commentid) => {

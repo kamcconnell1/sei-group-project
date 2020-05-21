@@ -1,7 +1,7 @@
 //! Require
 const User = require('../models/user')
 const Message = require('../models/message')
-const { unauthorized, notFound } = require('../lib/errorMessages')
+const { unauthorized, notFound, cantMessageYourself } = require('../lib/errorMessages')
 //? Function for creating a message.
 //* WORKING tested
 //* ERROR tested
@@ -10,6 +10,8 @@ async function createMessage(req, res, next) {
     req.body.user = await User.findById(req.currentUser)
     req.body.owner = await User.findById(req.params.userid)
     if (!req.body.owner) throw new Error(notFound)
+    console.log(req.body.user)
+    if (req.body.user._id.equals(req.body.owner._id)) throw new Error(cantMessageYourself)
     const message = await Message.create(req.body)
     console.log(message)
     await message.save()
@@ -57,7 +59,6 @@ async function getMessageThread(req, res, next) {
     const filtered = await messages.filter(message => message.owner.equals(req.currentUser._id))
     const filteredtwo = await messages.filter(message => message.user.equals(req.currentUser._id))
     const full = filtered.concat(filteredtwo)
-    console.log(filtered, filteredtwo)
     res.status(201).json(full)
   } catch (err) {
     next(err)
