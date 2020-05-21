@@ -2,7 +2,7 @@ import React from 'react'
 
 import StarRatingComponent from 'react-star-rating-component'
 
-const StarRating = ({rating, onStarClick}) => {
+const StarRating = ({ rating, onStarClick }) => {
 
   return (
     <div>

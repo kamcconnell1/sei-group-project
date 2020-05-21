@@ -14,28 +14,27 @@ class Pins extends React.Component {
     const { data, onClick } = this.props
 
     return (
-      
-        data.map(pin => (
-          <Marker
-            key={pin._id}
-            latitude={parseFloat(pin.latitude)}
-            longitude={parseFloat(pin.longitude)} >
-            <svg
-              height={SIZE}
-              viewBox="0 0 24 24"
-              style={{
-                cursor: 'pointer',
-                fill: '#d00',
-                stroke: 'none',
-                transform: `translate(${-SIZE / 2}px,${-SIZE}px)`
-              }}
-              onClick={() => onClick(pin)}
-              >
-              <path d={ICON} />
-            </svg>
-          </Marker>
-        ))
-      
+
+      data.map(pin => (
+        <Marker
+          key={pin._id}
+          latitude={parseFloat(pin.latitude)}
+          longitude={parseFloat(pin.longitude)} >
+          <svg
+            height={SIZE}
+            viewBox="0 0 24 24"
+            style={{
+              cursor: 'pointer',
+              fill: '#d00',
+              stroke: 'none',
+              transform: `translate(${-SIZE / 2}px,${-SIZE}px)`
+            }}
+            onClick={() => onClick(pin)}
+          >
+            <path d={ICON} />
+          </svg>
+        </Marker>
+      ))
     )
   }
 }

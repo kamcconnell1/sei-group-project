@@ -2,6 +2,8 @@ import React from 'react'
 
 import { editPost, getSinglePost } from '../../lib/api'
 
+import { toast } from '../../lib/notifications'
+
 class PostEdit extends React.Component {
   state = {
     dataInput: {
@@ -10,14 +12,14 @@ class PostEdit extends React.Component {
       photo: ''
     }
   }
+
   async componentDidMount() {
     const id = this.props.match.params.id
     try {
       const res = await getSinglePost(id)
-      console.log(res.data)
       this.setState({ dataInput: res.data })
     } catch (err) {
-      console.log(err)
+      this.props.history.push('/notfound')
     }
   }
 
@@ -36,8 +38,6 @@ class PostEdit extends React.Component {
       console.log(err)
     }
   }
-
-
 
   render() {
     return (

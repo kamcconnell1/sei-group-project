@@ -1,17 +1,7 @@
 import React from 'react'
 
 
-const PinForm = ({ modalStatus, handleChange, handleSubmit, numberOfPins, toggleModal, errors, form }) => {
-
-  // const pinNumber = numberOfPins()
-
-  // console.log(pinNumber);
-  // console.log('all errors', errors);
-  // console.log('pin,error', errors['pins.0.place']);
-  // // ["pins.0.place"]
-  // const errorMessage = (['pins',[pinNumber],'place'])
-  // console.log(errorMessage.join());
-  
+const PinForm = ({ modalStatus, handleChange, handleSubmit, toggleModal, errors, form }) => {
 
   return (
     <div
@@ -23,7 +13,6 @@ const PinForm = ({ modalStatus, handleChange, handleSubmit, numberOfPins, toggle
           onSubmit={handleSubmit}
           className="column is-3 is-pulled-left	"
         >
-
           <div className="field">
             <label className="label">Title</label>
             <div className="control">
@@ -79,7 +68,7 @@ const PinForm = ({ modalStatus, handleChange, handleSubmit, numberOfPins, toggle
           className="modal-close is-large"
           onClick={toggleModal}
           aria-label="close">
-          </button>
+        </button>
       </div>
     </div>
 
