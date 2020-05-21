@@ -54,7 +54,7 @@ class FavouriteFriends extends React.Component {
               {friends.map(friend =>
                 <div key={friend.username} className="column is-one-quarter-desktop is-one-third-tablet is-half-mobile">
                   <div className="card">
-                    <Link to={`/page/${friend._id}`}>
+                    <Link to={`/page/${friend.username}`}>
                       <div className="card-header">
                       </div>
                       <div className="card-image">

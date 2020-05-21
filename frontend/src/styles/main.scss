@@ -344,6 +344,11 @@ html {
 }
 
 .Photo-user-rating {
+  img {
+    width: 18vw;
+    height: 18vw;
+    border-radius: 90px;
+  }
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -356,7 +361,21 @@ html {
 }
 
 .Comments {
-  .Comment-text {
+  display: flex;
+
+  .Comment-left {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .Comments-on-user {
+    display: flex;
+    flex-direction: column;
+    margin-top: 2vw;
+    // background-color: red;
+    overflow: scroll;
+    max-height: 30vw;
+    width: 100%;
   }
 }
 
@@ -366,19 +385,21 @@ html {
 
   .User-items-index {
     display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    width: 80%;
+    margin-top: 2vw;
+    overflow: scroll;
+    max-height: 40vw;
+    max-width: 78vw;
+
     .Card {
       display: flex;
       flex-direction: column;
       align-items: center;
       margin: 5px 5px;
-      width: 150px;
-      height: 150px;
+      width: 25vw;
+      max-height: 25vw;
       .img img {
         margin: 0;
-        max-height: 150px;
+        max-height: 25vw;
         max-width: auto;
         object-fit: cover;
         z-index: 0;
@@ -413,7 +434,7 @@ html {
 .My-profile {
   display: flex;
   flex-direction: column;
-  width: 100%;
+  width: 100vw;
 }
 
 .My-profile-top-row {
@@ -456,7 +477,7 @@ html {
 
     .profile-img {
       img {
-        width: 100%;
+        width: 20vw;
         height: auto;
         border-radius: 70px;
       }
@@ -563,10 +584,14 @@ html {
   }
 }
 
-.My-profile-messages {
+.My-profile-message-board {
   display: flex;
   flex-direction: column;
   margin-top: 2vw;
+  // background-color: red;
+  overflow: scroll;
+  max-height: 50vw;
+  width: 100%;
 }
 
 .Message {
@@ -575,27 +600,56 @@ html {
   margin: 2vw;
   padding: 1.8vw;
   background-color: rgba(var(--navbar-color-rgb), 0.3);
+  width: 90%;
+
+  img {
+    max-width: 5vw;
+    max-height: 5vw;
+    border-radius: 50px;
+  }
 
   .Message-top {
     display: flex;
-    justify-content: space-between;
+    justify-content: left;
     height: 15%;
-
-    .Message-user-avatar {
-      width: 4vw;
-      height: 4vw;
-      border-radius: 50px;
-    }
-
-    .Message-from-date {
+    .Message-top-right {
       display: flex;
       flex-direction: column;
-      font-size: 1vw;
-      h3 {
-        font-size: 1.4vw;
+      align-items: left;
+      margin-left: 2vw;
+      h4 {
+        font-size: 2vw;
+      }
+      h5 {
+        font-size: 1vw;
+        font-weight: 200;
       }
     }
   }
+  .Message-text,
+  .Message-reply {
+    margin-top: 2vw;
+    h5 {
+      text-align: center;
+      font-size: 1vw;
+      font-weight: 200;
+    }
+    p {
+      font-size: 1.4vw;
+    }
+  }
+
+  .Message-from-date {
+    display: flex;
+    flex-direction: column;
+    p {
+      font-size: 1.2vw;
+    }
+    h4 {
+      font-size: 1vw;
+    }
+  }
+
   .Message-content {
     height: 55%;
     text-align: center;
@@ -607,6 +661,10 @@ html {
     height: 15%;
     display: flex;
     justify-content: center;
+    .Reply-btn {
+      width: 3vw;
+      background-color: red;
+    }
   }
 }
 
@@ -677,14 +735,63 @@ html {
   }
 }
 
-// .sidebar {
-//   width:30%;
-//   height: 100%;
-//   top: 200px;
-//   left: 0;
-//   overflow: hidden;
-//   border-right: 1px solid rgab(0, 0, 0, 0.25)
-// }
+//? Comments from users
+
+.My-comments {
+  padding: 3vw;
+  h3 {
+    font-weight: 600;
+    font-size: 20px;
+  }
+}
+
+.Comments-users {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.Comment {
+  margin: 3vw;
+  .Delete {
+    display: none;
+  }
+}
+
+.Comment-top {
+  display: flex;
+  justify-content: left;
+  margin-bottom: 2vw;
+  img {
+    max-width: 5vw;
+    max-height: 5vw;
+    border-radius: 50px;
+  }
+  .Comment-top-right {
+    display: flex;
+    flex-direction: column;
+    align-items: left;
+    margin-left: 2vw;
+    h4 {
+      font-size: 2vw;
+    }
+    h5 {
+      font-size: 1vw;
+      font-weight: 200;
+    }
+  }
+}
+.Comment-text {
+  margin-top: 2vw;
+  h5 {
+    text-align: center;
+    font-size: 1vw;
+    font-weight: 200;
+  }
+  p {
+    font-size: 1.4vw;
+  }
+}
 
 // ?------------------------------- Clothing Pages --------------------------------------------------------
 // ? SLIDE IMAGE - SHOW PAGE

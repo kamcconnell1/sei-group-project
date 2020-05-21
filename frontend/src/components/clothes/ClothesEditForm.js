@@ -1,7 +1,5 @@
 import React from 'react'
 import Select from 'react-select'
-import ImageUpload from '../common/ImageUpload'
-import { uploadClothesImage } from '../../lib/ext_api'
 
 const colorOptions = [
   { value: 'black', label: 'Black' },
@@ -16,7 +14,7 @@ const colorOptions = [
   { value: 'silver', label: 'Silver' },
   { value: 'gold', label: 'Gold' }
 ]
-const ClothesForm = ({ handleChange, handleSubmit, handleMultiChange, formData, onChange, errors }) => {
+const ClothesForm = ({ handleChange, handleSubmit, handleMultiChange, formData, errors }) => {
 
 
   const { title, category, genderCategory, size, rentalPrice, brand } = formData
@@ -150,43 +148,13 @@ const ClothesForm = ({ handleChange, handleSubmit, handleMultiChange, formData, 
               </div>
               {errors.rentalPrice && <small className="help is-danger">{errors.rentalPrice}</small>}
             </div>
-
             <div className="field">
-            <label className="label">Please upload Images of your item <small>(*2 minimum)</small></label>
-              {errors.image && <small className="help is-danger">Please upload some images</small>}
-              <div className="control">
-                {/* Image Upload function for four images only to be uploaded */}
-                <ImageUpload
-                  onChange={onChange}
-                  preset={uploadClothesImage}
-                  name="image"
-                />
-                <ImageUpload
-                  onChange={onChange}
-                  preset={uploadClothesImage}
-                  name="image"
-                />
-                <ImageUpload
-                  onChange={onChange}
-                  preset={uploadClothesImage}
-                  name="image"
-                />
-                <ImageUpload
-                  onChange={onChange}
-                  preset={uploadClothesImage}
-                  name="image"
-                />
-
-              </div>
-
-              <div className="field">
-                <button type="submit" className="button is-fullwidth is-primary">Add Item</button>
-              </div>
+              <button type="submit" className="button is-fullwidth is-primary">Add Item</button>
             </div>
           </form>
         </div>
       </div>
-    </section>
+    </section >
   )
 }
 export default ClothesForm
