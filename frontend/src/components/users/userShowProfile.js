@@ -1,7 +1,11 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+
 import { getUserProfile, postFavoriteFriend, commentOnUser, DeleteCommentOnUser, sendMessage, rateUser } from '../../lib/api'
 import { isAuthenticated } from '../../lib/auth'
+import { toast } from '../../lib/notifications'
+import { addedRatingToast } from '../../lib/toasts'
+
 import Comments from '../common/Comments'
 import StarRating from '../common/StarRating'
 
@@ -16,7 +20,9 @@ class userShowProfile extends React.Component {
     commentsArray: [],
     contactModalOpen: false,
     text: '',
+    ratingData: {
     rating: ''
+    }
   }
 
   async componentDidMount() {
@@ -108,6 +114,7 @@ class userShowProfile extends React.Component {
     }
   }
 
+  //* Function to get the page Users ratings - I they haven't been rated yet you start on 3 stars
   getUserRating = () => {
     const ratings = this.state.user.ratings
     if (ratings.length === 0) return 3
@@ -115,31 +122,30 @@ class userShowProfile extends React.Component {
       a + rating, 0) / ratings.length)))
   }
 
-  //* Star Rating function 
+
+  //* ON Clicking the star sets state 
   onStarClick = (nextValue) => {
-    // this.setState({ rating: [...this.state.rating, nextValue] }
-    //   , () => {
-    //     this.addUserRating()
-    //   })
-    this.setState({rating: nextValue}
+    if (!isAuthenticated()) return 
+  addedRatingToast()
+    const ratingData = {...this.state.ratingData, rating: nextValue}
+    this.setState({ratingData}
       , () => {
-        this.addUserRating()
+        this.submitUserRating()
       })
   }
 
+  // addedRatingToast = () => {
+  //   return toast('Thankyou, rating has been added')
+  // }
+
   //*POST rating on the user
-  addUserRating = async event => {
+  async submitUserRating() {
     try {
       const userId = this.state.user._id
-      const rating = (this.state.rating)
-      console.log(rating);
-      
-      const res = await rateUser(userId, rating)
+      const res = await rateUser(userId, this.state.ratingData)
       console.log(res.data);
-      
     } catch (err) {
       console.log(err);
-
     }
   }
 
@@ -147,14 +153,10 @@ class userShowProfile extends React.Component {
 
   render() {
     if (!this.state.user) return <h1>User kidnapped, Ninja to the rescue</h1>
-    console.log(this.state.user);
 
     const rating = parseInt(this.getUserRating())
-    console.log('getUserRating',rating)
-    console.log('state ratings', this.state.rating);
-    
-
     const { user, userItems, comments, commentsArray, contactModalOpen } = this.state
+
     return (
       <>
         <section>
@@ -169,7 +171,6 @@ class userShowProfile extends React.Component {
             <h4 className="title is-3">{user.username}</h4>
           </div>
           <div>
-            {/* Star Rating  */}
             <StarRating
               rating={rating}
               onStarClick={this.onStarClick}

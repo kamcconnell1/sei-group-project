@@ -1,5 +1,6 @@
 import React from 'react'
 import { BrowserRouter, Switch, Route } from 'react-router-dom'
+import Notifications from 'react-notify-toast'
 
 import Navbar from './components/common/Navbar'
 import Footer from './components/common/Footer'
@@ -28,6 +29,7 @@ import PostEdit from './components/posts/PostEdit'
 const App = () => {
   return (
     <BrowserRouter>
+    <Notifications />
     <Navbar className="Navbar" />
     <div className="Main column-center">
     <Switch>

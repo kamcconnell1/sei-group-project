@@ -128,10 +128,13 @@ class ClothesShow extends React.Component {
     }
   }
 
-//* StarRating function
-onStarClick = (nextValue) => {
-  this.setState({ rating: nextValue})
-}
+  //* Function to get the page Users ratings - I they haven't been rated yet you start on 3 stars
+  getUserRating = () => {
+    const ratings = this.state.user.ratings
+    if (ratings.length === 0) return 3
+    return (Math.round((Object.values(ratings).reduce((a, { rating }) =>
+      a + rating, 0) / ratings.length)))
+  }
 
 
 
@@ -139,6 +142,8 @@ onStarClick = (nextValue) => {
     
     if (!this.state.cloth) return <h1>Even more Ninjas are working on this</h1>
     const {cloth, user, comments, commentsArray, contactModalOpen } = this.state
+    const rating = parseInt(this.getUserRating())
+
 
     //* Variable of images from articles user posted
     const images = user.createdArticles.map(image => {return {image: image.image, id: image._id}})
@@ -178,8 +183,7 @@ onStarClick = (nextValue) => {
               contactModalOpen={contactModalOpen}
               handleContactChange={this.handleContactChange}
               handleContactSubmit={this.handleContactSubmit}
-              onStarClick={this.onStarClick}
-              rating={this.state.rating}
+              rating={rating}
               />
             </div>
           </div>

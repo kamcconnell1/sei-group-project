@@ -168,13 +168,23 @@ class UserProfile extends React.Component {
     console.log('clicked')
   }
 
+ //* Function to get the page Users ratings - I they haven't been rated yet you start on 3 stars
+ getUserRating = () => {
+  const ratings = this.state.user.ratings
+  if (ratings.length === 0) return 3
+  return (Math.round((Object.values(ratings).reduce((a, { rating }) =>
+    a + rating, 0) / ratings.length)))
+}
+
   render() {
       if (!this.state.user || !this.state.location || !this.state.messages) return null
-      // consts taken from state to populate user data shown on the page
-      const { username, createdArticles, profilePic } = this.state.user
+      
+      const { username, createdArticles, profilePic} = this.state.user
       const { commentsArray, messages } = this.state
       const location = this.state.location
       const reversedCreatedArticles = createdArticles.reverse().slice(0, 6)
+      const rating = parseInt(this.getUserRating())
+
       return (
         <>
 
@@ -198,8 +208,8 @@ class UserProfile extends React.Component {
               <div className="My-profile-rating">
                 <p>My Rating</p>
                 <StarRating
-                  onStarClick={this.onStarClick}
-                  rating={this.state.rating}
+                  rating={rating}
+                  editing={false}
                 />
               </div>
               <div className="Edit-delete">

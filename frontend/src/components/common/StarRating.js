@@ -11,7 +11,8 @@ const StarRating = ({rating, onStarClick}) => {
         starCount={5}
         value={rating}
         onStarClick={onStarClick}
-        starColor="#708090"
+        starColor="#fdfbfd"
+        emptyStarColor="#6c7f9a"
       />
     </div>
   )

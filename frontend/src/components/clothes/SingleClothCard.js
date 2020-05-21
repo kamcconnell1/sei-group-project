@@ -22,9 +22,10 @@ const properties = {
   }
 }
 
-const SingleClothCard = ({ deleteComment, handleContactSubmit, handleContactChange, contactModalOpen, toggleContact, commentsArray, comments, title, clothId, profilePic, username, images, image, currentUserId, onFirstClick, onSecondClick, onClick, location, handleCommentSubmit, handleCommentChange, rating, onStarClick }) => {
+
+const SingleClothCard = ({ deleteComment, handleContactSubmit, handleContactChange, contactModalOpen, toggleContact, commentsArray, comments, title, clothId, profilePic, username, images, image, currentUserId, onFirstClick, onSecondClick, onClick, location, handleCommentSubmit, handleCommentChange, rating }) => {
   const slideImages = [image[0], image[0], image[0]]
- 
+
   return (
     <>
       <section className="section">
@@ -94,7 +95,7 @@ const SingleClothCard = ({ deleteComment, handleContactSubmit, handleContactChan
           <hr />
           <StarRating 
           rating={rating}
-          onStarClick={onStarClick}
+          editing={false}
           />
         </div>
         <hr />
