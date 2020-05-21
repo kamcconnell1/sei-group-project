@@ -46,6 +46,14 @@ onClickMarker = (pin) => {
   this.setState({popupInfo: pin})
 }
 
+deletePopup = () => {
+  const id = this.state.popupInfo._id
+  this.setState({popupInfo: null},
+    () => {
+      this.props.onClickDelete(id)
+    })}
+
+
 //* Popup details
 renderPopup(props) {
   const {popupInfo} = this.state
@@ -61,8 +69,7 @@ renderPopup(props) {
       >
       <PinCard 
       info={popupInfo}
-      deletePin={this.props.onClickDelete}
-      closeOnClick={false}
+      deletePin={this.deletePopup}
       / >
       </Popup>
     )

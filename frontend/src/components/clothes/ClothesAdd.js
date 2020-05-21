@@ -1,7 +1,7 @@
 import React from 'react'
 import { addClothes } from '../../lib/api'
 
-import ClothesForm2 from './ClothesForm2'
+import ClothesForm from './ClothesForm'
 
 class ClothesAdd extends React.Component{
 state = {
@@ -71,7 +71,7 @@ handleImageChange = (event, i) => {
     return(
       <>
       <h1>Add Clothes</h1>
-      <ClothesForm2 
+      <ClothesForm
       onChange={this.handleImageChange}
       onClick={this.handleAddImage}
 
