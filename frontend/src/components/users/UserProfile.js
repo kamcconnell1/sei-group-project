@@ -238,8 +238,8 @@ class UserProfile extends React.Component {
               <div>
                 {/* Notifications / chat section */}
                 <div className="My-profile-message-board">
-                  <button onClick={this.toggleMessagesModal} className="button is-info">Messages <span>{`(${messages.length})`}</span></button>
-                  <div className={this.messagesModalOpen ? "modal is-active" : "modal"}>
+                  <button className="button is-info">Messages <span>{`(${messages.length})`}</span></button>
+                  <div>
                     {sortedMessages.map((message, i) =>
                       <MessageCard
                         key={i}
