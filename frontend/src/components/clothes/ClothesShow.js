@@ -25,17 +25,21 @@ class ClothesShow extends React.Component {
     try {
       this.getSingleCloth()
     } catch (err) {
-      this.props.history.push('/Somethingwentwrong')
+      this.props.history.push('/notfound')
     }
   }
 
   // * Function to GET single clothing Item
   getSingleCloth = async () => {
-    const clothId = this.props.match.params.id
-    const res = await singleCloth(clothId)
-    const userId = res.data.user.username
-    const user = await getUserProfile(userId)
-    this.setState({ cloth: res.data, user: user.data, commentsArray: res.data.comments })
+    try{
+      const clothId = this.props.match.params.id
+      const res = await singleCloth(clothId)
+        const userId = res.data.user.username
+        const user = await getUserProfile(userId)
+        this.setState({cloth: res.data, user: user.data, commentsArray: res.data.comments })
+    } catch (err) {
+      this.props.history.push('/notfound')
+    }
   }
 
   // * Function to click on first picture in similar user post
@@ -66,7 +70,7 @@ class ClothesShow extends React.Component {
   handleFavouriteSubmit = async e => {
     try {
       const addToList = await { ...this.state.item, [e.target.name]: e.target.value }
-      const res = await postFavorite(addToList)
+      await postFavorite(addToList)
       toast(`You added '${this.state.cloth.title}' to your favourites`)
     } catch (err) {
       console.log(err.response)

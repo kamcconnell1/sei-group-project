@@ -24,9 +24,7 @@ class Posts extends React.Component {
   pageSetup = async () => {
     try {
       const res = await getAllPosts()
-      console.log(res.data)
       const postReverse = await res.data.reverse()
-      console.log(postReverse)
       this.setState({ posts: postReverse })
     } catch (err) {
       console.log(err)

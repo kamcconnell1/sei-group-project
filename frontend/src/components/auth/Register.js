@@ -29,7 +29,6 @@ class Register extends React.Component {
   handlePostcodeChange = event => {
     const formData = { ...this.state.formData, postcode: event.target.value }
     const errors = { ...this.state.errors, postcode: '' }
-
     this.setState({ formData, errors }, () => {
       this.getLocation()
       this.assignAvatar()
@@ -53,8 +52,6 @@ class Register extends React.Component {
     const formData = { ...this.state.formData, profilePic: avatar }
     this.setState({ formData })
   }
-
-
 
   //* handleSubmit event for submitting the registration form
   handleSubmit = async event => {

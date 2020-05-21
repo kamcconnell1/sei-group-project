@@ -16,7 +16,6 @@ class Login extends React.Component {
     error: ''
   }
 
-
   //* HandleChange event for inputting values on form 
   handleChange = event => {
     const formData = { ...this.state.formData, [event.target.name]: event.target.value }
@@ -37,7 +36,6 @@ class Login extends React.Component {
       this.setState({ error: 'Invalid Credentials' })
     }
   }
-
 
   render() {
     return (

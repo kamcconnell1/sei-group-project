@@ -9,7 +9,7 @@ class FavouriteItem extends React.Component {
     try {
       await this.getPosts()
     } catch (err) {
-      console.log(err)
+      this.props.history.push('/notfound')
     }
   }
 
@@ -18,7 +18,7 @@ class FavouriteItem extends React.Component {
       const res = await allUsersFavourites()
       this.setState({ items: res.data.favArticles })
     } catch (err) {
-      console.log(err)
+      this.props.history.push('/notfound')
     }
   }
 
