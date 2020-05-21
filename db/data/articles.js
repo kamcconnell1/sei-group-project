@@ -407,7 +407,74 @@ module.exports = [
     color: 'Red',
     rentalPrice: 22,
     image: 'https://i.pinimg.com/564x/0a/1a/ba/0a1abafd8421cc9eb9af427d05634972.jpg'
+  },
+  {
+    title: 'Polka Dot Plunge Dress',
+    category: 'Dress',
+    brand: 'InTheStyle',
+    genderCategory: 'Women',
+    size: '12',
+    color: 'Blue, White',
+    rentalPrice: 32,
+    image: 'https://i.pinimg.com/564x/67/91/e4/6791e48b051224869c7b32b882a980b4.jpg'
+  },
+  {
+    title: 'Polka Dot Mini Dress',
+    category: 'Dress',
+    brand: 'Boohoo',
+    genderCategory: 'Women',
+    size: 'XS',
+    color: 'Blue, White',
+    rentalPrice: 20,
+    image: 'https://www.pinterest.co.uk/pin/537195061807495067/'
+  },
+  {
+    title: 'Boho Summer Dress',
+    category: 'Dress',
+    brand: 'Anthropologie',
+    genderCategory: 'Women',
+    size: '12',
+    color: 'White',
+    rentalPrice: 40,
+    image: 'https://i.pinimg.com/564x/5e/53/77/5e53775f7c5e6c258121b07bd823dc68.jpg'
+  },
+  {
+    title: 'Floral Midi Dress',
+    category: 'Dress',
+    brand: 'Pretty Little Thing',
+    genderCategory: 'Women',
+    size: 'M',
+    color: 'Blue',
+    rentalPrice: 33,
+    image: 'https://i.pinimg.com/564x/28/ed/be/28edbe1f17209019ba77494180e347d8.jpg'
+  },
+  {
+    title: 'Silk Evening Dress',
+    category: 'Dress',
+    brand: 'John Lewis',
+    genderCategory: 'Women',
+    size: '8',
+    color: 'Pink, Orange',
+    rentalPrice: 45,
+    image: 'https://i.pinimg.com/564x/35/98/ab/3598abd14164c794d46a41de1a24402d.jpg'
+  },
+  {
+    title: 'Midi Dress',
+    category: 'Dress',
+    brand: 'ASOS',
+    genderCategory: 'Women',
+    size: 'M',
+    color: 'Orange, Pink',
+    rentalPrice: 35,
+    image: 'https://i.pinimg.com/564x/3d/ad/36/3dad36a38abc3648f0c6159d2897a591.jpg'
   }
+
+
+
+
+
+
+
 
 
 
