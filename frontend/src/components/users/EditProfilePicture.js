@@ -3,7 +3,7 @@ import React from 'react'
 import { uploadClothesImage } from '../../lib/ext_api'
 import ImageUpload from '../common/ImageUpload'
 
-const EditProfile = ({ onChange, onSubmit, toggleModal, modalOpen }) => {
+const EditProfilePicture = ({ onChange, onSubmit, toggleModal, modalOpen }) => {
 
   return (
     <div
@@ -22,7 +22,6 @@ const EditProfile = ({ onChange, onSubmit, toggleModal, modalOpen }) => {
                   onChange={onChange}
                   preset={uploadClothesImage}
                   name="profilePic"
-                  labelText="Or Upload Picture"
                 />
               </div>
             </div>
@@ -43,5 +42,9 @@ const EditProfile = ({ onChange, onSubmit, toggleModal, modalOpen }) => {
   )
 }
 
+<<<<<<< HEAD
 
 export default EditProfile
+=======
+export default EditProfilePicture
+>>>>>>> development

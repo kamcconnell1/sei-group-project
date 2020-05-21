@@ -13,6 +13,7 @@ import ClothesIndex from './components/clothes/ClothesIndex'
 import ClothesShow from './components/clothes/ClothesShow'
 
 import UserProfile from './components/users/UserProfile'
+import EditProfile from './components/users/EditProfile'
 import UserMap from './components/users/UserMap'
 import userShowProfile from './components/users/userShowProfile'
 import FavouriteFriends from './components/users/FavouriteFriends'
@@ -39,8 +40,8 @@ const App = () => {
     <SecureRoute path='/profile/:username/friends' component={FavouriteFriends} />
     <SecureRoute path='/profile/:username/favouriteposts' component={FavouritePosts} />
     <SecureRoute path='/profile/:username/favourites' component={FavouriteItems} />
-
-    <Route path='/profile/:username/map' component={UserMap} />
+    <SecureRoute path='/profile/:username/map' component={UserMap} />
+    <SecureRoute path='/profile/:username/edit' component={EditProfile} />
     <Route path='/profile/:username' component={UserProfile} />
     <Route path='/clothes/:id' component={ClothesShow} />
     <Route path='/clothes' component={ClothesIndex} />
