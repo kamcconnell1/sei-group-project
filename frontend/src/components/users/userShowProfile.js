@@ -2,8 +2,8 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 
 import { getUserProfile, postFavoriteFriend, commentOnUser, DeleteCommentOnUser, sendMessage, rateUser } from '../../lib/api'
+import { getPostcodeInfo } from '../../lib/ext_api'
 import { isAuthenticated } from '../../lib/auth'
-import { toast } from '../../lib/notifications'
 import { addedRatingToast } from '../../lib/toasts'
 
 import Comments from '../common/Comments'
@@ -12,6 +12,7 @@ import StarRating from '../common/StarRating'
 class userShowProfile extends React.Component {
   state = {
     user: null,
+    location: '',
     userItems: null,
     friend: '',
     comments: {
@@ -39,10 +40,26 @@ class userShowProfile extends React.Component {
       const res = await getUserProfile(userId)
       const userItems = res.data.createdArticles
       this.setState({ user: res.data, userItems, commentsArray: res.data.comments, })
+      this.getLocation()
     } catch (err) {
       console.log(err)
     }
   }
+
+    //* Function to find user location details
+    async getLocation() {
+      try {
+        const postcode = this.state.user.postcode
+        const response = await getPostcodeInfo(postcode)
+        const nuts = response.data.result.nuts
+        const region = response.data.result.region
+        this.setState({ location: `${nuts}, ${region}`})
+      } catch (err) {
+        const latitude = 51.515419
+        const longitude = -0.141099
+        this.setState({ location: 'London, UK', latitude, longitude })
+      }
+    }
 
   // * Function to toggle contact modal
   toggleContactModal = () => {
@@ -156,7 +173,7 @@ class userShowProfile extends React.Component {
 
     const rating = parseInt(this.getUserRating())
     const { user, userItems, comments, commentsArray, contactModalOpen } = this.state
-
+    const {location} = this.state
     return (
       <>
         <section>
@@ -175,7 +192,9 @@ class userShowProfile extends React.Component {
               rating={rating}
               onStarClick={this.onStarClick}
             />
-
+          </div>
+          <div>
+          <h6 className="subtitle">{location}</h6>
           </div>
           <div className="columns">
             <div className="column">
@@ -189,7 +208,12 @@ class userShowProfile extends React.Component {
             <div className="field">
               <form onSubmit={this.handleContactSubmit}>
                 <div className="control">
-                  <textarea name="text" onChange={this.handleContactChange} name="text" className="textarea is-medium is-primary" placeholder="Message..."></textarea>
+                  <textarea 
+                  name="text" 
+                  onChange={this.handleContactChange} 
+                  name="text" 
+                  className="textarea is-medium is-primary" 
+                  placeholder="Message..."></textarea>
                 </div>
                 <button className="button is-info">SEND</button>
               </form>

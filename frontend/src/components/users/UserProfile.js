@@ -4,7 +4,7 @@ import UserClothCard from './UserClothCard'
 import MessageCard from './MessageCard'
 import EditProfilePicture from './EditProfilePicture'
 import EditProfile from './EditProfile'
-import { getProfile, editProfile, deleteProfile, inboxMessage, getUserProfile, replyMessage } from '../../lib/api'
+import { getProfile, editProfile, deleteProfile, inboxMessage, replyMessage } from '../../lib/api'
 import { logout } from '../../lib/auth'
 import { getPostcodeInfo } from '../../lib/ext_api'
 import Comments from '../common/Comments'
@@ -25,7 +25,8 @@ class UserProfile extends React.Component {
     messages: null,
     replyModalOpen: false,
     replyId: '',
-    text: ''
+    text: '',
+    messagesModalOpen: false
   }
   // * Function to GET the users details
   async componentDidMount() {
@@ -56,14 +57,14 @@ class UserProfile extends React.Component {
 
   // * Function to handle change of reply textbox
   handleReplyChange = e => {
-    const text = {...this.state.text, [e.target.name]: e.target.value}
-    this.setState({text})
+    const text = { ...this.state.text, [e.target.name]: e.target.value }
+    this.setState({ text })
   }
 
   // * Function to reply to messages
   handleReplySubmit = async e => {
     e.preventDefault()
-    const {replyId} = this.state
+    const { replyId } = this.state
     try {
       const res = await replyMessage(replyId, this.state.text)
       console.log(res.data)
@@ -71,7 +72,7 @@ class UserProfile extends React.Component {
     } catch (err) {
       console.log(err)
     }
-    this.setState({replyModalOpen: false})
+    this.setState({ replyModalOpen: false })
   }
 
   // * Function to GET incoming messages
@@ -91,13 +92,9 @@ class UserProfile extends React.Component {
       const response = await getPostcodeInfo(postcode)
       const nuts = response.data.result.nuts
       const region = response.data.result.region
-      const latitude = response.data.result.latitude
-      const longitude = response.data.result.longitude
-      this.setState({ location: `${nuts}, ${region}`, latitude, longitude })
+      this.setState({ location: `${nuts}, ${region}` })
     } catch (err) {
-      const latitude = 51.515419
-      const longitude = -0.141099
-      this.setState({ location: 'London, UK', latitude, longitude })
+      this.setState({ location: 'London, Greater London' })
     }
   }
   //* Function to allow user to upload a profile picture
@@ -126,27 +123,6 @@ class UserProfile extends React.Component {
     this.setState({ modalOpen: !this.state.modalOpen })
   }
 
-  toggleModalEdit = () => {
-    this.setState({ modalOpenEdit: !this.state.modalOpenEdit })
-  }
-
-  handleChangeEdit = (e) => {
-    const user = { ...this.state.user, [e.target.name]: e.target.value }
-    this.setState({ user })
-  }
-
-  handleSubmitEdit = async e => {
-    e.preventDefault()
-    try {
-      console.log('presub', this.state.user)
-      const res = await editProfile(this.state.user)
-      console.log(res.data)
-      this.toggleModalEdit()
-      this.getUserDashboard()
-    } catch (err) {
-      this.setState({ errors: 'username' })
-    }
-  }
 
   //* Delete Profile
   deleteUserProfile = async e => {
@@ -168,25 +144,39 @@ class UserProfile extends React.Component {
     console.log('clicked')
   }
 
- //* Function to get the page Users ratings - I they haven't been rated yet you start on 3 stars
- getUserRating = () => {
-  const ratings = this.state.user.ratings
-  if (ratings.length === 0) return 3
-  return (Math.round((Object.values(ratings).reduce((a, { rating }) =>
-    a + rating, 0) / ratings.length)))
-}
+  //* Function to get the page Users ratings - I they haven't been rated yet you start on 3 stars
+  getUserRating = () => {
+    const ratings = this.state.user.ratings
+    if (ratings.length === 0) return 3
+    return (Math.round((Object.values(ratings).reduce((a, { rating }) =>
+      a + rating, 0) / ratings.length)))
+  }
+
+  handleEditProfile = () => {
+    const user = this.props.match.params.username
+    this.props.history.push(`/profile/${user}/edit`)
+  }
+
+  // * function to toggle messages modal
+  toggleMessagesModal = () => {
+    this.setState({ messagesModalOpen: !this.state.messagesModalOpen})
+  }
 
   render() {
-      if (!this.state.user || !this.state.location || !this.state.messages) return null
-      
-      const { username, createdArticles, profilePic} = this.state.user
-      const { commentsArray, messages } = this.state
-      const location = this.state.location
-      const reversedCreatedArticles = createdArticles.reverse().slice(0, 6)
-      const rating = parseInt(this.getUserRating())
+    if (!this.state.user || !this.state.location || !this.state.messages) return null
 
-      return (
-        <>
+    const { username, createdArticles, profilePic } = this.state.user
+    const { commentsArray, messages, location } = this.state
+
+    const reversedCreatedArticles = createdArticles.reverse().slice(0, 6)
+    const rating = parseInt(this.getUserRating())
+
+    // * Sorted messages by date
+    const sortedMessages = messages.sort((a, b) => b.createdAt - a.createdAt )
+  
+
+    return (
+      <>
 
         <div className="My-profile">
 
@@ -206,24 +196,23 @@ class UserProfile extends React.Component {
                 />
               </div>
               <div className="My-profile-rating">
-                <p>My Rating</p>
                 <StarRating
                   rating={rating}
                   editing={false}
                 />
               </div>
               <div className="Edit-delete">
-                <button onClick={this.toggleModalEdit}
+                <button onClick={this.handleEditProfile}
                   className="My-profile-update-btn"
                 >Update Profile</button>
-                <EditProfile
+                {/* <EditProfile
                   errors={this.state.errors}
                   state={this.state.user}
                   toggleModalEdit={this.toggleModalEdit}
                   modalOpenEdit={this.state.modalOpenEdit}
                   onChangeEdit={this.handleChangeEdit}
                   onSubmitEdit={this.handleSubmitEdit}
-                />
+                /> */}
                 <button onClick={() => { if (window.confirm("Are you sure?")) this.deleteUserProfile() }} className="My-profile-delete-btn">Delete</button>
               </div>
             </div>
@@ -249,20 +238,20 @@ class UserProfile extends React.Component {
               <div>
                 {/* Notifications / chat section */}
                 <div className="My-profile-message-board">
-                <h3>Messages</h3>
-                  <div>
-                  {messages.map(message =>
-                    <MessageCard
-                      key={message._id}
-                      {...message}
-                      reply={this.toggleReplyModal}
-                      sendReply={this.handleReplySubmit}
-                      replyModal={this.state.replyModalOpen}
-                      replyChange={this.handleReplyChange}
-                    />
-                  )}
+                  <button onClick={this.toggleMessagesModal} className="button is-info">Messages <span>{`(${messages.length})`}</span></button>
+                  <div className={this.messagesModalOpen ? "modal is-active" : "modal"}>
+                    {sortedMessages.map((message, i) =>
+                      <MessageCard
+                        key={i}
+                        {...message}
+                        reply={this.toggleReplyModal}
+                        sendReply={this.handleReplySubmit}
+                        replyModal={this.state.replyModalOpen}
+                        replyChange={this.handleReplyChange}
+                      />
+                    )}
+                  </div>
                 </div>
-              </div>
 
                 <section>
                   <div>
@@ -275,7 +264,7 @@ class UserProfile extends React.Component {
                   </div>
                 </section>
               </div>
-              
+
               <section>
                 <div>
                   {commentsArray.map(comment => (

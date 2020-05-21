@@ -5,6 +5,7 @@ import Map from './Map'
 import PinForm from '../pins/PinForm'
 
 import { postPin, getProfile, removePin } from '../../lib/api'
+import { deletedItemToast } from '../../lib/toasts'
 
 import 'mapbox-gl/dist/mapbox-gl.css'
 
@@ -73,6 +74,7 @@ class UserMap extends React.Component {
       await postPin(this.state.formData)
       this.loadMap()
       this.toggleModal()
+      this.setState({...this.state.formData, title: ''})
     } catch (err) {
       console.log('response errors', err.response)
       this.setState({ errors: err.response.data })
@@ -84,6 +86,7 @@ class UserMap extends React.Component {
     try {
       await removePin(e.target.value)
       this.loadMap()
+      deletedItemToast()
     } catch (err) {
       console.log(err)
     }

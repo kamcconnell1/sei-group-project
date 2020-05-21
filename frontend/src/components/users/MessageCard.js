@@ -1,20 +1,27 @@
 import React from 'react'
 
 const MessageCard = ({ user, text, createdAt, reply, _id, sendReply, replyModal, replyChange, response }) => {
-  // console.log(response.map(res => res.text))
+  const edited = createdAt.split('T')
+  const date = edited[0]
+  const time = edited[1].split('.')[0]
+  // const resCreatAt = response.map(res => res.createdAt)
+  // const resEdited = resCreatAt.map(res => res.split('T'))
+  // const resDate = resEdited.map(res => res[0])
+  // const resTime = resEdited.map(res => res[1].split('.')[0])
+
   return (
     <>
       <h4>From <strong>{user.username}</strong></h4>
       <div className="columns">
         <figure className="media-left column">
           <p className="image is-64x64">
-            <img src={user.profilePic} />
+            <img src={user.profilePic} alt={user.username} />
           </p>
         </figure>
         <div className="column">
-          <p>Message</p>
-          <p><span>{createdAt}</span>{text}</p>
-          {response.map((res, i) => <p key={i} >{res.text}</p>)}
+          <p><span>{`${date} - ${time}`}: </span>{text}</p>
+          <hr />
+          {response.map((res, i) => <div  key={i}> <span>Reply: </span>  <p> <span>{res.createdAt.split('T')}</span> {res.text}</p><hr/></div> )}
         </div>
       </div>
       <div className="columns">
