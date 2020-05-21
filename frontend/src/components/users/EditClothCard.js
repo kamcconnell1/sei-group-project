@@ -8,10 +8,10 @@ const EditClothCard = ({ _id, title, image, rentalPrice, deleteArticle }) => {
         <img src={image[0]} alt={title} loading="lazy" width="255" height="255" />
         </div>
         <div className="Card-text">
-          <button 
+          {/* <button 
           className="My-profile-update-btn"
           >Update
-          </button>
+          </button> */}
           <button 
           onClick={() => { if (window.confirm("Are you sure?")) deleteArticle(_id) }} 
           className="My-profile-delete-btn">Delete</button>
