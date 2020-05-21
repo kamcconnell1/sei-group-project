@@ -1,8 +1,8 @@
 import React from 'react'
 
-import {Link} from 'react-router-dom'
+import { Link } from 'react-router-dom'
 
-const ClothCard = ({_id, title, image, rentalPrice}) => {
+const ClothCard = ({ _id, title, image, rentalPrice }) => {
   return (
     <Link to={`/clothes/${_id}`}>
       <div className="Clothes-card">

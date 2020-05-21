@@ -1,8 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 
-import { isAuthenticated } from '../../lib/auth'
-
 class About extends React.Component {
 
 

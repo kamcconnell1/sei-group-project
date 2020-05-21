@@ -18,9 +18,7 @@ const colorOptions = [
 ]
 const ClothesForm = ({ handleChange, handleSubmit, handleMultiChange, formData, onChange, errors }) => {
 
-
   const { title, category, genderCategory, size, rentalPrice, brand } = formData
-
 
   return (
     <section className="section">
@@ -150,9 +148,8 @@ const ClothesForm = ({ handleChange, handleSubmit, handleMultiChange, formData, 
               </div>
               {errors.rentalPrice && <small className="help is-danger">{errors.rentalPrice}</small>}
             </div>
-
             <div className="field">
-            <label className="label">Please upload Images of your item <small>(*2 minimum)</small></label>
+              <label className="label">Please upload Images of your item <small>(*2 minimum)</small></label>
               {errors.image && <small className="help is-danger">Please upload some images</small>}
               <div className="control">
                 {/* Image Upload function for four images only to be uploaded */}
@@ -176,9 +173,7 @@ const ClothesForm = ({ handleChange, handleSubmit, handleMultiChange, formData, 
                   preset={uploadClothesImage}
                   name="image"
                 />
-
               </div>
-
               <div className="field">
                 <button type="submit" className="button is-fullwidth is-primary">Add Item</button>
               </div>

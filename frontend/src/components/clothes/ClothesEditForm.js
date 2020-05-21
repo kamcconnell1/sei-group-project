@@ -16,7 +16,6 @@ const colorOptions = [
 ]
 const ClothesForm = ({ handleChange, handleSubmit, handleMultiChange, formData, errors }) => {
 
-
   const { title, category, genderCategory, size, rentalPrice, brand } = formData
 
 
@@ -42,7 +41,6 @@ const ClothesForm = ({ handleChange, handleSubmit, handleMultiChange, formData, 
               </div>
               {errors.title && <small className="help is-danger">{errors.title}</small>}
             </div>
-            {/* This input should be changed to a multi select to select categories fit into */}
             <div className="field">
               <label className="label">Category</label>
               <div className="control">

@@ -1,8 +1,7 @@
 import React from "react"
-// ! Filter function yet to be completed - Benga
+
 import { showAllClothes } from "../../lib/api"
 import ClothCard from "./ClothCard"
-// import Select from 'react-select'
 import ClothesFilter from "./ClothesFilter"
 
 class ClothesIndex extends React.Component {
@@ -14,7 +13,7 @@ class ClothesIndex extends React.Component {
     filteredItemsToDisplay: [],
   }
 
-  // * Function to GET all clothes and get data for filter functions
+  //* Function to GET all clothes and get data for filter functions
   async componentDidMount() {
     try {
       const res = await showAllClothes()
@@ -66,7 +65,6 @@ class ClothesIndex extends React.Component {
     this.setState({ searchClothes, filteredClothes })
   }
   // * Function to allow user to filter clothing items
-  // ! To be completed - by Benga
   handleFilter = (e, field) => {
     this.setState({ [field]: e.value }, this.getFilteredItems)
   }
@@ -147,7 +145,6 @@ class ClothesIndex extends React.Component {
     const sizeOption = sizes.map((size) => {
       return { value: size, label: size }
     })
-    // ! Needs to include range filter to filter price - Benga
     return (
       <>
         <div className="Page-head">
