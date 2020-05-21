@@ -324,24 +324,23 @@ class userShowProfile extends React.Component {
               </div>
             </div>
 
-            <div className="Comments">
-              {
-                isAuthenticated() && <section>
-                  <form onSubmit={this.handleCommentSubmit}>
 
-                    <div className="Comment-left">
-                      <p> Leave a comment about {user.username} </p>
-                      <input
+              {
+                isAuthenticated() && <section className="Comments">
+                  <form 
+                  className="Comment-left"
+                  onSubmit={this.handleCommentSubmit}>
+                      <p> Leave your comment about {user.username} </p>
+                      <textarea
                         className="Comment-text"
+                        rows="10"
                         type="textArea"
                         maxLength="250"
                         name="text"
                         onChange={this.handleCommentChange}
                         value={comments.text} />
                       <button className="Submit">Submit Comment</button>
-                    </div>
                   </form>
-
 
                   <div className="Comments-on-user">
                     {commentsArray.map(comment => (
@@ -355,7 +354,6 @@ class userShowProfile extends React.Component {
                   </div>
                 </section>
               }
-            </div>
 
           </div>
 
