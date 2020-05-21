@@ -24,11 +24,9 @@ class Navbar extends React.Component {
   }
 
   username = getUsername()
-  
-  
-  
+
   render() {
-    
+
     const { isOpen } = this.state
 
     return (
@@ -48,7 +46,7 @@ class Navbar extends React.Component {
           <div className={`navbar-menu ${isOpen ? 'is-active' : ''}`}>
             <div className="navbar-end">
               {isAuthenticated() && <Link to={`/profile/${this.username}`} className="navbar-item Navbar-item">View Profile</Link>}
-              {isAuthenticated() && <Link to={`/profile/${this.username}/map`} className="navbar-item Navbar-item">User Map</Link> }
+              {isAuthenticated() && <Link to={`/profile/${this.username}/map`} className="navbar-item Navbar-item">User Map</Link>}
               {!isAuthenticated() && <Link to="/register" className="navbar-item Navbar-item">Register</Link>}
               {!isAuthenticated() && <Link to="/login" className="navbar-item Navbar-item">Login</Link>}
               {isAuthenticated() && <span onClick={this.handleLogout} className="navbar-item Navbar-item">Logout</span>}
