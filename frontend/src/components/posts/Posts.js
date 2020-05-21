@@ -3,7 +3,6 @@ import PostCards from '../posts/PostsCards'
 import ImageUpload from '../common/ImageUpload'
 import { uploadClothesImage } from '../../lib/ext_api'
 import { getAllPosts, createPost, deleteAPost } from '../../lib/api'
-
 class Posts extends React.Component {
   state = {
     posts: null,
@@ -13,6 +12,8 @@ class Posts extends React.Component {
       photo: ''
     }
   }
+
+
   async componentDidMount() {
     try {
       this.pageSetup()
@@ -20,39 +21,44 @@ class Posts extends React.Component {
       console.log(err)
     }
   }
+
+
   pageSetup = async () => {
     try {
       const res = await getAllPosts()
       console.log(res.data)
-      this.setState({ posts: res.data })
+      const postReverse = await res.data.reverse()
+      console.log(postReverse)
+      this.setState({ posts: postReverse })
     } catch (err) {
       console.log(err)
     }
   }
+
   handleChange = e => {
     const input = { ...this.state.input, [e.target.name]: e.target.value }
     this.setState({ input })
   }
+
   handleSubmit = async e => {
     e.preventDefault()
     try {
       const res = await createPost(this.state.input)
       console.log(res.data)
+      this.setState({ commentsArray: res.data.comments, input: {...this.state.input, title: '', text: '', photo: ''} })
       await this.pageSetup()
     } catch (err) {
       console.log(err)
     }
   }
+
   deletePost = async e => {
     await deleteAPost(e.target.value)
     await this.pageSetup()
   }
-
+  
   render() {
     if (!this.state.posts) return null
-
-    const reversedPosts = this.state.posts.reverse()
-
     return (
       <>
         <div className="Page-head">
@@ -60,7 +66,7 @@ class Posts extends React.Component {
             <h1>Posts</h1>
           </div>
           <div className="Page-subtitle">
-            <h2>Add & save locations to remember later</h2>
+            {/* <h2>Add & save locations to remember later</h2> */}
           </div>
         </div>
         <div className="Posts row-center">
@@ -81,16 +87,17 @@ class Posts extends React.Component {
               placeholder="Text"
               onChange={this.handleChange}
             />
-            <label>Upload an image</label>
-            <ImageUpload
-            onChange={this.handleChange}
-            preset={uploadClothesImage}
-            name="photo"
+            <label>Add the Url of an Image here.</label>
+            <input className="Post-input-title"
+              name="photo"
+              value={this.state.input.photo}
+              placeholder="URL of Image"
+              onChange={this.handleChange}
             />
             <button className="Post-btn">Submit Post</button>
           </form>
           <div className="Post-cards">
-            {reversedPosts.map(post => (
+            {this.state.posts.map(post => (
               <PostCards
                 deletePost={this.deletePost}
                 key={post._id}

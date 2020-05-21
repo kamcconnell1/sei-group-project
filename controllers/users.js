@@ -1,6 +1,6 @@
 //! Required
 const User = require('../models/user')
-const { notFound, unauthorized, duplicate } = require('../lib/errorMessages')
+const { notFound, unauthorized, duplicate, cantAddYourself } = require('../lib/errorMessages')
 const Article = require('../models/article')
 const Posts = require('../models/post')
 //? Show User Dashboard
@@ -190,11 +190,13 @@ async function addArticleToFavourites(req, res, next) {
 //* ERROR tested
 async function addUserToFavourites(req, res, next) {
   try {
-    const id = req.currentUser.id
+    const id = req.currentUser._id
     const user = await User.findById(id)
     if (!user) throw new Error(unauthorized)
     const friend = await User.findById(req.body.friend)
     if (!friend) throw new Error(notFound)
+    console.log(user, friend)
+    if (user._id.equals(friend._id)) throw new Error(cantAddYourself)
     if (user.favourites.favUsers.includes(friend._id)) throw new Error(duplicate)
     user.favourites.favUsers.push(friend)
     await user.save()

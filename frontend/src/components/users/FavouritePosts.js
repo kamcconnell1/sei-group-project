@@ -68,7 +68,7 @@ class FavouritePosts extends React.Component {
                       <h5 className=""><strong></strong></h5>
                     </div>
                     </Link>
-                    <button onClick={this.removeFromFavs} value={post._id}>Remove this post</button>
+                    <button onClick={this.removeFromFavs} value={post._id}>Remove from favourites</button>
                   </div>
               
               </div> 
