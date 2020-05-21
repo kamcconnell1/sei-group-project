@@ -96,7 +96,7 @@ const SingleClothCard = ({ deleteComment, handleContactSubmit, handleContactChan
         <div>
           <br />
           <p>
-            <strong>{username}</strong>
+          <Link to={`/page/${username}`}><strong>{username}</strong></Link>
           </p>
           <hr />
           <StarRating 

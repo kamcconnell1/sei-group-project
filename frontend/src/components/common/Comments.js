@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 
 const Comments = ({ comment, deleteComment }) => {
@@ -12,7 +13,7 @@ const Comments = ({ comment, deleteComment }) => {
       <div className="comments-each">
         <img src={comment.user.profilePic} alt={comment.user.username} height="100" width="100" />
         <div className="comments-content">
-          <h6 className="author-of-comment">Written by <span className="username-span">{comment.user.username}</span></h6>
+        <Link to={`/page/${comment.user.username}`}><h6 className="author-of-comment">Written by <span className="username-span">{comment.user.username}</span></h6></Link>
           <p className="main-review-words">{comment.text}</p>
           <p className="date-on-comment">{time} {date}</p>
         </div>
