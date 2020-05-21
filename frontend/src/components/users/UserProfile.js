@@ -9,7 +9,6 @@ import { logout } from '../../lib/auth'
 import { getPostcodeInfo } from '../../lib/ext_api'
 import Comments from '../common/Comments'
 import StarRating from '../common/StarRating'
-
 // ! User profile, GETs data for user on mount
 class UserProfile extends React.Component {
   state = {
@@ -38,8 +37,6 @@ class UserProfile extends React.Component {
       console.log(err)
     }
   }
-
-
   async getUserDashboard() {
     try {
       const res = await getProfile()
@@ -49,18 +46,15 @@ class UserProfile extends React.Component {
       console.log(err)
     }
   }
-
   // * Function to toggle reply message box
   toggleReplyModal = e => {
     this.setState({ replyModalOpen: !this.state.contactModalOpen, replyId: e.target.value })
   }
-
   // * Function to handle change of reply textbox
   handleReplyChange = e => {
     const text = { ...this.state.text, [e.target.name]: e.target.value }
     this.setState({ text })
   }
-
   // * Function to reply to messages
   handleReplySubmit = async e => {
     e.preventDefault()
@@ -74,7 +68,6 @@ class UserProfile extends React.Component {
     }
     this.setState({ replyModalOpen: false })
   }
-
   // * Function to GET incoming messages
   async getInbox() {
     try {
@@ -84,7 +77,6 @@ class UserProfile extends React.Component {
       console.log(err)
     }
   }
-
   //* Function to find user location details
   async getLocation() {
     try {
@@ -122,8 +114,6 @@ class UserProfile extends React.Component {
   toggleModal = () => {
     this.setState({ modalOpen: !this.state.modalOpen })
   }
-
-
   //* Delete Profile
   deleteUserProfile = async e => {
     try {
@@ -143,7 +133,6 @@ class UserProfile extends React.Component {
   onStarClick = () => {
     console.log('clicked')
   }
-
   //* Function to get the page Users ratings - I they haven't been rated yet you start on 3 stars
   getUserRating = () => {
     const ratings = this.state.user.ratings
@@ -151,37 +140,26 @@ class UserProfile extends React.Component {
     return (Math.round((Object.values(ratings).reduce((a, { rating }) =>
       a + rating, 0) / ratings.length)))
   }
-
   handleEditProfile = () => {
     const user = this.props.match.params.username
     this.props.history.push(`/profile/${user}/edit`)
   }
-
   // * function to toggle messages modal
   toggleMessagesModal = () => {
     this.setState({ messagesModalOpen: !this.state.messagesModalOpen})
   }
-
   render() {
     if (!this.state.user || !this.state.location || !this.state.messages) return null
-
     const { username, createdArticles, profilePic } = this.state.user
     const { commentsArray, messages, location } = this.state
-
     const reversedCreatedArticles = createdArticles.reverse().slice(0, 6)
     const rating = parseInt(this.getUserRating())
-
     // * Sorted messages by date
     const sortedMessages = messages.sort((a, b) => b.createdAt - a.createdAt )
-  
-
     return (
       <>
-
         <div className="My-profile">
-
           <div className="My-profile-top-row">
-
             <div className="Photo-delete-rating">
               <div className="profile-img image is-128x128">
                 <img src={profilePic} alt="profile pic" />
@@ -216,30 +194,25 @@ class UserProfile extends React.Component {
                 <button onClick={() => { if (window.confirm("Are you sure?")) this.deleteUserProfile() }} className="My-profile-delete-btn">Delete</button>
               </div>
             </div>
-
             <div className="Welcome">
               <div className="Welcome-user">
                 <h5 className="title">Welcome {username}</h5>
                 <h6 className="subtitle">{location}</h6>
               </div>
-
               <div className="My-profile-favs">
                 <Link to={`/profile/${username}/friends`} className="Favs-btn">Friends</Link>
                 <Link to={`/profile/${username}/favourites`} className="Favs-btn">Clothes I Love</Link>
                 <Link to={`/profile/${username}/favouriteposts`} className="Favs-btn">Posts I Love</Link>
               </div>
-
             </div>
-
           </div>
-
           <div className="My-profile-columns">
             <div className="Left-col">
               <div>
                 {/* Notifications / chat section */}
                 <div className="My-profile-message-board">
-                  <button onClick={this.toggleMessagesModal} className="button is-info">Messages <span>{`(${messages.length})`}</span></button>
-                  <div className={this.messagesModalOpen ? "modal is-active" : "modal"}>
+                  <button className="button is-info">Messages <span>{`(${messages.length})`}</span></button>
+                  <div>
                     {sortedMessages.map((message, i) =>
                       <MessageCard
                         key={i}
@@ -253,7 +226,6 @@ class UserProfile extends React.Component {
                   </div>
                 </div>
               </div>
-
               <section>
                 <div>
                   {commentsArray.map(comment => (
@@ -276,7 +248,6 @@ class UserProfile extends React.Component {
                     onClick={this.handleAddClothes}
                   >Add Clothes Now</button>
                 </div>
-
                 <div>
                   {/* Ternary with text showing if no articles been created yet  */}
                   {(reversedCreatedArticles.length === 0) ?
@@ -297,10 +268,8 @@ class UserProfile extends React.Component {
                 </div>
               </div>
             </div>
-
           </div>
         </div>
-
       </>
     )
   }
