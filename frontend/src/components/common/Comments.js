@@ -1,9 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 
-
 const Comments = ({ comment, deleteComment }) => {
-
 
   const edited = comment.createdAt.split('T')
   const date = edited[0]
@@ -13,12 +11,10 @@ const Comments = ({ comment, deleteComment }) => {
       <div className="Comment-top">
         <img src={comment.user.profilePic} alt={comment.user.username} height="100" width="100" />
         <div className="Comment-top-right">
-        <Link to={`/page/${comment.user.username}`}><h4>By {comment.user.username}</h4></Link>
-        <h5 className="Date">{time} {date}</h5>
+          <Link to={`/page/${comment.user.username}`}><h4>By {comment.user.username}</h4></Link>
+          <h5 className="Date">{time} {date}</h5>
+        </div>
       </div>
-      </div>
-      
-
       <div className="Comment-text">
         <p>{comment.text}</p>
       </div>

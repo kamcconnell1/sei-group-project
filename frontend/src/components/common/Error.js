@@ -9,4 +9,5 @@ const Error = () => (
     </div>
   </section>
 )
+
 export default Error

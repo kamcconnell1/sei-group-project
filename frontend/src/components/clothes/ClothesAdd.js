@@ -51,7 +51,6 @@ class ClothesAdd extends React.Component {
     this.setState({ formData, errors })
   }
 
-
   //* Submits the add clothes form 
   handleSubmit = async event => {
     event.preventDefault()
@@ -61,7 +60,6 @@ class ClothesAdd extends React.Component {
     } catch (err) {
       this.setState({ errors: err.response.data })
     }
-
   }
 
   render() {
