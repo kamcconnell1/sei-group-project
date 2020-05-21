@@ -33,7 +33,7 @@ class ClothesShow extends React.Component {
     const clothId = this.props.match.params.id
     const res = await singleCloth(clothId)
       // console.log('clothes info:', res.data.user.id)
-      const userId = res.data.user.id
+      const userId = res.data.user.username
       const user = await getUserProfile(userId)
       // console.log('user profile info:', user.data)
       this.setState({cloth: res.data, user: user.data, commentsArray: res.data.comments })
@@ -43,7 +43,7 @@ class ClothesShow extends React.Component {
   handleFirstClick = async () => {
     const clothId = this.props.match.params.id
     const res = await singleCloth(clothId)
-    const userId = res.data.user.id
+    const userId = res.data.user.username
     const user = await getUserProfile(userId)
     const newCloth = user.data.createdArticles[0]
     const newClothId = user.data.createdArticles[0]._id
@@ -55,7 +55,7 @@ class ClothesShow extends React.Component {
   handleSecondClick = async () => {
     const clothId = this.props.match.params.id
     const res = await singleCloth(clothId)
-    const userId = res.data.user.id
+    const userId = res.data.user.username
     const user = await getUserProfile(userId)
     const newCloth = user.data.createdArticles[1]
     const newClothId = user.data.createdArticles[1]._id
@@ -110,7 +110,7 @@ class ClothesShow extends React.Component {
     e.preventDefault()
     try {
       const res = await addCommentCloth(clothId, this.state.comments)
-      this.setState({ commentsArray: res.data.comments})
+      this.setState({ commentsArray: res.data.comments, comments: {...this.state.comments, text: ''} })
       this.getSingleCloth()
     } catch (err) {
       console.log(err)
@@ -169,6 +169,7 @@ class ClothesShow extends React.Component {
               {...cloth}
               {...user}
               {...comments}
+              commentText={this.state.comments.text}
               commentsArray={commentsArray}
               deleteComment={this.deleteComment}
               handleCommentChange={this.handleCommentChange}

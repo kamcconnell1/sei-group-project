@@ -39,6 +39,7 @@ class Map extends React.Component {
       this.props.location(this.state.latitude, this.state.longitude)
     })
   }
+  
 
   //* Sets state based on which marker you click on
 onClickMarker = (pin) => {
@@ -61,6 +62,7 @@ renderPopup(props) {
       <PinCard 
       info={popupInfo}
       deletePin={this.props.onClickDelete}
+      closeOnClick={false}
       / >
       </Popup>
     )

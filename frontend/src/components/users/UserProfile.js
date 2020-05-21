@@ -4,12 +4,11 @@ import UserClothCard from './UserClothCard'
 import MessageCard from './MessageCard'
 import EditProfilePicture from './EditProfilePicture'
 import EditProfile from './EditProfile'
-import { getProfile, editProfile, deleteProfile, inboxMessage, getUserProfile, replyMessage } from '../../lib/api'
+import { getProfile, editProfile, deleteProfile, inboxMessage, replyMessage } from '../../lib/api'
 import { logout } from '../../lib/auth'
 import { getPostcodeInfo } from '../../lib/ext_api'
 import Comments from '../common/Comments'
 import StarRating from '../common/StarRating'
-
 // ! User profile, GETs data for user on mount
 class UserProfile extends React.Component {
   state = {
@@ -37,8 +36,6 @@ class UserProfile extends React.Component {
       console.log(err)
     }
   }
-
-
   async getUserDashboard() {
     try {
       const res = await getProfile()
@@ -48,22 +45,19 @@ class UserProfile extends React.Component {
       console.log(err)
     }
   }
-
   // * Function to toggle reply message box
   toggleReplyModal = e => {
     this.setState({ replyModalOpen: !this.state.contactModalOpen, replyId: e.target.value })
   }
-
   // * Function to handle change of reply textbox
   handleReplyChange = e => {
-    const text = {...this.state.text, [e.target.name]: e.target.value}
-    this.setState({text})
+    const text = { ...this.state.text, [e.target.name]: e.target.value }
+    this.setState({ text })
   }
-
   // * Function to reply to messages
   handleReplySubmit = async e => {
     e.preventDefault()
-    const {replyId} = this.state
+    const { replyId } = this.state
     try {
       const res = await replyMessage(replyId, this.state.text)
       console.log(res.data)
@@ -71,9 +65,8 @@ class UserProfile extends React.Component {
     } catch (err) {
       console.log(err)
     }
-    this.setState({replyModalOpen: false})
+    this.setState({ replyModalOpen: false })
   }
-
   // * Function to GET incoming messages
   async getInbox() {
     try {
@@ -83,7 +76,6 @@ class UserProfile extends React.Component {
       console.log(err)
     }
   }
-
   //* Function to find user location details
   async getLocation() {
     try {
@@ -91,13 +83,9 @@ class UserProfile extends React.Component {
       const response = await getPostcodeInfo(postcode)
       const nuts = response.data.result.nuts
       const region = response.data.result.region
-      const latitude = response.data.result.latitude
-      const longitude = response.data.result.longitude
-      this.setState({ location: `${nuts}, ${region}`, latitude, longitude })
+      this.setState({ location: `${nuts}, ${region}` })
     } catch (err) {
-      const latitude = 51.515419
-      const longitude = -0.141099
-      this.setState({ location: 'London, UK', latitude, longitude })
+      this.setState({ location: 'London, Greater London' })
     }
   }
   //* Function to allow user to upload a profile picture
@@ -125,16 +113,13 @@ class UserProfile extends React.Component {
   toggleModal = () => {
     this.setState({ modalOpen: !this.state.modalOpen })
   }
-
-  toggleModalEdit = () => {
-    this.setState({ modalOpenEdit: !this.state.modalOpenEdit })
-  }
-
-  handleChangeEdit = (e) => {
-    const user = { ...this.state.user, [e.target.name]: e.target.value }
-    this.setState({ user })
-  }
-
+  // toggleModalEdit = () => {
+  //   this.setState({ modalOpenEdit: !this.state.modalOpenEdit })
+  // }
+  // handleChangeEdit = (e) => {
+  //   const user = { ...this.state.user, [e.target.name]: e.target.value }
+  //   this.setState({ user })
+  // }
   handleSubmitEdit = async e => {
     e.preventDefault()
     try {
@@ -147,7 +132,6 @@ class UserProfile extends React.Component {
       this.setState({ errors: 'username' })
     }
   }
-
   //* Delete Profile
   deleteUserProfile = async e => {
     try {
@@ -167,31 +151,29 @@ class UserProfile extends React.Component {
   onStarClick = () => {
     console.log('clicked')
   }
-
- //* Function to get the page Users ratings - I they haven't been rated yet you start on 3 stars
- getUserRating = () => {
-  const ratings = this.state.user.ratings
-  if (ratings.length === 0) return 3
-  return (Math.round((Object.values(ratings).reduce((a, { rating }) =>
-    a + rating, 0) / ratings.length)))
-}
-
+  //* Function to get the page Users ratings - I they haven't been rated yet you start on 3 stars
+  getUserRating = () => {
+    const ratings = this.state.user.ratings
+    if (ratings.length === 0) return 3
+    return (Math.round((Object.values(ratings).reduce((a, { rating }) =>
+      a + rating, 0) / ratings.length)))
+  }
+  handleEditProfile = () => {
+    const user = this.props.match.params.username
+    this.props.history.push(`/profile/${user}/edit`)
+  }
   render() {
-      if (!this.state.user || !this.state.location || !this.state.messages) return null
-      
-      const { username, createdArticles, profilePic} = this.state.user
-      const { commentsArray, messages } = this.state
-      const location = this.state.location
-      const reversedCreatedArticles = createdArticles.reverse().slice(0, 6)
-      const rating = parseInt(this.getUserRating())
-
-      return (
-        <>
-
+    if (!this.state.user || !this.state.location || !this.state.messages) return null
+    const { username, createdArticles, profilePic } = this.state.user
+    const { commentsArray, messages, location } = this.state
+    const reversedCreatedArticles = createdArticles.reverse().slice(0, 6)
+    const rating = parseInt(this.getUserRating())
+    // * Sorted messages by date
+    const sortedMessages = messages.sort((a, b) => b.createdAt - a.createdAt )
+    return (
+      <>
         <div className="My-profile">
-
           <div className="My-profile-top-row">
-
             <div className="Photo-delete-rating">
               <div className="profile-img image is-128x128">
                 <img src={profilePic} alt="profile pic" />
@@ -206,64 +188,57 @@ class UserProfile extends React.Component {
                 />
               </div>
               <div className="My-profile-rating">
-                <p>My Rating</p>
                 <StarRating
                   rating={rating}
                   editing={false}
                 />
               </div>
               <div className="Edit-delete">
-                <button onClick={this.toggleModalEdit}
+                <button onClick={this.handleEditProfile}
                   className="My-profile-update-btn"
                 >Update Profile</button>
-                <EditProfile
+                {/* <EditProfile
                   errors={this.state.errors}
                   state={this.state.user}
                   toggleModalEdit={this.toggleModalEdit}
                   modalOpenEdit={this.state.modalOpenEdit}
                   onChangeEdit={this.handleChangeEdit}
                   onSubmitEdit={this.handleSubmitEdit}
-                />
+                /> */}
                 <button onClick={() => { if (window.confirm("Are you sure?")) this.deleteUserProfile() }} className="My-profile-delete-btn">Delete</button>
               </div>
             </div>
-
             <div className="Welcome">
               <div className="Welcome-user">
                 <h5 className="title">Welcome {username}</h5>
                 <h6 className="subtitle">{location}</h6>
               </div>
-
               <div className="My-profile-favs">
                 <Link to={`/profile/${username}/friends`} className="Favs-btn">Friends</Link>
                 <Link to={`/profile/${username}/favourites`} className="Favs-btn">Clothes I Love</Link>
                 <Link to={`/profile/${username}/favouriteposts`} className="Favs-btn">Posts I Love</Link>
               </div>
-
             </div>
-
           </div>
-
           <div className="My-profile-columns">
             <div className="Left-col">
               <div>
                 {/* Notifications / chat section */}
                 <div className="My-profile-message-board">
-                <h3>Messages</h3>
+                  <button>Messages <span>{`(${messages.length})`}</span></button>
                   <div>
-                  {messages.map(message =>
-                    <MessageCard
-                      key={message._id}
-                      {...message}
-                      reply={this.toggleReplyModal}
-                      sendReply={this.handleReplySubmit}
-                      replyModal={this.state.replyModalOpen}
-                      replyChange={this.handleReplyChange}
-                    />
-                  )}
+                    {sortedMessages.map((message, i) =>
+                      <MessageCard
+                        key={i}
+                        {...message}
+                        reply={this.toggleReplyModal}
+                        sendReply={this.handleReplySubmit}
+                        replyModal={this.state.replyModalOpen}
+                        replyChange={this.handleReplyChange}
+                      />
+                    )}
+                  </div>
                 </div>
-              </div>
-
                 <section>
                   <div>
                     {commentsArray.map(comment => (
@@ -275,7 +250,6 @@ class UserProfile extends React.Component {
                   </div>
                 </section>
               </div>
-              
               <section>
                 <div>
                   {commentsArray.map(comment => (
@@ -298,7 +272,6 @@ class UserProfile extends React.Component {
                     onClick={this.handleAddClothes}
                   >Add Clothes Now</button>
                 </div>
-
                 <div>
                   {/* Ternary with text showing if no articles been created yet  */}
                   {(reversedCreatedArticles.length === 0) ?
@@ -319,10 +292,8 @@ class UserProfile extends React.Component {
                 </div>
               </div>
             </div>
-
           </div>
         </div>
-
       </>
     )
   }

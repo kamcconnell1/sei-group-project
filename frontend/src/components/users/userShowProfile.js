@@ -35,7 +35,8 @@ class userShowProfile extends React.Component {
 
   getUser = async () => {
     try {
-      const userId = this.props.match.params.id
+      const userId = this.props.match.params.username
+      console.log(userId)
       const res = await getUserProfile(userId)
       const userItems = res.data.createdArticles
       this.setState({ user: res.data, userItems, commentsArray: res.data.comments, })
@@ -59,7 +60,7 @@ class userShowProfile extends React.Component {
   handleContactSubmit = async e => {
     e.preventDefault()
     const { user } = this.state
-    const userId = user.id
+    const userId = this.state.user._id
     try {
       await sendMessage(userId, this.state.text)
     } catch (err) {
@@ -89,12 +90,11 @@ class userShowProfile extends React.Component {
 
   //* Submit Comment on User
   handleCommentSubmit = async e => {
-    const userId = this.props.match.params.id
     e.preventDefault()
     try {
-      const res = await commentOnUser(userId, this.state.comments)
+      const res = await commentOnUser(this.state.user._id, this.state.comments)
       console.log(res.data)
-      this.setState({ commentsArray: res.data.comments })
+      this.setState({ commentsArray: res.data.comments, comments: {...this.state.comments, text: ''} })
       this.getUser()
     } catch (err) {
       console.log(err)
@@ -104,9 +104,8 @@ class userShowProfile extends React.Component {
   //* Delete Comments on User
   deleteComment = async e => {
     try {
-      const userId = this.props.match.params.id
       const commentId = e.target.value
-      await DeleteCommentOnUser(userId, commentId)
+      await DeleteCommentOnUser(this.state.user._id, commentId)
       console.log('sucess')
       this.getUser()
     } catch (err) {
@@ -222,7 +221,7 @@ class userShowProfile extends React.Component {
           </div>
         </section>
         {isAuthenticated() && <section>
-          <form onSubmit={this.handleCommentSubmit}>
+          <form value={user._id} onSubmit={this.handleCommentSubmit}>
             <div>
               <div className="label for comments">
                 <p> Comment on {user.username} </p>
@@ -233,7 +232,7 @@ class userShowProfile extends React.Component {
                 maxLength="250"
                 name="text"
                 onChange={this.handleCommentChange}
-                value={comments.text} />
+                value={this.state.comments.text} />
             </div>
             <div className="comments-submit-button">
               <button className="button is-primary">Submit Comment</button>

@@ -34,7 +34,7 @@ const App = () => {
     <div className="Main column-center">
     <Switch>
     <Route exact path='/' component={Home}/>
-    <Route path='/page/:id' component={userShowProfile} />
+    <Route path='/page/:username' component={userShowProfile} />
     <SecureRoute path='/profile/:username/add' component={ClothesAdd} />
     <SecureRoute path='/profile/:username/friends' component={FavouriteFriends} />
     <SecureRoute path='/profile/:username/favouriteposts' component={FavouritePosts} />
