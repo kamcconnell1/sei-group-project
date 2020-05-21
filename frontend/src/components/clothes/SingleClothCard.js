@@ -2,7 +2,7 @@ import React from 'react'
 
 import { Slide } from 'react-slideshow-image'
 import { Link } from 'react-router-dom'
-import { isAuthenticated } from '../../lib/auth'
+import { isAuthenticated, isOwner } from '../../lib/auth'
 
 import Comments from '../common/Comments'
 import StarRating from '../common/StarRating'
@@ -23,9 +23,11 @@ const properties = {
 }
 
 
-const SingleClothCard = ({ deleteComment, handleContactSubmit, handleContactChange, contactModalOpen, toggleContact, commentsArray, comments, title, clothId, profilePic, username, images, image, currentUserId, onFirstClick, onSecondClick, onClick, location, handleCommentSubmit, handleCommentChange, rating }) => {
+const SingleClothCard = ({ deleteComment, handleContactSubmit, handleContactChange, contactModalOpen, toggleContact, commentsArray, comments, title, clothId, profilePic, username, images, image, currentUserId, onFirstClick, onSecondClick, onClick, location, handleCommentSubmit, handleCommentChange, rating, commentText }) => {
   const slideImages = [image[0], image[0], image[0]]
 
+  console.log(!isOwner());
+  
   return (
     <>
       <section className="section">
@@ -61,7 +63,7 @@ const SingleClothCard = ({ deleteComment, handleContactSubmit, handleContactChan
               maxLength="250"
               name="text"
               onChange={handleCommentChange}
-              value={comments.text} />
+              value={commentText} />
           </div>
           <div className="comments-submit-button">
             <button className="button is-primary">Submit Comment</button>
@@ -78,7 +80,7 @@ const SingleClothCard = ({ deleteComment, handleContactSubmit, handleContactChan
         </div>
       </section>
       <section className="section">
-        <Link to={`/page/${currentUserId}`}>
+        <Link to={`/page/${username}`}>
           <div className="container">
             <figure className="media-right">
               <p className="image is-64x64">

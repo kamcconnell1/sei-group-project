@@ -137,7 +137,9 @@ class ClothesIndex extends React.Component {
       gender,
       category,
     } = this.state
-    const anyFilterSet = color || gender || category || size
+    // console.log('Filtered clothes:', filteredClothes)
+    // console.log('Item to display:', filteredItemsToDisplay)
+
     // * Variable of category options
     const categoryOption = categories.map((cat) => {
       return { value: cat, label: cat }

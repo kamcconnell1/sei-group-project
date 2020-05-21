@@ -11,8 +11,6 @@ class ImageUpload extends React.Component{
 
 //! Might need to add some error handling on this function 
   handleUpload = async event => {
-    console.log(this.props);
-    
     event.preventDefault()
     // Cloudinary preset passed in as props 
     const preset = (this.props.preset)
@@ -24,7 +22,6 @@ class ImageUpload extends React.Component{
 
     // Axios request to send image to Cloudinary
     const res = await postImage(data)
-    console.log(res)
 
     //Set state with link to image sent in response data
     this.setState({
@@ -44,10 +41,15 @@ class ImageUpload extends React.Component{
       {image ?
         <div>
           <img src={image} alt="selected"/>
+          <input
+            className="input"
+            type="file"
+            name={this.props.name}
+            onChange={this.handleUpload}
+          />
         </div>
         :
         <>
-
           <input
             className="input"
             type="file"
@@ -55,7 +57,6 @@ class ImageUpload extends React.Component{
             onChange={this.handleUpload}
           />
         </>
-        
       }
     </>
     )
