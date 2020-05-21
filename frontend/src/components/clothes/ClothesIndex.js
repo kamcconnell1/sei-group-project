@@ -5,7 +5,6 @@ import ClothCard from "./ClothCard"
 // import Select from 'react-select'
 import ClothesFilter from "./ClothesFilter"
 
-
 class ClothesIndex extends React.Component {
   state = {
     clothes: null,
@@ -52,7 +51,6 @@ class ClothesIndex extends React.Component {
     }
   }
 
-
   // * Function to handle search box input - user can search by category, title and username
   handleChange = (event) => {
     const { clothes } = this.state
@@ -69,7 +67,7 @@ class ClothesIndex extends React.Component {
   }
 
 
-  // * Function to allow user to filter clothing intems
+  // * Function to allow user to filter clothing items
   // ! To be completed - by Benga
   handleFilter = (e, field) => {
     this.setState({ [field]: e.value }, this.getFilteredItems)
@@ -92,9 +90,10 @@ class ClothesIndex extends React.Component {
       const sizeFilter = size ? item.size.includes(size) : true
       return categoryFilter && colorFilter && genderFilter && sizeFilter
     })
-    this.setState({ filteredItemsToDisplay: resultOfFilteredItemsToDisplay})
+    this.setState({ filteredItemsToDisplay: resultOfFilteredItemsToDisplay })
   }
 
+  // * Function to change each filter
   filterChange = (event) => {
     const { filteredClothes } = this.state
     const showFilter = event.value
@@ -115,9 +114,9 @@ class ClothesIndex extends React.Component {
     }
   }
 
-  // * Function to reset filter button
+  // * Function to reset filter
   resetFilter = () => {
-    this.setState({filteredItemsToDisplay: this.state.clothes })
+    this.setState({ filteredItemsToDisplay: this.state.clothes })
   }
 
 
@@ -137,9 +136,7 @@ class ClothesIndex extends React.Component {
       gender,
       category,
     } = this.state
-    // console.log('Filtered clothes:', filteredClothes)
-    // console.log('Item to display:', filteredItemsToDisplay)
-
+    const anyFilterSet = color || gender || category || size
     // * Variable of category options
     const categoryOption = categories.map((cat) => {
       return { value: cat, label: cat }
@@ -189,7 +186,7 @@ class ClothesIndex extends React.Component {
               />
             </form>
           </div>
-          <button onClick={this.resetFilter} className="button is-dark">Reset Filter</button>
+          <button onClick={this.resetFilter} className="button is-primary">Reset Filter</button>
           <div className="Clothes-index">
             {filteredItemsToDisplay.length > 0 ? (
               filteredItemsToDisplay.map((cloth) => (
@@ -198,15 +195,14 @@ class ClothesIndex extends React.Component {
             ) : anyFilterSet ? (
               <p>No items found with your filters</p>
             ) : (
-              filteredClothes.map((cloth) => (
-                <ClothCard {...cloth} key={cloth._id} />
-              ))
-            )}
+                  filteredClothes.map((cloth) => (
+                    <ClothCard {...cloth} key={cloth._id} />
+                  ))
+                )}
           </div>
-        </div>
+        </div >
       </>
     )
   }
 }
-
 export default ClothesIndex
