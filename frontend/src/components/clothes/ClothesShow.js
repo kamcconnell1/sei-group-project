@@ -30,13 +30,17 @@ class ClothesShow extends React.Component {
 
   // * Function to GET single clothing Item
   getSingleCloth = async () => {
-    const clothId = this.props.match.params.id
-    const res = await singleCloth(clothId)
-      // console.log('clothes info:', res.data.user.id)
-      const userId = res.data.user.username
-      const user = await getUserProfile(userId)
-      // console.log('user profile info:', user.data)
-      this.setState({cloth: res.data, user: user.data, commentsArray: res.data.comments })
+    try{
+      const clothId = this.props.match.params.id
+      const res = await singleCloth(clothId)
+        // console.log('clothes info:', res.data.user.id)
+        const userId = res.data.user.username
+        const user = await getUserProfile(userId)
+        // console.log('user profile info:', user.data)
+        this.setState({cloth: res.data, user: user.data, commentsArray: res.data.comments })
+    } catch (err) {
+      this.props.history.push('/notfound')
+    }
   }
 
   // * Function to click on first picture in similar user post

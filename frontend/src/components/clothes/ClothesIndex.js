@@ -47,7 +47,7 @@ class ClothesIndex extends React.Component {
         filteredCategories: filteredCategory,
       })
     } catch (err) {
-      console.log(err)
+      this.props.history.push('/notfound')
     }
   }
 
@@ -139,12 +139,13 @@ class ClothesIndex extends React.Component {
     const colorOption = colors.map((col) => {
       return { value: col, label: col }
     })
+
     // * Variable of Gender options
     const genderOption = genders.map((gen) => {
       return { value: gen, label: gen }
     })
     // * Variable of Size options
-    const sizeOption = sizes.map((size) => {
+    const sizeOption = sizes.sort((a, b) => a - b ).map((size) => {
       return { value: size, label: size }
     })
     // ! Needs to include range filter to filter price - Benga
@@ -183,13 +184,13 @@ class ClothesIndex extends React.Component {
           <button onClick={this.resetFilter} className="button is-primary">Reset Filter</button>
           <div className="Clothes-index">
             {filteredItemsToDisplay.length > 0 ? (
-              filteredItemsToDisplay.map((cloth) => (
+              filteredItemsToDisplay.sort((a, b) => a.rentalPrice - b.rentalPrice ).map((cloth) => (
                 <ClothCard {...cloth} key={cloth._id} />
               ))
             ) : anyFilterSet ? (
               <p>No items found with your filters</p>
             ) : (
-                  filteredClothes.map((cloth) => (
+                  filteredClothes.sort((a, b) => a.rentalPrice - b.rentalPrice ).map((cloth) => (
                     <ClothCard {...cloth} key={cloth._id} />
                   ))
                 )}

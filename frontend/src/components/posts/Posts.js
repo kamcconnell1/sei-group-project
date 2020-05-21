@@ -1,7 +1,5 @@
 import React from 'react'
 import PostCards from '../posts/PostsCards'
-import ImageUpload from '../common/ImageUpload'
-import { uploadClothesImage } from '../../lib/ext_api'
 import { getAllPosts, createPost, deleteAPost } from '../../lib/api'
 class Posts extends React.Component {
   state = {
@@ -26,9 +24,7 @@ class Posts extends React.Component {
   pageSetup = async () => {
     try {
       const res = await getAllPosts()
-      console.log(res.data)
       const postReverse = await res.data.reverse()
-      console.log(postReverse)
       this.setState({ posts: postReverse })
     } catch (err) {
       console.log(err)

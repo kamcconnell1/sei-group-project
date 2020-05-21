@@ -44,7 +44,6 @@ class Register extends React.Component {
       console.log('postcode info', response)
     } catch (err) {
       const errors = { ...this.state.errors, postcode: err.response.data.error }
-      // console.log(err.response.data.error)
       this.setState({ errors })
     }
   }

@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom'
 import UserClothCard from './UserClothCard'
 import MessageCard from './MessageCard'
 import EditProfilePicture from './EditProfilePicture'
-import EditProfile from './EditProfile'
 import { getProfile, editProfile, deleteProfile, inboxMessage, replyMessage } from '../../lib/api'
 import { logout } from '../../lib/auth'
 import { getPostcodeInfo } from '../../lib/ext_api'
@@ -43,7 +42,7 @@ class UserProfile extends React.Component {
       this.setState({ user: res.data, commentsArray: res.data.comments, errors: '' })
       this.getLocation()
     } catch (err) {
-      console.log(err)
+      this.props.history.push('/notfound')
     }
   }
   // * Function to toggle reply message box
