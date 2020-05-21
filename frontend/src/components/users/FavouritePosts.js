@@ -11,7 +11,7 @@ class FavouritePosts extends React.Component {
     try{
     await this.getPosts()
     } catch (err) {
-      console.log(err)
+      this.props.history.push('/notfound')
     }
   }
 

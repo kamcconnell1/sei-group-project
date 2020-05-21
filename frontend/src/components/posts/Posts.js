@@ -1,7 +1,11 @@
 import React from 'react'
+
 import PostCards from '../posts/PostsCards'
 import { getAllPosts, createPost, deleteAPost } from '../../lib/api'
+import { toast } from '../../lib/notifications'
+
 class Posts extends React.Component {
+
   state = {
     posts: null,
     input: {
@@ -11,50 +15,44 @@ class Posts extends React.Component {
     }
   }
 
-
   async componentDidMount() {
     try {
       this.pageSetup()
     } catch (err) {
-      console.log(err)
+      this.props.history.push('/notfound')
     }
   }
 
-
+  //* Set up page outside of component did mount so it can be called again.
   pageSetup = async () => {
     try {
       const res = await getAllPosts()
-      console.log(res.data)
       const postReverse = await res.data.reverse()
-      console.log(postReverse)
       this.setState({ posts: postReverse })
     } catch (err) {
-      console.log(err)
+      this.props.history.push('/notfound')
     }
   }
 
+  //* Handles changes on inputs for post
   handleChange = e => {
     const input = { ...this.state.input, [e.target.name]: e.target.value }
     this.setState({ input })
   }
 
+  //* Submit post.
   handleSubmit = async e => {
     e.preventDefault()
     try {
       const res = await createPost(this.state.input)
-      console.log(res.data)
-      this.setState({ commentsArray: res.data.comments, input: {...this.state.input, title: '', text: '', photo: ''} })
+      this.setState({ commentsArray: res.data.comments, input: { ...this.state.input, title: '', text: '', photo: '' } })
+      toast('Submitted post!')
       await this.pageSetup()
     } catch (err) {
-      console.log(err)
+      this.props.history.push('/notfound')
     }
   }
 
-  deletePost = async e => {
-    await deleteAPost(e.target.value)
-    await this.pageSetup()
-  }
-  
   render() {
     if (!this.state.posts) return null
     return (
@@ -64,7 +62,6 @@ class Posts extends React.Component {
             <h1>Posts</h1>
           </div>
           <div className="Page-subtitle">
-            {/* <h2>Add & save locations to remember later</h2> */}
           </div>
         </div>
         <div className="Posts row-center">
@@ -97,7 +94,6 @@ class Posts extends React.Component {
           <div className="Post-cards">
             {this.state.posts.map(post => (
               <PostCards
-                deletePost={this.deletePost}
                 key={post._id}
                 {...post}
               />

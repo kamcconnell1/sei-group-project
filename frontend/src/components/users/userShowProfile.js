@@ -43,7 +43,7 @@ class userShowProfile extends React.Component {
       this.setState({ user: res.data, userItems, commentsArray: res.data.comments, })
       this.getLocation()
     } catch (err) {
-      console.log(err)
+      this.props.history.push('/notfound')
     }
   }
 

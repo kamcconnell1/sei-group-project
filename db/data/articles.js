@@ -249,8 +249,8 @@ module.exports = [
     image: ['https://www.amylucy.co.uk/images/smiffys-flared-trousers-green-ladies-p13355-144497_image.jpg']
   },
   {
-    title: 'Womens Camo Trouser',
-    category: 'Woman',
+    title: 'Camo Trouser',
+    category: 'Trouser',
     brand: 'Mountain Warehouse',
     genderCategory: 'Women',
     size: '14',
@@ -560,7 +560,7 @@ module.exports = [
   },
   {
     title: 'Checked Casual Overshirt',
-    category: 'Shirt, Jacket',
+    category: 'Jacket',
     brand: 'ASOS',
     genderCategory: 'Men',
     size: 'S',
@@ -710,7 +710,7 @@ module.exports = [
   },
   {
     title: 'Flannel Casual Shirt Jacket',
-    category: 'Jacket, Shirt',
+    category: 'Jacket',
     brand: 'Boohoo',
     genderCategory: 'Women',
     size: '16',
@@ -720,7 +720,7 @@ module.exports = [
   },
   {
     title: 'Checked Tartan Casual Suit',
-    category: 'Suit, Jacket, Trousers',
+    category: 'Suit',
     brand: 'Farfetch',
     genderCategory: 'Men',
     size: 'M',
@@ -1110,7 +1110,7 @@ module.exports = [
   ,
   {
     title: 'Woolen Long Sleeve Tee',
-    category: 'Top, Cardigan',
+    category: 'Cardigan',
     brand: 'Urban Outfitters',
     genderCategory: 'Women',
     size: '12',
@@ -1186,7 +1186,7 @@ module.exports = [
   },
   {
     title: 'Pink Shirt',
-    category: 'Shirt, Top',
+    category: 'Shirt',
     brand: 'River Island',
     genderCategory: 'Women',
     size: '16',

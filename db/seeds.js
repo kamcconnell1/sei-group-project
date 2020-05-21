@@ -25,55 +25,22 @@ mongoose.connect(
 
       //? SEED ARTICLES
 
-      //* Articles by John
-      const articlesFromJohn = articleData.slice(0, 9).map(article => {
-        return { ...article, user: users[1]._id }
-      })
-      const articlesJohn = await Article.create(articlesFromJohn)
-      console.log(`${'👗🧒🏻 '.repeat(articlesJohn.length)} articles created `)
+      // * Add random user to each article 
+      const articlesWithUsers = articleData.map(article => {
+        return { ...article, user: users[Math.floor(Math.random() * users.length)]._id }
+      }) 
 
-
-      //* Articles By Mary
-      const articlesForMary = articleData.slice(9, 17).map(article => {
-        return { ...article, user: users[2]._id }
-      })
-      const articlesMary = await Article.create(articlesForMary)
-      console.log(`${'👗👩🏾‍🦰 '.repeat(articlesMary.length)} articles created `)
-
-
-      //* Articles By Paul
-      const articlesForPaul = articleData.slice(17).map(article => {
-        return { ...article, user: users[3]._id }
-      })
-      const articlesPaul = await Article.create(articlesForPaul)
-      console.log(`${'👗🧔🏼 '.repeat(articlesPaul.length)} articles created `)
+      const articles = await Article.create(articlesWithUsers)
+      console.log(`${'👘 '.repeat(articles.length)} clothes created `)
 
 
       //? SEED POSTS
-
-      //* Posts for John
-      const postsForJohn = postData.slice(0, 3).map(post => {
-        return { ...post, user: users[1]._id }
+      // * Add a random user to each post
+      const postsWithUsers = postData.map(post => {
+        return { ...post, user: users[Math.floor(Math.random() * users.length)]._id }
       })
-      const postsJohn = await Post.create(postsForJohn)
-      console.log(`${'📄🧒🏻 '.repeat(postsJohn.length)} posts created `)
-
-
-
-      //* Posts by Mary
-      const postsForMary = postData.slice(4, 6).map(post => {
-        return { ...post, user: users[2]._id }
-      })
-      const postsMary = await Post.create(postsForMary)
-      console.log(`${'📄👩🏾‍🦰 '.repeat(postsMary.length)} posts created `)
-
-      //* Posts by Paul
-      const postsForPaul = postData.slice(6, 8).map(post => {
-        return { ...post, user: users[3]._id }
-      })
-      const postsPaul = await Post.create(postsForPaul)
-      console.log(`${'📄🧔🏼 '.repeat(postsPaul.length)} posts created `)
-
+      const posts = await Post.create(postsWithUsers)
+      console.log(`${'📄🧒🏻 '.repeat(posts.length)} posts created `)
 
 
       await mongoose.connection.close()

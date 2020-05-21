@@ -7,9 +7,7 @@ import { isAuthenticated, isOwner } from '../../lib/auth'
 import Comments from '../common/Comments'
 import StarRating from '../common/StarRating'
 
-// !Slideshow needs work - Benga
-
-// * properties of slide tag
+// * Properties of slide tag
 const properties = {
   duration: 5000,
   transitionDuration: 500,
@@ -18,16 +16,15 @@ const properties = {
   arrows: true,
   pauseOnHover: true,
   onChange: (oldIndex, newIndex) => {
-    // console.log(`slide transition from ${oldIndex} to ${newIndex}`);
   }
 }
 
 
-const SingleClothCard = ({ deleteComment, handleContactSubmit, handleContactChange, contactModalOpen, toggleContact, commentsArray, title, clothId, profilePic, username, images, image, currentUserId, onFirstClick, onSecondClick, onClick, location, handleCommentSubmit, handleCommentChange, rating, commentText, brand, color, category, genderCategory, size }) => {
+const SingleClothCard = ({ deleteComment, handleContactSubmit, handleContactChange, contactModalOpen, toggleContact, commentsArray, title, clothId, profilePic, username, images, image, onFirstClick, onSecondClick, onClick, handleCommentSubmit, handleCommentChange, rating, commentText, brand, color, category, genderCategory, size }) => {
   const slideImages = [image[0], image[0], image[0]]
 
   console.log(!isOwner());
-  
+
   return (
     <>
       <section className="section">
@@ -96,12 +93,12 @@ const SingleClothCard = ({ deleteComment, handleContactSubmit, handleContactChan
         <div>
           <br />
           <p>
-          <Link to={`/page/${username}`}><strong>{username}</strong></Link>
+            <Link to={`/page/${username}`}>{username}</Link>
           </p>
           <hr />
-          <StarRating 
-          rating={rating}
-          editing={false}
+          <StarRating
+            rating={rating}
+            editing={false}
           />
         </div>
         <hr />

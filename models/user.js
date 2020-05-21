@@ -28,7 +28,7 @@ const pinSchema = new mongoose.Schema({
 //* Schema for user
 const userSchema = new mongoose.Schema({
   username: { type: String, required: true, unique: true, maxlength: 50 },//* username of user
-  email: { type: String, required: true, maxlength: 50 },//* email of user
+  email: { type: String, required: true, unique: true, maxlength: 50 },//* email of user
   password: { type: String, required: true },//* password
   postcode: { type: String, required: true },//* postcode location
   profilePic: { type: String }, //* profile picture to allow different options.
