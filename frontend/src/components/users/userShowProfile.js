@@ -22,7 +22,7 @@ class userShowProfile extends React.Component {
     contactModalOpen: false,
     text: '',
     ratingData: {
-    rating: ''
+      rating: ''
     }
   }
 
@@ -47,20 +47,20 @@ class userShowProfile extends React.Component {
     }
   }
 
-    //* Function to find user location details
-    async getLocation() {
-      try {
-        const postcode = this.state.user.postcode
-        const response = await getPostcodeInfo(postcode)
-        const nuts = response.data.result.nuts
-        const region = response.data.result.region
-        this.setState({ location: `${nuts}, ${region}`})
-      } catch (err) {
-        const latitude = 51.515419
-        const longitude = -0.141099
-        this.setState({ location: 'London, UK', latitude, longitude })
-      }
+  //* Function to find user location details
+  async getLocation() {
+    try {
+      const postcode = this.state.user.postcode
+      const response = await getPostcodeInfo(postcode)
+      const nuts = response.data.result.nuts
+      const region = response.data.result.region
+      this.setState({ location: `${nuts}, ${region}` })
+    } catch (err) {
+      const latitude = 51.515419
+      const longitude = -0.141099
+      this.setState({ location: 'London, UK', latitude, longitude })
     }
+  }
 
   // * Function to toggle contact modal
   toggleContactModal = () => {
@@ -141,10 +141,10 @@ class userShowProfile extends React.Component {
 
   //* ON Clicking the star sets state 
   onStarClick = (nextValue) => {
-    if (!isAuthenticated()) return 
-  addedRatingToast()
-    const ratingData = {...this.state.ratingData, rating: nextValue}
-    this.setState({ratingData}
+    if (!isAuthenticated()) return
+    addedRatingToast()
+    const ratingData = { ...this.state.ratingData, rating: nextValue }
+    this.setState({ ratingData }
       , () => {
         this.submitUserRating()
       })
@@ -167,74 +167,211 @@ class userShowProfile extends React.Component {
 
 
 
+  // render() {
+  //   if (!this.state.user) return <h1>User kidnapped, Ninja to the rescue</h1>
+
+  //   const rating = parseInt(this.getUserRating())
+  //   const { user, userItems, comments, commentsArray, contactModalOpen } = this.state
+  //   const {location} = this.state
+  //   return (
+  //     <>
+  //       <section>
+  //         <div className="container">
+  //           <figure className="media-right">
+  //             <p className="image is-64x64">
+  //               <img src={user.profilePic} alt={user.username} />
+  //             </p>
+  //           </figure>
+  //         </div>
+  //         <div>
+  //           <h4 className="title is-3">{user.username}</h4>
+  //         </div>
+  //         <div>
+  //           <StarRating
+  //             rating={rating}
+  //             onStarClick={this.onStarClick}
+  //           />
+  //         </div>
+  //         <div>
+  //         <h6 className="subtitle">{location}</h6>
+  //         </div>
+  //         <div className="columns">
+  //           <div className="column">
+  //             {isAuthenticated() && <button name="friend" value={user._id} onClick={this.handleFriendSubmit} className="button is-primary">Follow</button>}
+  //           </div>
+  //           <div className="column">
+  //             {isAuthenticated() && <button onClick={this.toggleContactModal} className="button is-primary">Message</button>}
+  //           </div>
+  //         </div>
+  //         <div className={contactModalOpen ? "modal is-active" : "modal"}>
+  //           <div className="field">
+  //             <form onSubmit={this.handleContactSubmit}>
+  //               <div className="control">
+  //                 <textarea 
+  //                 name="text" 
+  //                 onChange={this.handleContactChange} 
+  //                 name="text" 
+  //                 className="textarea is-medium is-primary" 
+  //                 placeholder="Message..."></textarea>
+  //               </div>
+  //               <button className="button is-info">SEND</button>
+  //             </form>
+  //           </div>
+  //         </div>
+  //       </section>
+  //       <section className="section">
+  //         <div className="container">
+  //           <div className="columns is-multiline">
+  //             {userItems.map(item =>
+  //               <div key={item._id} className="column is-one-quarter-desktop is-one-third-tablet is-half-mobile">
+  //                 <Link to={`/clothes/${item._id}`}>
+  //                   <div className="card">
+  //                     <div className="card-header">
+  //                       <h4 className="card-header-title">{item.title}</h4>
+  //                     </div>
+  //                     <div className="card-image">
+  //                       <figure className="image image is-1by1">
+  //                         <img src={item.image} alt={item.title} loading="lazy" width="255" height="255" />
+  //                       </figure>
+  //                     </div>
+  //                     <div className="card-content">
+  //                       <h5 className=""><strong>Rental Price:</strong> {`£${item.rentalPrice}`}</h5>
+  //                     </div>
+  //                   </div>
+  //                 </Link>
+  //               </div>
+  //             )}
+  //           </div>
+  //         </div>
+  //       </section>
+  //       {isAuthenticated() && <section>
+  //         <form onSubmit={this.handleCommentSubmit}>
+  //           <div>
+  //             <div className="label for comments">
+  //               <p> Comment on {user.username} </p>
+  //             </div>
+  //             <input
+  //               className="comments-input"
+  //               type="textArea"
+  //               maxLength="250"
+  //               name="text"
+  //               onChange={this.handleCommentChange}
+  //               value={comments.text} />
+  //           </div>
+  //           <div className="comments-submit-button">
+  //             <button className="button is-primary">Submit Comment</button>
+  //           </div>
+  //         </form>
+  //         <div>
+  //           {commentsArray.map(comment => (
+  //             <Comments
+  //               key={comment._id}
+  //               comment={comment}
+  //               deleteComment={this.deleteComment}
+  //             />
+  //           ))}
+  //         </div>
+  //       </section>}
+  //     </>
+  //   )
+  // }
+
+
   render() {
     if (!this.state.user) return <h1>User kidnapped, Ninja to the rescue</h1>
 
     const rating = parseInt(this.getUserRating())
     const { user, userItems, comments, commentsArray, contactModalOpen } = this.state
-    const {location} = this.state
+    const { location } = this.state
     return (
       <>
-        <section>
-          <div className="container">
-            <figure className="media-right">
-              <p className="image is-64x64">
-                <img src={user.profilePic} alt={user.username} />
-              </p>
-            </figure>
-          </div>
-          <div>
-            <h4 className="title is-3">{user.username}</h4>
-          </div>
-          <div>
-            <StarRating
-              rating={rating}
-              onStarClick={this.onStarClick}
-            />
-          </div>
-          <div>
-          <h6 className="subtitle">{location}</h6>
-          </div>
-          <div className="columns">
-            <div className="column">
-              {isAuthenticated() && <button name="friend" value={user._id} onClick={this.handleFriendSubmit} className="button is-primary">Follow</button>}
+        <div className="Show-profile">
+          <div className="Show-profile-top">
+            <div className="Photo-user-rating">
+              <img src={user.profilePic} alt={user.username} />
+              <h4 className="title is-3">{user.username}</h4>
+              <h6 className="subtitle">{location}</h6>
+              <StarRating
+                rating={rating}
+                onStarClick={this.onStarClick}
+              />
             </div>
-            <div className="column">
-              {isAuthenticated() && <button onClick={this.toggleContactModal} className="button is-primary">Message</button>}
-            </div>
-          </div>
-          <div className={contactModalOpen ? "modal is-active" : "modal"}>
-            <div className="field">
-              <form onSubmit={this.handleContactSubmit}>
-                <div className="control">
-                  <textarea 
-                  name="text" 
-                  onChange={this.handleContactChange} 
-                  name="text" 
-                  className="textarea is-medium is-primary" 
-                  placeholder="Message..."></textarea>
+            <div className="Follow-message-comment">
+              <div className="Follow-btn">
+                {isAuthenticated() && <button name="friend" value={user._id} onClick={this.handleFriendSubmit} className="button is-primary">Follow</button>}
+              </div>
+              <div className="Message">
+                {isAuthenticated() && <button onClick={this.toggleContactModal} className="button is-primary">Message</button>}
+
+                <div className="Modal-Message">
+                  <div className={contactModalOpen ? "modal is-active" : "modal"}>
+                    <div className="field">
+                      <form onSubmit={this.handleContactSubmit}>
+                        <div className="control">
+                          <textarea
+                            name="text"
+                            onChange={this.handleContactChange}
+                            name="text"
+                            className="textarea is-medium is-primary"
+                            placeholder="Message..."></textarea>
+                        </div>
+                        <button className="button is-info">SEND</button>
+                      </form>
+                    </div>
+                  </div>
                 </div>
-                <button className="button is-info">SEND</button>
-              </form>
+
+              </div>
             </div>
+            
+            <div className="Comments">
+              {
+                isAuthenticated() && <section>
+                  <form onSubmit={this.handleCommentSubmit}>
+                    <div className="Comment-top">
+                      <p> Leave a comment about {user.username} </p>
+                    </div>
+                    <input
+                      className="Comment-text"
+                      type="textArea"
+                      maxLength="250"
+                      name="text"
+                      onChange={this.handleCommentChange}
+                      value={comments.text} />
+
+                    <div className="Comment-bottom">
+                      <button className="Submit">Submit Comment</button>
+                    </div>
+                  </form>
+                  <div>
+                    <div className="Comments-on-user">
+                      {commentsArray.map(comment => (
+                        <Comments
+                          key={comment._id}
+                          comment={comment}
+                          deleteComment={this.deleteComment}
+                        />
+                      ))}
+                    </div>
+
+                  </div>
+                </section>
+              }
+            </div>
+
           </div>
-        </section>
-        <section className="section">
-          <div className="container">
-            <div className="columns is-multiline">
+
+          <div className="Show-profile-bottom">
+            <div className="User-items-index">
               {userItems.map(item =>
-                <div key={item._id} className="column is-one-quarter-desktop is-one-third-tablet is-half-mobile">
+                <div key={item._id}>
                   <Link to={`/clothes/${item._id}`}>
-                    <div className="card">
-                      <div className="card-header">
-                        <h4 className="card-header-title">{item.title}</h4>
+                    <div className="Card">
+                        <h4 className="Title">{item.title}</h4>
+                      <div className="img">
+                        <img src={item.image} alt={item.title} loading="lazy" width="255" height="255" />
                       </div>
-                      <div className="card-image">
-                        <figure className="image image is-1by1">
-                          <img src={item.image} alt={item.title} loading="lazy" width="255" height="255" />
-                        </figure>
-                      </div>
-                      <div className="card-content">
+                      <div className="Card-text">
                         <h5 className=""><strong>Rental Price:</strong> {`£${item.rentalPrice}`}</h5>
                       </div>
                     </div>
@@ -243,38 +380,14 @@ class userShowProfile extends React.Component {
               )}
             </div>
           </div>
-        </section>
-        {isAuthenticated() && <section>
-          <form value={user._id} onSubmit={this.handleCommentSubmit}>
-            <div>
-              <div className="label for comments">
-                <p> Comment on {user.username} </p>
-              </div>
-              <input
-                className="comments-input"
-                type="textArea"
-                maxLength="250"
-                name="text"
-                onChange={this.handleCommentChange}
-                value={this.state.comments.text} />
-            </div>
-            <div className="comments-submit-button">
-              <button className="button is-primary">Submit Comment</button>
-            </div>
-          </form>
-          <div>
-            {commentsArray.map(comment => (
-              <Comments
-                key={comment._id}
-                comment={comment}
-                deleteComment={this.deleteComment}
-              />
-            ))}
-          </div>
-        </section>}
+        </div>
+
+
       </>
     )
   }
+
+
 }
 
 export default userShowProfile

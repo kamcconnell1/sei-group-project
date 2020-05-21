@@ -330,6 +330,84 @@ html {
   border-radius: 100%;
 }
 
+//? SHOW USERS PROFILE
+
+.Show-profile {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.Show-profile-top {
+  display: flex;
+  align-items: center;
+}
+
+.Photo-user-rating {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.Follow-message-comment {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.Comments {
+  .Comment-text {
+  }
+}
+
+.Show-profile-bottom {
+  display: flex;
+  justify-content: center;
+
+  .User-items-index {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    width: 80%;
+    .Card {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin: 5px 5px;
+      width: 150px;
+      height: 150px;
+      .img img {
+        margin: 0;
+        max-height: 150px;
+        max-width: auto;
+        object-fit: cover;
+        z-index: 0;
+        box-sizing: content-box;
+      }
+      .Card-text {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        min-height: 60px;
+        width: 100%;
+        position: relative;
+        bottom: 60px;
+        z-index: 1;
+        background-color: rgba(var(--navbar-color-rgb), 0.5);
+        color: var(--cards-text-color);
+        .Title {
+          font-size: 11px;
+          font-weight: 600;
+          margin-top: 5px;
+        }
+        .Subtitle {
+          font-size: 10px;
+        }
+      }
+    }
+  }
+}
+
 //? USER PROFILE - MY PROFILE PAGE
 
 .My-profile {
@@ -370,13 +448,11 @@ html {
         background-color: var(--main-bg-color);
         border-radius: 5px;
         font-size: 1.4vw;
-      
       }
     }
     .Modal-inactive {
       display: block;
     }
-
 
     .profile-img {
       img {
@@ -431,7 +507,6 @@ html {
       font-size: 1.5vw;
       margin-top: 1vw;
     }
-
   }
 
   .Welcome {
