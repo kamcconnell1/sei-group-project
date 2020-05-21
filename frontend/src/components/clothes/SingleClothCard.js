@@ -2,7 +2,7 @@ import React from 'react'
 
 import { Slide } from 'react-slideshow-image'
 import { Link } from 'react-router-dom'
-import { isAuthenticated } from '../../lib/auth'
+import { isAuthenticated, isOwner } from '../../lib/auth'
 
 import Comments from '../common/Comments'
 import StarRating from '../common/StarRating'
@@ -26,6 +26,8 @@ const properties = {
 const SingleClothCard = ({ deleteComment, handleContactSubmit, handleContactChange, contactModalOpen, toggleContact, commentsArray, comments, title, clothId, profilePic, username, images, image, currentUserId, onFirstClick, onSecondClick, onClick, location, handleCommentSubmit, handleCommentChange, rating }) => {
   const slideImages = [image[0], image[0], image[0]]
 
+  console.log(!isOwner());
+  
   return (
     <>
       <section className="section">

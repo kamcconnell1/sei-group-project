@@ -138,13 +138,8 @@ class ClothesIndex extends React.Component {
       sizes,
       filteredItemsToDisplay
     } = this.state
-    console.log('Filtered clothes:', filteredClothes)
-    console.log('Item to display:', filteredItemsToDisplay)
-
-
-
-    console.log(filteredClothes)
-
+    // console.log('Filtered clothes:', filteredClothes)
+    // console.log('Item to display:', filteredItemsToDisplay)
 
     // * Variable of category options
     const categoryOption = categories.map((cat) => {

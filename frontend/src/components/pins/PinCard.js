@@ -12,7 +12,7 @@ const {deletePin} = props
     <h2 className="is-size-6">{place.charAt(0).toUpperCase()+place.slice(1)}</h2>
     <p >Notes: {note}</p>
     <p><small>Pin Saved on: {createdAt.slice(0,10)}</small></p>
-    <button onClick={deletePin} value={_id}>Remove Pin</button>
+    <button onClick={deletePin} >Remove Pin</button>
     </div>
   )
 }

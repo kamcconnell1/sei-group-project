@@ -3,7 +3,7 @@ import React from 'react'
 import { uploadClothesImage } from '../../lib/ext_api'
 import ImageUpload from '../common/ImageUpload'
 
-const EditProfilePicture = ({ onChange, onSubmit, toggleModal, modalOpen }) => {
+const EditProfilePicture = ({ onChange, onSubmit, toggleModal, modalOpen, profilePic }) => {
 
   return (
 

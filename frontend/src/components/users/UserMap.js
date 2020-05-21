@@ -82,9 +82,9 @@ class UserMap extends React.Component {
   }
 
   //* handleDelete on the pin
-  deletePin = async e => {
+  deletePin = async id => {
     try {
-      await removePin(e.target.value)
+      await removePin(id)
       this.loadMap()
       deletedItemToast()
     } catch (err) {

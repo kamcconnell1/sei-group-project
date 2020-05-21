@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import UserClothCard from './UserClothCard'
 import MessageCard from './MessageCard'
 import EditProfilePicture from './EditProfilePicture'
-import EditProfile from './EditProfile'
+
 import { getProfile, editProfile, deleteProfile, inboxMessage, replyMessage } from '../../lib/api'
 import { logout } from '../../lib/auth'
 import { getPostcodeInfo } from '../../lib/ext_api'
@@ -25,8 +25,7 @@ class UserProfile extends React.Component {
     messages: null,
     replyModalOpen: false,
     replyId: '',
-    text: '',
-    messagesModalOpen: false
+    text: ''
   }
   // * Function to GET the users details
   async componentDidMount() {
@@ -123,6 +122,18 @@ class UserProfile extends React.Component {
     this.setState({ modalOpen: !this.state.modalOpen })
   }
 
+  handleSubmitEdit = async e => {
+    e.preventDefault()
+    try {
+      console.log('presub', this.state.user)
+      const res = await editProfile(this.state.user)
+      console.log(res.data)
+      this.toggleModalEdit()
+      this.getUserDashboard()
+    } catch (err) {
+      this.setState({ errors: 'username' })
+    }
+  }
 
   //* Delete Profile
   deleteUserProfile = async e => {
@@ -139,10 +150,6 @@ class UserProfile extends React.Component {
     const user = this.props.match.params.username
     this.props.history.push(`/profile/${user}/add`)
   }
-  // * Star Rating Function
-  onStarClick = () => {
-    console.log('clicked')
-  }
 
   //* Function to get the page Users ratings - I they haven't been rated yet you start on 3 stars
   getUserRating = () => {
@@ -155,11 +162,6 @@ class UserProfile extends React.Component {
   handleEditProfile = () => {
     const user = this.props.match.params.username
     this.props.history.push(`/profile/${user}/edit`)
-  }
-
-  // * function to toggle messages modal
-  toggleMessagesModal = () => {
-    this.setState({ messagesModalOpen: !this.state.messagesModalOpen})
   }
 
   render() {
@@ -205,14 +207,6 @@ class UserProfile extends React.Component {
                 <button onClick={this.handleEditProfile}
                   className="My-profile-update-btn"
                 >Update Profile</button>
-                {/* <EditProfile
-                  errors={this.state.errors}
-                  state={this.state.user}
-                  toggleModalEdit={this.toggleModalEdit}
-                  modalOpenEdit={this.state.modalOpenEdit}
-                  onChangeEdit={this.handleChangeEdit}
-                  onSubmitEdit={this.handleSubmitEdit}
-                /> */}
                 <button onClick={() => { if (window.confirm("Are you sure?")) this.deleteUserProfile() }} className="My-profile-delete-btn">Delete</button>
               </div>
             </div>
@@ -238,8 +232,8 @@ class UserProfile extends React.Component {
               <div>
                 {/* Notifications / chat section */}
                 <div className="My-profile-message-board">
-                  <button onClick={this.toggleMessagesModal} className="button is-info">Messages <span>{`(${messages.length})`}</span></button>
-                  <div className={this.messagesModalOpen ? "modal is-active" : "modal"}>
+                  <button className="button is-info">Messages <span>{`(${messages.length})`}</span></button>
+                  <div>
                     {sortedMessages.map((message, i) =>
                       <MessageCard
                         key={i}
