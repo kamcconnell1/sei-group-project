@@ -68,28 +68,30 @@ class Posts extends React.Component {
           <form className="Post-form"
             onSubmit={this.handleSubmit} >
             <label>Title</label>
-            <input className="Post-input-title"
+            <input className="Post-input-title input is-info"
               name="title"
               value={this.state.input.title}
               placeholder="Title"
               onChange={this.handleChange}
             />
             <label>Content</label>
-            <textarea className="Post-input-text"
+            <br/>
+            <textarea className="textarea is-small is-info"
               name="text"
               rows="15"
               value={this.state.input.text}
               placeholder="Text"
               onChange={this.handleChange}
             />
-            <label>Add the Url of an Image here.</label>
-            <input className="Post-input-title"
+            <label>Image URL</label>
+            <input className="is-info input"
               name="photo"
               value={this.state.input.photo}
               placeholder="URL of Image"
               onChange={this.handleChange}
             />
-            <button className="Post-btn">Submit Post</button>
+            <br /><br/>
+            <button className="button is-small is-info">Submit Post</button>
           </form>
           <div className="Post-cards">
             {this.state.posts.map(post => (
