@@ -5,6 +5,8 @@ const RegisterForm = ({ handlePostcodeChange, handleChange, handleSubmit, userna
 
   return (
     <>
+  
+     <div className="column">
       <form
         onSubmit={handleSubmit}
         className="box"
@@ -84,9 +86,12 @@ const RegisterForm = ({ handlePostcodeChange, handleChange, handleSubmit, userna
           {errors.passwordConfirmation && <small className="help is-danger">{errors.passwordConfirmation}</small>}
         </div>
         <div className="field">
-          <button type="submit" className="button is-fullwidth is-primary">Register</button>
+          <button type="submit" className="button is-warning is-medium is-light">Register</button>
         </div>
       </form>
+      </div>
+     
+ 
     </>
   )
 }

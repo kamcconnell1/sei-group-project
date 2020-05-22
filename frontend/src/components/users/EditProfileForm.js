@@ -36,33 +36,6 @@ const EditProfileForm = ({ onPostcodeChange, onChange, onSubmit, username, postc
                   />
                 </div>
               </div>
-
-              <div className="field" >
-                <label className="label">Password</label>
-                <div className="control">
-                  <input
-                    className={`input ${errors.password ? 'is-danger' : ''}`}
-                    type="text"
-                    placeholder="Update Password here"
-                    name="password"
-                    value={password}
-                    onChange={onChange}
-                  />
-                </div>
-              </div>
-              <div className="field" >
-                <label className="label">Password Confirmation</label>
-                <div className="control">
-                  <input
-                    className={`input ${errors.passwordConfirmation ? 'is-danger' : ''}`}
-                    type="text"
-                    placeholder="Update Password here"
-                    name="passwordConfirmation"
-                    value={passwordConfirmation}
-                    onChange={onChange}
-                  />
-                </div>
-              </div>
               <div className="field">
                 <button type="submit"
                   className="button is-fullwidth is-primary">

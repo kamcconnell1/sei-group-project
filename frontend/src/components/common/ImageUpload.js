@@ -1,12 +1,9 @@
 import React from 'react'
-
 import { postImage } from '../../lib/ext_api'
-
 class ImageUpload extends React.Component {
   state = {
     image: null
   }
-
   handleUpload = async event => {
     event.preventDefault()
     //* Cloudinary preset passed in as props 

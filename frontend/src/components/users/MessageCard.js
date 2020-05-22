@@ -29,10 +29,10 @@ const MessageCard = ({ user, text, createdAt, reply, _id, sendReply, replyModal,
                 <div className="Message-content">
                 </div>
               </div>)}
+            <button value={_id} onClick={reply} className="Reply-btn">Reply</button>
           </div>
         </div>
         <div className="Message-reply-delete">
-          <button value={_id} onClick={reply} className="Reply-btn">Reply</button>
           <div className={replyModal ? "modal is-active" : "modal"}>
             <div className="field">
               <form onSubmit={sendReply}>

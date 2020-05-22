@@ -49,7 +49,7 @@ class Posts extends React.Component {
       toast('Submitted post!')
       await this.pageSetup()
     } catch (err) {
-      this.props.history.push('/notfound')
+      toast('Couldnt upload your post')
     }
   }
 
@@ -59,16 +59,16 @@ class Posts extends React.Component {
       <>
         <div className="Page-head">
           <div className="Page-title">
-            <h1>Posts</h1>
+            <h1>POSTS</h1>
           </div>
           <div className="Page-subtitle">
-            Check the latest post
+            <h2>Check the latest post</h2>
           </div>
         </div>
         <div className="Posts">
           <form className="Post-form"
             onSubmit={this.handleSubmit} >
-              <h3>Write a post</h3>
+            <h3>Add a post now!</h3>
             <input className="Post-input-title"
               name="title"
               value={this.state.input.title}

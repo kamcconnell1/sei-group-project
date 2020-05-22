@@ -150,7 +150,7 @@ class ClothesIndex extends React.Component {
       <>
         <div className="Page-head">
           <div className="Page-title">
-            <h1>KEBB Clothes</h1>
+            <h1>CLOTHES</h1>
           </div>
           <div className="Page-subtitle">
             <h2>Latest Items</h2>

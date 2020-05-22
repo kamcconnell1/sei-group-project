@@ -109,6 +109,12 @@ class Map extends React.Component {
               <span role="img" aria-label="marker">📍</span>
             </Marker>
           </MapGl>
+          <div className="pin-modal">
+            <button
+              className="Button"
+              onClick={this.handleDropPin}
+            >Add Location</button>
+          </div>
         </div>
       </>
     )

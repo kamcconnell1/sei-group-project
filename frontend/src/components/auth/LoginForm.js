@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom'
 
 const LoginForm = ({ email, password, handleChange, handleSubmit, errors }) => {
   return (
+    <div className="column">
     <form
       className="box"
       onSubmit={handleSubmit}
@@ -36,9 +37,10 @@ const LoginForm = ({ email, password, handleChange, handleSubmit, errors }) => {
         </div>
       </div>
       <div className="field">
-        <button type="submit" className="button is-success is-light is-medium">Login</button>
+        <button type="submit" className="button is-warning is-medium is-light">Login</button>
       </div>
     </form>
+      </div>
   )
 }
 

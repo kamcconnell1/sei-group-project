@@ -169,6 +169,7 @@ class UserProfile extends React.Component {
     const { commentsArray, messages, location } = this.state
     const reversedCreatedArticles = createdArticles.slice(0, 6).reverse()
     const rating = parseInt(this.getUserRating())
+    const nameCap = username.charAt(0).toUpperCase() + username.slice(1)
     // * Sorted messages by date
     const sortedMessages = messages.sort((a, b) => b.createdAt - a.createdAt)
     return (
@@ -176,7 +177,7 @@ class UserProfile extends React.Component {
         <div className="My-profile">
           <div className="My-profile-top-row">
             <div className="Photo-delete-rating">
-              <div className="Profile-img image is-128x128">
+              <div className="Profile-img image ">
                 <img src={profilePic} alt="profile pic" />
                 <button onClick={this.toggleModal}
                   className="button is-profile-btn"
@@ -198,18 +199,18 @@ class UserProfile extends React.Component {
                 <button onClick={this.handleEditProfile}
                   className="My-profile-update-btn"
                 >Update Profile</button>
-                <button onClick={() => { if (window.confirm("Are you sure?")) this.deleteUserProfile() }} className="My-profile-delete-btn">Delete</button>
+                <button onClick={() => { if (window.confirm("Are you sure?")) this.deleteUserProfile() }} className="My-profile-delete-btn">Delete Profile</button>
               </div>
             </div>
             <div className="Welcome">
               <div className="Welcome-user">
-                <h5 className="title">Welcome {username}</h5>
+                <h5 className="title">WELCOME {nameCap}</h5>
                 <h6 className="subtitle">{location}</h6>
               </div>
               <div className="My-profile-favs">
-                <Link to={`/profile/${username}/friends`} className="Favs-btn">Friends</Link>
-                <Link to={`/profile/${username}/favourites`} className="Favs-btn">Clothes I Love</Link>
-                <Link to={`/profile/${username}/favouriteposts`} className="Favs-btn">Posts I Love</Link>
+                <Link to={`/profile/${username}/friends`} className="Favs-btn">Following</Link>
+                <Link to={`/profile/${username}/favourites`} className="Favs-btn">Favourite Items</Link>
+                <Link to={`/profile/${username}/favouriteposts`} className="Favs-btn">Favourite Posts</Link>
               </div>
             </div>
           </div>
@@ -218,7 +219,7 @@ class UserProfile extends React.Component {
               <div>
                 {/* Notifications / chat section */}
                 <div className="My-profile-message-board">
-                  <h3 className="Title"> {`${messages.length}`} Messages</h3>
+                  <h3 className="Title"> {`${messages.length}`} Message(s)</h3>
                   <div>
                     {sortedMessages.map((message, i) =>
                       <MessageCard

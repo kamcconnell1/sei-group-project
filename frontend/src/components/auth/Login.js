@@ -40,21 +40,27 @@ class Login extends React.Component {
   render() {
     return (
       <>
-        <section className="section">
-          <div className="container">
-            <h1 className="title">Login</h1>
-            <h2 className="subtitle">
-              Login here
-          </h2>
+     <div className="Page-head">
+          <div className="Page-title">
+              <h1 >LOGIN</h1>
+              </div>
+              <div className="Page-subtitle">
+                <h2>
+                  Login here
+                 </h2>
+                 </div>
+              </div>
+              <div className="columns">
+          <LoginForm
+            handleChange={this.handleChange}
+            handleSubmit={this.handleSubmit}
+            errors={this.state.error}
+            {...this.state.formData}
+          />
           </div>
-        </section>
-        <LoginForm
-          handleChange={this.handleChange}
-          handleSubmit={this.handleSubmit}
-          errors={this.state.error}
-          {...this.state.formData}
-        />
-      </>
+      
+  </>
+   
     )
   }
 }

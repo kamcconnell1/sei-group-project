@@ -39,7 +39,7 @@ class FavouriteItem extends React.Component {
     const { items } = this.state
     return (
       <>
-        <section className="hero is-primary">
+        <section className="hero">
           <div className="hero-body">
             <div className="container">
               <h1 className="title">
@@ -68,7 +68,7 @@ class FavouriteItem extends React.Component {
                       </div>
                     </Link>
                   </div>
-                  <button onClick={this.removeFromFavs} value={item._id}>Remove from favourites</button>
+                  <button className="button is-dark is-small" onClick={this.removeFromFavs} value={item._id}>Delete from favourites</button>
                 </div>
               )}
             </div>

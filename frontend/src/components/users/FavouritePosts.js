@@ -41,41 +41,30 @@ class FavouritePosts extends React.Component {
     const { posts } = this.state
     return (
       <>
-        <section className="hero is-primary">
-          <div className="hero-body">
-            <div className="container">
-              <h1 className="title">
-                Favourite Posts
-              </h1>
-            </div>
-          </div>
-        </section>
-        <section className="section">
-          <div className="container">
-            <div className="columns is-multiline">
+        <div className="FavPosts">
+          <h1 className="Title">
+            Favourite Posts
+           </h1>
+          <div className="Fav-friends">
+            <div className="fav-post-friends">
               {posts.map(post =>
-                <div key={post._id} className="column is-one-quarter-desktop is-one-third-tablet is-half-mobile">
-                  <div className="card">
+                <div key={post._id} className="Fav-post-name">
+                  <div className="Fav-card">
                     <Link to={`/posts/${post._id}`}>
-                      <div className="card-header">
+                      <div className="Card-image">
+                        <img src={post.photo} alt={post.title} loading="lazy" width="255" height="255" />
                       </div>
-                      <div className="card-image">
-                        <figure className="image image is-1by1">
-                          <img src={post.image} alt={post.title} loading="lazy" width="255" height="255" />
-                        </figure>
-                      </div>
-                      <div className="card-content">
+                      <div className="Card-content">
                         <h4 className=""><strong>{post.title}</strong></h4>
-                        <h5 className=""><strong></strong></h5>
                       </div>
                     </Link>
-                    <button onClick={this.removeFromFavs} value={post._id}>Remove from favourites</button>
                   </div>
+                  <button className="Button" onClick={this.removeFromFavs} value={post._id}>Remove from favourites</button>
                 </div>
               )}
             </div>
           </div>
-        </section>
+        </div>
       </>
     )
   }

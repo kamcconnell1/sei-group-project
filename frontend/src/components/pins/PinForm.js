@@ -4,14 +4,15 @@ import React from 'react'
 const PinForm = ({ modalStatus, handleChange, handleSubmit, toggleModal, errors, form }) => {
 
   return (
+    <div className="pin-form">
     <div
       className={modalStatus ? "modal is-active" : "modal"}
     >
       <div className="modal-background"></div>
-      <div className="modal-content">
+      <div className="modal-content is-centered">
         <form
           onSubmit={handleSubmit}
-          className="column is-3 is-pulled-left	"
+          className="column is-6 is-offset-3"
         >
           <div className="field">
             <label className="label">Title</label>
@@ -59,9 +60,9 @@ const PinForm = ({ modalStatus, handleChange, handleSubmit, toggleModal, errors,
           </div>
           <div className="field">
             <button
+              className="Button"
               type="submit"
-              className="button is-fullwidth is-primary"
-            >Save Location</button>
+            >Save</button>
           </div>
         </form>
         <button
@@ -70,6 +71,7 @@ const PinForm = ({ modalStatus, handleChange, handleSubmit, toggleModal, errors,
           aria-label="close">
         </button>
       </div>
+    </div>
     </div>
 
 

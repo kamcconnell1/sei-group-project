@@ -5,8 +5,8 @@ import { allUsersFavourites, deleteFriend } from '../../lib/api'
 import { toast } from '../../lib/notifications'
 
 class FavouriteFriends extends React.Component {
-  state = { 
-    friends: null 
+  state = {
+    friends: null
   }
 
   async componentDidMount() {
@@ -43,40 +43,30 @@ class FavouriteFriends extends React.Component {
     const { friends } = this.state
     return (
       <>
-        <section className="hero is-primary">
-          <div className="hero-body">
-            <div className="container">
-              <h1 className="title">
-                Your friends
-              </h1>
-            </div>
-          </div>
-        </section>
-        <section className="section">
-          <div className="container">
-            <div className="columns is-multiline">
+        <div className="Friends">
+          <h1 className="Title">
+            Following
+          </h1>
+          <div className="Fav-friends">
+            <div className="fav-card-friends">
               {friends.map(friend =>
-                <div key={friend.username} className="column is-one-quarter-desktop is-one-third-tablet is-half-mobile">
-                  <div className="card">
+                <div key={friend.username} className="Friends-name">
+                  <div className="Fav-card">
                     <Link to={`/page/${friend.username}`}>
-                      <div className="card-header">
+                      <div className="Card-image">
+                        <img src={friend.profilePic} loading="lazy" width="150" height="150" alt={friend.username} />
                       </div>
-                      <div className="card-image">
-                        <figure className="image image is-1by1">
-                          <img src={friend.profilePic} loading="lazy" width="150" height="150" alt={friend.username} />
-                        </figure>
-                      </div>
-                      <div className="card-content">
+                      <div className="Card-content">
                         <h4 className=""><strong>{friend.username}</strong></h4>
                       </div>
                     </Link>
                   </div>
-                  <button onClick={this.removeFromFavs} value={friend._id}>Remove from favourites</button>
+                  <button className="Button" onClick={this.removeFromFavs} value={friend._id}>Unfollow</button>
                 </div>
               )}
             </div>
           </div>
-        </section>
+        </div>
       </>
     )
   }

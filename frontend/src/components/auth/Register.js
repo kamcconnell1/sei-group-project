@@ -68,21 +68,36 @@ class Register extends React.Component {
 
     return (
       <>
-        <section className="section">
-          <div className="container">
+          {/* <section className="section">
+          <div className="container has-text-centered">
+          <div className="Page-title">
             <h1 className="title">KEBB Clothes</h1>
-            <h2 className="subtitle">
-              Join here
+            </div>
+            <div className="Page-subtitle">
+            <h2>
+              Join Us Now
               </h2>
+              </div>
           </div>
-        </section>
-        <RegisterForm
-          handlePostcodeChange={this.handlePostcodeChange}
-          handleChange={this.handleChange}
-          handleSubmit={this.handleSubmit}
-          errors={this.state.errors}
-          {...this.state.formData}
-        />
+        </section> */}
+          <div className="Page-head">
+            <div className="Page-title">
+              <h1>REGISTER</h1>
+            </div>
+            <div className="Page-subtitle">
+              <h2>Join now and start enjoying to world of KEBB</h2>
+            </div>
+          </div>
+          <div className="columns">
+          <RegisterForm
+            handlePostcodeChange={this.handlePostcodeChange}
+            handleChange={this.handleChange}
+            handleSubmit={this.handleSubmit}
+            errors={this.state.errors}
+            {...this.state.formData}
+          />
+</div>
+     
       </>
     )
   }

@@ -26,7 +26,7 @@ module.exports = [
   }, {
     title: 'HUTCH JUST DROPPED THE CUTEST NEW COLLECTION WITH MODCLOTH',
     text: 'I couldn’t be happier for them so I most definitely had to share some of my favorite styles from their recent Modcloth Collaboration. A few things I wanted to mention; everything runs pretty true to size for me (feel free to email or dm me if you have sizing questions). The fit, feel of the fabric and quality are 100 percent worth the price – you will have these unique pieces for years to come.',
-    photo: 'https://lovelyinla.com/wp-content/uploads/2020/05/modcloth-x-hutch-maxi-dress-postcards-1536x2048.jpg'
+    photo: 'https://rstyle.me/+i-JxS10DcSqbp7MFf-CWkQ'
   }, {
     title: 'HUTCH JUST DROPPED THE CUTEST NEW COLLECTION WITH MODCLOTH',
     text: 'Adding fake greenery gives a room an organic and calming feel; I eyed these faux palms for a year before buying! *faux palms, blanket and canisters on sale as of 5/2/20; pictured above: the ceramic jug and the bottle*',

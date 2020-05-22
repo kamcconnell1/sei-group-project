@@ -29,11 +29,6 @@ const SingleClothCard = ({ deleteComment, rentalPrice, handleContactSubmit, hand
     <>
       <section className="section">
         <div className="slide-container">
-          <p><strong>Brand</strong> {brand}</p>
-          <p><strong>{category}</strong> for {genderCategory}</p>
-          <p><strong>Color</strong> {color}</p>
-          <p><strong>Size</strong> {size}</p>
-          <p><strong>Rental price</strong> £{rentalPrice}</p>
           <Slide {...properties}>
             <div className="each-slide">
               <div style={{ 'backgroundImage': `url(${slideImages[0]})` }}>
@@ -96,21 +91,25 @@ const SingleClothCard = ({ deleteComment, rentalPrice, handleContactSubmit, hand
             <p><strong>{username}</strong></p>
           </div>
         </Link>
-        <div>
-          <hr />
-          <StarRating
+        <StarRating
             rating={rating}
             editing={false}
           />
+        <div>
+          <hr />
+          <p><strong>Brand: </strong> {brand}</p>
+          <p><strong>{category}: </strong> {genderCategory}</p>
+          <p><strong>Color: </strong> {color}</p>
+          <p><strong>Size: </strong> {size}</p>
+          <p><strong>Rental price: </strong> £{rentalPrice}</p>
         </div>
         <hr />
         <div className="show-buttons">
-          {!isAuthenticated() && <div className="columns">
-            <Link className="button is-success is-light" to="/login">SIGN IN</Link>
+          {!isAuthenticated() ? <div className="columns">
+            <Link to="/login">SIGN IN</Link>
             <p className="or"> OR </p>
-            <Link to="/register" className="button is-warning is-light">JOIN KEBB</Link>
-          </div>}
-          {isAuthenticated() && <button onClick={toggleContact} className="button is-primary is-small">CONTACT USER</button>}
+            <Link to="/register">JOIN KEBB</Link>
+          </div>: <button onClick={toggleContact} className="button is-primary is-small">CONTACT USER</button> }
         </div>
         <div className={contactModalOpen ? "modal is-active" : "modal"}>
           <div className="field">
@@ -123,6 +122,7 @@ const SingleClothCard = ({ deleteComment, rentalPrice, handleContactSubmit, hand
           </div>
         </div>
         <hr />
+          <p>Other Items posted by {username}</p> <br/>
         <div className="columns similar">
           <div className="column is-one-quarter">
             <a onClick={onFirstClick}>
