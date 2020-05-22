@@ -121,13 +121,16 @@ a {
 }
 
 .Footer {
-  height: 2vw;
   width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
   padding: 0;
   background-color: var(--navbar-color);
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  height: 2.5rem;
 }
 
 .box {
