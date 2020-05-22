@@ -53,7 +53,6 @@ class Map extends React.Component {
       })
   }
 
-
   //* Popup details
   renderPopup(props) {
     const { popupInfo } = this.state
@@ -104,17 +103,12 @@ class Map extends React.Component {
 
             {this.renderPopup()}
 
-            {/* Pin to show where user is zooming to */}
             <Marker
               className=""
               {...viewport} >
               <span role="img" aria-label="marker">📍</span>
             </Marker>
           </MapGl>
-          <button
-            className="Button"
-            onClick={this.handleDropPin}
-          >Add a Pin</button>
         </div>
       </>
     )
