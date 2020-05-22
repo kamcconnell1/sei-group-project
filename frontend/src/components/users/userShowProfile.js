@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 
 import { getUserProfile, postFavoriteFriend, commentOnUser, DeleteCommentOnUser, sendMessage, rateUser } from '../../lib/api'
 import { getPostcodeInfo } from '../../lib/ext_api'
-import { isAuthenticated } from '../../lib/auth'
+import { isAuthenticated, isOwner } from '../../lib/auth'
 
 import Comments from '../common/Comments'
 import StarRating from '../common/StarRating'

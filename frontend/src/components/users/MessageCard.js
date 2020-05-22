@@ -24,13 +24,12 @@ const MessageCard = ({ user, text, createdAt, reply, _id, sendReply, replyModal,
           <div className="Message-reply">
             {response.map((res, i) =>
               <div key={i}>
-                <h5>reply: {res.createdAt.split('T')}</h5>
-                <p>{res.text}</p><hr />
+                <h5>reply: {date} {time}</h5>
+                <p>{res.text}</p>
+                <div className="Message-content">
+                </div>
               </div>)}
           </div>
-        </div>
-        <div className="Message-content">
-          {response.map((res, i) => <p key={i} >{res.text}</p>)}
         </div>
         <div className="Message-reply-delete">
           <button value={_id} onClick={reply} className="Reply-btn">Reply</button>

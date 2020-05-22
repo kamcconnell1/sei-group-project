@@ -68,6 +68,7 @@ class UserProfile extends React.Component {
     const { replyId } = this.state
     try {
       await replyMessage(replyId, this.state.text)
+      this.getInbox()
       toast('Reply sent!')
     } catch (err) {
       toast('Couldnt send reply')
