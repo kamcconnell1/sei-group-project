@@ -178,7 +178,7 @@ class ClothesIndex extends React.Component {
               />
             </form>
           </div>
-          <button onClick={this.resetFilter} className="button is-small is-dark">Reset Filter</button>
+          <button onClick={this.resetFilter} className="Button">Reset Filter</button>
           <br />
           <div className="Clothes-index">
             {filteredItemsToDisplay.length > 0 ? (

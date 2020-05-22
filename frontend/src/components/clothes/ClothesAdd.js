@@ -66,7 +66,14 @@ class ClothesAdd extends React.Component {
 
     return (
       <>
-        <h1>Add Clothes</h1>
+        <div className="Page-head">
+          <div className="Page-title">
+            <h1>Add clothes</h1>
+          </div>
+          <div className="Page-subtitle">
+            <h2>Add the clothes you want to rent</h2>
+          </div>
+        </div>
         <ClothesForm
           onChange={this.handleImageChange}
           onClick={this.handleAddImage}
