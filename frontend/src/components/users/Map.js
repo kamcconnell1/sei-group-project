@@ -44,16 +44,6 @@ class Map extends React.Component {
   onClickMarker = (pin) => {
     this.setState({ popupInfo: pin })
   }
-<<<<<<< HEAD
-
-  deletePopup = () => {
-    const id = this.state.popupInfo._id
-    this.setState({ popupInfo: null },
-      () => {
-        this.props.onClickDelete(id)
-      })
-  }
-=======
 
   deletePopup = () => {
     const id = this.state.popupInfo._id
@@ -63,19 +53,10 @@ class Map extends React.Component {
       })
   }
 
->>>>>>> development
-
   //* Popup details
   renderPopup(props) {
     const { popupInfo } = this.state
 
-<<<<<<< HEAD
-  //* Popup details
-  renderPopup(props) {
-    const { popupInfo } = this.state
-
-=======
->>>>>>> development
     return (
       popupInfo && (
         <Popup
@@ -107,14 +88,7 @@ class Map extends React.Component {
             width={'600px'}
             onViewportChange={this.handleViewportChange}
             mapboxApiAccessToken={process.env.REACT_APP_MAPBOX_ACCESS_TOKEN}
-<<<<<<< HEAD
-            mapStyle='mapbox://styles/mapbox/light-v10'
-          >
-            <Geocoder
-              mapRef={this.myMap}
-              onViewportChange={this.handleViewportChange}
-              mapboxApiAccessToken={process.env.REACT_APP_MAPBOX_ACCESS_TOKEN}
-              position="top-left" />
+            position="top-left" >
 
             <Pins
               data={pins}
@@ -123,39 +97,17 @@ class Map extends React.Component {
 
             {this.renderPopup()}
 
-            {/* Pin to show where user is zooming to */}
             <Marker
               className=""
               {...viewport} >
               <span role="img" aria-label="marker">📍</span>
             </Marker>
           </MapGl>
-          <button
-            className="Button"
-            onClick={this.handleDropPin}
-          >Add a Pin</button>
         </div>
-=======
-            position="top-left" />
-
-          <Pins
-            data={pins}
-            onClick={this.onClickMarker}
-          />
-
-          {this.renderPopup()}
-
-          <Marker
-            className=""
-            {...viewport} >
-            <span role="img" aria-label="marker">📍</span>
-          </Marker>
-        </MapGl>
         <button
           className="button is-primary"
           onClick={this.handleDropPin}
         >Add Location</button>
->>>>>>> development
       </>
     )
   }
