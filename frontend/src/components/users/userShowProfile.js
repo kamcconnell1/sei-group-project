@@ -4,10 +4,6 @@ import { Link } from 'react-router-dom'
 import { getUserProfile, postFavoriteFriend, commentOnUser, DeleteCommentOnUser, sendMessage, rateUser } from '../../lib/api'
 import { getPostcodeInfo } from '../../lib/ext_api'
 import { isAuthenticated } from '../../lib/auth'
-<<<<<<< HEAD
-import { toast } from '../../lib/notifications'
-=======
->>>>>>> 602f19d4a5c7b5c86a8ff110ee65483b6bb1eaed
 
 import Comments from '../common/Comments'
 import StarRating from '../common/StarRating'
@@ -145,11 +141,7 @@ class userShowProfile extends React.Component {
   //* ON Clicking the star sets state 
   onStarClick = (nextValue) => {
     if (!isAuthenticated()) return
-<<<<<<< HEAD
-    toast('Rating Added')
-=======
     toast('Thankyou, rating has been added')
->>>>>>> 602f19d4a5c7b5c86a8ff110ee65483b6bb1eaed
     const ratingData = { ...this.state.ratingData, rating: nextValue }
     this.setState({ ratingData }
       , () => {
