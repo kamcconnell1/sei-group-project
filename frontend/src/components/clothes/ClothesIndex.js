@@ -143,7 +143,7 @@ class ClothesIndex extends React.Component {
       return { value: gen, label: gen }
     })
     // * Variable of Size options
-    const sizeOption = sizes.sort((a, b) => a - b ).map((size) => {
+    const sizeOption = sizes.sort((a, b) => a - b).map((size) => {
       return { value: size, label: size }
     })
     return (
@@ -182,13 +182,13 @@ class ClothesIndex extends React.Component {
           <br />
           <div className="Clothes-index">
             {filteredItemsToDisplay.length > 0 ? (
-              filteredItemsToDisplay.sort((a, b) => a.rentalPrice - b.rentalPrice ).map((cloth) => (
+              filteredItemsToDisplay.sort((a, b) => a.rentalPrice - b.rentalPrice).map((cloth) => (
                 <ClothCard {...cloth} key={cloth._id} />
               ))
             ) : anyFilterSet ? (
               <p>No items found with your filters</p>
             ) : (
-                  filteredClothes.sort((a, b) => a.rentalPrice - b.rentalPrice ).map((cloth) => (
+                  filteredClothes.sort((a, b) => a.rentalPrice - b.rentalPrice).map((cloth) => (
                     <ClothCard {...cloth} key={cloth._id} />
                   ))
                 )}

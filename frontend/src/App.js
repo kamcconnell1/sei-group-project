@@ -56,7 +56,9 @@ const App = () => {
           <Route path="/*" component={Error} />
         </Switch>
       </div>
-      <Footer className="Footer" />
+      <div className="">
+      <Footer className='Footer' />
+      </div>
     </BrowserRouter>
   )
 }
