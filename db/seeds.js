@@ -28,7 +28,7 @@ mongoose.connect(
       // * Add random user to each article 
       const articlesWithUsers = articleData.map(article => {
         return { ...article, user: users[Math.floor(Math.random() * users.length)]._id }
-      }) 
+      })
 
       const articles = await Article.create(articlesWithUsers)
       console.log(`${'👘 '.repeat(articles.length)} clothes created `)

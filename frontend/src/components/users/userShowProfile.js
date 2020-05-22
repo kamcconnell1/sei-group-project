@@ -183,29 +183,28 @@ class userShowProfile extends React.Component {
                 rating={rating}
                 onStarClick={this.onStarClick}
               />
+            </div>
+            <div className="Follow-message-comment">
+              <div className="Follow-btn">
+                {isAuthenticated() && <button name="friend" value={user._id} onClick={this.handleFriendSubmit} className="button is-danger is-small">Follow</button>}
+              </div>
+              <div className="Message">
+                {isAuthenticated() && <button onClick={this.toggleContactModal} className="button is-small is-primary">Message</button>}
 
-              <div className="Follow-message">
-                <div className="Follow-btn">
-                  {isAuthenticated() && <button name="friend" value={user._id} onClick={this.handleFriendSubmit} className="Button">Follow</button>}
-                </div>
-                <div className="Message">
-                  {isAuthenticated() && <button onClick={this.toggleContactModal} className="Button">Message</button>}
-
-                  <div className="Modal-Message">
-                    <div className={contactModalOpen ? "modal is-active" : "modal"}>
-                      <div className="field">
-                        <form onSubmit={this.handleContactSubmit}>
-                          <div className="control">
-                            <textarea
-                              name="text"
-                              onChange={this.handleContactChange}
-                              name="text"
-                              className="textarea is-medium is-primary"
-                              placeholder="Message..."></textarea>
-                          </div>
-                          <button className="button is-info">SEND</button>
-                        </form>
-                      </div>
+                <div className="Modal-Message">
+                  <div className={contactModalOpen ? "modal is-active" : "modal"}>
+                    <div className="field">
+                      <form onSubmit={this.handleContactSubmit}>
+                        <div className="control">
+                          <textarea
+                            name="text"
+                            onChange={this.handleContactChange}
+                            className="textarea is-medium is-primary"
+                            placeholder="Message..."></textarea>
+                        </div>
+                        <br />
+                        <button className="button is-info is-small">SEND</button>
+                      </form>
                     </div>
                   </div>
                 </div>
@@ -261,7 +260,7 @@ class userShowProfile extends React.Component {
                       </div>
                       <div className="Card-text">
                         <h4 className="Title">{item.title}</h4>
-                        <h5 className="Subtitle">Rent it for: <strong>{`£${item.rentalPrice}`}</strong></h5>
+                        <h5 className="Subtitle"><strong>Rental price: </strong><p>{`£${item.rentalPrice}`}</p></h5>
                       </div>
                     </div>
                   </Link>

@@ -5,7 +5,7 @@ const { unauthorized } = require('../lib/errorMessages')
 const jwt = require('jsonwebtoken')
 
 
-//? Register a User
+//! REGISTER a User
 //* WORKING tested
 //* ERROR tested 
 async function register(req, res, next) {
@@ -17,7 +17,7 @@ async function register(req, res, next) {
   }
 }
 
-//? Function for User Login
+//! LOGIN
 //* WORKING tested
 //* ERROR tested 
 async function login(req, res, next) {

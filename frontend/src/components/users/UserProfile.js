@@ -1,4 +1,5 @@
 import React from 'react'
+
 import { Link } from 'react-router-dom'
 import UserClothCard from './UserClothCard'
 import MessageCard from './MessageCard'
@@ -8,7 +9,9 @@ import { logout } from '../../lib/auth'
 import { getPostcodeInfo } from '../../lib/ext_api'
 import Comments from '../common/Comments'
 import StarRating from '../common/StarRating'
-// ! User profile, GETs data for user on mount
+import { toast } from '../../lib/notifications'
+
+
 class UserProfile extends React.Component {
   state = {
     user: '',
@@ -33,9 +36,11 @@ class UserProfile extends React.Component {
       await this.getInbox()
       this.interval = setInterval(this.getInbox, 120000)
     } catch (err) {
-      console.log(err)
+      this.props.history.push('/notfound')
     }
   }
+
+  //* Function to allow CDM to be called again
   async getUserDashboard() {
     try {
       const res = await getProfile()
@@ -45,28 +50,32 @@ class UserProfile extends React.Component {
       this.props.history.push('/notfound')
     }
   }
+
   // * Function to toggle reply message box
   toggleReplyModal = e => {
     this.setState({ replyModalOpen: !this.state.contactModalOpen, replyId: e.target.value })
   }
+
   // * Function to handle change of reply textbox
   handleReplyChange = e => {
     const text = { ...this.state.text, [e.target.name]: e.target.value }
     this.setState({ text })
   }
+
   // * Function to reply to messages
   handleReplySubmit = async e => {
     e.preventDefault()
     const { replyId } = this.state
     try {
-      const res = await replyMessage(replyId, this.state.text)
-      console.log(res.data)
-      console.log('sent')
+      await replyMessage(replyId, this.state.text)
+      this.getInbox()
+      toast('Reply sent!')
     } catch (err) {
-      console.log(err)
+      toast('Couldnt send reply')
     }
     this.setState({ replyModalOpen: false })
   }
+
   // * Function to GET incoming messages
   async getInbox() {
     try {
@@ -76,6 +85,7 @@ class UserProfile extends React.Component {
       console.log(err)
     }
   }
+
   //* Function to find user location details
   async getLocation() {
     try {
@@ -88,6 +98,7 @@ class UserProfile extends React.Component {
       this.setState({ location: 'London, Greater London' })
     }
   }
+
   //* Function to allow user to upload a profile picture
   handleChange = (event) => {
     this.setState(prevState => ({
@@ -97,22 +108,25 @@ class UserProfile extends React.Component {
       }
     }))
   }
+
   //* Function for PUT request to update profile picture
   handleSubmit = async event => {
     event.preventDefault()
     try {
-      const res = await editProfile(this.state.user)
+      await editProfile(this.state.user)
       this.toggleModal()
       this.getUserDashboard()
-      console.log('submit event res', res)
+      toast('Updated!')
     } catch (err) {
       console.log(err.response.data)
     }
   }
+
   //* Function to toggle state to show the image upload form or not
   toggleModal = () => {
     this.setState({ modalOpen: !this.state.modalOpen })
   }
+
   //* Delete Profile
   deleteUserProfile = async e => {
     try {
@@ -120,14 +134,16 @@ class UserProfile extends React.Component {
       await logout()
       this.props.history.push(`/`)
     } catch (err) {
-      console.log(err)
+      toast('Couldnt delete this profile')
     }
   }
+
   // * Function to push the user to clothes add page if they want to add a new item 
   handleAddClothes = () => {
     const user = this.props.match.params.username
     this.props.history.push(`/profile/${user}/add`)
   }
+
   //* Function to get the page Users ratings - I they haven't been rated yet you start on 3 stars
   getUserRating = () => {
     const ratings = this.state.user.ratings
@@ -135,14 +151,18 @@ class UserProfile extends React.Component {
     return (Math.round((Object.values(ratings).reduce((a, { rating }) =>
       a + rating, 0) / ratings.length)))
   }
+
+  //* Push user to an edit page to 
   handleEditProfile = () => {
     const user = this.props.match.params.username
     this.props.history.push(`/profile/${user}/edit`)
   }
-  // * function to toggle messages modal
+
+  // * Function to toggle messages modal
   toggleMessagesModal = () => {
     this.setState({ messagesModalOpen: !this.state.messagesModalOpen })
   }
+
   render() {
     if (!this.state.user || !this.state.location || !this.state.messages) return null
     const { username, createdArticles, profilePic } = this.state.user
@@ -213,7 +233,6 @@ class UserProfile extends React.Component {
                   </div>
                 </div>
               </div>
-
             </div>
             <div className="Center-col">
               {/* Map over the clothes the user has uploaded - need to work on the positioning of this - need to add to allow user to edit / delete items */}
@@ -246,19 +265,18 @@ class UserProfile extends React.Component {
                 </div>
               </div>
               <div className="My-comments">
-              <div className="My-comments-title">
-                <h3>User's comments About Me</h3>
+                <div className="My-comments-title">
+                  <h3>User's comments About Me</h3>
+                </div>
+                <div className="Comments-users">
+                  {commentsArray.map(comment => (
+                    <Comments
+                      key={comment._id}
+                      comment={comment}
+                    />
+                  ))}
+                </div>
               </div>
-              <div className="Comments-users">
-                {commentsArray.map(comment => (
-                  <Comments
-                    key={comment._id}
-                    comment={comment}
-                  />
-                ))}
-              </div>
-              </div>
-              
             </div>
           </div>
         </div>

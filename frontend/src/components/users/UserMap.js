@@ -1,15 +1,12 @@
 import React from 'react'
 
 import Map from './Map'
-
 import PinForm from '../pins/PinForm'
 
 import { postPin, getProfile, removePin } from '../../lib/api'
-import { deletedItemToast } from '../../lib/toasts'
 
 import 'mapbox-gl/dist/mapbox-gl.css'
-
-
+import { toast } from '../../lib/notifications'
 
 class UserMap extends React.Component {
   state = {
@@ -32,6 +29,7 @@ class UserMap extends React.Component {
     }
   }
 
+  //* Load the map outside of CDM to allow to recall.
   loadMap = async () => {
     try {
       const res = await getProfile()
@@ -41,6 +39,7 @@ class UserMap extends React.Component {
     }
   }
 
+  //* add a location
   addLocation = (latitude, longitude) => {
     this.setState(prevState => ({
       formData: {
@@ -58,14 +57,12 @@ class UserMap extends React.Component {
     this.setState({ formData, errors })
   }
 
-
   //* Function to toggle the modal pin form open or close when user drops pin
   toggleModal = () => {
     this.setState({ modalOpen: !this.state.modalOpen })
   }
 
-
-  //* handleSubmit event for submitting the registration form
+  //* HandleSubmit event for submitting the registration form
   handleSubmit = async event => {
     event.preventDefault()
     try {
@@ -79,14 +76,14 @@ class UserMap extends React.Component {
     }
   }
 
-  //* handleDelete on the pin
+  //* HandleDelete on the pin
   deletePin = async id => {
     try {
       await removePin(id)
       this.loadMap()
-      deletedItemToast()
+      toast('Pin removed')
     } catch (err) {
-      console.log(err)
+      toast('Couldnt remove pin')
     }
   }
 

@@ -2,9 +2,12 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 
 import { allUsersFavourites, deleteFriend } from '../../lib/api'
+import { toast } from '../../lib/notifications'
 
 class FavouriteFriends extends React.Component {
-  state = { friends: null }
+  state = { 
+    friends: null 
+  }
 
   async componentDidMount() {
     try {
@@ -14,36 +17,37 @@ class FavouriteFriends extends React.Component {
     }
   }
 
+  //* Function 
   getPosts = async () => {
     try {
       const res = await allUsersFavourites()
       this.setState({ friends: res.data.favUsers })
     } catch (err) {
-      console.log(err)
+      this.props.history.push('/notfound')
     }
   }
 
+  //* Remove friends from favs
   removeFromFavs = async e => {
     try {
-      console.log(e.target.value)
       await deleteFriend(e.target.value)
+      toast('You removed a friend!')
       this.getPosts()
     } catch (err) {
-      console.log(err)
+      toast('Couldnt remove friend')
     }
   }
 
   render() {
     if (!this.state.friends) return <h1>Looks like the Ninjas dont like you</h1>
     const { friends } = this.state
-    console.log(friends)
     return (
       <>
         <section className="hero is-primary">
           <div className="hero-body">
             <div className="container">
               <h1 className="title">
-                Friends
+                Your friends
               </h1>
             </div>
           </div>

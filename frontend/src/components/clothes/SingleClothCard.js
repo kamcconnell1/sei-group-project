@@ -20,7 +20,7 @@ const properties = {
 }
 
 
-const SingleClothCard = ({ deleteComment, handleContactSubmit, handleContactChange, contactModalOpen, toggleContact, commentsArray, title, clothId, profilePic, username, images, image, onFirstClick, onSecondClick, onClick, handleCommentSubmit, handleCommentChange, rating, commentText, brand, color, category, genderCategory, size }) => {
+const SingleClothCard = ({ deleteComment, rentalPrice, handleContactSubmit, handleContactChange, contactModalOpen, toggleContact, commentsArray, title, clothId, profilePic, username, images, image, onFirstClick, onSecondClick, onClick, handleCommentSubmit, handleCommentChange, rating, commentText, brand, color, category, genderCategory, size }) => {
   const slideImages = [image[0], image[0], image[0]]
 
   console.log(!isOwner());
@@ -29,10 +29,11 @@ const SingleClothCard = ({ deleteComment, handleContactSubmit, handleContactChan
     <>
       <section className="section">
         <div className="slide-container">
-          <p>{brand}</p>
-          <p>{category} for {genderCategory}</p>
-          <p>{color}</p>
-          <p>{size}</p>
+          <p><strong>Brand</strong> {brand}</p>
+          <p><strong>{category}</strong> for {genderCategory}</p>
+          <p><strong>Color</strong> {color}</p>
+          <p><strong>Size</strong> {size}</p>
+          <p><strong>Rental price</strong> £{rentalPrice}</p>
           <Slide {...properties}>
             <div className="each-slide">
               <div style={{ 'backgroundImage': `url(${slideImages[0]})` }}>
@@ -52,22 +53,26 @@ const SingleClothCard = ({ deleteComment, handleContactSubmit, handleContactChan
           </Slide>
         </div>
 
-        {isAuthenticated() && <button name="item" value={clothId} onClick={onClick} className="button is-dark">Add to Favourites</button>}
+        {isAuthenticated() && <button name="item" value={clothId} onClick={onClick} className="button is-small is-danger">Add to Favourites</button>}
+        <br />
         {isAuthenticated() && <form onSubmit={handleCommentSubmit}>
           <div>
             <div className="label for comments">
-              <p> Comment on {title} </p>
+              <p> Add a comment on {title} </p>
             </div>
-            <input
-              className="comments-input"
+            <textarea
+              className="textarea is-small is-info"
               type="textArea"
               maxLength="250"
               name="text"
               onChange={handleCommentChange}
-              value={commentText} />
+              value={commentText}
+              placeholder="Add your comment"
+              ></textarea>
           </div>
-          <div className="comments-submit-button">
-            <button className="button is-primary">Submit Comment</button>
+          <br/>
+          <div>
+            <button className="button is-small is-info">Submit Comment</button>
           </div>
         </form>}
         <div>
@@ -108,7 +113,7 @@ const SingleClothCard = ({ deleteComment, handleContactSubmit, handleContactChan
             <p> OR </p>
             <Link className="join-button column" to="/register" className="button is-primary">JOIN KEBB</Link>
           </div>}
-          {isAuthenticated() && <button onClick={toggleContact} className="button is-primary">Contact User</button>}
+          {isAuthenticated() && <button onClick={toggleContact} className="button is-primary is-small">Contact User</button>}
         </div>
         <div className={contactModalOpen ? "modal is-active" : "modal"}>
           <div className="field">

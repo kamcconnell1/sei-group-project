@@ -1,7 +1,9 @@
 //! Required
 const User = require('../models/user')
 const { notFound } = require('../lib/errorMessages')
-// //? Function to get all Map Pins of current user
+
+//! MAP PINS
+//? Function to get all Map Pins of current user
 //* WORKING tested
 //* ERROR tested
 async function getPins(req, res, next) {
@@ -13,7 +15,7 @@ async function getPins(req, res, next) {
   }
 }
 
-// //? Function to create a Map Pin
+//? Function to create a Map Pin
 //* WORKING tested
 //* ERROR tested
 async function mapPinsCreate(req, res, next) {

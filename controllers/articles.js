@@ -2,6 +2,7 @@
 const Article = require('../models/article')
 const { notFound, unauthorized } = require('../lib/errorMessages')
 
+//! CLOTHING
 //? Function to get all articles of clothing
 //* WORKING tested
 //* ERROR tested
@@ -76,11 +77,11 @@ async function articlesDelete(req, res, next) {
   }
 }
 
-//? COMMENTS
+//! COMMENTS
 //? Function to Create Comments
 //* WORKING tested
 //* ERROR tested
-async function articleCommentCreate (req, res, next) {
+async function articleCommentCreate(req, res, next) {
   try {
     req.body.user = req.currentUser
     const articleId = req.params.id
@@ -97,7 +98,7 @@ async function articleCommentCreate (req, res, next) {
 //? Function to delete Comment on Article
 //* WORKING tested
 //* ERROR tested
-async function articleCommentDelete (req, res, next) {
+async function articleCommentDelete(req, res, next) {
   try {
     req.body.user = req.currentUser
     const article = await Article.findById(req.params.articleid)
@@ -116,7 +117,7 @@ async function articleCommentDelete (req, res, next) {
 //? Add Rating
 //* WORKING tested
 //* ERROR tested
-async function articleRatingCreate (req, res, next) {
+async function articleRatingCreate(req, res, next) {
   try {
     req.body.user = req.currentUser
     const rating = req.body
@@ -134,7 +135,7 @@ async function articleRatingCreate (req, res, next) {
 //? Update article rating
 //* WORKING tested
 //* ERROR tested
-async function editArticleRating (req, res, next) {
+async function editArticleRating(req, res, next) {
   try {
     req.body.user = req.currentUser
     const id = req.params.id

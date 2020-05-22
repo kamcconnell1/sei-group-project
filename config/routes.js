@@ -44,9 +44,6 @@ router.route('/profile')
   .get(secureRoute, user.profile)
   .put(secureRoute, user.updateUser)
 
-router.route('/editprofilepic')
-  .put(secureRoute, user.userUpdateProfilePic)
-
 //* Get Specific Profile
 router.route('/profile/:username')
   .get(user.getProfile)

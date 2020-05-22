@@ -2,6 +2,8 @@
 const User = require('../models/user')
 const Message = require('../models/message')
 const { unauthorized, notFound, cantMessageYourself } = require('../lib/errorMessages')
+
+//! MESSAGES
 //? Function for creating a message.
 //* WORKING tested
 //* ERROR tested
@@ -20,6 +22,7 @@ async function createMessage(req, res, next) {
     next(err)
   }
 }
+
 //? Function for sending response to intial Message
 //* WORKING tested
 //* ERROR tested
@@ -37,6 +40,7 @@ async function sendResponse(req, res, next) {
     next(err)
   }
 }
+
 //? Get single message with all responses
 //* WORKING tested
 //* ERROR tested
@@ -50,6 +54,7 @@ async function getMessage(req, res, next) {
     next(err)
   }
 }
+
 //? Get all messages sent to rent
 //* WORKING tested
 //* ERROR tested
@@ -64,6 +69,7 @@ async function getMessageThread(req, res, next) {
     next(err)
   }
 }
+
 //! Export
 module.exports = {
   createMessage,

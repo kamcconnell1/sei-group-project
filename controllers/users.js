@@ -3,6 +3,8 @@ const User = require('../models/user')
 const { notFound, unauthorized, duplicate, cantAddYourself } = require('../lib/errorMessages')
 const Article = require('../models/article')
 const Posts = require('../models/post')
+
+//! USERS
 //? Show User Dashboard
 //* WORKING tested
 //* ERROR tested
@@ -15,6 +17,7 @@ async function currentUserProfile(req, res, next) {
     next(err)
   }
 }
+
 //? Show single User profile.
 //* WORKING tested
 //* ERROR tested
@@ -24,19 +27,6 @@ async function getProfile(req, res, next) {
     const userProfile = await User.findOne({ username: user }).populate('createdArticles').populate('createdPosts').populate('comments.user').populate('user')
     if (!userProfile) throw new Error(notFound)
     res.status(200).json(userProfile)
-  } catch (err) {
-    next(err)
-  }
-}
-//? Update details on User profile
-//* WORKING tested
-//* ERROR tested
-async function userUpdateProfilePic(req, res, next) {
-  try {
-    const userId = req.currentUser
-    const updatedProfile = await User.findByIdAndUpdate(userId, req.body, { new: true })
-    if (!updatedProfile) throw new Error(unauthorized)
-    res.status(202).json(updatedProfile)
   } catch (err) {
     next(err)
   }
@@ -58,6 +48,7 @@ async function userUpdate(req, res, next) {
     next(err)
   }
 }
+
 //? Delete details on User Profile
 //* WORKING tested
 //* ERROR tested
@@ -79,7 +70,8 @@ async function deleteUser(req, res, next) {
     next(err)
   }
 }
-//? COMMENTS
+
+//! USER/ COMMENTS
 //? Comment on User profile
 //* WORKING tested
 //* ERROR tested
@@ -97,6 +89,7 @@ async function userCommentCreate(req, res, next) {
     next(err)
   }
 }
+
 //? Delete a Comment if you're the User who posted it
 //* WORKING tested
 //* ERROR tested
@@ -116,7 +109,8 @@ async function userCommentDelete(req, res, next) {
     next(err)
   }
 }
-//? RATINGS
+
+//! USER/ RATINGS
 //? Add a Rating on a User
 //* WORKING tested
 //* ERROR tested
@@ -134,6 +128,7 @@ async function userRatingCreate(req, res, next) {
     next(err)
   }
 }
+
 //? Update User Rating
 //* WORKING tested
 //* ERROR tested
@@ -154,7 +149,8 @@ async function editUserRating(req, res, next) {
     next(err)
   }
 }
-//? FAVOURITES
+
+//! FAVOURITES
 //? Get All Favs
 //* WORKING tested
 //* ERROR tested
@@ -167,6 +163,7 @@ async function getAllFavourites(req, res, next) {
     next(err)
   }
 }
+
 //? Add an Article to your Favourites
 //* WORKING tested
 //* ERROR tested
@@ -185,6 +182,7 @@ async function addArticleToFavourites(req, res, next) {
     next(err)
   }
 }
+
 //? Add a User to your Favourites.
 //* WORKING tested
 //* ERROR tested
@@ -205,6 +203,7 @@ async function addUserToFavourites(req, res, next) {
     next(err)
   }
 }
+
 //? Add a Post to your Favourites
 //* WORKING tested
 //* ERROR tested
@@ -223,6 +222,7 @@ async function addPostToFavourites(req, res, next) {
     next(err)
   }
 }
+
 //? FAVOURITES DELETE FUNCTION
 //? Remove Article from your Favs
 //* WORKING tested
@@ -241,6 +241,7 @@ async function removeArticleFromFavs(req, res, next) {
     next(err)
   }
 }
+
 //? Remove User from your Friends Favs
 //* WORKING tested
 //* ERROR tested
@@ -257,6 +258,7 @@ async function removeUserFromFavs(req, res, next) {
     next(err)
   }
 }
+
 //? Remove Posts from your Posts Favs
 //* WORKING tested
 //* ERROR tested
@@ -273,10 +275,10 @@ async function removePostsFromFavs(req, res, next) {
     next(err)
   }
 }
+
 //! Exports
 module.exports = {
   updateUser: userUpdate,
-  userUpdateProfilePic,
   profile: currentUserProfile,
   getProfile,
   deleteUser,

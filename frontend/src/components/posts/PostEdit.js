@@ -2,8 +2,6 @@ import React from 'react'
 
 import { editPost, getSinglePost } from '../../lib/api'
 
-import { toast } from '../../lib/notifications'
-
 class PostEdit extends React.Component {
   state = {
     dataInput: {
