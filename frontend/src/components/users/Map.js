@@ -52,6 +52,10 @@ class Map extends React.Component {
         this.props.onClickDelete(id)
       })
   }
+<<<<<<< HEAD
+=======
+
+>>>>>>> 602f19d4a5c7b5c86a8ff110ee65483b6bb1eaed
 
   //* Popup details
   renderPopup(props) {
@@ -88,7 +92,17 @@ class Map extends React.Component {
             width={'600px'}
             onViewportChange={this.handleViewportChange}
             mapboxApiAccessToken={process.env.REACT_APP_MAPBOX_ACCESS_TOKEN}
+<<<<<<< HEAD
             position="top-left" >
+=======
+            mapStyle='mapbox://styles/mapbox/light-v10'
+          >
+            <Geocoder
+              mapRef={this.myMap}
+              onViewportChange={this.handleViewportChange}
+              mapboxApiAccessToken={process.env.REACT_APP_MAPBOX_ACCESS_TOKEN}
+              position="top-left" />
+>>>>>>> 602f19d4a5c7b5c86a8ff110ee65483b6bb1eaed
 
             <Pins
               data={pins}
@@ -104,10 +118,13 @@ class Map extends React.Component {
             </Marker>
           </MapGl>
         </div>
+<<<<<<< HEAD
         <button
           className="button is-primary"
           onClick={this.handleDropPin}
         >Add Location</button>
+=======
+>>>>>>> 602f19d4a5c7b5c86a8ff110ee65483b6bb1eaed
       </>
     )
   }

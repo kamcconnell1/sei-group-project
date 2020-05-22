@@ -27,7 +27,7 @@ const SingleClothCard = ({ deleteComment, rentalPrice, handleContactSubmit, hand
 
   return (
     <>
-      <section className="section">
+      <section className="Slide-details">
         <div className="slide-container">
           <p><strong>Brand</strong> {brand}</p>
           <p><strong>{category}</strong> for {genderCategory}</p>
@@ -53,7 +53,7 @@ const SingleClothCard = ({ deleteComment, rentalPrice, handleContactSubmit, hand
           </Slide>
         </div>
 
-        {isAuthenticated() && <button name="item" value={clothId} onClick={onClick} className="button is-small is-danger">Add to Favourites</button>}
+        {isAuthenticated() && <button name="item" value={clothId} onClick={onClick} className="Button">Add to Favourites</button>}
         <br />
         {isAuthenticated() && <form onSubmit={handleCommentSubmit}>
           <div>
@@ -68,9 +68,9 @@ const SingleClothCard = ({ deleteComment, rentalPrice, handleContactSubmit, hand
               onChange={handleCommentChange}
               value={commentText}
               placeholder="Add your comment"
-              ></textarea>
+            ></textarea>
           </div>
-          <br/>
+          <br />
           <div>
             <button className="button is-small is-info">Submit Comment</button>
           </div>
@@ -85,7 +85,7 @@ const SingleClothCard = ({ deleteComment, rentalPrice, handleContactSubmit, hand
           ))}
         </div>
       </section>
-      <section className="section">
+      <section className="Slide-user">
         <Link to={`/page/${username}`}>
           <div className="container">
             <figure className="media-right">

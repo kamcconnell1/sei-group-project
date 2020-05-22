@@ -4,10 +4,15 @@ import { Link } from 'react-router-dom'
 import { getUserProfile, postFavoriteFriend, commentOnUser, DeleteCommentOnUser, sendMessage, rateUser } from '../../lib/api'
 import { getPostcodeInfo } from '../../lib/ext_api'
 import { isAuthenticated } from '../../lib/auth'
+<<<<<<< HEAD
 import { toast } from '../../lib/notifications'
+=======
+>>>>>>> 602f19d4a5c7b5c86a8ff110ee65483b6bb1eaed
 
 import Comments from '../common/Comments'
 import StarRating from '../common/StarRating'
+
+import { toast } from '../../lib/notifications'
 
 class userShowProfile extends React.Component {
   state = {
@@ -30,7 +35,7 @@ class userShowProfile extends React.Component {
     try {
       await this.getUser()
     } catch (err) {
-      console.log(err)
+      this.props.history.push('/notfound')
     }
   }
 
@@ -79,8 +84,9 @@ class userShowProfile extends React.Component {
     const userId = this.state.user._id
     try {
       await sendMessage(userId, this.state.text)
+      toast('You sent a message!')
     } catch (err) {
-      console.log(err)
+      toast('Couldnt submit message')
     }
     this.setState({ contactModalOpen: false })
   }
@@ -89,12 +95,10 @@ class userShowProfile extends React.Component {
   handleFriendSubmit = async e => {
     try {
       const addToList = await { ...this.state.friend, [e.target.name]: e.target.value }
-      console.log(addToList)
-      const res = await postFavoriteFriend(addToList)
-      console.log(res.data)
-      console.log('sent')
+      await postFavoriteFriend(addToList)
+      toast(`You added ${this.state.user.username}!`)
     } catch (err) {
-      console.log(err)
+      toast('Couldnt add user')
     }
   }
 
@@ -109,11 +113,11 @@ class userShowProfile extends React.Component {
     e.preventDefault()
     try {
       const res = await commentOnUser(this.state.user._id, this.state.comments)
-      console.log(res.data)
       this.setState({ commentsArray: res.data.comments, comments: { ...this.state.comments, text: '' } })
       this.getUser()
+      toast('Comment added')
     } catch (err) {
-      console.log(err)
+      toast('Couldnt add comment')
     }
   }
 
@@ -122,10 +126,10 @@ class userShowProfile extends React.Component {
     try {
       const commentId = e.target.value
       await DeleteCommentOnUser(this.state.user._id, commentId)
-      console.log('sucess')
+      toast('Comment deleted!')
       this.getUser()
     } catch (err) {
-      console.log(err)
+      toast('Couldnt delete this comment')
     }
   }
 
@@ -141,7 +145,11 @@ class userShowProfile extends React.Component {
   //* ON Clicking the star sets state 
   onStarClick = (nextValue) => {
     if (!isAuthenticated()) return
+<<<<<<< HEAD
     toast('Rating Added')
+=======
+    toast('Thankyou, rating has been added')
+>>>>>>> 602f19d4a5c7b5c86a8ff110ee65483b6bb1eaed
     const ratingData = { ...this.state.ratingData, rating: nextValue }
     this.setState({ ratingData }
       , () => {
@@ -149,21 +157,15 @@ class userShowProfile extends React.Component {
       })
   }
 
-  // addedRatingToast = () => {
-  //   return toast('Thankyou, rating has been added')
-  // }
-
   //*POST rating on the user
   async submitUserRating() {
     try {
       const userId = this.state.user._id
-      const res = await rateUser(userId, this.state.ratingData)
-      console.log(res.data);
+      await rateUser(userId, this.state.ratingData)
     } catch (err) {
-      console.log(err);
+      toast('Rating couldnt be added')
     }
   }
-
 
   render() {
     if (!this.state.user) return <h1>User kidnapped, Ninja to the rescue</h1>
@@ -183,13 +185,9 @@ class userShowProfile extends React.Component {
                 rating={rating}
                 onStarClick={this.onStarClick}
               />
-            </div>
-            <div className="Follow-message-comment">
-              <div className="Follow-btn">
-                {isAuthenticated() && <button name="friend" value={user._id} onClick={this.handleFriendSubmit} className="button is-danger is-small">Follow</button>}
-              </div>
-              <div className="Message">
-                {isAuthenticated() && <button onClick={this.toggleContactModal} className="button is-small is-primary">Message</button>}
+              <div className="Follow-message">
+                {isAuthenticated() && <button name="friend" value={user._id} onClick={this.handleFriendSubmit} className="Button">Follow</button>}
+                {isAuthenticated() && <button onClick={this.toggleContactModal} className="Button">Message</button>}
 
                 <div className="Modal-Message">
                   <div className={contactModalOpen ? "modal is-active" : "modal"}>
@@ -203,14 +201,16 @@ class userShowProfile extends React.Component {
                             placeholder="Message..."></textarea>
                         </div>
                         <br />
-                        <button className="button is-info is-small">SEND</button>
+                        <button className="Button">SEND</button>
                       </form>
                     </div>
                   </div>
                 </div>
-              </div>
+
 
             </div>
+            </div>
+            
 
 
             <div className="Comments-container">

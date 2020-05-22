@@ -25,7 +25,8 @@ const ClothesForm = ({ handleChange, handleSubmit, handleMultiChange, formData, 
   const { title, category, genderCategory, size, rentalPrice, brand } = formData
 
   return (
-    <section className="section">
+    <div className="ClothesForm">
+      <section className="section">
       <div className="container">
         <div className="columns">
           <form
@@ -186,6 +187,7 @@ const ClothesForm = ({ handleChange, handleSubmit, handleMultiChange, formData, 
         </div>
       </div>
     </section>
+    </div>
   )
 }
 export default ClothesForm

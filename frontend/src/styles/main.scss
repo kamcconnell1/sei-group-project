@@ -38,7 +38,6 @@
 
 html {
   background-color: var(--main-bg-color);
-  
 }
 
 .body {
@@ -179,19 +178,25 @@ a {
 .Latest {
   position: absolute;
   top: var(--main-start-point);
-}
 
-.Clothes-filter {
-  margin: 1vw;
-  display: flex;
-  align-items: flex-start;
-  width: 90vw;
+  .Button {
+    width: 10vw;
+    font-size: 1.4vw;
+  }
+
+  .Clothes-filter {
+    margin: 1vw;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    width: 90vw;
+  }
   .input {
     margin: 1vw;
   }
   .Clothes-select {
-    margin: 10px;
-    width: 150px;
+    margin: 1vw;
+    min-width: 12vw;
   }
 }
 
@@ -200,21 +205,20 @@ a {
   justify-content: center;
   flex-wrap: wrap;
   overflow: scroll;
-  width: 90vw;
-  max-height: 60vw;
+  width: 80vw;
+  max-height: 40vw;
 }
 
 .Clothes-card {
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin: 5px 5px;
-  width: 150px;
-  height: 150px;
+  margin: 0 1vw;
+
   .img img {
     margin: 0;
-    max-height: 150px;
-    max-width: auto;
+    min-width: 80px;
+    min-height: 100px;
     object-fit: cover;
     z-index: 0;
     box-sizing: content-box;
@@ -239,6 +243,41 @@ a {
       font-size: 10px;
     }
   }
+}
+
+//? CLOTHES SHOW
+
+// ? SLIDE IMAGE - SHOW PAGE
+
+.slide-container {
+  width: 30vw;
+  margin: auto;
+}
+
+.Slide-details {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  font-size: 2vw;
+}
+
+.Slide-user {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+h3 {
+  text-align: center;
+}
+
+.each-slide > div {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-size: cover;
+  height: 30vw;
+  width: 30vw;
 }
 
 //? POSTS
@@ -326,6 +365,84 @@ a {
   }
 }
 
+//? POST SHOW
+
+.Post {
+  display: flex;
+  flex-direction: column;
+  width: 80vw;
+
+  .Button {
+    width: 13vw;
+    font-size: 1.2vw;
+  }
+  .Title {
+    font-size: 3vw;
+    text-align: center;
+    color: white;
+    font-weight: 200;
+  }
+
+  .Post-and-comments {
+    display: flex;
+    margin: -5vw;
+
+    .Comments-all {
+      display: flex;
+      align-items: center;
+      width: 15%;
+      p {
+        font-size: 2vw;
+      }
+
+    }
+  }
+
+  .Post-comment {
+    display: flex;
+    flex-direction: column;
+    width: 30%;
+    p {
+      font-size: 2vw;
+    }
+  }
+
+  .User-comments {
+    display: flex;
+    flex-direction: column;
+    width: 60%;
+    overflow: scroll;
+    max-height: 15vw;
+    width: 30vw;
+    font-size: 1vw;
+  }
+
+  .Post-main {
+    margin: 5vw 0;
+    display: flex;
+    justify-content: center;
+    background-color: rgba(var(--navbar-color-rgb), 0.5);
+    width: 100%;
+
+    img {
+      object-fit: cover;
+      width: 30vw;
+      height: 100%;
+    }
+    .Content {
+      font-size: 1.2vw;
+      margin: 5vw;
+    }
+  }
+  .Created-by {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    margin: 2vw;
+    font-size: 1vw;
+  }
+}
+
 //? PIN-MAP
 
 .Map-page {
@@ -397,11 +514,25 @@ a {
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin-right: 12vw;
+  h4 {
+    font-size: 3vw;
+  }
+  h6 {
+    font-size: 2vw;
+  }
 }
 
 .Follow-message {
   display: flex;
   align-items: center;
+
+  .Button {
+    width: 12vw;
+    height: 3vw;
+    padding: 0;
+    font-size: 1.4vw;
+  }
 }
 
 .Comments-container {
@@ -412,7 +543,7 @@ a {
 }
 .Comments {
   display: flex;
-  justify-content: space-evenly;
+  justify-content: right;
   align-items: flex-end;
   .Button {
     width: 7vw;
@@ -425,6 +556,9 @@ a {
   .Comment {
     max-width: 30vw;
     word-wrap: break-word;
+    h4 {
+      color: white;
+    }
   }
 
   .Comment-left {
@@ -446,9 +580,10 @@ a {
     display: flex;
     flex-direction: column;
     margin-top: 2vw;
-    // background-color: red;
     overflow: scroll;
     max-height: 25vw;
+    min-width: 30vw;
+    max-width: 30vw;
     width: 100%;
   }
 }
@@ -459,7 +594,7 @@ a {
 
   .User-items-index {
     display: flex;
-    margin-top: 2vw;
+    margin-top: 4vw;
     overflow: scroll;
     max-height: 40vw;
     max-width: 78vw;
@@ -809,6 +944,14 @@ a {
   }
 }
 
+
+//? Add clothes to rent
+
+.ClothesForm {
+  position: relative;
+  top: 15vw;
+}
+
 //? Comments from users
 
 .My-comments {
@@ -867,25 +1010,6 @@ a {
   }
 }
 
-// ?------------------------------- Clothing Pages --------------------------------------------------------
-// ? SLIDE IMAGE - SHOW PAGE
-.slide-container {
-  width: 75%;
-  margin: auto;
-}
-
-h3 {
-  text-align: center;
-}
-
-.each-slide > div {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background-size: cover;
-  height: 300px;
-}
-
 .Is-active {
   display: block;
 }
@@ -905,7 +1029,16 @@ h3 {
       width: 100%;
     }
   }
-  
+
+  .Latest {
+    .Clothes-filter {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      align-items: center;
+      min-height: 60vw;
+    }
+  }
 }
 
 @import "~bulma/bulma.sass";
