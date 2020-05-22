@@ -8,7 +8,7 @@ class About extends React.Component {
       <>
         <div className="Page-head">
           <div className="Page-title">
-            <h1>KEBB Bazaar</h1>
+            <h1 className='about-title'>KEBB Bazaar</h1>
           </div>
           <div className="Page-subtitle">
             <h2>A place to borrow, lend & be inspired.</h2>
@@ -35,10 +35,10 @@ class About extends React.Component {
               </ul>
             </div>
           </div>
-
           <img src="https://img.huffingtonpost.com/asset/5c94befb230000c800e9f38b.jpeg?ops=scalefit_720_noupscale&format=webp" alt="woman lookin at clothes" />
 
         </div>
+
       </>
     )
   }

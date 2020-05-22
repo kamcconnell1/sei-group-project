@@ -36,7 +36,7 @@ const LoginForm = ({ email, password, handleChange, handleSubmit, errors }) => {
         </div>
       </div>
       <div className="field">
-        <button type="submit" className="button is-fullwidth is-primary">Login</button>
+        <button type="submit" className="button is-success is-light is-medium">Login</button>
       </div>
     </form>
   )

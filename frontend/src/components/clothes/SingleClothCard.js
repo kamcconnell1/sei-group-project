@@ -27,7 +27,7 @@ const SingleClothCard = ({ deleteComment, rentalPrice, handleContactSubmit, hand
 
   return (
     <>
-      <section className="Slide-details">
+      <section className="section">
         <div className="slide-container">
           <p><strong>Brand</strong> {brand}</p>
           <p><strong>{category}</strong> for {genderCategory}</p>
@@ -37,23 +37,23 @@ const SingleClothCard = ({ deleteComment, rentalPrice, handleContactSubmit, hand
           <Slide {...properties}>
             <div className="each-slide">
               <div style={{ 'backgroundImage': `url(${slideImages[0]})` }}>
-                <span>Slide 1</span>
+                <span></span>
               </div>
             </div>
             <div className="each-slide">
               <div style={{ 'backgroundImage': `url(${slideImages[1]})` }}>
-                <span>Slide 2</span>
+                <span></span>
               </div>
             </div>
             <div className="each-slide">
               <div style={{ 'backgroundImage': `url(${slideImages[2]})` }}>
-                <span>Slide 3</span>
+                <span></span>
               </div>
             </div>
           </Slide>
         </div>
 
-        {isAuthenticated() && <button name="item" value={clothId} onClick={onClick} className="Button">Add to Favourites</button>}
+        {isAuthenticated() && <button name="item" value={clothId} onClick={onClick} className="button is-small is-danger">Add to Favourites</button>}
         <br />
         {isAuthenticated() && <form onSubmit={handleCommentSubmit}>
           <div>
@@ -85,21 +85,18 @@ const SingleClothCard = ({ deleteComment, rentalPrice, handleContactSubmit, hand
           ))}
         </div>
       </section>
-      <section className="Slide-user">
+      <section className="section">
         <Link to={`/page/${username}`}>
           <div className="container">
-            <figure className="media-right">
+            <figure className="media-left">
               <p className="image is-64x64">
                 <img src={profilePic} alt={username} />
               </p>
             </figure>
+            <p><strong>{username}</strong></p>
           </div>
         </Link>
         <div>
-          <br />
-          <p>
-            <Link to={`/page/${username}`}>{username}</Link>
-          </p>
           <hr />
           <StarRating
             rating={rating}
@@ -107,13 +104,13 @@ const SingleClothCard = ({ deleteComment, rentalPrice, handleContactSubmit, hand
           />
         </div>
         <hr />
-        <div>
+        <div className="show-buttons">
           {!isAuthenticated() && <div className="columns">
-            <Link className="sign-in-button column" to="/login" className="button is-info">SIGN IN</Link>
-            <p> OR </p>
-            <Link className="join-button column" to="/register" className="button is-primary">JOIN KEBB</Link>
+            <Link className="button is-success is-light" to="/login">SIGN IN</Link>
+            <p className="or"> OR </p>
+            <Link to="/register" className="button is-warning is-light">JOIN KEBB</Link>
           </div>}
-          {isAuthenticated() && <button onClick={toggleContact} className="button is-primary is-small">Contact User</button>}
+          {isAuthenticated() && <button onClick={toggleContact} className="button is-primary is-small">CONTACT USER</button>}
         </div>
         <div className={contactModalOpen ? "modal is-active" : "modal"}>
           <div className="field">
@@ -121,12 +118,12 @@ const SingleClothCard = ({ deleteComment, rentalPrice, handleContactSubmit, hand
               <div className="control">
                 <textarea name="text" onChange={handleContactChange} className="textarea is-medium is-primary" placeholder="Message..."></textarea>
               </div>
-              <button className="button is-info">SEND</button>
+              <button className="button is-small is-info">SEND</button>
             </form>
           </div>
         </div>
         <hr />
-        <div className="columns">
+        <div className="columns similar">
           <div className="column is-one-quarter">
             <a onClick={onFirstClick}>
               <figure className="image">

@@ -98,7 +98,7 @@ a {
 .Navbar {
   position: fixed;
   top: 0;
-  height: 7vw;
+  height: 7vh;
   display: flex;
   align-items: center;
   background-color: rgba(var(--navbar-color-rgb), 0.3);
@@ -106,7 +106,7 @@ a {
   .Navbar-item {
     color: inherit;
     margin: -7vw 1%;
-    font-size: 1.7vw;
+    font-size: 1.2vw;
     font-weight: 500;
   }
   .navbar-item {
@@ -159,12 +159,18 @@ a {
 //? ABOUT
 
 .About {
+  height: 100%;
+  overflow: hidden;
+.About-title {
+  margin-top: 0.2vh;
+}
+
   .About-row {
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     justify-content: center;
     position: relative;
-    top: 20vw;
+    top: 20vh;
     color: white;
     text-align: center;
     
@@ -179,11 +185,11 @@ a {
     }
   }
   .Title {
-    font-size: 3vw;
+    font-size: 1.5vw;
     margin: 2vw;
   }
   .Subtitle {
-    font-size: 2vw;
+    font-size: 1.3vw;
     font-weight: 200;
     span {
       color: rgb(128, 110, 129);
@@ -195,7 +201,7 @@ a {
   img {
     z-index: -1;
     width: 100vw;
-    height: 100vw;
+    height: 120vh;
     display: cover;
     position: relative;
     top: -50vw;
@@ -203,7 +209,7 @@ a {
   .Join-us {
     color: white;
     position: relative;
-    top: 20vw;
+    top: 15vw;
     a {
       color: rgb(128, 110, 129);
       font-weight: bold;
@@ -288,6 +294,9 @@ a {
 
 // ? SLIDE IMAGE - SHOW PAGE
 
+.slide{
+  margin-top: 13px;
+}
 .slide-container {
   width: 30vw;
   margin: auto;
@@ -1079,5 +1088,12 @@ h3 {
     }
   }
 }
+
+.or{
+  margin-left: 15px;
+  margin-right: 15px;
+}
+
+
 
 @import "~bulma/bulma.sass";
