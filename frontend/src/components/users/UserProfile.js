@@ -176,7 +176,7 @@ class UserProfile extends React.Component {
         <div className="My-profile">
           <div className="My-profile-top-row">
             <div className="Photo-delete-rating">
-              <div className="profile-img image is-128x128">
+              <div className="Profile-img image is-128x128">
                 <img src={profilePic} alt="profile pic" />
                 <button onClick={this.toggleModal}
                   className="button is-profile-btn"

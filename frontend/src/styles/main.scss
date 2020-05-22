@@ -140,12 +140,18 @@ a {
 
 //? HOME
 .Home {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-self: center;
+  text-align: center;
+  min-height: 100vh;
   h1 {
-    font-size: 40px;
+    font-size: 10vw;
     font-weight: bold;
   }
   h2 {
-    font-size: 30px;
+    font-size: 4vw;
     font-weight: 200;
   }
 }
@@ -157,20 +163,53 @@ a {
     display: flex;
     align-items: center;
     justify-content: center;
+    position: relative;
+    top: 20vw;
+    color: white;
+    text-align: center;
+    
+
     .Our-mission {
-      width: 30%;
+      width: 35%;
+      margin: 5vw;
     }
     .How-it-works {
-      width: 30%;
+      width: 35%;
+      margin: 5vw;
     }
   }
   .Title {
-    font-size: 15px;
-    margin: 20px;
+    font-size: 3vw;
+    margin: 2vw;
   }
   .Subtitle {
-    font-size: 10px;
+    font-size: 2vw;
+    font-weight: 200;
+    span {
+      color: rgb(128, 110, 129);
+      font-weight: 400;
+    }
+    
   }
+  
+  img {
+    z-index: -1;
+    width: 100vw;
+    height: 100vw;
+    display: cover;
+    position: relative;
+    top: -50vw;
+  }
+  .Join-us {
+    color: white;
+    position: relative;
+    top: 20vw;
+    a {
+      color: rgb(128, 110, 129);
+      font-weight: bold;
+    }
+  }
+  
 }
 
 //? LATEST
@@ -394,7 +433,6 @@ h3 {
       p {
         font-size: 2vw;
       }
-
     }
   }
 
@@ -684,11 +722,13 @@ h3 {
       display: block;
     }
 
-    .profile-img {
+    .Profile-img {
+      width: 20vw;
+      height: 20vw;
       img {
         width: 20vw;
         height: auto;
-        border-radius: 70px;
+        clip-path: circle(60px at center);        display: cover;
       }
     }
 
@@ -943,7 +983,6 @@ h3 {
     }
   }
 }
-
 
 //? Add clothes to rent
 
