@@ -183,30 +183,6 @@ class userShowProfile extends React.Component {
                 rating={rating}
                 onStarClick={this.onStarClick}
               />
-<<<<<<< HEAD
-            </div>
-            <div className="Follow-message-comment">
-              <div className="Follow-btn">
-                {isAuthenticated() && <button name="friend" value={user._id} onClick={this.handleFriendSubmit} className="button is-danger is-small">Follow</button>}
-              </div>
-              <div className="Message">
-                {isAuthenticated() && <button onClick={this.toggleContactModal} className="button is-small is-primary">Message</button>}
-
-                <div className="Modal-Message">
-                  <div className={contactModalOpen ? "modal is-active" : "modal"}>
-                    <div className="field">
-                      <form onSubmit={this.handleContactSubmit}>
-                        <div className="control">
-                          <textarea
-                            name="text"
-                            onChange={this.handleContactChange}
-                            className="textarea is-medium is-primary"
-                            placeholder="Message..."></textarea>
-                        </div>
-                        <br/>
-                        <button className="button is-info is-small">SEND</button>
-                      </form>
-=======
 
               <div className="Follow-message">
                 <div className="Follow-btn">
@@ -230,7 +206,6 @@ class userShowProfile extends React.Component {
                           <button className="button is-info">SEND</button>
                         </form>
                       </div>
->>>>>>> development
                     </div>
                   </div>
                 </div>
@@ -242,25 +217,6 @@ class userShowProfile extends React.Component {
             <div className="Comments-container">
               <h3>{user.username}'s Reviews</h3>
               {
-<<<<<<< HEAD
-                isAuthenticated() && <section>
-                  <form onSubmit={this.handleCommentSubmit}>
-
-                    <div className="Comment-left">
-                      <p> Review {user.username} </p>
-                      <textarea
-                        className="textarea is-small is-info"
-                        type="textArea"
-                        maxLength="250"
-                        name="text"
-                        onChange={this.handleCommentChange}
-                        value={comments.text}
-                        placeholder="Add Comment..."
-                        ></textarea>
-                        <br/>
-                      <button className="button is-info is-small">Submit Comment</button>
-                    </div>
-=======
                 isAuthenticated() && <section className="Comments">
                   <form
                     className="Comment-left"
@@ -275,7 +231,6 @@ class userShowProfile extends React.Component {
                       onChange={this.handleCommentChange}
                       value={comments.text} />
                     <button className="Submit">Submit Comment</button>
->>>>>>> development
                   </form>
 
                   <div className="Comments-on-user">

@@ -109,31 +109,6 @@ class PostsShow extends React.Component {
           <p>{post.text}</p>
           <Link to={`/page/${post.user.username}`}><p>Created by: {post.user.username}</p> </Link>
           <p>{date} {time}</p>
-<<<<<<< HEAD
-          <br />
-          <div>
-          <button name="posts" value={post._id} onClick={this.handleFavouriteSubmit} className="button is-small is-danger">Add to Favourites</button>
-          {!isOwner && <Link to={`/posts/${post._id}/edit`}><button>Edit</button></Link>}
-          </div>
-        </section>
-        {isAuthenticated && <section>
-        <form onSubmit={this.handleCommentSubmit}>
-        <div>
-        <div className="label for comments">
-              <p> Add a comment </p>
-            </div>
-            <textarea
-              className="textarea is-small is-info"
-              type="textArea"
-              maxLength="250"
-              name="text"
-              onChange={this.handleCommentChange}
-              value={this.state.comments.text}></textarea>
-          </div>
-          <br/>
-          <div className="comments-submit-button">
-            <button className="button is-info is-small">Submit Comment</button>
-=======
           <button name="posts" value={post._id} onClick={this.handleFavouriteSubmit} className="button">Add to Favourites</button>
           {isOwner && <Link to={`/posts/${post._id}/edit`}><button>Edit</button></Link>}
           {isOwner && <button value={post._id} onClick={this.deletePost}>Delete</button>}
@@ -164,7 +139,6 @@ class PostsShow extends React.Component {
                 deleteComment={this.deleteComment}
               />
             ))}
->>>>>>> development
           </div>
         </section>}
       </>
