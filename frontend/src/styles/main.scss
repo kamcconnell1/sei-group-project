@@ -1,21 +1,19 @@
 //? VARS
 :root {
-  --main-bg-color: rgba(var(--main-bg-rgb), 0.2);
-  --main-bg-rgb: 198, 187, 200;
+  --main-bg-color: rgba(var(--main-bg-rgb), 0.8);
+  --main-bg-rgb: 190, 183, 192;
   --navbar-color: rgba(255, 255, 255, 1);
   --navbar-color-rgb: 255, 255, 255;
   --navbar-hover-color: grey;
   --title-color: white;
   --subtite-color: grey;
-  --main-start-point: 25vh;
+  --main-start-point: 20vw;
+  --page-head-position: 10vw;
   --btn-color: lightgrey;
   --cards-text-color: rgb(86, 80, 87);
   --section-titles-profile-size: 3vw;
   --delete-btn-color: rgb(143, 29, 29);
 }
-
-
-
 
 //? LIBRARY
 
@@ -35,17 +33,18 @@
 * {
   margin: 0;
   padding: 0;
-  // font-family: 'Hind Siliguri', sans-serif;
   font-family: "Poppins", sans-serif;
 }
 
 html {
   background-color: var(--main-bg-color);
-  position: relative;
+  
 }
 
 .body {
   padding: 0;
+  background-size: cover;
+  min-height: 100%;
 }
 
 a {
@@ -64,19 +63,17 @@ a {
   border-radius: 10px;
   margin: 0;
   color: white;
-
-
 }
 //? ALL PAGES - navbar, main, footer
 
 .Page-head {
   position: absolute;
   text-align: center;
-  top: 12vw;
+  top: var(--page-head-position);
   width: 60vw;
   .Page-title {
     color: var(--title-color);
-    font-size: 30px;
+    font-size: 4vw;
   }
   .Page-subtitle {
     color: var(--subtite-color);
@@ -91,28 +88,26 @@ a {
   align-items: center;
   background-color: var(--main-bg-color);
   min-height: 100vh;
-  min-width: 100vh;
+  min-width: 100vw;
   a:hover {
     color: white;
     text-shadow: 1px 1px 5px rgb(183, 174, 185);
+    top: 7vw;
   }
 }
 
 .Navbar {
-  position: sticky;
+  position: fixed;
   top: 0;
-  height: 7vh;
+  height: 7vw;
   display: flex;
   align-items: center;
   background-color: rgba(var(--navbar-color-rgb), 0.3);
 
-  .navbar-brand {
-  }
-
   .Navbar-item {
     color: inherit;
     margin: -7vw 1%;
-    font-size: 15px;
+    font-size: 1.7vw;
     font-weight: 500;
   }
   .navbar-item {
@@ -127,17 +122,13 @@ a {
 }
 
 .Footer {
-  height: 5vh;
+  height: 2vw;
   width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
   padding: 0;
-  position: fixed;
-  bottom: 0;
   background-color: var(--navbar-color);
-
-  // background-color: rgb(198, 187, 200);
 }
 
 .box {
@@ -191,11 +182,12 @@ a {
 }
 
 .Clothes-filter {
-  margin: 20px;
+  margin: 1vw;
   display: flex;
   align-items: flex-start;
+  width: 90vw;
   .input {
-    margin: 10px;
+    margin: 1vw;
   }
   .Clothes-select {
     margin: 10px;
@@ -207,6 +199,9 @@ a {
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
+  overflow: scroll;
+  width: 90vw;
+  max-height: 60vw;
 }
 
 .Clothes-card {
@@ -249,6 +244,9 @@ a {
 //? POSTS
 
 .Posts {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
   .Post-form {
     display: column;
     justify-content: right;
@@ -258,36 +256,51 @@ a {
   position: absolute;
   top: var(--main-start-point);
   .Post-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 2vw;
+    margin-left: 3vw;
+    padding-bottom: 0;
+
     .Post-input-title {
-      width: 300px;
-      height: 30px;
+      width: 25vw;
+      height: 3vw;
+      margin: 1vw 0;
     }
     .Post-input-text {
-      width: 300px;
+      width: 25vw;
+      height: 25vw;
+      border: none;
+      margin-bottom: 1vw;
     }
     .Post-input-image {
-      width: 300px;
+      width: 25vw;
     }
-    .Post-btn {
-      padding: 15px 30px;
-      background-color: var(--btn-color);
+    .Button {
+      margin: 1vw;
+      width: 12vw;
+      font-size: 1vw;
     }
   }
   .Post-cards {
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
+    overflow: scroll;
+    max-height: 50vw;
+    max-width: 70vw;
     .Post-bottom {
       display: flex;
     }
   }
   .Card {
     background-color: rgba(var(--navbar-color-rgb), 0.3);
-    margin: 20px;
-    padding: 20px;
-    width: 40%;
+    margin: 1vw;
+    padding: 2vw;
+    width: 80%;
     .Title {
-      color: white;
+      color: rgb(252, 249, 249);
       text-shadow: 1px 1px 2px rgb(175, 170, 170);
     }
     .Post-image {
@@ -315,39 +328,42 @@ a {
 
 //? PIN-MAP
 
-.map-page {
+.Map-page {
   display: flex;
+  flex-direction: column;
   align-items: center;
-  max-width: 60vw;
-  max-height: 800px;
-  .map {
+  .Button {
+    width: 17vw;
+    max-width: 120px;
+    height: 4vw;
+    max-height: 30px;
+    padding: 0;
+    font-size: 1.5vw;
+  }
+}
+.Map {
+  .MapGL {
+    position: relative;
+    top: 17vw;
     display: flex;
     flex-direction: column;
     align-items: center;
-    background-color: black;
+    background-color: white;
     overflow: hidden;
-    margin: 50px 20px 0 0;
     border-radius: 10px;
-    .map-map {
-      max-height: 300px;
-
-      #mapboxgl-control-continer {
-        position: fixed;
-        bottom: 100px;
-      }
+    border: 2px solid white;
+    width: 100%;
+    height: 100%;
+  }
+  .pincard p {
+    font-size: 1.5vw;
+    font-weight: 200;
+    small {
+      font-size: 1vw;
     }
   }
   .map-pins {
     width: 300px;
-    .pincard {
-      font-size: 10px;
-      text-align: center;
-      background-color: white;
-      margin: 30px;
-      padding: 10px;
-      box-shadow: 0 10px 20px #777;
-      border-radius: 10px;
-    }
   }
 }
 
@@ -381,7 +397,6 @@ a {
   display: flex;
   flex-direction: column;
   align-items: center;
- 
 }
 
 .Follow-message {
@@ -870,16 +885,27 @@ h3 {
   background-size: cover;
   height: 300px;
 }
-// ? FILTERS ON CLOTHES INDEX
-.filter {
-  margin-left: 0;
-}
 
 .Is-active {
   display: block;
 }
 
-//? ------------------------------- Bulma Variables ------------------------------------------------------
-// $modal-content-width: 500px;
-// $modal-content-width: 300px;
+@media only screen and (min-device-width: 375px) and (max-device-width: 667px) and (-webkit-min-device-pixel-ratio: 2) {
+  .Main {
+    padding: 0;
+  }
+
+  //POSTS
+  .Posts {
+    flex-direction: column;
+    input {
+      width: 280px;
+    }
+    .Card {
+      width: 100%;
+    }
+  }
+  
+}
+
 @import "~bulma/bulma.sass";

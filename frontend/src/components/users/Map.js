@@ -39,81 +39,84 @@ class Map extends React.Component {
       this.props.location(this.state.latitude, this.state.longitude)
     })
   }
-  
+
 
   //* Sets state based on which marker you click on
-onClickMarker = (pin) => {
-  this.setState({popupInfo: pin})
-}
+  onClickMarker = (pin) => {
+    this.setState({ popupInfo: pin })
+  }
 
-deletePopup = () => {
-  const id = this.state.popupInfo._id
-  this.setState({popupInfo: null},
-    () => {
-      this.props.onClickDelete(id)
-    })}
+  deletePopup = () => {
+    const id = this.state.popupInfo._id
+    this.setState({ popupInfo: null },
+      () => {
+        this.props.onClickDelete(id)
+      })
+  }
 
 
-//* Popup details
-renderPopup(props) {
-  const {popupInfo} = this.state
-  
-  return (
-    popupInfo && (
-      <Popup 
-      tipSize={5}
-      longitude={parseFloat(popupInfo.longitude)}
-      latitude={parseFloat(popupInfo.latitude)}
-      closeOnClick={false}
-      onClose={() => this.setState({popupInfo: null})}
-      >
-      <PinCard 
-      info={popupInfo}
-      deletePin={this.deletePopup}
-      / >
-      </Popup>
+  //* Popup details
+  renderPopup(props) {
+    const { popupInfo } = this.state
+
+    return (
+      popupInfo && (
+        <Popup
+          tipSize={5}
+          longitude={parseFloat(popupInfo.longitude)}
+          latitude={parseFloat(popupInfo.latitude)}
+          closeOnClick={false}
+          onClose={() => this.setState({ popupInfo: null })}
+        >
+          <PinCard
+            info={popupInfo}
+            deletePin={this.deletePopup}
+          />
+        </Popup>
+      )
     )
-  )
-}
+  }
   render() {
     const pins = (this.props.pins)
     const { viewport } = this.state
 
     return (
       <>
-        <MapGl
-          ref={this.myMap}
-          {...viewport}
-          height={'800px'}
-          width={'60vw'}
-          onViewportChange={this.handleViewportChange}
-          mapboxApiAccessToken={process.env.REACT_APP_MAPBOX_ACCESS_TOKEN}
-          mapStyle='mapbox://styles/mapbox/light-v10'
-        >
-          <Geocoder
-            mapRef={this.myMap}
+        <div className="MapGL">
+          <MapGl
+            ref={this.myMap}
+            {...viewport}
+            height={'450px'}
+            width={'600px'}
             onViewportChange={this.handleViewportChange}
             mapboxApiAccessToken={process.env.REACT_APP_MAPBOX_ACCESS_TOKEN}
-            position="top-left" />
-            
-            <Pins 
-            data={pins}
-            onClick={this.onClickMarker}
+            mapStyle='mapbox://styles/mapbox/light-v10'
+          >
+            <Geocoder
+              mapRef={this.myMap}
+              onViewportChange={this.handleViewportChange}
+              mapboxApiAccessToken={process.env.REACT_APP_MAPBOX_ACCESS_TOKEN}
+              position="top-left" />
+
+            <Pins
+              data={pins}
+              onClick={this.onClickMarker}
             />
-            
-  {this.renderPopup()}
-  
-          {/* Pin to show where user is zooming to */}
-          <Marker
-            className=""
-            {...viewport} >
-            <span role="img" aria-label="marker">📍</span>
-          </Marker>
-        </MapGl>
-        <button
-          className="button is-primary"
-          onClick={this.handleDropPin}
-        >Add Location</button>
+
+            {this.renderPopup()}
+
+            {/* Pin to show where user is zooming to */}
+            <Marker
+              className=""
+              {...viewport} >
+              <span role="img" aria-label="marker">📍</span>
+            </Marker>
+          </MapGl>
+          <button
+            className="Button"
+            onClick={this.handleDropPin}
+          >Add a Pin</button>
+        </div>
       </>
     )
   }

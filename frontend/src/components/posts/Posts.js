@@ -62,19 +62,19 @@ class Posts extends React.Component {
             <h1>Posts</h1>
           </div>
           <div className="Page-subtitle">
+            Check the latest post
           </div>
         </div>
-        <div className="Posts row-center">
+        <div className="Posts">
           <form className="Post-form"
             onSubmit={this.handleSubmit} >
-            <label>Title</label>
+              <h3>Write a post</h3>
             <input className="Post-input-title"
               name="title"
               value={this.state.input.title}
               placeholder="Title"
               onChange={this.handleChange}
             />
-            <label>Content</label>
             <textarea className="Post-input-text"
               name="text"
               rows="15"
@@ -82,14 +82,13 @@ class Posts extends React.Component {
               placeholder="Text"
               onChange={this.handleChange}
             />
-            <label>Add the Url of an Image here.</label>
             <input className="Post-input-title"
               name="photo"
               value={this.state.input.photo}
               placeholder="URL of Image"
               onChange={this.handleChange}
             />
-            <button className="Post-btn">Submit Post</button>
+            <button className="Button">Submit Post</button>
           </form>
           <div className="Post-cards">
             {this.state.posts.map(post => (
