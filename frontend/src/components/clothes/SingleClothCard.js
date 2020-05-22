@@ -37,17 +37,17 @@ const SingleClothCard = ({ deleteComment, rentalPrice, handleContactSubmit, hand
           <Slide {...properties}>
             <div className="each-slide">
               <div style={{ 'backgroundImage': `url(${slideImages[0]})` }}>
-                <span>Slide 1</span>
+                <span></span>
               </div>
             </div>
             <div className="each-slide">
               <div style={{ 'backgroundImage': `url(${slideImages[1]})` }}>
-                <span>Slide 2</span>
+                <span></span>
               </div>
             </div>
             <div className="each-slide">
               <div style={{ 'backgroundImage': `url(${slideImages[2]})` }}>
-                <span>Slide 3</span>
+                <span></span>
               </div>
             </div>
           </Slide>
