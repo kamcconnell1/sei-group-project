@@ -1,6 +1,8 @@
 import React from 'react'
+
 import { Link } from 'react-router-dom'
 import { allUsersFavourites, deleteArticleFromFavs } from '../../lib/api'
+import { toast } from '../../lib/notifications'
 
 class FavouriteItem extends React.Component {
   state = { items: null }
@@ -24,15 +26,13 @@ class FavouriteItem extends React.Component {
 
   removeFromFavs = async e => {
     try {
-      console.log(e.target.value)
       await deleteArticleFromFavs(e.target.value)
+      toast('Removed post from favs')
       this.getPosts()
     } catch (err) {
-      console.log(err)
+      toast('Couldnt remove post from favs')
     }
-
   }
-
 
   render() {
     if (!this.state.items) return <h1>The Ninjas went to get you some Pizza</h1>

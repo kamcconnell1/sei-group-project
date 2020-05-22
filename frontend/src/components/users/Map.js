@@ -15,7 +15,6 @@ class Map extends React.Component {
       zoom: 12
     },
     popupInfo: null,
-    // state of dropped pin
     latitude: '',
     longitude: ''
   }
@@ -31,7 +30,7 @@ class Map extends React.Component {
   }
 
   // * Sets state based on the lat / long the viewport has landed on & opens the pin form modal when you add pin. Callback function passes lat / long back up to parent
-  handleDropPin = event => {
+  handleDropPin = () => {
     const latitude = (this.state.viewport.latitude)
     const longitude = (this.state.viewport.longitude)
     this.props.onClick()
@@ -39,42 +38,43 @@ class Map extends React.Component {
       this.props.location(this.state.latitude, this.state.longitude)
     })
   }
-  
+
 
   //* Sets state based on which marker you click on
-onClickMarker = (pin) => {
-  this.setState({popupInfo: pin})
-}
+  onClickMarker = (pin) => {
+    this.setState({ popupInfo: pin })
+  }
 
-deletePopup = () => {
-  const id = this.state.popupInfo._id
-  this.setState({popupInfo: null},
-    () => {
-      this.props.onClickDelete(id)
-    })}
+  deletePopup = () => {
+    const id = this.state.popupInfo._id
+    this.setState({ popupInfo: null },
+      () => {
+        this.props.onClickDelete(id)
+      })
+  }
 
 
-//* Popup details
-renderPopup(props) {
-  const {popupInfo} = this.state
-  
-  return (
-    popupInfo && (
-      <Popup 
-      tipSize={5}
-      longitude={parseFloat(popupInfo.longitude)}
-      latitude={parseFloat(popupInfo.latitude)}
-      closeOnClick={false}
-      onClose={() => this.setState({popupInfo: null})}
-      >
-      <PinCard 
-      info={popupInfo}
-      deletePin={this.deletePopup}
-      / >
-      </Popup>
+  //* Popup details
+  renderPopup(props) {
+    const { popupInfo } = this.state
+
+    return (
+      popupInfo && (
+        <Popup
+          tipSize={5}
+          longitude={parseFloat(popupInfo.longitude)}
+          latitude={parseFloat(popupInfo.latitude)}
+          closeOnClick={false}
+          onClose={() => this.setState({ popupInfo: null })}
+        >
+          <PinCard
+            info={popupInfo}
+            deletePin={this.deletePopup}
+          />
+        </Popup>
+      )
     )
-  )
-}
+  }
   render() {
     const pins = (this.props.pins)
     const { viewport } = this.state
@@ -95,15 +95,14 @@ renderPopup(props) {
             onViewportChange={this.handleViewportChange}
             mapboxApiAccessToken={process.env.REACT_APP_MAPBOX_ACCESS_TOKEN}
             position="top-left" />
-            
-            <Pins 
+
+          <Pins
             data={pins}
             onClick={this.onClickMarker}
-            />
-            
-  {this.renderPopup()}
-  
-          {/* Pin to show where user is zooming to */}
+          />
+
+          {this.renderPopup()}
+
           <Marker
             className=""
             {...viewport} >

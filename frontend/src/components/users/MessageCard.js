@@ -5,26 +5,18 @@ const MessageCard = ({ user, text, createdAt, reply, _id, sendReply, replyModal,
   const edited = createdAt.split('T')
   const date = edited[0]
   const time = edited[1].split('.')[0]
-  // const resCreatAt = response.map(res => res.createdAt)
-  // const resEdited = resCreatAt.map(res => res.split('T'))
-  // const resDate = resEdited.map(res => res[0])
-  // const resTime = resEdited.map(res => res[1].split('.')[0])
 
   return (
     <>
       <div>
-
         <div className="Message">
           <div className="Message-top">
             <img src={user.profilePic} alt={user.username} />
-
             <div className="Message-top-right">
               <Link to={`/page/${user.username}`}><h4>From {user.username}</h4></Link>
               <h5>{`${date} at ${time}`}:</h5>
             </div>
-
           </div>
-
           <div className="Message-text">
             <p>{text}</p>
             <hr />
@@ -36,9 +28,7 @@ const MessageCard = ({ user, text, createdAt, reply, _id, sendReply, replyModal,
                 <p>{res.text}</p><hr />
               </div>)}
           </div>
-
         </div>
-
         <div className="Message-content">
           {response.map((res, i) => <p key={i} >{res.text}</p>)}
         </div>
@@ -48,7 +38,11 @@ const MessageCard = ({ user, text, createdAt, reply, _id, sendReply, replyModal,
             <div className="field">
               <form onSubmit={sendReply}>
                 <div className="control">
-                  <textarea onChange={replyChange} name="text" className="textarea is-medium is-primary" placeholder="Message..."></textarea>
+                  <textarea
+                    onChange={replyChange}
+                    name="text"
+                    className="textarea is-medium is-primary"
+                    placeholder="Message..."></textarea>
                 </div>
                 <button className="button is-info">SEND</button>
               </form>
@@ -57,7 +51,6 @@ const MessageCard = ({ user, text, createdAt, reply, _id, sendReply, replyModal,
         </div>
       </div>
     </>
-
   )
 }
 

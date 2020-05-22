@@ -23,9 +23,8 @@ class ClothesEdit extends React.Component {
       const clothId = this.props.match.params.id
       const res = await singleCloth(clothId)
       this.setState({ formData: res.data })
-      console.log(res.data)
     } catch (err) {
-      console.log(err)
+      this.props.history.push('/notfound')
     }
   }
 
@@ -74,7 +73,6 @@ class ClothesEdit extends React.Component {
     } catch (err) {
       this.setState({ errors: err.response.data })
     }
-
   }
 
   render() {

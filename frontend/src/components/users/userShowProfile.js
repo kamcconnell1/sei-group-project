@@ -4,10 +4,10 @@ import { Link } from 'react-router-dom'
 import { getUserProfile, postFavoriteFriend, commentOnUser, DeleteCommentOnUser, sendMessage, rateUser } from '../../lib/api'
 import { getPostcodeInfo } from '../../lib/ext_api'
 import { isAuthenticated } from '../../lib/auth'
-import { addedRatingToast } from '../../lib/toasts'
 
 import Comments from '../common/Comments'
 import StarRating from '../common/StarRating'
+import { toast } from '../../lib/notifications'
 
 class userShowProfile extends React.Component {
   state = {
@@ -30,7 +30,7 @@ class userShowProfile extends React.Component {
     try {
       await this.getUser()
     } catch (err) {
-      console.log(err)
+      this.props.history.push('/notfound')
     }
   }
 
@@ -79,8 +79,9 @@ class userShowProfile extends React.Component {
     const userId = this.state.user._id
     try {
       await sendMessage(userId, this.state.text)
+      toast('You sent a message!')
     } catch (err) {
-      console.log(err)
+      toast('Couldnt submit message')
     }
     this.setState({ contactModalOpen: false })
   }
@@ -89,12 +90,10 @@ class userShowProfile extends React.Component {
   handleFriendSubmit = async e => {
     try {
       const addToList = await { ...this.state.friend, [e.target.name]: e.target.value }
-      console.log(addToList)
-      const res = await postFavoriteFriend(addToList)
-      console.log(res.data)
-      console.log('sent')
+      await postFavoriteFriend(addToList)
+      toast(`You added ${this.state.user.username}!`)
     } catch (err) {
-      console.log(err)
+      toast('Couldnt add user')
     }
   }
 
@@ -109,11 +108,11 @@ class userShowProfile extends React.Component {
     e.preventDefault()
     try {
       const res = await commentOnUser(this.state.user._id, this.state.comments)
-      console.log(res.data)
       this.setState({ commentsArray: res.data.comments, comments: { ...this.state.comments, text: '' } })
       this.getUser()
+      toast('Comment added')
     } catch (err) {
-      console.log(err)
+      toast('Couldnt add comment')
     }
   }
 
@@ -122,10 +121,10 @@ class userShowProfile extends React.Component {
     try {
       const commentId = e.target.value
       await DeleteCommentOnUser(this.state.user._id, commentId)
-      console.log('sucess')
+      toast('Comment deleted!')
       this.getUser()
     } catch (err) {
-      console.log(err)
+      toast('Couldnt delete this comment')
     }
   }
 
@@ -141,7 +140,7 @@ class userShowProfile extends React.Component {
   //* ON Clicking the star sets state 
   onStarClick = (nextValue) => {
     if (!isAuthenticated()) return
-    addedRatingToast()
+    toast('Thankyou, rating has been added')
     const ratingData = { ...this.state.ratingData, rating: nextValue }
     this.setState({ ratingData }
       , () => {
@@ -149,132 +148,15 @@ class userShowProfile extends React.Component {
       })
   }
 
-  // addedRatingToast = () => {
-  //   return toast('Thankyou, rating has been added')
-  // }
-
   //*POST rating on the user
   async submitUserRating() {
     try {
       const userId = this.state.user._id
-      const res = await rateUser(userId, this.state.ratingData)
-      console.log(res.data);
+      await rateUser(userId, this.state.ratingData)
     } catch (err) {
-      console.log(err);
+      toast('Rating couldnt be added')
     }
   }
-
-
-
-  // render() {
-  //   if (!this.state.user) return <h1>User kidnapped, Ninja to the rescue</h1>
-
-  //   const rating = parseInt(this.getUserRating())
-  //   const { user, userItems, comments, commentsArray, contactModalOpen } = this.state
-  //   const {location} = this.state
-  //   return (
-  //     <>
-  //       <section>
-  //         <div className="container">
-  //           <figure className="media-right">
-  //             <p className="image is-64x64">
-  //               <img src={user.profilePic} alt={user.username} />
-  //             </p>
-  //           </figure>
-  //         </div>
-  //         <div>
-  //           <h4 className="title is-3">{user.username}</h4>
-  //         </div>
-  //         <div>
-  //           <StarRating
-  //             rating={rating}
-  //             onStarClick={this.onStarClick}
-  //           />
-  //         </div>
-  //         <div>
-  //         <h6 className="subtitle">{location}</h6>
-  //         </div>
-  //         <div className="columns">
-  //           <div className="column">
-  //             {isAuthenticated() && <button name="friend" value={user._id} onClick={this.handleFriendSubmit} className="button is-primary">Follow</button>}
-  //           </div>
-  //           <div className="column">
-  //             {isAuthenticated() && <button onClick={this.toggleContactModal} className="button is-primary">Message</button>}
-  //           </div>
-  //         </div>
-  //         <div className={contactModalOpen ? "modal is-active" : "modal"}>
-  //           <div className="field">
-  //             <form onSubmit={this.handleContactSubmit}>
-  //               <div className="control">
-  //                 <textarea 
-  //                 name="text" 
-  //                 onChange={this.handleContactChange} 
-  //                 name="text" 
-  //                 className="textarea is-medium is-primary" 
-  //                 placeholder="Message..."></textarea>
-  //               </div>
-  //               <button className="button is-info">SEND</button>
-  //             </form>
-  //           </div>
-  //         </div>
-  //       </section>
-  //       <section className="section">
-  //         <div className="container">
-  //           <div className="columns is-multiline">
-  //             {userItems.map(item =>
-  //               <div key={item._id} className="column is-one-quarter-desktop is-one-third-tablet is-half-mobile">
-  //                 <Link to={`/clothes/${item._id}`}>
-  //                   <div className="card">
-  //                     <div className="card-header">
-  //                       <h4 className="card-header-title">{item.title}</h4>
-  //                     </div>
-  //                     <div className="card-image">
-  //                       <figure className="image image is-1by1">
-  //                         <img src={item.image} alt={item.title} loading="lazy" width="255" height="255" />
-  //                       </figure>
-  //                     </div>
-  //                     <div className="card-content">
-  //                       <h5 className=""><strong>Rental Price:</strong> {`£${item.rentalPrice}`}</h5>
-  //                     </div>
-  //                   </div>
-  //                 </Link>
-  //               </div>
-  //             )}
-  //           </div>
-  //         </div>
-  //       </section>
-  //       {isAuthenticated() && <section>
-  //         <form onSubmit={this.handleCommentSubmit}>
-  //           <div>
-  //             <div className="label for comments">
-  //               <p> Comment on {user.username} </p>
-  //             </div>
-  //             <input
-  //               className="comments-input"
-  //               type="textArea"
-  //               maxLength="250"
-  //               name="text"
-  //               onChange={this.handleCommentChange}
-  //               value={comments.text} />
-  //           </div>
-  //           <div className="comments-submit-button">
-  //             <button className="button is-primary">Submit Comment</button>
-  //           </div>
-  //         </form>
-  //         <div>
-  //           {commentsArray.map(comment => (
-  //             <Comments
-  //               key={comment._id}
-  //               comment={comment}
-  //               deleteComment={this.deleteComment}
-  //             />
-  //           ))}
-  //         </div>
-  //       </section>}
-  //     </>
-  //   )
-  // }
-
 
   render() {
     if (!this.state.user) return <h1>User kidnapped, Ninja to the rescue</h1>
@@ -301,7 +183,6 @@ class userShowProfile extends React.Component {
               </div>
               <div className="Message">
                 {isAuthenticated() && <button onClick={this.toggleContactModal} className="button is-primary">Message</button>}
-
                 <div className="Modal-Message">
                   <div className={contactModalOpen ? "modal is-active" : "modal"}>
                     <div className="field">
@@ -318,15 +199,12 @@ class userShowProfile extends React.Component {
                     </div>
                   </div>
                 </div>
-
               </div>
             </div>
-
             <div className="Comments">
               {
                 isAuthenticated() && <section>
                   <form onSubmit={this.handleCommentSubmit}>
-
                     <div className="Comment-left">
                       <p> Leave a comment about {user.username} </p>
                       <input
@@ -339,8 +217,6 @@ class userShowProfile extends React.Component {
                       <button className="Submit">Submit Comment</button>
                     </div>
                   </form>
-
-
                   <div className="Comments-on-user">
                     {commentsArray.map(comment => (
                       <Comments
@@ -349,14 +225,11 @@ class userShowProfile extends React.Component {
                         deleteComment={this.deleteComment}
                       />
                     ))}
-
                   </div>
                 </section>
               }
             </div>
-
           </div>
-
           <div className="Show-profile-bottom">
             <div className="User-items-index">
               {userItems.map(item =>
@@ -377,13 +250,9 @@ class userShowProfile extends React.Component {
             </div>
           </div>
         </div>
-
-
       </>
     )
   }
-
-
 }
 
 export default userShowProfile

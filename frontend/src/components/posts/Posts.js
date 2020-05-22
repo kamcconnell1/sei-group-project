@@ -1,7 +1,7 @@
 import React from 'react'
 
 import PostCards from '../posts/PostsCards'
-import { getAllPosts, createPost, deleteAPost } from '../../lib/api'
+import { getAllPosts, createPost } from '../../lib/api'
 import { toast } from '../../lib/notifications'
 
 class Posts extends React.Component {

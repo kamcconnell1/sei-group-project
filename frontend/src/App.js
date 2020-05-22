@@ -31,32 +31,32 @@ import PostEdit from './components/posts/PostEdit'
 const App = () => {
   return (
     <BrowserRouter>
-    <Notifications />
-    <Navbar className="Navbar" />
-    <div className="Main">
-    <Switch>
-    <Route exact path='/' component={Home}/>
-    <Route path='/page/:username' component={userShowProfile} />
-    <SecureRoute path='/profile/:username/add' component={ClothesAdd} />
-    <SecureRoute path='/profile/:username/friends' component={FavouriteFriends} />
-    <SecureRoute path='/profile/:username/favouriteposts' component={FavouritePosts} />
-    <SecureRoute path='/profile/:username/favourites' component={FavouriteItems} />
-    <SecureRoute path='/profile/:username/map' component={UserMap} />
-    <SecureRoute path='/profile/:username/edit' component={EditProfile} />
-    <Route path='/profile/:username' component={UserProfile} />
-    <Route path='/clothes/:id/edit' component={ClothesEdit} />
-    <Route path='/clothes/:id' component={ClothesShow} />
-    <Route path='/clothes' component={ClothesIndex} />
-    <Route path='/about' component={About} />
-    <Route path='/register' component={Register} />
-    <Route path='/login' component={Login} />
-    <Route path='/posts/:id/edit' component={PostEdit} />
-    <Route path='/posts/:id' component={PostsShow} />
-    <Route path='/posts' component={Posts} />
-    <Route path="/*" component={Error} />
-    </Switch>
-    </div>
-    <Footer className="Footer" />
+      <Notifications />
+      <Navbar className="Navbar" />
+      <div className="Main">
+        <Switch>
+          <Route exact path='/' component={Home} />
+          <Route path='/page/:username' component={userShowProfile} />
+          <SecureRoute path='/profile/:username/add' component={ClothesAdd} />
+          <SecureRoute path='/profile/:username/friends' component={FavouriteFriends} />
+          <SecureRoute path='/profile/:username/favouriteposts' component={FavouritePosts} />
+          <SecureRoute path='/profile/:username/favourites' component={FavouriteItems} />
+          <SecureRoute path='/profile/:username/map' component={UserMap} />
+          <SecureRoute path='/profile/:username/edit' component={EditProfile} />
+          <Route path='/profile/:username' component={UserProfile} />
+          <Route path='/clothes/:id/edit' component={ClothesEdit} />
+          <Route path='/clothes/:id' component={ClothesShow} />
+          <Route path='/clothes' component={ClothesIndex} />
+          <Route path='/about' component={About} />
+          <Route path='/register' component={Register} />
+          <Route path='/login' component={Login} />
+          <Route path='/posts/:id/edit' component={PostEdit} />
+          <Route path='/posts/:id' component={PostsShow} />
+          <Route path='/posts' component={Posts} />
+          <Route path="/*" component={Error} />
+        </Switch>
+      </div>
+      <Footer className="Footer" />
     </BrowserRouter>
   )
 }

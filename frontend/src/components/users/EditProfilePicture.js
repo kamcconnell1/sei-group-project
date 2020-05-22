@@ -15,7 +15,6 @@ const EditProfilePicture = ({ onChange, onSubmit, toggleModal, modalOpen, profil
           onSubmit={onSubmit}
         >
           <div className="Modal-content">
-
             <div className="Field">
               <div className="image is128x128">
                 <ImageUpload

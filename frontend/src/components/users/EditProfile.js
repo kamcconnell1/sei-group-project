@@ -3,7 +3,7 @@ import EditProfileForm from '../users/EditProfileForm'
 import EditClothCard from '../users/EditClothCard'
 import { editProfile, getProfile, deleteCloth } from '../../lib/api'
 import { getPostcodeInfo } from '../../lib/ext_api'
-import { deletedItemToast } from '../../lib/toasts'
+import { toast } from '../../lib/notifications'
 
 class EditProfile extends React.Component {
   state = {
@@ -19,16 +19,16 @@ class EditProfile extends React.Component {
     try {
       await this.getEditDashboard()
     } catch (err) {
-      console.log(err)
+      this.props.history.push('/notfound')
     }
   }
-  
+
   async getEditDashboard() {
     try {
       const res = await getProfile()
       this.setState({ formData: res.data })
     } catch (err) {
-      console.log(err)
+      this.props.history.push('/notfound')
     }
   }
 
@@ -39,53 +39,51 @@ class EditProfile extends React.Component {
     this.setState({ formData, errors })
   }
 
-  getLocation = async event => {
+  //* Test updated postcode against database using axios request.
+  getLocation = async () => {
     try {
       const postcode = this.state.formData.postcode
-      const response = await getPostcodeInfo(postcode)
-      console.log('postcode info', response)
+      await getPostcodeInfo(postcode)
     } catch (err) {
       const errors = { ...this.state.errors, postcode: err.response.data.error }
-      // console.log(err.response.data.error)
       this.setState({ errors })
     }
   }
 
-  //* handleChange event for the postcode which calls check psotcode & then randomly assigns the user
+  //* HandleChange event for the postcode which calls check psotcode & then randomly assigns the user
   handlePostcodeChange = event => {
     const formData = { ...this.state.formData, postcode: event.target.value }
     const errors = { ...this.state.errors, postcode: '' }
-
     this.setState({ formData, errors }, () => {
       this.getLocation()
     })
   }
 
-  //*Submit profile info update
+  //* Submit profile info update
   handleSubmit = async event => {
     event.preventDefault()
     try {
       const res = await editProfile(this.state.formData)
+      toast('Profile updated!')
       this.props.history.push(`/profile/${res.data.username}`)
     } catch (err) {
       this.setState({ errors: err.response.data })
-      console.log(err.response);
     }
   }
 
-  //*Delete item of clothing
+  //* Delete item of clothing
   deleteArticle = async (_id) => {
     try {
       await deleteCloth(_id)
-      deletedItemToast()
+      toast('Item deleted')
       this.getEditDashboard()
     } catch (err) {
-      console.log(err)
+      toast('Couldnt delete item')
     }
   }
 
   render() {
-    if (!this.state.formData.createdArticles ) return null
+    if (!this.state.formData.createdArticles) return null
     const { createdArticles } = this.state.formData
 
     return (
@@ -109,6 +107,5 @@ class EditProfile extends React.Component {
     )
   }
 }
-
 
 export default EditProfile
