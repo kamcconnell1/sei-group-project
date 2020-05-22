@@ -1,7 +1,7 @@
 import React from 'react'
 
 import PostCards from '../posts/PostsCards'
-import { getAllPosts, createPost, deleteAPost } from '../../lib/api'
+import { getAllPosts, createPost } from '../../lib/api'
 import { toast } from '../../lib/notifications'
 
 class Posts extends React.Component {
@@ -62,36 +62,33 @@ class Posts extends React.Component {
             <h1>Posts</h1>
           </div>
           <div className="Page-subtitle">
+            Check the latest post
           </div>
         </div>
-        <div className="Posts row-center">
+        <div className="Posts">
           <form className="Post-form"
             onSubmit={this.handleSubmit} >
-            <label>Title</label>
-            <input className="Post-input-title input is-info"
+              <h3>Write a post</h3>
+            <input className="Post-input-title"
               name="title"
               value={this.state.input.title}
               placeholder="Title"
               onChange={this.handleChange}
             />
-            <label>Content</label>
-            <br/>
-            <textarea className="textarea is-small is-info"
+            <textarea className="Post-input-text"
               name="text"
               rows="15"
               value={this.state.input.text}
               placeholder="Text"
               onChange={this.handleChange}
             />
-            <label>Image URL</label>
-            <input className="is-info input"
+            <input className="Post-input-title"
               name="photo"
               value={this.state.input.photo}
               placeholder="URL of Image"
               onChange={this.handleChange}
             />
-            <br /><br/>
-            <button className="button is-small is-info">Submit Post</button>
+            <button className="Button">Submit Post</button>
           </form>
           <div className="Post-cards">
             {this.state.posts.map(post => (

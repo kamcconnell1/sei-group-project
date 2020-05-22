@@ -40,13 +40,14 @@ class PostsShow extends React.Component {
     this.setState({ comments })
   }
 
+  //* delete Post
   deletePost = async e => {
     try {
       toast('Post deleted')
       await deleteAPost(e.target.value)
       this.props.history.push('/posts')
     } catch (err) {
-      toast('Post could not be deleted')
+      toast('Post couldnt be deleted')
     }
   }
 
@@ -54,14 +55,12 @@ class PostsShow extends React.Component {
     const postId = this.props.match.params.id
     e.preventDefault()
     try {
-      console.log(this.state.comments)
-      console.log(postId)
       const res = await commentOnPost(postId, this.state.comments)
-      console.log(res.data)
+      toast('Comment added')
       this.setState({ commentsArray: res.data.comments, comments: { ...this.state.comments, text: '' } })
       this.getPost()
     } catch (err) {
-      console.log(err)
+      toast('Couldnt add comment')
     }
   }
 
@@ -69,12 +68,10 @@ class PostsShow extends React.Component {
   handleFavouriteSubmit = async e => {
     try {
       const addToList = await { ...this.state.posts, [e.target.name]: e.target.value }
-      console.log('Post Id:', addToList)
-      const res = await postFavoritePost(addToList)
-      console.log('res sent:', res.data)
-      console.log('sent')
+      await postFavoritePost(addToList)
+      toast('Post added to your favourite posts!')
     } catch (err) {
-      // console.log(err)
+      toast(err.response.data.message)
     }
   }
 
@@ -84,10 +81,10 @@ class PostsShow extends React.Component {
       const postId = this.props.match.params.id
       const commentId = e.target.value
       await DeleteCommentOnPost(postId, commentId)
-      console.log('sucess')
+      toast('Comment deleted!')
       this.getPost()
     } catch (err) {
-      console.log(err)
+      toast('Couldnt delete this comment')
     }
   }
 
@@ -99,48 +96,59 @@ class PostsShow extends React.Component {
     const time = edited[1].split('.')[0]
     return (
       <>
-        <section className="hero is-light">
-          <div className="hero-body">
-            <div className="container">
-              <h1>{post.title}</h1>
-            </div>
-          </div>
-          <img src={post.photo} alt={post.title} height="200" width="100" />
-          <p>{post.text}</p>
-          <Link to={`/page/${post.user.username}`}><p>Created by: {post.user.username}</p> </Link>
-          <p>{date} {time}</p>
-          <button name="posts" value={post._id} onClick={this.handleFavouriteSubmit} className="button">Add to Favourites</button>
-          {isOwner && <Link to={`/posts/${post._id}/edit`}><button>Edit</button></Link>}
-          {isOwner && <button value={post._id} onClick={this.deletePost}>Delete</button>}
-        </section>
-        {isAuthenticated && <section>
-          <form onSubmit={this.handleCommentSubmit}>
-            <div>
-              <div className="label for comments">
-                <p> Comment on {post.title} </p>
+        <div className="Post">
+          <section className="">
+            <div className="hero-body">
+              <div className="container">
+                <h1 className="Title">{post.title}</h1>
               </div>
-              <input
-                className="comments-input"
-                type="textArea"
-                maxLength="250"
-                name="text"
-                onChange={this.handleCommentChange}
-                value={this.state.comments.text} />
             </div>
-            <div className="comments-submit-button">
-              <button>Submit Comment</button>
+            <div className="Post-and-comments">
+              <div className="Post-main">
+                <img src={post.photo} alt={post.title} height="200" width="100" />
+                <p className="Content">{post.text}</p>
+              </div>
+              <div className="Created-by">
+                <Link to={`/page/${post.user.username}`}><p>Created by: {post.user.username}</p> </Link>
+                <p>{date} {time}</p>
+                <button name="posts" value={post._id} onClick={this.handleFavouriteSubmit} className="Button">Add to Favourites</button>
+              </div>
+
             </div>
-          </form>
-          <div>
-            {commentsArray.map(comment => (
-              <Comments
-                key={comment._id}
-                comment={comment}
-                deleteComment={this.deleteComment}
-              />
-            ))}
-          </div>
-        </section>}
+            <div className="Comments-all">
+              {isAuthenticated && <section>
+                <form onSubmit={this.handleCommentSubmit}>
+                  <div className="Post-comment">
+                    <div className="label for comments">
+                      <p> Leave a comment </p>
+                    </div>
+                    <textarea
+                      className="comments-input"
+                      type="textArea"
+                      rows="5"
+                      maxLength="250"
+                      name="text"
+                      onChange={this.handleCommentChange}
+                      value={this.state.comments.text} />
+                    <button className="Button">Submit Comment</button>
+                  </div>
+                </form>
+                <div className="User-comments">
+                  {commentsArray.map(comment => (
+                    <Comments
+                      key={comment._id}
+                      comment={comment}
+                      deleteComment={this.deleteComment}
+                    />
+                  ))}
+                </div>
+              </section>}
+            </div>
+            {isOwner(post.user._id) && <Link to={`/posts/${post._id}/edit`}><button>Edit</button></Link>}
+            {isOwner(post.user._id) && <button value={post._id} onClick={this.deletePost}>Delete</button>}
+          </section>
+
+        </div>
       </>
     )
   }

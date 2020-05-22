@@ -1,14 +1,15 @@
 //! Require
 const mongoose = require('mongoose')
 
-//* schema for comments on post
+//! COMMENTS Schema
 const postCommentsSchema = new mongoose.Schema({
-  text: [ { type: String, maxlength: 200 } ], //* comments on post
+  text: [{ type: String, maxlength: 200 }], //* comments on post
   user: { type: mongoose.Schema.ObjectId, ref: 'User', required: true }
 }, {
   timestamps: true
 })
-//* schema for posts (news/post feed)
+
+//! MAIN POSTS SCHEMA
 const postSchema = new mongoose.Schema({
   title: { type: String, required: true, maxlength: 100 }, //* title of post
   text: { type: String, required: true }, //* content of post

@@ -1,15 +1,12 @@
 import React from 'react'
 
 import Map from './Map'
-
 import PinForm from '../pins/PinForm'
 
 import { postPin, getProfile, removePin } from '../../lib/api'
-import { deletedItemToast } from '../../lib/toasts'
 
 import 'mapbox-gl/dist/mapbox-gl.css'
-
-
+import { toast } from '../../lib/notifications'
 
 class UserMap extends React.Component {
   state = {
@@ -26,12 +23,13 @@ class UserMap extends React.Component {
   // * Function to GET the users details
   async componentDidMount() {
     try {
-    await this.loadMap()
+      await this.loadMap()
     } catch (err) {
       this.props.history.push('/notfound')
     }
   }
 
+  //* Load the map outside of CDM to allow to recall.
   loadMap = async () => {
     try {
       const res = await getProfile()
@@ -41,6 +39,7 @@ class UserMap extends React.Component {
     }
   }
 
+  //* add a location
   addLocation = (latitude, longitude) => {
     this.setState(prevState => ({
       formData: {
@@ -58,35 +57,33 @@ class UserMap extends React.Component {
     this.setState({ formData, errors })
   }
 
-
   //* Function to toggle the modal pin form open or close when user drops pin
   toggleModal = () => {
     this.setState({ modalOpen: !this.state.modalOpen })
   }
 
-
-  //* handleSubmit event for submitting the registration form
+  //* HandleSubmit event for submitting the registration form
   handleSubmit = async event => {
     event.preventDefault()
     try {
       await postPin(this.state.formData)
       this.loadMap()
       this.toggleModal()
-      this.setState({formData: {...this.state.formData, title: '', place: '', note: '' }})
+      this.setState({ formData: { ...this.state.formData, title: '', place: '', note: '' } })
     } catch (err) {
       console.log('response errors', err.response)
       this.setState({ errors: err.response.data })
     }
   }
 
-  //* handleDelete on the pin
+  //* HandleDelete on the pin
   deletePin = async id => {
     try {
       await removePin(id)
       this.loadMap()
-      deletedItemToast()
+      toast('Pin removed')
     } catch (err) {
-      console.log(err)
+      toast('Couldnt remove pin')
     }
   }
 
@@ -96,49 +93,51 @@ class UserMap extends React.Component {
 
   render() {
     if (!this.state.user) return null
-    
+
     return (
       <>
-        <div className="Page-head">
-          <div className="Page-title">
-            <h1>My Saved Pins</h1>
-          </div>
-          <div className="Page-subtitle">
-            <h2>Add & save locations to remember later</h2>
-          </div>
-        </div>
-
-        <div className="pin-details">
-
-              {/* Map for user to view locations & drop pins */}
-          <div className="map-page">
-            <div className="container">
-              <Map
-                onChange={this.handleChange}
-                onClick={this.toggleModal}
-                pins={this.state.user.pins}
-                location={this.addLocation}
-                onClickDelete={this.deletePin}
-                name="location" />
+        <div className="Map-page">
+          <div className="Page-head">
+            <div className="Page-title">
+              <h1>My Saved Pins</h1>
             </div>
-
-
-            {/* PinForm will pop up if a user decides to drop a pin on thr map */}
-            <PinForm
-              handleChange={this.handleChange}
-              handleSubmit={this.handleSubmit}
-              toggleModal={this.toggleModal}
-              errors={this.state.errors}
-              numberOfPins={this.numberOfPins}
-              modalStatus={this.state.modalOpen}
-              form={this.state.formData}
-            />
-
+            <div className="Page-subtitle">
+              <h2>Add & save locations to remember later</h2>
+            </div>
           </div>
-          <div className="map pad2">
+
+          <div className="pin-details">
+
+            {/* Map for user to view locations & drop pins */}
+            <div className="map-page">
+              <div className="Map">
+                <Map
+                  onChange={this.handleChange}
+                  onClick={this.toggleModal}
+                  pins={this.state.user.pins}
+                  location={this.addLocation}
+                  onClickDelete={this.deletePin}
+                  name="location" />
+              </div>
+
+
+              {/* PinForm will pop up if a user decides to drop a pin on thr map */}
+              <PinForm
+                handleChange={this.handleChange}
+                handleSubmit={this.handleSubmit}
+                toggleModal={this.toggleModal}
+                errors={this.state.errors}
+                numberOfPins={this.numberOfPins}
+                modalStatus={this.state.modalOpen}
+                form={this.state.formData}
+              />
+
+            </div>
+            <div className="map pad2">
+            </div>
           </div>
+
         </div>
-
       </>
     )
   }

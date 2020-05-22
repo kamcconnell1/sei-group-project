@@ -1,36 +1,38 @@
 import React from 'react'
+
 import { allUsersFavourites, deletePostFromFavs } from '../../lib/api'
 import { Link } from 'react-router-dom'
+import { toast } from '../../lib/notifications'
 
 class FavouritePosts extends React.Component {
-  state = { 
+  state = {
     posts: []
   }
 
   async componentDidMount() {
-    try{
-    await this.getPosts()
+    try {
+      await this.getPosts()
     } catch (err) {
       this.props.history.push('/notfound')
     }
   }
 
   getPosts = async () => {
-    try{
-    const res = await allUsersFavourites()
-    this.setState({ posts: res.data.favPosts })
+    try {
+      const res = await allUsersFavourites()
+      this.setState({ posts: res.data.favPosts })
     } catch (err) {
-      console.log(err)
+      this.props.history.push('/notfound')
     }
   }
 
   removeFromFavs = async e => {
-    try{
-    console.log(e.target.value)
-    await deletePostFromFavs(e.target.value)
-    this.getPosts()
+    try {
+      await deletePostFromFavs(e.target.value)
+      toast('Removed item from your favourites')
+      this.getPosts()
     } catch (err) {
-      console.log(err)
+      toast('Couldnt remove item from your favourites')
     }
   }
 
@@ -53,25 +55,23 @@ class FavouritePosts extends React.Component {
             <div className="columns is-multiline">
               {posts.map(post =>
                 <div key={post._id} className="column is-one-quarter-desktop is-one-third-tablet is-half-mobile">
-                
                   <div className="card">
-                  <Link to={`/posts/${post._id}`}>
-                    <div className="card-header">
-                    </div>
-                    <div className="card-image">
-                      <figure className="image image is-1by1">
-                        <img src={post.image} alt={post.title} loading="lazy" width="255" height="255" />
-                      </figure>
-                    </div>
-                    <div className="card-content">
-                      <h4 className=""><strong>{post.title}</strong></h4>
-                      <h5 className=""><strong></strong></h5>
-                    </div>
+                    <Link to={`/posts/${post._id}`}>
+                      <div className="card-header">
+                      </div>
+                      <div className="card-image">
+                        <figure className="image image is-1by1">
+                          <img src={post.image} alt={post.title} loading="lazy" width="255" height="255" />
+                        </figure>
+                      </div>
+                      <div className="card-content">
+                        <h4 className=""><strong>{post.title}</strong></h4>
+                        <h5 className=""><strong></strong></h5>
+                      </div>
                     </Link>
                     <button onClick={this.removeFromFavs} value={post._id}>Remove from favourites</button>
                   </div>
-              
-              </div> 
+                </div>
               )}
             </div>
           </div>

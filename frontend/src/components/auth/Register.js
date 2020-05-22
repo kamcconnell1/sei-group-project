@@ -57,7 +57,7 @@ class Register extends React.Component {
   handleSubmit = async event => {
     event.preventDefault()
     try {
-      const res = await registerUser(this.state.formData)
+      await registerUser(this.state.formData)
       this.props.history.push('/login')
     } catch (err) {
       this.setState({ errors: err.response.data })

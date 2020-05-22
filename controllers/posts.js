@@ -2,6 +2,7 @@
 const Post = require('../models/post')
 const { notFound, unauthorized } = require('../lib/errorMessages')
 
+//! POSTS
 //? Show all Posts (from all users)
 //* WORKING tested
 //* ERROR tested
@@ -76,11 +77,11 @@ async function postsDelete(req, res, next) {
 }
 
 
-//? POST COMMENTS CONTROLLERS
+//! POST/ COMMENTS
 //? Create a Comment on a Post
 //* WORKING tested
 //* ERROR tested 
-async function postCommentCreate (req, res, next) {
+async function postCommentCreate(req, res, next) {
   try {
     req.body.user = req.currentUser
     const postId = req.params.id
@@ -97,7 +98,7 @@ async function postCommentCreate (req, res, next) {
 //? Delete Comment from Post
 //* WORKING tested
 //* ERROR tested 
-async function postCommentDelete (req, res, next) {
+async function postCommentDelete(req, res, next) {
   try {
     req.body.user = req.currentUser
     const postId = req.params.id

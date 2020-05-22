@@ -1,4 +1,4 @@
-// Function to set users token when logged in & set username in local sotrage
+//* Function to set users token when logged in & set username in local sotrage
 export const setToken = token => {
   window.localStorage.setItem('token', token)
 }
@@ -10,11 +10,12 @@ export const setUsername = username => {
 }
 
 
-// Function to get users token & username from local storage
+//* Function to get users token & username from local storage
 export const getToken = () => {
   return window.localStorage.getItem('token')
 }
 
+//* Get user name for params
 export const getUsername = () => {
   return window.localStorage.getItem('username')
 }

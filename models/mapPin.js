@@ -1,8 +1,6 @@
 const mongoose = require('mongoose')
 
-
-//* Schema for map pins
-
+//! MAIN PIN SCHEMA
 const mapPinSchema = new mongoose.Schema({
   title: { type: String, required: true, maxlength: 100 },
   place: { type: String, required: true, maxlength: 100 },
@@ -13,11 +11,5 @@ const mapPinSchema = new mongoose.Schema({
 })
 
 module.exports = mongoose.model('MapPin', mapPinSchema)
-//* EXAMPLE
-// title: 'Jewel for mum´s birthday',
-// place: 'Tiffanny´s',
-// location: '13 James St, Covent Garden, London', //* how do we deal with this? lon/lat
-// user: - user who pins it, currentUser -,
-// note: 'cute little pendant with heart shape',
-// photo: - a pic uploaded from the user camera files
+
 

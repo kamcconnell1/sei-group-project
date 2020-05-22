@@ -1,16 +1,17 @@
 //------------------------------------FILE FOR EXTERNAL API REQUESTS -----------------------
 
+
 import axios from 'axios'
 
+//* Cloudinary URL connection to .env
 const imageUrl = process.env.REACT_APP_CLOUDINARY_URL
 
 //* POST request for user to upload image - hosted on cloudinary
 export const postImage = data => {
   return axios.post(imageUrl, data)
 }
-// export const uploadProfileImage = process.env.REACT_APP_PROFILE_IMAGE_PRESET
 
-
+//* Image preset link to .env
 export const uploadClothesImage = process.env.REACT_APP_IMAGE_PRESET
 
 //* GET request to find the postcode details of user /item
