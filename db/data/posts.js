@@ -5,7 +5,7 @@ module.exports = [
     title: 'Look for less: Longewear Set',
     text: 'Loungewear has been a fun perk of quarantine - and this gorgeous tie-dye Free People set is a fan favorite. It is currently sold out, but we have got you covered in a similar style that will be make you and your wallet happy!',
     photo: 'https://www.thebudgetbabe.com/uploads/2020/202005/freepeopleugglookforless1.jpg'
-  }, 
+  },
   {
     title: 'Got some news...!',
     text: 'I have been meaning to write this post since I announced by pregnancy back in August. A few of you sweethearts have been asking where I have been, how I’ve been feeling and wondering where I’ve been. I am doing really great, and I owe you a major update on my second trimester now that I am almost halfway through my third (eek!). If I am being honest, I have loved slowing down a bit and spending quality time with the people I love most. I have been off my phone for the majority of the Summer and Fall to really enjoy this pregnancy. I took a step back from the blog because something just needed to give. Between work (which I absolutely love), buying our first house, renovating said house, and moving at 31 weeks pregnant, I just found myself not finding the right words or stories to share here. Now, that all of the madness is almost behind us (just in time for another big life change to happen), I honestly have so much to tell you! So, minus the lack of a good outfit to share, I want to tell you about all of the pieces I have been wearing the last few months. I almost created a capsule-like wardrobe for myself because I am determined not to buy too many things that I won’t want to wear post-baby.',

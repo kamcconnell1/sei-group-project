@@ -12,7 +12,7 @@ module.exports = [
         place: 'H&M',
         latitude: '51.500193113059076',
         longitude: '0.11085416633009527'
-      },{
+      }, {
         title: 'Top for Mums Birthday',
         place: 'Oliver Bonas',
         latitude: '51.518226',
@@ -22,12 +22,12 @@ module.exports = [
         place: 'Zara',
         latitude: '51.49716106826442',
         longitude: '-0.16041554906063296'
-      },{
+      }, {
         title: 'Trainers',
         place: 'Office',
         latitude: '51.52269095532998',
         longitude: '-0.07778637786653057'
-      },{
+      }, {
         title: 'Photo Frame',
         place: 'Habitat',
         latitude: '51.52269095532998',
@@ -47,22 +47,22 @@ module.exports = [
         place: 'Suit Supply',
         latitude: ' -0.139314',
         longitude: '51.510136'
-      },{
+      }, {
         title: 'Jewellery for Mrs',
         place: 'Monica Vinader',
         latitude: '51.52269095532998',
         longitude: '-0.07778637786653057'
-      } , {
+      }, {
         title: 'Work Shoes',
         place: 'Todds',
         latitude: '51.484982808916385',
         longitude: '-0.11230258856636263'
-      },{
+      }, {
         title: 'Record Shop',
         place: 'Old Street Records',
         latitude: '51.526596',
         longitude: '-0.080906'
-      },{
+      }, {
         title: 'Chocolates',
         place: 'Hotel Chocolat',
         latitude: '51.50546406734942',
@@ -82,22 +82,22 @@ module.exports = [
         place: 'JD Sports',
         latitude: '51.5109050919409',
         longitude: '-0.06764266047389358'
-      },{
+      }, {
         title: 'Work Shoes',
         place: 'Russel & Bromley',
         latitude: '51.52269095532998',
         longitude: '-0.07778637786653057'
-      } , {
+      }, {
         title: 'Vase',
         place: 'Oliver Bonas',
         latitude: '51.49716106826442',
         longitude: '-0.16041554906063296'
-      },{
+      }, {
         title: 'Vintage Jeans',
         place: 'Brick Lane',
         latitude: '51.525193644052095',
         longitude: '-0.07802505817643898'
-      },{
+      }, {
         title: 'Dads Birthday Present',
         place: 'East London Liquor Company',
         latitude: '51.53473131727723',
@@ -117,22 +117,22 @@ module.exports = [
         place: 'Urban Outfitters',
         latitude: '51.51261580641044',
         longitude: '-0.12361748605933259'
-      },{
+      }, {
         title: 'Trainers',
         place: 'Office',
         latitude: '51.52269095532998',
         longitude: '-0.07778637786653057'
-      } , {
+      }, {
         title: 'Zara Pin',
         place: 'Zara',
         latitude: '51.49716106826442',
         longitude: '-0.16041554906063296'
-      },{
+      }, {
         title: 'Dress for Office Party',
         place: 'Mango',
         latitude: '51.520089578199645',
         longitude: '-0.1370254679140282'
-      },{
+      }, {
         title: 'Top for Mums Birthday',
         place: 'Oliver Bonas',
         latitude: '51.52269095532998',
@@ -152,22 +152,22 @@ module.exports = [
         place: 'Matalan',
         latitude: '51.530641830317094',
         longitude: '-0.16895069557877013'
-      },{
+      }, {
         title: 'Trainers',
         place: 'Office',
         latitude: '51.52269095532998',
         longitude: '-0.07778637786653057'
-      } , {
+      }, {
         title: 'Zara Pin',
         place: 'Zara',
         latitude: '51.49716106826442',
         longitude: '-0.16041554906063296'
-      },{
+      }, {
         title: 'Trainers',
         place: 'Office',
         latitude: '51.52269095532998',
         longitude: '-0.07778637786653057'
-      },{
+      }, {
         title: 'Top for Mums Birthday',
         place: 'Oliver Bonas',
         latitude: '51.52269095532998',

@@ -5,7 +5,7 @@ const { unauthorized } = require('../lib/errorMessages')
 const jwt = require('jsonwebtoken')
 
 
-//? Register a User
+//! REGISTER a User
 //* WORKING tested
 //* ERROR tested 
 async function register(req, res, next) {
@@ -17,13 +17,14 @@ async function register(req, res, next) {
   }
 }
 
-//? Function for User Login
+//! LOGIN
 //* WORKING tested
 //* ERROR tested 
 async function login(req, res, next) {
   try {
     const user = await User.findOne({ email: req.body.email })
     if (!user || !user.validatePassword(req.body.password)) throw new Error(unauthorized)
+    await axios.get(`http://api.postcodes.io/postcodes/${postcode}`)
     const token = jwt.sign({ sub: user._id }, secret, { expiresIn: '7 days' })
     res.status(202).json({ message: `Hello ${user.username}`, token })
   } catch (err) {

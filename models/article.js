@@ -1,7 +1,7 @@
 //! Require
 const mongoose = require('mongoose')
 
-//* schema for rating
+//! ARTICLE RATING SCHEMA
 const ratingSchema = new mongoose.Schema({
   rating: [{ type: Number, min: 1, max: 5 }], //* rating specific to article
   user: { type: mongoose.Schema.ObjectId, ref: 'User', required: true } //* the user who made the rating
@@ -9,14 +9,15 @@ const ratingSchema = new mongoose.Schema({
   timestamps: true
 })
 
+//! COMMENTS SCHEMA
 const articleCommentsSchema = new mongoose.Schema({
-  text: [ { type: String, maxlength: 200 } ],
+  text: [{ type: String, maxlength: 200 }],
   user: { type: mongoose.Schema.ObjectId, ref: 'User', required: true }
 }, {
   timestamps: true
 })
 
-//* schema for clothing
+//! MAIN CLOTHING SCHEMA
 const articleOfClothingSchema = new mongoose.Schema({
   title: { type: String, required: true, maxlength: 50 }, //* title of clothing
   category: { type: String, required: true }, //* category of clothing (skirt, shirt etc)
