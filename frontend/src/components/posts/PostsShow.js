@@ -111,6 +111,8 @@ class PostsShow extends React.Component {
               <div className="Created-by">
                 <Link to={`/page/${post.user.username}`}><p>Created by: {post.user.username}</p> </Link>
                 <p>{date} {time}</p>
+                {isOwner(post.user._id) && <Link to={`/posts/${post._id}/edit`}><button className="Button">Edit</button></Link>}
+                {isOwner(post.user._id) && <button className="Button" value={post._id} onClick={this.deletePost}>Delete</button>}
                 <button name="posts" value={post._id} onClick={this.handleFavouriteSubmit} className="Button">Add to Favourites</button>
               </div>
 
@@ -144,8 +146,6 @@ class PostsShow extends React.Component {
                 </div>
               </section>}
             </div>
-            {isOwner(post.user._id) && <Link to={`/posts/${post._id}/edit`}><button>Edit</button></Link>}
-            {isOwner(post.user._id) && <button value={post._id} onClick={this.deletePost}>Delete</button>}
           </section>
 
         </div>

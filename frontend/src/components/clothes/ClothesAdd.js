@@ -55,6 +55,7 @@ class ClothesAdd extends React.Component {
   handleSubmit = async event => {
     event.preventDefault()
     try {
+      console.log(this.state.formData)
       const res = await addClothes(this.state.formData)
       this.props.history.push(`/clothes/${res.data._id}`)
     } catch (err) {

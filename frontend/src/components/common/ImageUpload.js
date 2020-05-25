@@ -2,7 +2,7 @@ import React from 'react'
 import { postImage } from '../../lib/ext_api'
 class ImageUpload extends React.Component {
   state = {
-    image: null
+    image: []
   }
   handleUpload = async event => {
     event.preventDefault()
@@ -14,6 +14,7 @@ class ImageUpload extends React.Component {
     data.append('upload_preset', preset)
     //* Axios request to send image to Cloudinary
     const res = await postImage(data)
+    console.log(res.data)
     //* Set state with link to image sent in response data
     this.setState({
       image: res.data.url
