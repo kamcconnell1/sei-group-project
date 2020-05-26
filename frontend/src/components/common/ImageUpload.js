@@ -2,7 +2,7 @@ import React from 'react'
 import { postImage } from '../../lib/ext_api'
 class ImageUpload extends React.Component {
   state = {
-    image: []
+    image: null
   }
   handleUpload = async event => {
     event.preventDefault()
@@ -25,20 +25,16 @@ class ImageUpload extends React.Component {
   }
   render() {
     const { image } = this.state
+    
     return (
       <>
         {image ?
           <div>
             <img src={image} alt="selected" />
-            <input
-              className="input"
-              type="file"
-              name={this.props.name}
-              onChange={this.handleUpload}
-            />
           </div>
           :
           <>
+          <label className="label">{this.props.labelText}</label>
             <input
               className="input"
               type="file"
