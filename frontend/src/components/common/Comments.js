@@ -1,6 +1,8 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 
+import { isOwner} from '../../lib/auth'
+
 const Comments = ({ comment, deleteComment }) => {
 
   const edited = comment.createdAt.split('T')
@@ -19,11 +21,12 @@ const Comments = ({ comment, deleteComment }) => {
         <p>{comment.text}</p>
       </div>
       <div className="Delete">
-        <button className="Button" onClick={deleteComment
-        } value={comment._id} >Delete</button>
+        {isOwner(comment.user._id) && <button className="Button" onClick={deleteComment
+        } value={comment._id} >Delete</button>}
       </div>
     </div>
   )
 }
 
 export default Comments
+

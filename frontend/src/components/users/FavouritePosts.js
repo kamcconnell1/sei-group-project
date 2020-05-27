@@ -41,25 +41,25 @@ class FavouritePosts extends React.Component {
     const { posts } = this.state
     return (
       <>
-        <div className="FavPosts">
-          <h1 className="Title">
-            Favourite Posts
-           </h1>
-          <div className="Fav-friends">
+        <div className="Fav-Posts">
+          <div className="Page-head">
+            <div className="Page-title">
+              <h1>MY FAVOURITE ITEMS</h1>
+            </div>
+          </div>
+          <div className="Fav-posts">
             <div className="fav-post-friends">
               {posts.map(post =>
-                <div key={post._id} className="Fav-post-name">
-                  <div className="Fav-card">
-                    <Link to={`/posts/${post._id}`}>
-                      <div className="Card-image">
-                        <img src={post.photo} alt={post.title} loading="lazy" width="255" height="255" />
-                      </div>
-                      <div className="Card-content">
-                        <h4 className=""><strong>{post.title}</strong></h4>
-                      </div>
-                    </Link>
-                  </div>
-                  <button className="Button" onClick={this.removeFromFavs} value={post._id}>Remove from favourites</button>
+                <div key={post._id} className="Fav-post-card">
+                  <Link to={`/posts/${post._id}`} className="Post-img-text">
+                    <div className="Card-image">
+                      <img src={post.photo} alt={post.title} loading="lazy" width="255" height="255" />
+                    </div>
+                    <div className="Card-content">
+                      <h4 className="">{post.title}</h4>
+                      <button className="Button" onClick={this.removeFromFavs} value={post._id}>Remove from favourites</button>
+                    </div>
+                  </Link>
                 </div>
               )}
             </div>

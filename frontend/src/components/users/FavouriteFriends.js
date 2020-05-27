@@ -44,27 +44,25 @@ class FavouriteFriends extends React.Component {
     return (
       <>
         <div className="Friends">
-          <h1 className="Title">
-            Following
-          </h1>
-          <div className="Fav-friends">
-            <div className="fav-card-friends">
-              {friends.map(friend =>
-                <div key={friend.username} className="Friends-name">
-                  <div className="Fav-card">
-                    <Link to={`/page/${friend.username}`}>
-                      <div className="Card-image">
-                        <img src={friend.profilePic} loading="lazy" width="150" height="150" alt={friend.username} />
-                      </div>
-                      <div className="Card-content">
-                        <h4 className=""><strong>{friend.username}</strong></h4>
-                      </div>
-                    </Link>
-                  </div>
-                  <button className="Button" onClick={this.removeFromFavs} value={friend._id}>Unfollow</button>
-                </div>
-              )}
+          <div className="Page-head">
+            <div className="Page-title">
+              <h1>MY FRIENDS</h1>
             </div>
+          </div>
+          <div className="Fav-friends">
+            {friends.map(friend =>
+              <div key={friend.username} className="Fav-card">
+                <Link to={`/page/${friend.username}`}>
+                  <div className="Card-image">
+                    <img src={friend.profilePic} loading="lazy" width="150" height="150" alt={friend.username} />
+                  </div>
+                  <div className="Card-content">
+                    <h4 className=""><strong>{friend.username}</strong></h4>
+                  </div>
+                </Link>
+                <button className="Button" onClick={this.removeFromFavs} value={friend._id}>Unfollow</button>
+              </div>
+            )}
           </div>
         </div>
       </>

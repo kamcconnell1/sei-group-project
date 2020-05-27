@@ -39,41 +39,34 @@ class FavouriteItem extends React.Component {
     const { items } = this.state
     return (
       <>
-        <section className="hero">
-          <div className="hero-body">
-            <div className="container">
-              <h1 className="title">
-                Favourite Items
-              </h1>
+        <div className="Fav-items">
+          <div className="Page-head">
+            <div className="Page-title">
+              <h1>MY FAVOURITE ITEMS</h1>
             </div>
           </div>
-        </section>
-        <section className="section">
-          <div className="container">
-            <div className="columns is-multiline">
-              {items.map(item =>
-                <div key={item._id} className="column is-one-quarter-desktop is-one-third-tablet is-half-mobile">
-                  <div className="card">
-                    <Link to={`/clothes/${item._id}`}>
-                      <div className="card-header">
-                      </div>
-                      <div className="card-image">
-                        <figure className="image image is-1by1">
-                          <img src={item.image[0]} alt={item.title} loading="lazy" width="255" height="255" />
-                        </figure>
-                      </div>
-                      <div className="card-content">
-                        <h4 className=""><strong>{item.title}</strong></h4>
-                        <h5 className=""><strong>Rental Price:</strong> {`£${item.rentalPrice}`}</h5>
-                      </div>
-                    </Link>
-                  </div>
-                  <button className="button is-dark is-small" onClick={this.removeFromFavs} value={item._id}>Delete from favourites</button>
+          <div className="Favs">
+            {items.map(item =>
+              <div key={item._id} className='m'>
+                <div className="Card">
+                  <Link to={`/clothes/${item._id}`}>
+                        <div className="fav-img">
+                        <img src={item.image[0]} alt={item.title} loading="lazy" width="255" height="255" />
+                        </div>
+                    <div className="Card-content">
+                      <h4><strong>{item.title}</strong></h4>
+                      <h5><strong>Rental Price:</strong> {`£${item.rentalPrice}`}</h5>
+                    </div>
+                  </Link>
                 </div>
-              )}
-            </div>
+                <button className="Button" onClick={this.removeFromFavs} value={item._id}>Delete from favourites</button>
+              </div>
+            )}
           </div>
-        </section>
+
+
+
+        </div>
       </>
     )
   }

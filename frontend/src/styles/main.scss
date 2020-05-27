@@ -39,7 +39,6 @@
 html {
   background-color: var(--main-bg-color);
   height: 100%;
-
 }
 
 .body {
@@ -49,8 +48,9 @@ html {
   background-color: rgba(190, 183, 192, 0.8);
 }
 
-h1, h2 {
-  font-family: 'Playfair Display', serif;
+h1,
+h2 {
+  font-family: "Playfair Display", serif;
 }
 
 a {
@@ -60,7 +60,8 @@ a {
 
 .About-page-main {
   height: 100vh;
-  background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("https://img.huffingtonpost.com/asset/5c94befb230000c800e9f38b.jpeg?ops=scalefit_720_noupscale&format=webp");
+  background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+    url("https://img.huffingtonpost.com/asset/5c94befb230000c800e9f38b.jpeg?ops=scalefit_720_noupscale&format=webp");
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
@@ -68,7 +69,7 @@ a {
   display: flex;
   flex-direction: column;
   align-items: center;
-  .Page-head{
+  .Page-head {
     display: flex;
     flex-direction: column;
   }
@@ -83,7 +84,7 @@ a {
     }
     h1.about-title {
       text-align: center;
-      font-family: 'Playfair Display', serif;
+      font-family: "Playfair Display", serif;
     }
 
     .About-row {
@@ -128,7 +129,7 @@ a {
   .Page-title {
     color: var(--title-color);
     font-size: 4vw;
-    font-family: 'Playfair Display', serif;
+    font-family: "Playfair Display", serif;
   }
   .Page-subtitle {
     color: var(--subtite-color);
@@ -136,12 +137,12 @@ a {
   }
 }
 
-.submit-pin{
+.submit-pin {
   margin-top: 300px;
 }
 
-.Home-class{
-    position: fixed;
+.Home-class {
+  position: fixed;
 }
 
 .About-us-wrapper {
@@ -176,7 +177,7 @@ a {
     margin: -7vw 1%;
     font-size: 1.2vw;
     font-weight: 500;
-    font-family: 'Playfair Display', serif;
+    font-family: "Playfair Display", serif;
     text-transform: uppercase;
   }
   .navbar-item {
@@ -209,10 +210,9 @@ a {
   background-color: rgba(var(--navbar-color-rgb), 0.1);
   .field {
     padding: 5px;
-    font-family: 'Playfair Display', serif;
+    font-family: "Playfair Display", serif;
   }
 }
-
 
 //? HOME
 .Home {
@@ -226,7 +226,7 @@ a {
   h1 {
     font-size: 10vw;
     font-weight: bold;
-    font-family: 'Playfair Display', serif;
+    font-family: "Playfair Display", serif;
   }
   h2 {
     font-size: 4vw;
@@ -265,15 +265,15 @@ a {
   top: var(--main-start-point);
 
   .Button {
-      width: 10vw;
-      padding: 0.5vw;
-      text-align: center;
-      font-size: 1vw;
-      font-family: inherit;
-      font-weight: 200;
-      background-color: rgba(66, 48, 48, 0.327);
-      border-radius: 10px;
-      color: white;
+    width: 10vw;
+    padding: 0.5vw;
+    text-align: center;
+    font-size: 1vw;
+    font-family: inherit;
+    font-weight: 200;
+    background-color: rgba(66, 48, 48, 0.327);
+    border-radius: 10px;
+    color: white;
   }
 
   .Clothes-filter {
@@ -382,7 +382,7 @@ h3 {
   flex-direction: row;
   justify-content: center;
   overflow: hidden;
-  
+
   .Post-form {
     display: column;
     justify-content: right;
@@ -428,7 +428,7 @@ h3 {
       background-color: rgba(66, 48, 48, 0.327);
       border-radius: 10px;
       color: white;
-  }
+    }
   }
   .Post-cards {
     display: flex;
@@ -550,7 +550,7 @@ h3 {
 
 //? PIN-MAP
 
-.pin-form{
+.pin-form {
   .Button {
     height: 4vw;
     max-height: 30px;
@@ -874,8 +874,7 @@ h3 {
       border: none;
       cursor: pointer;
       border-radius: 5px;
-
-      }
+    }
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -919,12 +918,12 @@ h3 {
     width: 70%;
     h5.title {
       margin-top: 5vw;
-      font-family: 'Playfair Display', serif;
+      font-family: "Playfair Display", serif;
       text-align: center;
       color: var(--title-color);
     }
     h6.subtitle {
-      font-family: 'Playfair Display', serif;
+      font-family: "Playfair Display", serif;
       text-align: center;
       color: var(--subtite-color);
     }
@@ -1199,11 +1198,9 @@ h3 {
 //? FAVOURITE
 
 .Friends {
-
- .Title {
-   font-size: 2vw;
- }
-  
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 
   .Button {
     width: 10vw;
@@ -1212,45 +1209,93 @@ h3 {
     padding: 0;
   }
   .Fav-friends {
+    margin-top: 12vw;
     display: flex;
-  max-width: 40vw;
-  max-height:40vw ;
+    flex-wrap: wrap;
+    max-height: 40vw;
+    max-width: 90vw;
   }
-
-  .Fav-card-friends {
+  .Fav-card {
+    a {
+      color: inherit;
+    }
+    a:hover {
+      color: white;
+    }
+    margin: 1vw;
     display: flex;
     flex-direction: column;
+    align-items: center;
+    text-align: center;
   }
-  
-
 }
 
-.FavPosts {
+.Fav-items {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 
-  .Title {
-    font-size: 2vw;
+  .Favs {
+    margin-top: 12vw;
+    display: flex;
+    overflow: scroll;
+    max-width: 80vw;
+    max-height: 40vw;
   }
-   
- 
-   .Button {
-     width: 10vw;
-     height: 2vw;
-     font-size: 1vw;
-     padding: 0;
-   }
-   .Fav-friends {
-     display: flex;
-   max-width: 40vw;
-   max-height:40vw;
-   }
- 
-   .Fav-post-friends {
-     display: flex;
-     flex-direction: column;
-   }
-   
- 
- }
+  .Card {
+    .fav-img {
+      overflow: hidden;
+      width: 20vw;
+      height: 20vw;
+    }
+    font-size: 1.3vw;
+    text-align: center;
+    a {
+      color: black;
+    }
+  }
+}
+
+.Fav-Posts {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 12vw;
+  .Button {
+    width: 10vw;
+    height: 2vw;
+    font-size: 1vw;
+    padding: 0;
+  }
+  .Fav-posts {
+    overflow: scroll;
+    max-height: 70vw;
+  }
+  .Fav-post-card {
+    margin: 3vw;
+    display: flex;
+    .Post-img-text {
+      display: flex;
+      max-width: 70vw;
+    }
+    .Card-image {
+      max-height: 20vw;
+      max-width: 30vw;
+      overflow: hidden;
+     
+    }
+    .Card-content {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      h4 {
+        text-align: right;
+        color: white;
+      }
+    }
+  }
+
+}
 
 @media only screen and (min-device-width: 375px) and (max-device-width: 667px) and (-webkit-min-device-pixel-ratio: 2) {
   .Main {
