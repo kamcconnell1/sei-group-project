@@ -56,7 +56,7 @@ class Posts extends React.Component {
   render() {
     if (!this.state.posts) return null
     return (
-      <>
+      <div className="Main Posts-Page">
         <div className="Page-head">
           <div className="Page-title">
             <h1>POSTS</h1>
@@ -77,7 +77,7 @@ class Posts extends React.Component {
             />
             <textarea className="Post-input-text"
               name="text"
-              rows="15"
+              rows="7"
               value={this.state.input.text}
               placeholder="Text"
               onChange={this.handleChange}
@@ -99,7 +99,7 @@ class Posts extends React.Component {
             ))}
           </div>
         </div>
-      </>
+      </div>
     )
   }
 }

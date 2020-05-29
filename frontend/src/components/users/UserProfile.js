@@ -173,7 +173,7 @@ class UserProfile extends React.Component {
     // * Sorted messages by date
     const sortedMessages = messages.sort((a, b) => b.createdAt - a.createdAt)
     return (
-      <>
+      <div className="Main">
         <div className="My-profile">
           <div className="My-profile-top-row">
             <div className="Photo-delete-rating">
@@ -265,9 +265,11 @@ class UserProfile extends React.Component {
                   }
                 </div>
               </div>
+              {commentsArray.length > 0 
+              ?
               <div className="My-comments">
                 <div className="My-comments-title">
-                  <h3>User's comments About Me</h3>
+                  <h3>Comments About Me</h3>
                 </div>
                 <div className="Comments-users">
                   {commentsArray.map(comment => (
@@ -278,10 +280,13 @@ class UserProfile extends React.Component {
                   ))}
                 </div>
               </div>
+            :
+            ''
+            }
             </div>
           </div>
         </div>
-      </>
+      </div>
     )
   }
 }

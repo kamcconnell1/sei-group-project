@@ -39,8 +39,10 @@ class FavouritePosts extends React.Component {
   render() {
     if (!this.state.posts) return <h1>The Ninjas went to get you some Pizza</h1>
     const { posts } = this.state
+    console.log(posts);
+    
     return (
-      <>
+      <div className="Main">
         <div className="Fav-Posts">
           <div className="Page-head">
             <div className="Page-title">
@@ -49,6 +51,7 @@ class FavouritePosts extends React.Component {
           </div>
           <div className="Fav-posts">
             <div className="fav-post-friends">
+              {posts.length === 0 ? <p>Oh no, looks like you haven't added anything yet!<br /> Go back and add to your favourites now to save things for later.</p> : ''}
               {posts.map(post =>
                 <div key={post._id} className="Fav-post-card">
                   <Link to={`/posts/${post._id}`} className="Post-img-text">
@@ -65,7 +68,7 @@ class FavouritePosts extends React.Component {
             </div>
           </div>
         </div>
-      </>
+      </div>
     )
   }
 }

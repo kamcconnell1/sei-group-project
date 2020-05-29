@@ -1,4 +1,4 @@
-//? VARS
+//? -------------------VARS-----------------
 :root {
   --main-bg-color: rgba(var(--main-bg-rgb), 0.8);
   --main-bg-rgb: 190, 183, 192;
@@ -7,15 +7,15 @@
   --navbar-hover-color: grey;
   --title-color: white;
   --subtite-color: rgb(173, 165, 165);
-  --main-start-point: 20vw;
-  --page-head-position: 10vw;
+  --main-start-point: 14vw;
+  --page-head-position: 5vw;
   --btn-color: lightgrey;
   --cards-text-color: rgb(86, 80, 87);
-  --section-titles-profile-size: 3vw;
+  --section-titles-profile-size: 2vw;
   --delete-btn-color: rgb(143, 29, 29);
 }
 
-//? LIBRARY
+//? -------------------LIBRARY--------------------
 
 .column-center {
   display: flex;
@@ -29,11 +29,12 @@
   justify-content: center;
 }
 
-//?Global Styling
+//?---------------GLOBAL STYLING----------------------
 * {
   margin: 0;
   padding: 0;
   font-family: "Poppins", sans-serif;
+  outline: none;
 }
 
 html {
@@ -58,68 +59,16 @@ a {
   color: inherit;
 }
 
-.About-page-main {
-  height: 100vh;
-  background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
-    url("https://img.huffingtonpost.com/asset/5c94befb230000c800e9f38b.jpeg?ops=scalefit_720_noupscale&format=webp");
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-position: center;
-  background-blend-mode: darken;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  .Page-head {
-    display: flex;
-    flex-direction: column;
-  }
-  .About {
-    margin-top: -50px;
-    height: 100%;
-    overflow: hidden;
-    .Page-title {
-      display: flex;
-      text-align: center;
-      justify-content: center;
-    }
-    h1.about-title {
-      text-align: center;
-      font-family: "Playfair Display", serif;
-    }
-
-    .About-row {
-      display: flex;
-      align-items: flex-start;
-      justify-content: center;
-      position: relative;
-      top: 20vh;
-      color: white;
-      text-align: center;
-
-      .Our-mission {
-        width: 35%;
-        margin: 5vw;
-      }
-      .How-it-works {
-        width: 35%;
-        margin: 5vw;
-      }
-    }
-  }
-}
 
 .Button {
-  width: 20vw;
-  padding: 1vw;
+  padding: 5px;
   text-align: center;
-  font-size: 2vw;
-  font-weight: 200;
+  font-size: 12px;
   background: rgb(48, 47, 47);
-  border-radius: 10px;
-  margin: 0;
+  border-radius: 5px;
   color: white;
 }
-//? ALL PAGES - navbar, main, footer
+//?----------------ALL PAGES - navbar, main, footer--------------------
 
 .Page-head {
   position: absolute;
@@ -141,21 +90,13 @@ a {
   margin-top: 300px;
 }
 
-.Home-class {
-  position: fixed;
-}
-
-.About-us-wrapper {
-  position: fixed;
-}
-
 .Main {
   display: flex;
   flex-direction: column;
   justify-content: left;
   align-items: center;
+  min-height: 93vh;
   background-color: rgba(190, 183, 192, 0.8);
-  height: 170vh;
   min-width: 100vw;
   a:hover {
     color: white;
@@ -205,24 +146,28 @@ a {
 }
 
 .box {
-  // width: 30%;
-  margin-top: 32vh;
+  margin-top: 20vh;
   background-color: rgba(var(--navbar-color-rgb), 0.1);
+  width: 40vw;
   .field {
-    padding: 5px;
+    // padding: 5px;
     font-family: "Playfair Display", serif;
   }
 }
 
-//? HOME
-.Home {
+//?--------------------HOME PAGE----------------------------------
+.Home-class {
+  body {
+    overflow: hidden;
+  }
+  .Home {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-content: center;
   text-align: center;
   min-height: 70vh;
-
+  }
   h1 {
     font-size: 10vw;
     font-weight: bold;
@@ -234,6 +179,51 @@ a {
     font-family: "Playfair Display", serif;
   }
 }
+
+//?-----------------------ABOUT PAGE --------------------------
+.About-page-main {
+  height: 93vh;
+  background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+    url("https://img.huffingtonpost.com/asset/5c94befb230000c800e9f38b.jpeg?ops=scalefit_720_noupscale&format=webp");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-blend-mode: darken;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  .Page-head {
+    display: flex;
+    flex-direction: column;
+  }
+    .Page-title {
+      display: flex;
+      text-align: center;
+      justify-content: center;
+    }
+    h1.about-title {
+      text-align: center;
+      font-family: "Playfair Display", serif;
+    }
+
+    .About-row {
+      display: flex;
+      align-items: flex-start;
+      justify-content: center;
+      position: relative;
+      top: 30vh;
+      color: white;
+      text-align: center;
+
+      .Our-mission {
+        width: 35%;
+        margin: 5vw;
+      }
+      .How-it-works {
+        width: 35%;
+        margin: 5vw;
+      }
+    }
+  }
 
 .Title {
   font-size: 1.5vw;
@@ -247,41 +237,41 @@ a {
     font-weight: 400;
   }
 }
-
 .Join-us {
   color: white;
-  position: relative;
-  top: 15vw;
+  position: fixed;
+  margin-top: 10vh;
+
   a {
     color: rgb(181, 156, 182);
     font-weight: bold;
   }
 }
 
-//? LATEST
+//?------------------LATEST ITEMS -----------------------------
+.Clothes-Index {
+  height: 960vh;
+  background-color: rgba(190, 183, 192, 0.8);
 
 .Latest {
   position: absolute;
   top: var(--main-start-point);
-
-  .Button {
-    width: 10vw;
-    padding: 0.5vw;
-    text-align: center;
-    font-size: 1vw;
-    font-family: inherit;
-    font-weight: 200;
-    background-color: rgba(66, 48, 48, 0.327);
-    border-radius: 10px;
-    color: white;
-  }
 
   .Clothes-filter {
     margin: 1vw;
     display: flex;
     align-items: flex-start;
     justify-content: center;
-    width: 90vw;
+  .Button {
+    width: 10vw;
+    padding: 9px;
+    margin-left: 35px;
+    font-size: 1vw;
+    font-family: inherit;
+    font-weight: 200;
+    background-color: rgba(66, 48, 48, 0.327);
+    border-radius: 5px;
+    color: white;
   }
   .input {
     margin: 1vw;
@@ -291,13 +281,14 @@ a {
     min-width: 12vw;
   }
 }
+}
+}
 
 .Clothes-index {
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
-  overflow: scroll;
-  width: 80vw;
+  width: 90vw;
   max-height: 40vw;
 }
 
@@ -337,10 +328,14 @@ a {
   }
 }
 
-//? CLOTHES SHOW
+//?---------------------------CLOTHES SHOW--------------------------
 
-// ? SLIDE IMAGE - SHOW PAGE
-
+.Cloth-card {
+  margin-top: 8vh;
+}
+h1.clothes-title {
+  text-transform: uppercase;
+}
 .slide {
   margin-top: 13px;
 }
@@ -348,35 +343,44 @@ a {
   width: 30vw;
   margin: auto;
 }
-
-.Slide-details {
+.comments {
+  margin-top: 10px;
+}
+.info-wrapper {
   display: flex;
-  flex-direction: column;
+  justify-content: space-between;
   align-items: center;
-
-  font-size: 2vw;
+  .user-info, p.username {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    img {
+      width: 140px;
+    }
+    .show-buttons {
+      margin-top: 5px;
+      a {
+        color: #b59cb6
+      }
+    }
+  }
 }
 
-.Slide-user {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-h3 {
-  text-align: center;
+.username{
+text-transform: uppercase;
+color: #363636;
 }
 
 .each-slide > div {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background-size: cover;
-  height: 30vw;
-  width: 30vw;
+  background-size: 100% 100%;
+  height: 38vw;
+  max-width: 30vw;
 }
 
-//? POSTS
-
+//?---------------------POSTS PAGE ----------------------------
+.Posts-Page {
+  height: 150vh;
+}
 .Posts {
   display: flex;
   flex-direction: row;
@@ -400,14 +404,14 @@ h3 {
     padding-bottom: 0;
     .Post-input-title {
       width: 25vw;
-      height: 3vw;
+      height: 2vw;
       margin: 1vw 0;
       outline: none;
       border-radius: 7px;
     }
     .Post-input-text {
       width: 25vw;
-      height: 25vw;
+      height: 15vw;
       border: none;
       margin-bottom: 1vw;
       outline: none;
@@ -434,7 +438,7 @@ h3 {
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
-    overflow: scroll;
+    overflow: auto;
     max-height: 50vw;
     max-width: 70vw;
     .Post-bottom {
@@ -444,7 +448,7 @@ h3 {
   .Card {
     background-color: rgba(var(--navbar-color-rgb), 0.3);
     margin: 1vw;
-    padding: 2vw;
+    padding: 1vw;
     width: 80%;
     .Title {
       color: rgb(252, 249, 249);
@@ -457,10 +461,10 @@ h3 {
     .Text {
       width: 65%;
       .Post-content {
-        font-size: 9px;
+        font-size: 12px;
         font-weight: 200;
         color: black;
-        max-height: 100px;
+        max-height: 500px;
         overflow: hidden;
       }
       .Post-author {
@@ -471,16 +475,16 @@ h3 {
   }
 }
 
-//? POST SHOW
+//?------------------------POST SHOW------------------------------
 
 .Post {
   display: flex;
   flex-direction: column;
   width: 80vw;
+  height: 160vh;
 
   .Button {
-    width: 13vw;
-    font-size: 1.2vw;
+    width: 8vw;
   }
   .Title {
     font-size: 3vw;
@@ -508,7 +512,7 @@ h3 {
     flex-direction: column;
     width: 30%;
     p {
-      font-size: 2vw;
+      font-size: 1vw;
     }
   }
 
@@ -516,10 +520,18 @@ h3 {
     display: flex;
     flex-direction: column;
     width: 60%;
-    overflow: scroll;
-    max-height: 15vw;
-    width: 30vw;
-    font-size: 1vw;
+    overflow: auto;
+    .Comment-top{
+      h4{
+        font-size: 15px;
+      }
+      h5 {
+        font-size: 10px;
+      }
+    }
+        .Button{
+          width:50px;
+        }
   }
 
   .Post-main {
@@ -541,14 +553,13 @@ h3 {
   }
   .Created-by {
     display: flex;
-    flex-direction: column;
-    align-items: flex-end;
+    flex-direction: column-reverse;
     margin: 2vw;
     font-size: 1vw;
   }
 }
 
-//? PIN-MAP
+//? -------------------------PIN-MAP----------------------------------
 
 .pin-form {
   .Button {
@@ -564,7 +575,6 @@ h3 {
   display: flex;
   flex-direction: column;
   align-items: center;
-  min-height: 100vh;
   .Button {
     width: 20vw;
     max-width: 120px;
@@ -577,7 +587,7 @@ h3 {
 .Map {
   .MapGL {
     position: relative;
-    top: 17vw;
+    top: 10vw;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -587,7 +597,6 @@ h3 {
     border: 2px solid white;
     width: 100%;
     height: 100%;
-    margin-bottom: 10vw;
   }
   .pincard p {
     font-size: 1.5vw;
@@ -608,12 +617,52 @@ h3 {
   border-radius: 100%;
 }
 
-//? SHOW USERS PROFILE
+//?---------------------------MAP FORM MODAL------------------------
+
+.pin-modal {
+  display: flex;
+  align-items: center;
+  .Modal {
+    display: none;
+    z-index: 99;
+    width: 60vw;
+    height: 40vw;
+    position: fixed;
+    top: 23vh;
+    left: 30vw;
+    background-color: rgba(var(--navbar-color-rgb), 0.9);
+    border-radius: 20px;
+    .Modal-content {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      width: 60vw;
+      height: 40vw;
+    }
+    .Modal-close {
+      position: absolute;
+      right: 2vw;
+      top: 2vw;
+      width: 6vw;
+      height: 3vw;
+      background-color: var(--main-bg-color);
+      border-radius: 5px;
+      font-size: 1.4vw;
+    }
+  }
+  .Modal-inactive {
+    display: block;
+  }
+}
+
+//? ------------------------SHOW USERS PROFILE------------------------
 
 .Show-profile {
   display: flex;
   flex-direction: column;
   align-items: center;
+  height: 120vh;
 }
 
 .Show-profile-top {
@@ -625,7 +674,6 @@ h3 {
   img {
     max-width: 12vw;
     max-height: 12vw;
-    border-radius: 90px;
     margin: 2vw 2vw 0 0;
   }
   display: flex;
@@ -633,23 +681,17 @@ h3 {
   align-items: center;
   margin-right: 12vw;
   h4 {
-    font-size: 3vw;
+    font-size: 30px;
+    text-transform: uppercase;
   }
   h6 {
-    font-size: 2vw;
+    font-size: 15px;
   }
 }
 
 .Follow-message {
   display: flex;
   align-items: center;
-
-  .Button {
-    width: 12vw;
-    height: 3vw;
-    padding: 0;
-    font-size: 1.4vw;
-  }
 }
 
 .Comments-container {
@@ -657,17 +699,15 @@ h3 {
   flex-direction: column;
   align-items: center;
   margin-top: 5vw;
+
+h3 {
+  text-transform: uppercase;
 }
 .Comments {
-  display: flex;
-  justify-content: right;
-  align-items: flex-end;
   .Button {
     width: 7vw;
     height: 2vw;
     font-size: 1vw;
-    padding: 0;
-    background-color: var(--delete-btn-color);
   }
 
   .Comment {
@@ -682,13 +722,11 @@ h3 {
     display: flex;
     flex-direction: column;
     p {
-      font-size: 1.5vw;
-      text-align: center;
+      font-size: 15px;
     }
     .Comment-text {
       border-radius: 5px;
       border: none;
-      margin: 1vw;
       width: 15vw;
     }
   }
@@ -704,7 +742,7 @@ h3 {
     width: 100%;
   }
 }
-
+}
 .card-two {
   display: flex;
   flex-direction: column;
@@ -721,9 +759,9 @@ h3 {
   .User-items-index {
     display: flex;
     margin-top: 4vw;
-    overflow: scroll;
-    max-height: 40vw;
-    max-width: 78vw;
+    overflow: auto;
+    max-width: 90vw;
+    height: 255px;
 
     .Card {
       display: flex;
@@ -764,48 +802,9 @@ h3 {
   }
 }
 
-//? REGISTER & LOGIN FORMS
-.register-form {
-  top: var(--main-start-point);
-}
-.pin-modal {
-  display: flex;
-  align-items: center;
-  .Modal {
-    display: none;
-    z-index: 99;
-    width: 60vw;
-    height: 40vw;
-    position: fixed;
-    top: 23vh;
-    left: 30vw;
-    background-color: rgba(var(--navbar-color-rgb), 0.9);
-    border-radius: 20px;
-    .Modal-content {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      width: 60vw;
-      height: 40vw;
-    }
-    .Modal-close {
-      position: absolute;
-      right: 2vw;
-      top: 2vw;
-      width: 6vw;
-      height: 3vw;
-      background-color: var(--main-bg-color);
-      border-radius: 5px;
-      font-size: 1.4vw;
-    }
-  }
-  .Modal-inactive {
-    display: block;
-  }
-}
 
-//? USER PROFILE - MY PROFILE PAGE
+
+//? -------------USER PROFILE - MY PROFILE PAGE----------------------
 
 .My-profile {
   display: flex;
@@ -824,7 +823,7 @@ h3 {
       width: 60vw;
       height: 40vw;
       position: fixed;
-      top: 23vh;
+      top: 15vh;
       left: 30vw;
       background-color: rgba(var(--navbar-color-rgb), 0.9);
       border-radius: 20px;
@@ -858,7 +857,7 @@ h3 {
       img {
         width: 20vw;
         height: auto;
-        clip-path: circle(60px at center);
+        clip-path: circle(80px at center);
         display: cover;
       }
     }
@@ -888,17 +887,16 @@ h3 {
       .My-profile-update-btn,
       .My-profile-delete-btn {
         text-align: center;
-        font-size: 1.3vw;
+        font-size: 0.8vw;
         font-family: inherit;
         font-weight: 200;
         padding: 0.5vw 0.7vw;
-        background-color: rgba(66, 48, 48, 0.327);
         border-radius: 10px;
         margin: 0.7vw;
         color: white;
       }
       .My-profile-update-btn {
-        background-color: rgb(87, 170, 87);
+        background-color:#98c9a3;
       }
       .My-profile-delete-btn {
         background-color: rgb(168, 86, 100);
@@ -966,7 +964,6 @@ h3 {
 
 .My-profile-message-board {
   height: 100vh;
-  padding-top: 3vw;
   margin-left: 2vw;
 
   h3 {
@@ -978,9 +975,7 @@ h3 {
 .My-profile-message-board {
   display: flex;
   flex-direction: column;
-  margin-top: 2vw;
-  // background-color: red;
-  overflow: scroll;
+  overflow: auto;
   max-height: 50vw;
   width: 100%;
 }
@@ -1126,14 +1121,17 @@ h3 {
   }
 }
 
-//? Add clothes to rent
-
+//?-----------------ADD CLOTHES ---------------------------------
+.Clothes-Add {
+  height: 135vh;
+}
 .ClothesForm {
   position: relative;
   top: 15vw;
+  margin-bottom: 5vh;
 }
 
-//? Comments from users
+//? -------------USER COMMENTS-------------------------------------
 
 .My-comments {
   padding: 3vw;
@@ -1150,7 +1148,7 @@ h3 {
 }
 
 .Comment {
-  margin: 3vw;
+  margin: 1vw;
   .Comments-user.Delete {
     display: none;
   }
@@ -1159,10 +1157,10 @@ h3 {
 .Comment-top {
   display: flex;
   justify-content: left;
-  margin-bottom: 2vw;
+  margin-bottom: 1vw;
   img {
-    max-width: 5vw;
-    max-height: 5vw;
+    max-width: 3vw;
+    max-height: 3vw;
     border-radius: 50px;
   }
   .Comment-top-right {
@@ -1171,7 +1169,7 @@ h3 {
     align-items: left;
     margin-left: 2vw;
     h4 {
-      font-size: 2vw;
+      font-size: 20px;
     }
     h5 {
       font-size: 1vw;
@@ -1180,14 +1178,14 @@ h3 {
   }
 }
 .Comment-text {
-  margin-top: 2vw;
+  margin-top: 0.5vw;
   h5 {
     text-align: center;
     font-size: 1vw;
     font-weight: 200;
   }
   p {
-    font-size: 1.4vw;
+    font-size: 1vw;
   }
 }
 
@@ -1195,7 +1193,7 @@ h3 {
   display: block;
 }
 
-//? FAVOURITE
+//?---------------FAVOURITES-----------------------------------
 
 .Friends {
   display: flex;
@@ -1238,7 +1236,7 @@ h3 {
   .Favs {
     margin-top: 12vw;
     display: flex;
-    overflow: scroll;
+    overflow: auto;
     max-width: 80vw;
     max-height: 40vw;
   }
@@ -1268,7 +1266,7 @@ h3 {
     padding: 0;
   }
   .Fav-posts {
-    overflow: scroll;
+    overflow: auto;
     max-height: 70vw;
   }
   .Fav-post-card {
@@ -1282,7 +1280,6 @@ h3 {
       max-height: 20vw;
       max-width: 30vw;
       overflow: hidden;
-     
     }
     .Card-content {
       display: flex;
@@ -1296,7 +1293,10 @@ h3 {
   }
 
 }
-
+//?---------------REGISTER ----------------------------
+.Register {
+  height: 105vh;
+}
 @media only screen and (min-device-width: 375px) and (max-device-width: 667px) and (-webkit-min-device-pixel-ratio: 2) {
   .Main {
     padding: 0;

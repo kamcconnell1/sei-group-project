@@ -5,9 +5,6 @@ class About extends React.Component {
 
   render() {
     return (
-      <>
-        <div className="About-us-wrapper">
-          <div>
             <div className="About-page-main">
               <div className="Page-head">
                 <div className="Page-title">
@@ -40,9 +37,6 @@ class About extends React.Component {
                 </div>
               </div>
             </div>
-          </div>
-        </div>
-      </>
     )
   }
 }

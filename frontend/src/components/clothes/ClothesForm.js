@@ -27,11 +27,9 @@ const ClothesForm = ({ handleChange, handleSubmit, handleMultiChange, formData, 
 
 
   return (
-    <section className="section">
-      <div className="container">
-        <div className="columns">
+        <div className="column">
           <form
-            className="column is-half is-offset-one-quarter box"
+            className="box"
             onSubmit={handleSubmit}
           >
 
@@ -161,7 +159,6 @@ const ClothesForm = ({ handleChange, handleSubmit, handleMultiChange, formData, 
               </div>
               {errors.rentalPrice && <small className="help is-danger">{errors.rentalPrice}</small>}
             </div>
- 
             <div className="field">
               {errors.image && <small className="help is-danger">Please upload some images</small>}
               <div className="control">
@@ -172,22 +169,22 @@ const ClothesForm = ({ handleChange, handleSubmit, handleMultiChange, formData, 
                       onChange={args => onChange(args, index)}
                       preset={uploadClothesImage}
                       name="image"
-                      labelText="Please add an image (*2 minimum)"
+                      labelText="Please add an image(s)"
                     />
                   )
                 })
                 }
-                {image.length < 5 && <button onClick={onClick}>Add Image</button>}
+                {image.length < 5 && <button className="Button" onClick={onClick}>Add Another Image</button>}
               </div>
       
             <div className="field">
-              <button type="submit" className="button is-fullwidth is-primary">Add Item</button>
+            <div class="buttons has-addons is-right">
+              <button type="submit" className="button is-warning is-medium is-light">Add Item</button>
+              </div>
             </div>
             </div>
           </form>
         </div>
-      </div>
-    </section>
   )
 }
 

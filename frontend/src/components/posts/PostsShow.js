@@ -89,13 +89,14 @@ class PostsShow extends React.Component {
   }
 
   render() {
-    const { post, commentsArray } = this.state
     if (!this.state.post) return <h1>loading</h1>
+    const { post, commentsArray } = this.state
     const edited = post.createdAt.split('T')
     const date = edited[0]
     const time = edited[1].split('.')[0]
+    
     return (
-      <>
+      <div className="Main">
         <div className="Post">
           <section className="">
             <div className="hero-body">
@@ -106,19 +107,19 @@ class PostsShow extends React.Component {
             <div className="Post-and-comments">
               <div className="Post-main">
                 <img src={post.photo} alt={post.title} height="200" width="100" />
-                <p className="Content">{post.text}</p>
+                <p className="Content">
+                <Link to={`/page/${post.user.username}`}><p>Posted by {post.user.username} @ {date}</p> </Link>
+                  {post.text}</p>
               </div>
               <div className="Created-by">
-                <Link to={`/page/${post.user.username}`}><p>Created by: {post.user.username}</p> </Link>
-                <p>{date} {time}</p>
                 {isOwner(post.user._id) && <Link to={`/posts/${post._id}/edit`}><button className="Button">Edit</button></Link>}
                 {isOwner(post.user._id) && <button className="Button" value={post._id} onClick={this.deletePost}>Delete</button>}
-                <button name="posts" value={post._id} onClick={this.handleFavouriteSubmit} className="Button">Add to Favourites</button>
+                {isAuthenticated() && <button name="posts" value={post._id} onClick={this.handleFavouriteSubmit} className="button is-small is-danger">❤️ Favourite</button>}
               </div>
 
             </div>
             <div className="Comments-all">
-              {isAuthenticated && <section>
+              {isAuthenticated() && <section>
                 <form onSubmit={this.handleCommentSubmit}>
                   <div className="Post-comment">
                     <div className="label for comments">
@@ -132,9 +133,11 @@ class PostsShow extends React.Component {
                       name="text"
                       onChange={this.handleCommentChange}
                       value={this.state.comments.text} />
-                    <button className="Button">Submit Comment</button>
+                    <button className="Button">Submit</button>
                   </div>
                 </form>
+                {commentsArray.length > 0 
+                ? 
                 <div className="User-comments">
                   {commentsArray.map(comment => (
                     <Comments
@@ -144,12 +147,15 @@ class PostsShow extends React.Component {
                     />
                   ))}
                 </div>
+                :
+                ''
+              }
               </section>}
             </div>
           </section>
 
         </div>
-      </>
+      </div>
     )
   }
 }

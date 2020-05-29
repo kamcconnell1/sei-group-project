@@ -42,7 +42,7 @@ class FavouriteFriends extends React.Component {
     if (!this.state.friends) return <h1>Looks like the Ninjas dont like you</h1>
     const { friends } = this.state
     return (
-      <>
+      <div className="Main">
         <div className="Friends">
           <div className="Page-head">
             <div className="Page-title">
@@ -50,6 +50,7 @@ class FavouriteFriends extends React.Component {
             </div>
           </div>
           <div className="Fav-friends">
+          {friends.length === 0 ? <p>Oh no, looks like you haven't added anything yet!<br /> Go back and add to your favourites now to save things for later.</p> : ''}
             {friends.map(friend =>
               <div key={friend.username} className="Fav-card">
                 <Link to={`/page/${friend.username}`}>
@@ -65,7 +66,7 @@ class FavouriteFriends extends React.Component {
             )}
           </div>
         </div>
-      </>
+      </div>
     )
   }
 }

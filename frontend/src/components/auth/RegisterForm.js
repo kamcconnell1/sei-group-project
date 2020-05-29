@@ -4,9 +4,8 @@ import { Link } from 'react-router-dom'
 const RegisterForm = ({ handlePostcodeChange, handleChange, handleSubmit, username, email, postcode, password, passwordConfirmation, errors }) => {
 
   return (
-    <>
-  
-     <div className="column">
+
+    <div className="column">
       <form
         onSubmit={handleSubmit}
         className="box"
@@ -89,10 +88,8 @@ const RegisterForm = ({ handlePostcodeChange, handleChange, handleSubmit, userna
           <button type="submit" className="button is-warning is-medium is-light">Register</button>
         </div>
       </form>
-      </div>
-     
- 
-    </>
+    </div>
+
   )
 }
 

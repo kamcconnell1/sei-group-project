@@ -33,7 +33,7 @@ const App = () => {
       <BrowserRouter>
         <Notifications />
         <Navbar className="Navbar" />
-        <div className="Main">
+        {/* <div className="Main"> */}
           <Switch>
             <Route exact path='/' component={Home} />
             <Route path='/page/:username' component={userShowProfile} />
@@ -55,7 +55,7 @@ const App = () => {
             <Route path='/posts' component={Posts} />
             <Route path="/*" component={Error} />
           </Switch>
-        </div>
+        {/* </div> */}
 
         <div className="">
           <Footer className='Footer' />

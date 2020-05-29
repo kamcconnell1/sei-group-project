@@ -26,7 +26,7 @@ const EditProfilePicture = ({ onChange, onSubmit, toggleModal, modalOpen, profil
             </div>
             <div className="Submit">
               <button type="Submit"
-                className="Modal-submit-btn">
+                className="Button">
                 Update My Picture
           </button>
             </div>

@@ -38,7 +38,7 @@ class FavouriteItem extends React.Component {
     if (!this.state.items) return <h1>The Ninjas went to get you some Pizza</h1>
     const { items } = this.state
     return (
-      <>
+      <div className="Main">
         <div className="Fav-items">
           <div className="Page-head">
             <div className="Page-title">
@@ -46,6 +46,7 @@ class FavouriteItem extends React.Component {
             </div>
           </div>
           <div className="Favs">
+          {items.length === 0 ? <p>Oh no, looks like you haven't added anything yet!<br /> Go back and add to your favourites now to save things for later.</p> : ''}
             {items.map(item =>
               <div key={item._id} className='m'>
                 <div className="Card">
@@ -67,7 +68,7 @@ class FavouriteItem extends React.Component {
 
 
         </div>
-      </>
+      </div>
     )
   }
 }

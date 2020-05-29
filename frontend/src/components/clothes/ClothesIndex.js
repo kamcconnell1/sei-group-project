@@ -1,9 +1,7 @@
 import React from "react"
-
 import { showAllClothes } from "../../lib/api"
 import ClothCard from "./ClothCard"
 import ClothesFilter from "./ClothesFilter"
-
 class ClothesIndex extends React.Component {
   state = {
     clothes: null,
@@ -12,7 +10,6 @@ class ClothesIndex extends React.Component {
     searchClothes: "",
     filteredItemsToDisplay: [],
   }
-
   //* Function to GET all clothes and get data for filter functions
   async componentDidMount() {
     try {
@@ -49,7 +46,6 @@ class ClothesIndex extends React.Component {
       this.props.history.push('/notfound')
     }
   }
-
   // * Function to handle search box input - user can search by category, title and username
   handleChange = (event) => {
     const { clothes } = this.state
@@ -137,7 +133,6 @@ class ClothesIndex extends React.Component {
     const colorOption = colors.map((col) => {
       return { value: col, label: col }
     })
-
     // * Variable of Gender options
     const genderOption = genders.map((gen) => {
       return { value: gen, label: gen }
@@ -147,7 +142,7 @@ class ClothesIndex extends React.Component {
       return { value: size, label: size }
     })
     return (
-      <>
+      <div className="Main Clothes-Index">
         <div className="Page-head">
           <div className="Page-title">
             <h1>CLOTHES</h1>
@@ -177,24 +172,24 @@ class ClothesIndex extends React.Component {
                 onChange={this.handleChange}
               />
             </form>
+          <button onClick={this.resetFilter} className="Clothes-filter Button">Reset</button>
           </div>
-          <button onClick={this.resetFilter} className="Button">Reset Filter</button>
           <br />
           <div className="Clothes-index">
             {filteredItemsToDisplay.length > 0 ? (
-              filteredItemsToDisplay.sort((a, b) => a.rentalPrice - b.rentalPrice).map((cloth) => (
+              filteredItemsToDisplay.sort((a, b) => b.rentalPrice - a.rentalPrice).map((cloth) => (
                 <ClothCard {...cloth} key={cloth._id} />
               ))
             ) : anyFilterSet ? (
               <p>No items found with your filters</p>
             ) : (
-                  filteredClothes.sort((a, b) => a.rentalPrice - b.rentalPrice).map((cloth) => (
+                  filteredClothes.sort((a, b) => b.rentalPrice - a.rentalPrice).map((cloth) => (
                     <ClothCard {...cloth} key={cloth._id} />
                   ))
                 )}
           </div>
         </div >
-      </>
+      </div>
     )
   }
 }

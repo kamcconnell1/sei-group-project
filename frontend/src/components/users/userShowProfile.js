@@ -163,11 +163,10 @@ class userShowProfile extends React.Component {
     if (!this.state.user) return <h1>User kidnapped, Ninja to the rescue</h1>
 
     const rating = parseInt(this.getUserRating())
-    const { user, userItems, comments, commentsArray, contactModalOpen } = this.state
-    const { location } = this.state
+    const { user, userItems, comments, commentsArray, contactModalOpen, location } = this.state
+    
     return (
-      <>
-        <div className="Show-profile">
+        <div className="Show-profile Main">
           <div className="Show-profile-top">
             <div className="Photo-user-rating">
               <img src={user.profilePic} alt={user.username} />
@@ -189,7 +188,7 @@ class userShowProfile extends React.Component {
                           <textarea
                             name="text"
                             onChange={this.handleContactChange}
-                            className="textarea is-medium is-primary"
+                            className="textarea is-medium"
                             placeholder="Message..."></textarea>
                         </div>
                         <br />
@@ -200,30 +199,11 @@ class userShowProfile extends React.Component {
                 </div>
 
 
+              </div>
             </div>
-            </div>
-            
-
 
             <div className="Comments-container">
               <h3>{user.username}'s Reviews</h3>
-              {
-                isAuthenticated() && <section className="Comments">
-                  <form
-                    className="Comment-left"
-                    onSubmit={this.handleCommentSubmit}>
-                    <p> Your review for {user.username}:</p>
-                    <textarea
-                      className="Comment-text"
-                      rows="5"
-                      type="textArea"
-                      maxLength="200"
-                      name="text"
-                      onChange={this.handleCommentChange}
-                      value={comments.text} />
-                    <button className="Submit">Submit Comment</button>
-                  </form>
-
                   <div className="Comments-on-user">
                     {commentsArray.map(comment => (
                       <Comments
@@ -234,6 +214,23 @@ class userShowProfile extends React.Component {
                     ))}
 
                   </div>
+              {
+                isAuthenticated() && <section className="Comments">
+                  <form
+                    className="Comment-left"
+                    onSubmit={this.handleCommentSubmit}>
+                    <p> Add Review:</p>
+                    <textarea
+                      className="Comment-text"
+                      rows="5"
+                      type="textArea"
+                      maxLength="200"
+                      name="text"
+                      onChange={this.handleCommentChange}
+                      value={comments.text} />
+                    <button className="Button">Add</button>
+                  </form>
+
                 </section>
               }
 
@@ -261,9 +258,6 @@ class userShowProfile extends React.Component {
             </div>
           </div>
         </div>
-
-
-      </>
     )
   }
 

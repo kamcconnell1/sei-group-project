@@ -27,7 +27,7 @@ const SingleClothCard = ({ deleteComment, rentalPrice, handleContactSubmit, hand
 
   return (
     <>
-      <section className="section">
+      <section className="Cloth-card section">
         <div className="slide-container">
           <Slide {...properties}>
             <div className="each-slide">
@@ -48,26 +48,27 @@ const SingleClothCard = ({ deleteComment, rentalPrice, handleContactSubmit, hand
           </Slide>
         </div>
 
-        {isAuthenticated() && <button name="item" value={clothId} onClick={onClick} className="button is-small is-danger">Add to Favourites</button>}
+        {isAuthenticated() && <button name="item" value={clothId} onClick={onClick} className="button is-small is-danger">❤️ Favourite</button>}
         <br />
         {isAuthenticated() && <form onSubmit={handleCommentSubmit}>
-          <div>
+          <div className="comments">
             <div className="label for comments">
-              <p> Add a comment on {title} </p>
+              <p>Comment on {title} </p>
             </div>
             <textarea
-              className="textarea is-small is-info"
+              className="textarea"
+              rows="2"
               type="textArea"
               maxLength="250"
               name="text"
               onChange={handleCommentChange}
               value={commentText}
-              placeholder="Add your comment"
+              placeholder="Add your comment..."
             ></textarea>
           </div>
           <br />
           <div>
-            <button className="button is-small is-info">Submit Comment</button>
+            <button className="Button">Submit Comment</button>
           </div>
         </form>}
         <div>
@@ -80,64 +81,61 @@ const SingleClothCard = ({ deleteComment, rentalPrice, handleContactSubmit, hand
           ))}
         </div>
       </section>
-      <section className="section">
-        <Link to={`/page/${username}`}>
-          <div className="container">
-            <figure className="media-left">
-              <p className="image is-64x64">
+      <section className="Cloth-card section">
+        <hr />
+        <div className="info-wrapper">
+          <div className="item-info">
+            <p><strong>Brand:  </strong>  {brand}</p>
+            <p><strong>{category}:  </strong>  {genderCategory}</p>
+            <p><strong>Color:  </strong>  {color}</p>
+            <p><strong>Size:  </strong>  {size}</p>
+            <p><strong>Rental price:  </strong>  £{rentalPrice}</p>
+          </div>
+          <div className="user-info">
+            <Link to={`/page/${username}`}>
+              <div className="container">
+                <p className="username"><strong>{username}</strong></p>
                 <img src={profilePic} alt={username} />
-              </p>
-            </figure>
-            <p><strong>{username}</strong></p>
-          </div>
-        </Link>
-        <StarRating
-            rating={rating}
-            editing={false}
-          />
-        <div>
-          <hr />
-          <p><strong>Brand: </strong> {brand}</p>
-          <p><strong>{category}: </strong> {genderCategory}</p>
-          <p><strong>Color: </strong> {color}</p>
-          <p><strong>Size: </strong> {size}</p>
-          <p><strong>Rental price: </strong> £{rentalPrice}</p>
-        </div>
-        <hr />
-        <div className="show-buttons">
-          {!isAuthenticated() ? <div className="columns">
-            <Link to="/login">SIGN IN</Link>
-            <p className="or"> OR </p>
-            <Link to="/register">JOIN KEBB</Link>
-          </div>: <button onClick={toggleContact} className="button is-primary is-small">CONTACT USER</button> }
-        </div>
-        <div className={contactModalOpen ? "modal is-active" : "modal"}>
-          <div className="field">
-            <form onSubmit={handleContactSubmit}>
-              <div className="control">
-                <textarea name="text" onChange={handleContactChange} className="textarea is-medium is-primary" placeholder="Message..."></textarea>
               </div>
-              <button className="button is-small is-info">SEND</button>
-            </form>
+            </Link>
+            <StarRating
+              rating={rating}
+              editing={false}
+            />
+            <div className="show-buttons">
+              {!isAuthenticated() ? <div className="columns">
+                <Link to="/login">SIGN IN</Link>
+                <p className="or"> OR </p>
+                <Link to="/register">JOIN KEBB</Link>
+              </div> : <button onClick={toggleContact} className="Button">CONTACT</button>}
+            </div>
+            <div className={contactModalOpen ? "modal is-active" : "modal"}>
+              <div className="field">
+                <form onSubmit={handleContactSubmit}>
+                  <div className="control">
+                    <textarea name="text" onChange={handleContactChange} className="textarea is-medium is-primary" placeholder="Message..."></textarea>
+                  </div>
+                  <button className="button is-small is-info">SEND</button>
+                </form>
+              </div>
+            </div>
           </div>
         </div>
         <hr />
-          <p>Other Items posted by {username}</p> <br/>
-        <div className="columns similar">
-          <div className="column is-one-quarter">
-            <a onClick={onFirstClick}>
-              <figure className="image">
-                <img src={images[0].image} alt={title} />
-              </figure>
-            </a>
-          </div>
+        <div className="rent-wardrobe">
+          <p className="username">Rent {username}'s Wardrobe</p> <br />
+          <div className="columns similar">
+            <div className="column is-one-quarter">
+              <a onClick={onFirstClick}>
+                  <img src={images[0].image} alt={title} />
+              </a>
+            </div>
 
-          <div className="column is-one-quarter">
-            <a onClick={onSecondClick}>
-              <figure className="image">
-                <img src={images[1].image} alt={title} />
-              </figure>
-            </a>
+            <div className="column is-one-quarter">
+              <a onClick={onSecondClick}>
+                  <img src={images[1].image} alt={title} />
+              </a>
+            </div>
           </div>
         </div>
       </section>
