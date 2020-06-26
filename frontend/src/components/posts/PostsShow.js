@@ -96,66 +96,65 @@ class PostsShow extends React.Component {
     const time = edited[1].split('.')[0]
     
     return (
-      <div className="Main">
-        <div className="Post">
-          <section className="">
-            <div className="hero-body">
-              <div className="container">
-                <h1 className="Title">{post.title}</h1>
+      <>
+      <div className="Page-head PostShow">
+          <div className="Page-title">
+                <h1 >{post.title}</h1>
               </div>
             </div>
+
+            <div className='post-card'>
             <div className="Post-and-comments">
-              <div className="Post-main">
-                <img src={post.photo} alt={post.title} height="200" width="100" />
-                <p className="Content">
-                <Link to={`/page/${post.user.username}`}><p>Posted by {post.user.username} @ {date}</p> </Link>
-                  {post.text}</p>
-              </div>
+            <div className='card-content'>
+                <img className="Post-image" src={post.photo} alt={post.title} />
+                <div className="Post-right">
+                <p className="Title Post">
+                <Link to={`/page/${post.user.username}`}><p>Posted by {post.user.username} @ {date}</p> </Link></p>
+                  <p className='Text'>{post.text}</p>
               <div className="Created-by">
                 {isOwner(post.user._id) && <Link to={`/posts/${post._id}/edit`}><button className="Button">Edit</button></Link>}
                 {isOwner(post.user._id) && <button className="Button" value={post._id} onClick={this.deletePost}>Delete</button>}
-                {isAuthenticated() && <button name="posts" value={post._id} onClick={this.handleFavouriteSubmit} className="button is-small is-danger">❤️ Favourite</button>}
+                {isAuthenticated() && <button name="posts" value={post._id} onClick={this.handleFavouriteSubmit} className="favourite-btn">❤️ Love!</button>}
               </div>
-
+              </div>
+              </div>
             </div>
             <div className="Comments-all">
-              {isAuthenticated() && <section>
-                <form onSubmit={this.handleCommentSubmit}>
                   <div className="Post-comment">
+              {isAuthenticated() && 
+                <form onSubmit={this.handleCommentSubmit}>
                     <div className="label for comments">
                       <p> Leave a comment </p>
                     </div>
-                    <textarea
+                    <input
                       className="comments-input"
-                      type="textArea"
-                      rows="5"
+                      placeholder='Comment'
                       maxLength="250"
                       name="text"
                       onChange={this.handleCommentChange}
                       value={this.state.comments.text} />
+                      <div >
                     <button className="Button">Submit</button>
+                    </div>
+              </form> }
                   </div>
-                </form>
+                  <div className="User-comments">
                 {commentsArray.length > 0 
                 ? 
-                <div className="User-comments">
-                  {commentsArray.map(comment => (
+                  commentsArray.map(comment => (
                     <Comments
                       key={comment._id}
                       comment={comment}
                       deleteComment={this.deleteComment}
                     />
-                  ))}
+                  ))
+                  :
+                  ''
+                }
                 </div>
-                :
-                ''
-              }
-              </section>}
             </div>
-          </section>
-
-        </div>
-      </div>
+            </div>
+          </>
     )
   }
 }

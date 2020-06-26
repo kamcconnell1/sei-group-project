@@ -1,0 +1,52 @@
+//?-----------------------ABOUT PAGE --------------------------
+.About-page {
+  height: 93vh;
+  background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+    url("https://img.huffingtonpost.com/asset/5c94befb230000c800e9f38b.jpeg?ops=scalefit_720_noupscale&format=webp");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-blend-mode: darken;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  
+  .Join-us {
+    color: white;  
+    a {
+      color: rgb(181, 156, 182);
+      font-weight: bold;
+    }
+  }
+  .Title {
+    font-size: 1.5vw;
+    margin: 2vw;
+  }
+  
+  .About-row {
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    position: relative;
+    color: white;
+    text-align: center;
+    .Subtitle {
+    font-size: 1.3vw;
+    font-weight: 200;
+    span {
+    color: rgb(181, 156, 182);
+    font-weight: 400;
+    }
+    }
+      .Our-mission {
+        width: 35%;
+        margin: 5vw;
+      }
+      .How-it-works {
+        width: 35%;
+        margin: 5vw;
+      }
+    }
+  }
+
+
+

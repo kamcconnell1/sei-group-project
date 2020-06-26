@@ -23,11 +23,9 @@ const properties = {
 const SingleClothCard = ({ deleteComment, rentalPrice, handleContactSubmit, handleContactChange, contactModalOpen, toggleContact, commentsArray, title, clothId, profilePic, username, images, image, onFirstClick, onSecondClick, onClick, handleCommentSubmit, handleCommentChange, rating, commentText, brand, color, category, genderCategory, size }) => {
   const slideImages = [image[0], image[0], image[0]]
 
-  console.log(!isOwner());
-
   return (
     <>
-      <section className="Cloth-card section">
+      <section className="Cloth-card-left">
         <div className="slide-container">
           <Slide {...properties}>
             <div className="each-slide">
@@ -48,41 +46,9 @@ const SingleClothCard = ({ deleteComment, rentalPrice, handleContactSubmit, hand
           </Slide>
         </div>
 
-        {isAuthenticated() && <button name="item" value={clothId} onClick={onClick} className="button is-small is-danger">❤️ Favourite</button>}
-        <br />
-        {isAuthenticated() && <form onSubmit={handleCommentSubmit}>
-          <div className="comments">
-            <div className="label for comments">
-              <p>Comment on {title} </p>
-            </div>
-            <textarea
-              className="textarea"
-              rows="2"
-              type="textArea"
-              maxLength="250"
-              name="text"
-              onChange={handleCommentChange}
-              value={commentText}
-              placeholder="Add your comment..."
-            ></textarea>
-          </div>
-          <br />
-          <div>
-            <button className="Button">Submit Comment</button>
-          </div>
-        </form>}
-        <div>
-          {commentsArray.map(comment => (
-            <Comments
-              key={comment._id}
-              comment={comment}
-              deleteComment={deleteComment}
-            />
-          ))}
-        </div>
       </section>
-      <section className="Cloth-card section">
-        <hr />
+
+      <section className="Cloth-card-right">
         <div className="info-wrapper">
           <div className="item-info">
             <p><strong>Brand:  </strong>  {brand}</p>
@@ -90,6 +56,7 @@ const SingleClothCard = ({ deleteComment, rentalPrice, handleContactSubmit, hand
             <p><strong>Color:  </strong>  {color}</p>
             <p><strong>Size:  </strong>  {size}</p>
             <p><strong>Rental price:  </strong>  £{rentalPrice}</p>
+        {isAuthenticated() && <button name="item" value={clothId} onClick={onClick} className="favourite-btn">❤️ Love!</button>}
           </div>
           <div className="user-info">
             <Link to={`/page/${username}`}>
@@ -122,23 +89,60 @@ const SingleClothCard = ({ deleteComment, rentalPrice, handleContactSubmit, hand
           </div>
         </div>
         <hr />
+        
+        <div className='comments'>
+        {isAuthenticated() && <form onSubmit={handleCommentSubmit}>
+            <div className="comments-label">
+              <p>Comment on {title} </p>
+            </div>
+          <div className="comment-box">
+            <textarea
+              rows="2"
+              type="textArea"
+              maxLength="250"
+              name="text"
+              onChange={handleCommentChange}
+              value={commentText}
+              placeholder="Add your comment..."
+            ></textarea>
+            <button className="Button">Post Comment</button>
+          </div>
+        </form>}
+        
+          {commentsArray.length === 0? 
+          <p className='no-comments'>Nobody has commented on this item yet. <br /> Be the first to comment now!</p>
+          : 
+          commentsArray.map(comment => (
+            <Comments
+              key={comment._id}
+              comment={comment}
+              deleteComment={deleteComment}
+            />
+          ))}
+        </div>
+
+        <hr />
+
         <div className="rent-wardrobe">
           <p className="username">Rent {username}'s Wardrobe</p> <br />
           <div className="columns similar">
             <div className="column is-one-quarter">
               <a onClick={onFirstClick}>
-                  <img src={images[0].image} alt={title} />
+                  <img  className='other-items' src={images[0].image} alt={title} />
               </a>
             </div>
 
             <div className="column is-one-quarter">
               <a onClick={onSecondClick}>
-                  <img src={images[1].image} alt={title} />
+                  <img className='other-items' src={images[1].image} alt={title} />
               </a>
             </div>
           </div>
         </div>
+
       </section>
+
+
     </>
   )
 }

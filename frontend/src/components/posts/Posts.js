@@ -3,6 +3,7 @@ import React from 'react'
 import PostCards from '../posts/PostsCards'
 import { getAllPosts, createPost } from '../../lib/api'
 import { toast } from '../../lib/notifications'
+import { isAuthenticated } from '../../lib/auth'
 
 class Posts extends React.Component {
 
@@ -56,7 +57,7 @@ class Posts extends React.Component {
   render() {
     if (!this.state.posts) return null
     return (
-      <div className="Main Posts-Page">
+      <>
         <div className="Page-head">
           <div className="Page-title">
             <h1>POSTS</h1>
@@ -66,15 +67,28 @@ class Posts extends React.Component {
           </div>
         </div>
         <div className="Posts">
+
+          {isAuthenticated() && 
           <form className="Post-form"
             onSubmit={this.handleSubmit} >
-            <h3>Add a post now!</h3>
+            <div className='add-post'>Add a Post Now!</div>
+            <div className='post-form-input'>
+              <div className='post-form-left'>
             <input className="Post-input-title"
               name="title"
               value={this.state.input.title}
               placeholder="Title"
               onChange={this.handleChange}
             />
+            <input className="Post-input-image"
+              name="photo"
+              value={this.state.input.photo}
+              placeholder="URL of Image"
+              onChange={this.handleChange}
+            />
+
+            </div>
+            <div className='post-form-right'>
             <textarea className="Post-input-text"
               name="text"
               rows="7"
@@ -82,14 +96,10 @@ class Posts extends React.Component {
               placeholder="Text"
               onChange={this.handleChange}
             />
-            <input className="Post-input-title"
-              name="photo"
-              value={this.state.input.photo}
-              placeholder="URL of Image"
-              onChange={this.handleChange}
-            />
             <button className="Button">Submit Post</button>
-          </form>
+            </div>
+            </div>
+          </form> }
           <div className="Post-cards">
             {this.state.posts.map(post => (
               <PostCards
@@ -99,7 +109,7 @@ class Posts extends React.Component {
             ))}
           </div>
         </div>
-      </div>
+      </>
     )
   }
 }

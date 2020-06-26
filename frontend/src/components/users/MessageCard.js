@@ -7,13 +7,12 @@ const MessageCard = ({ user, text, createdAt, reply, _id, sendReply, replyModal,
   const time = edited[1].split('.')[0]
 
   return (
-    <>
-      <div>
+    <div className='message-card'>
         <div className="Message">
           <div className="Message-top">
             <img src={user.profilePic} alt={user.username} />
             <div className="Message-top-right">
-              <Link to={`/page/${user.username}`}><h4>From {user.username}</h4></Link>
+              <Link to={`/page/${user.username}`}><h4>{user.username}</h4></Link>
               <h5>{`${date} at ${time}`}:</h5>
             </div>
           </div>
@@ -24,12 +23,12 @@ const MessageCard = ({ user, text, createdAt, reply, _id, sendReply, replyModal,
           <div className="Message-reply">
             {response.map((res, i) =>
               <div key={i}>
-                <h5>reply: {date} {time}</h5>
+                <h5>Reply @ {date} {time}</h5>
                 <p>{res.text}</p>
                 <div className="Message-content">
                 </div>
               </div>)}
-            <button value={_id} onClick={reply} className="Reply-btn">Reply</button>
+            <button value={_id} onClick={reply} className="Button">Reply</button>
           </div>
         </div>
         <div className="Message-reply-delete">
@@ -48,8 +47,7 @@ const MessageCard = ({ user, text, createdAt, reply, _id, sendReply, replyModal,
             </div>
           </div>
         </div>
-      </div>
-    </>
+    </div>
   )
 }
 

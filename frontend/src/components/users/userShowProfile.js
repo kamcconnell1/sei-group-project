@@ -166,16 +166,18 @@ class userShowProfile extends React.Component {
     const { user, userItems, comments, commentsArray, contactModalOpen, location } = this.state
     
     return (
-        <div className="Show-profile Main">
+        <div className="Show-profile">
           <div className="Show-profile-top">
             <div className="Photo-user-rating">
               <img src={user.profilePic} alt={user.username} />
               <h4 className="Username">{user.username}</h4>
               <h6 className="User-location">{location}</h6>
+              <div className='rating'>
               <StarRating
                 rating={rating}
                 onStarClick={this.onStarClick}
               />
+              </div>
               <div className="Follow-message">
                 {isAuthenticated() && <button name="friend" value={user._id} onClick={this.handleFriendSubmit} className="Button">Follow</button>}
                 {isAuthenticated() && <button onClick={this.toggleContactModal} className="Button">Message</button>}
@@ -203,7 +205,7 @@ class userShowProfile extends React.Component {
             </div>
 
             <div className="Comments-container">
-              <h3>{user.username}'s Reviews</h3>
+              <h3>Reviews</h3>
                   <div className="Comments-on-user">
                     {commentsArray.map(comment => (
                       <Comments
@@ -217,12 +219,10 @@ class userShowProfile extends React.Component {
               {
                 isAuthenticated() && <section className="Comments">
                   <form
-                    className="Comment-left"
+                    className="comment-box"
                     onSubmit={this.handleCommentSubmit}>
                     <p> Add Review:</p>
                     <textarea
-                      className="Comment-text"
-                      rows="5"
                       type="textArea"
                       maxLength="200"
                       name="text"

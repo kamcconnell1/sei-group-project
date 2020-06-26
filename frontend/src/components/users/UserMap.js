@@ -95,7 +95,6 @@ class UserMap extends React.Component {
     if (!this.state.user) return null
 
     return (
-      <div className="Main">
         <div className="Map-page">
           <div className="Page-head">
             <div className="Page-title">
@@ -138,7 +137,6 @@ class UserMap extends React.Component {
           </div>
 
         </div>
-      </div>
     )
   }
 }

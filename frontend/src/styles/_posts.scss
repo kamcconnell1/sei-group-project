@@ -1,0 +1,174 @@
+
+//?---------------------POSTS PAGE ----------------------------
+
+.Posts {
+  position: absolute;
+  top: var(--main-start-point);
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  width: 100vw;
+  .Post-form {
+    display: flex;
+    align-self: flex-start;
+    margin-left: 15vw;
+    width: 70vw;
+    .add-post{
+      font-size: 16px;
+      font-weight: 700;
+    }
+    .post-form-input{
+        display: flex;
+        .post-form-left{
+          display: flex;
+          flex-direction: column;
+          margin: 20px;
+          
+          .Post-input-title {
+            width: 25vw;
+            height: 3vw;
+            padding: 1vw;
+            outline: none;
+            border-radius: 2px;
+            border: 2px solid lightgray;
+            margin-bottom: 10px;
+          }
+          .Post-input-image {
+            width: 25vw;
+            height: 3vw;
+            padding: 1vw;
+            outline: none;
+            border-radius: 2px;
+            border: 2px solid lightgray;
+            
+          }
+          
+
+        }
+        .post-form-right{
+          display: flex;
+          flex-direction: column;
+          margin: 20px;
+          .Post-input-text {
+            width: 25vw;
+            height: 4vw;
+            padding: 1vw;
+            outline: none;
+            border-radius: 2px;
+            border: 2px solid lightgray;
+            margin-bottom: 10px;
+          }
+          .Button {
+            background-color: rgba(66, 48, 48, 0.327);
+            color: white;
+            border: none;
+          }
+        }
+    }
+  }
+  .Post-cards {
+    max-width: 70vw;
+    .Card {
+      background-color: var(--main-bg-color);
+      margin-bottom: 20px;
+
+    .card-content{
+      display: flex;
+      .Post-image {
+        max-width: 20%;
+        margin-right: 20px;
+      }
+      .Post-right{
+        .Title {
+          color: rgb(252, 249, 249);
+          text-shadow: 1px 1px 2px rgb(175, 170, 170);
+          text-transform: uppercase;
+          margin: -0.5vw;
+        }
+        .Text {
+          margin: 20px 0;
+        .Post-content {
+                font-size: 12px;
+                font-weight: 200;
+                color: black;
+                max-height: 500px;
+              }
+              .Post-author {
+        font-size: 10px;
+        color: white;
+      }
+
+      }
+      }
+    }
+    }
+    }
+  }
+
+
+//?------------------------POST SHOW------------------------------
+
+.PostShow {
+  font-size: 12px;
+}
+.post-card{
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  min-height: 130vh;
+  overflow: scroll;
+  .Post-and-comments{
+    max-width: 70vw;
+    background-color: var(--main-bg-color);
+    margin-bottom: 20px;
+    .card-content{
+      display: flex;
+      .Post-image {
+        max-width: 50%;
+        margin-right: 20px;
+      }
+      .Post-right{
+        a, .Title.Post {
+          color: rgb(252, 249, 249);
+          text-shadow: 1px 1px 2px rgb(175, 170, 170);
+          text-transform: uppercase;
+          margin: -0.5vw;
+        }
+        .Text {
+          margin: 20px 0;
+          font-size: 14px;
+          font-weight: 200;
+      }
+      }
+    }
+  }
+  .Comments-all{
+    display: flex;
+    justify-content: space-between;
+    width: 70vw;
+    
+    .Post-comment {
+      font-size: 16px;
+      display: flex;
+      flex-direction: column;
+      .comments-input{
+        width: 25vw;
+        height: 3vw;
+        padding: 1vw;
+        outline: none;
+        border-radius: 2px;
+        border: 2px solid lightgray;
+        margin-bottom: 10px;
+      }
+      .Button {
+        background-color: rgba(66, 48, 48, 0.327);
+            color: white;
+            border: none;
+            width: 25vw;
+      }
+    }
+    div.User-comments{
+      margin: 10px 25% 0 0 ;
+    }
+  }
+}

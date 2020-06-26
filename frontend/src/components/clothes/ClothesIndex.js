@@ -142,8 +142,8 @@ class ClothesIndex extends React.Component {
       return { value: size, label: size }
     })
     return (
-      <div className="Main Clothes-Index">
-        <div className="Page-head">
+      <>
+      <div className="Page-head">
           <div className="Page-title">
             <h1>CLOTHES</h1>
           </div>
@@ -151,31 +151,32 @@ class ClothesIndex extends React.Component {
             <h2>Latest Items</h2>
           </div>
         </div>
-        <div className="Latest column-center">
-          <div className="Clothes-filter">
-            <ClothesFilter
-              category={categoryOption}
-              color={colorOption}
-              gender={genderOption}
-              sizes={sizeOption}
-              handleCategoryFilter={(e) => this.handleFilter(e, "category")}
-              handleColorFilter={(e) => this.handleFilter(e, "color")}
-              handleGenderFilter={(e) => this.handleFilter(e, "gender")}
-              handleSizeFilter={(e) => this.handleFilter(e, "size")}
+        <div className="Clothes-Index">
+        <div className="Clothes-filter">
+          <ClothesFilter
+            category={categoryOption}
+            color={colorOption}
+            gender={genderOption}
+            sizes={sizeOption}
+            handleCategoryFilter={(e) => this.handleFilter(e, "category")}
+            handleColorFilter={(e) => this.handleFilter(e, "color")}
+            handleGenderFilter={(e) => this.handleFilter(e, "gender")}
+            handleSizeFilter={(e) => this.handleFilter(e, "size")}
+          />
+          <form>
+            <input
+              className="input"
+              type="text"
+              placeholder="Search..."
+              value={searchClothes}
+              onChange={this.handleChange}
             />
-            <form>
-              <input
-                className="input"
-                type="text"
-                placeholder="Search for Category, Name and User"
-                value={searchClothes}
-                onChange={this.handleChange}
-              />
-            </form>
-          <button onClick={this.resetFilter} className="Clothes-filter Button">Reset</button>
-          </div>
-          <br />
-          <div className="Clothes-index">
+          </form>
+          <button onClick={this.resetFilter} className="Button-main">Clear</button>
+        </div>
+        <br />
+        <div className="Latest column-center">
+          <div className="Clothes-index-cards">
             {filteredItemsToDisplay.length > 0 ? (
               filteredItemsToDisplay.sort((a, b) => b.rentalPrice - a.rentalPrice).map((cloth) => (
                 <ClothCard {...cloth} key={cloth._id} />
@@ -190,6 +191,7 @@ class ClothesIndex extends React.Component {
           </div>
         </div >
       </div>
+      </>
     )
   }
 }

@@ -173,7 +173,6 @@ class UserProfile extends React.Component {
     // * Sorted messages by date
     const sortedMessages = messages.sort((a, b) => b.createdAt - a.createdAt)
     return (
-      <div className="Main">
         <div className="My-profile">
           <div className="My-profile-top-row">
             <div className="Photo-delete-rating">
@@ -216,11 +215,8 @@ class UserProfile extends React.Component {
           </div>
           <div className="My-profile-columns">
             <div className="Left-col">
-              <div>
                 {/* Notifications / chat section */}
-                <div className="My-profile-message-board">
-                  <h3 className="Title"> {`${messages.length}`} Message(s)</h3>
-                  <div>
+                  <h3 className="Title">{`${messages.length}`} Message(s)</h3>
                     {sortedMessages.map((message, i) =>
                       <MessageCard
                         key={i}
@@ -231,10 +227,7 @@ class UserProfile extends React.Component {
                         replyChange={this.handleReplyChange}
                       />
                     )}
-                  </div>
-                </div>
               </div>
-            </div>
             <div className="Center-col">
               {/* Map over the clothes the user has uploaded - need to work on the positioning of this - need to add to allow user to edit / delete items */}
               <div className="My-items">
@@ -242,7 +235,7 @@ class UserProfile extends React.Component {
                   <div className="My-items-title">
                     <h3>My Items</h3>
                   </div>
-                  <button className="Add-clothes-btn"
+                  <button className="Button"
                     onClick={this.handleAddClothes}
                   >Add Clothes Now</button>
                 </div>
@@ -286,7 +279,6 @@ class UserProfile extends React.Component {
             </div>
           </div>
         </div>
-      </div>
     )
   }
 }

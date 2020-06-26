@@ -1,0 +1,99 @@
+//? -------------------VARS-----------------
+:root {
+  --main-bg-color: rgba(var(--main-bg-rgb), 0.4);
+  --main-bg-rgb: 190, 183, 192;
+  --navbar-color: rgba(255, 255, 255, 1);
+  --navbar-color-rgb: 255, 255, 255;
+  --navbar-hover-color: grey;
+  --title-color: rgba(var(--main-bg-rgb), 0.8);
+  --subtite-color: rgb(173, 165, 165);
+  // --main-start-point: 20vh;
+  --page-head-position: 3vh;
+  --btn-color: lightgrey;
+  --cards-text-color: rgb(86, 80, 87);
+  --section-titles-profile-size: 2vw;
+  --delete-btn-color: rgb(143, 29, 29);
+}
+
+
+
+//?---------------GLOBAL STYLING----------------------
+* {
+  margin: 0;
+  padding: 0;
+  font-family: "Poppins", sans-serif;
+  outline: none;
+}
+
+html, body {
+  padding: 0;
+  background-size: cover;
+  min-height: 100vh;
+  height: 100%;
+}
+
+h1,
+h2 {
+  font-family: "Playfair Display", serif;
+}
+
+a {
+  text-decoration: none;
+  color: var(--btn-color);
+}
+
+
+
+//?----------------ALL PAGES - navbar, main, footer--------------------
+
+.Main {
+  display: flex;
+  flex-direction: column;
+  justify-content: left;
+  align-items: center;
+  min-height: 93vh;
+  height: 100%;
+  min-width: 100vw;
+  a:hover {
+    color: white;
+    text-shadow: 1px 1px 5px rgb(183, 174, 185);
+    top: 7vw;
+  }
+}
+
+.Page-head {
+  display: flex;
+  top: var(--page-head-position);
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  padding-bottom: 50px;
+  .Page-title {
+    color: var(--title-color);
+    font-size: 3em;
+    font-family: "Playfair Display", serif;
+    max-width: 60vw;
+    text-align: center;
+  }
+  .Page-subtitle {
+    color: var(--subtite-color);
+    font-size: 20px;
+  }
+}
+
+.submit-pin {
+  margin-top: 300px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,173 @@
+//?------------------LATEST ITEMS -----------------------------
+.Clothes-Index {
+  padding: 0 5%;
+  position: absolute;
+  top: var(--main-start-point);
+
+  div.Clothes-filter {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  .input {
+    margin: 1vw;
+    max-height: 36px;
+    font-family: "Poppins", sans-serif;
+    min-width: 12vw;
+  }
+  .Clothes-select {
+    margin: 1vw;
+    min-width: 12vw;
+    max-height: 36px;
+    font-size: 0.8rem;
+    color: #363636;
+  }
+  .Button-main {
+    margin-left: 2vw;
+  }
+}
+.Clothes-index-cards {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  width: 90vw;
+  max-height: 40vw;
+  
+  .Clothes-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0 1vw;
+  
+    .img img {
+      margin: 0;
+      max-width: 200px;
+      max-height: 200px;
+      object-fit: cover;
+      z-index: 0;
+      box-sizing: content-box;
+    }
+    .Card-text {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      height: 60px;
+      width: 100%;
+      position: relative;
+      bottom: 60px;
+      z-index: 1;
+      background-color: rgba(var(--navbar-color-rgb), 0.5);
+      color: var(--cards-text-color);
+      .Card-Title {
+        font-size: 11px;
+        font-weight: 600;
+        margin-top: 5px;
+      }
+      .Subtitle {
+        font-size: 10px;
+      }
+    }
+  }
+}
+}
+
+//?---------------------------CLOTHES SHOW--------------------------
+
+h1.clothes-title {
+  text-transform: uppercase;
+}
+.clothes-show {
+  margin: 0 5%;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+.Cloth-card-left{
+  .slide-container {
+    width: 30vw;
+    margin: auto;
+    .each-slide > div {
+      background-size: 100% 100%;
+      height: 38vw;
+      max-width: 30vw;
+    }
+  }
+  .comments {
+    margin-top: 10px;
+  }
+}
+
+.Cloth-card-right{
+  margin-left: 20px;
+  background-color: var(--main-bg-color);
+  width: 50%;
+  min-height: 38vw;
+  padding: 20px;
+  .info-wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    .user-info{
+      margin: 0 30px;
+      .username{
+        text-transform: uppercase;
+        color: #363636;
+        }
+    }
+    .user-info, p.username {
+      display: flex;
+      align-items: center;
+      flex-direction: column;
+      img {
+        width: 7vw;
+      }
+      .show-buttons {
+        margin-top: 5px;
+        a {
+          color: #b59cb6
+        }
+      }
+    }
+  }
+  hr {
+    width: 90%;
+    margin: 15px auto;
+  }
+  .comments {
+    .comments-label{
+      font-size: 1rem;
+      font-weight: 700;
+      margin-bottom: 10px;
+    }
+    .comment-box{
+      display: flex;
+      margin: 10px 0;
+      textarea{
+        width: 80%;
+        border: none;
+        padding: 5px;
+        margin-right: 10px;
+      }
+    }
+    .no-comments{
+      font-size: 0.8rem;
+      padding-top: 25px;
+    }
+  }
+}
+.rent-wardrobe {
+  .username{
+    text-transform: uppercase;
+    
+  }
+  .columns.similar{
+    display: flex;
+    img.other-items{
+      width: 300px;
+      height: auto;
+      margin: 10px;
+    }
+  }
+}
+}
+
+

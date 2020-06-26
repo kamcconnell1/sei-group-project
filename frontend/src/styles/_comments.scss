@@ -1,0 +1,22 @@
+
+.Comment {
+  display: flex;
+  margin-bottom: 10px;
+  align-items: center;
+  .comment-img{
+    width: 3vw;
+  }
+  .username{
+    margin-left: 10px;
+    text-transform: uppercase;
+    color: var(--delete-btn-color)
+  }
+  .comment-text{
+    margin: 0 20px;
+  }
+  button.Button{
+    background-color: var(--btn-color);
+    border: none;
+  }
+
+}

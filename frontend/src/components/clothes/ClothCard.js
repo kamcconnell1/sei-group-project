@@ -12,7 +12,7 @@ const ClothCard = ({ _id, title, image, rentalPrice }) => {
           <img src={image[0]} alt={title} loading="lazy" width="255" height="255" />
         </div>
         <div className="Card-text">
-          <h4 className="Title"><strong>{title}</strong></h4>
+          <h4 className="Card-Title"><strong>{title}</strong></h4>
           <h5 className="Subtitle"><strong>Rental Price:</strong> {`£${rentalPrice}`}</h5>
         </div>
       </div>

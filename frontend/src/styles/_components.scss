@@ -1,0 +1,107 @@
+//? -------------------LIBRARY--------------------
+
+.column-center {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.row-center {
+  display: flex;
+  justify-content: center;
+}
+
+.Button-main {
+  padding: 5px;
+  font-size: 1rem;
+  font-family: inherit;
+  background-color: rgba(66, 48, 48, 0.327);
+  border-radius: 5px;
+  border: none;
+  height: 36px;
+  color: white;
+}
+.Button-main:hover{
+  color: var(--cards-text-color);
+}
+.Button-main:active{
+  transform: translate(2px, 2px);
+}
+
+.Button {
+  padding: 5px;
+  text-align: center;
+  font-size: 12px;
+  background: rgb(48, 47, 47);
+  border-radius: 5px;
+  color: white;
+}
+
+.favourite-btn{
+  background-color: white;
+  border: 1px solid lightgray;
+  border-radius: 6px;
+  padding: 0 20px;
+  margin: 5px ;
+  box-shadow: inset 0 0 5px rgb(242, 204, 217);
+}
+.favourite-btn:hover{
+  background-color: lightpink;
+  box-shadow: inset 0 0 5px rgb(194, 117, 144);
+  color: white;
+}
+.favourite-btn:active{
+  transform: translate(2px, 2px);
+}
+
+.Navbar {
+  position: fixed;
+  top: 0;
+  display: flex;
+  align-items: center;
+  background-color: rgba(var(--navbar-color-rgb), 0.3);
+
+  .Navbar-item {
+    color: inherit;
+    margin: -7vw 1%;
+    font-size: 1.2vw;
+    font-weight: 500;
+    font-family: "Playfair Display", serif;
+    text-transform: uppercase;
+  }
+  .navbar-item {
+    margin: 0;
+    background-color: rgba(var(--navbar-color-rgb), 0.3);
+  }
+  .navbar-item:hover,
+  .navbar-burger:hover {
+    background-color: var(--navbar-color);
+    color: var(--navbar-hover-color);
+  }
+}
+
+.Footer {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0;
+  background-color: var(--navbar-color);
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  height: 2.5rem;
+}
+
+.box {
+  margin-top: 20vh;
+  background-color: rgba(var(--navbar-color-rgb), 0.1);
+  width: 40vw;
+  .field {
+    // padding: 5px;
+    font-family: "Playfair Display", serif;
+  }
+}
+
+

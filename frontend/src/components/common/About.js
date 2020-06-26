@@ -5,7 +5,7 @@ class About extends React.Component {
 
   render() {
     return (
-            <div className="About-page-main">
+            <div className="About-page">
               <div className="Page-head">
                 <div className="Page-title">
                   <h1 className="about-title">About KEBB</h1>
@@ -14,8 +14,6 @@ class About extends React.Component {
                   <h2>A place to borrow, lend & be inspired.</h2>
                 </div>
               </div>
-
-              <div className="About column-center">
                 <div className="Join-us Title">
                   <p><Link to="/register">Join us now </Link> and see where your new wardrobe could take you!</p>
                 </div>
@@ -36,7 +34,6 @@ class About extends React.Component {
                   </div>
                 </div>
               </div>
-            </div>
     )
   }
 }
