@@ -43,24 +43,23 @@ class FavouritePosts extends React.Component {
     
     return (
       <div className="Main">
-        <div className="Fav-Posts">
+        <div className="Fav-items">
           <div className="Page-head">
             <div className="Page-title">
-              <h1>MY FAVOURITE ITEMS</h1>
+              <h1>MY FAVOURITE POSTS</h1>
             </div>
           </div>
-          <div className="Fav-posts">
-            <div className="fav-post-friends">
+          <div className="Favs">
               {posts.length === 0 ? <p>Oh no, looks like you haven't added anything yet!<br /> Go back and add to your favourites now to save things for later.</p> : ''}
               {posts.map(post =>
-                <div key={post._id} className="Fav-post-card">
+                <div key={post._id} className="Card">
                   <Link to={`/posts/${post._id}`} className="Post-img-text">
                     <div className="Card-image">
                       <img src={post.photo} alt={post.title} loading="lazy" width="255" height="255" />
                     </div>
                     <div className="Card-content">
-                      <h4 className="">{post.title}</h4>
-                      <button className="Button" onClick={this.removeFromFavs} value={post._id}>Remove from favourites</button>
+                      <h4 className="post-title">{post.title}</h4>
+                      <button className="Button" onClick={this.removeFromFavs} value={post._id}>Delete from favourites</button>
                     </div>
                   </Link>
                 </div>
@@ -68,7 +67,6 @@ class FavouritePosts extends React.Component {
             </div>
           </div>
         </div>
-      </div>
     )
   }
 }

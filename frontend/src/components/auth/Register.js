@@ -67,7 +67,7 @@ class Register extends React.Component {
   render() {
 
     return (
-      <div className="Main Register">
+        <div className="Main Register">
         <div className="Page-head">
           <div className="Page-title">
             <h1>REGISTER</h1>
@@ -85,7 +85,7 @@ class Register extends React.Component {
             {...this.state.formData}
           />
         </div>
-      </div>
+        </div>
     )
   }
 }

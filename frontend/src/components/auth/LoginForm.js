@@ -6,7 +6,7 @@ const LoginForm = ({ email, password, handleChange, handleSubmit, errors }) => {
   return (
     <div className="column">
     <form
-      className="box"
+      className="box auth"
       onSubmit={handleSubmit}
     >
       <p>Not signed up yet? <Link to="/register">Register here</Link></p>

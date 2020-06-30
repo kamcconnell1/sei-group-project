@@ -8,7 +8,7 @@ const RegisterForm = ({ handlePostcodeChange, handleChange, handleSubmit, userna
     <div className="column">
       <form
         onSubmit={handleSubmit}
-        className="box"
+        className="box auth"
       >
         <p>Already have an Account? <Link to="/login">Login Here</Link></p>
         <div className="field">
