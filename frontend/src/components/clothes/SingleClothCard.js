@@ -137,6 +137,16 @@ const SingleClothCard = ({ deleteComment, rentalPrice, handleContactSubmit, hand
                   <img className='other-items' src={images[1].image} alt={title} />
               </a>
             </div>
+            <div className="column is-one-quarter">
+              <a onClick={onSecondClick}>
+                  <img className='other-items' src={images[2].image} alt={title} />
+              </a>
+            </div>
+            <div className="column is-one-quarter">
+              <a onClick={onSecondClick}>
+                  <img className='other-items' src={images[3].image} alt={title} />
+              </a>
+            </div>
           </div>
         </div>
 

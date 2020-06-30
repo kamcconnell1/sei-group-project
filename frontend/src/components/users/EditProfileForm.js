@@ -38,7 +38,7 @@ const EditProfileForm = ({ onPostcodeChange, onChange, onSubmit, username, postc
               </div>
               <div className="field">
                 <button type="submit"
-                  className="button is-fullwidth is-primary">
+                  className="button is-fullwidth ">
                   Update Profile Information
                 </button>
               </div>

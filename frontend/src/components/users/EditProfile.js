@@ -87,7 +87,7 @@ class EditProfile extends React.Component {
     const { createdArticles } = this.state.formData
 
     return (
-      <div className="Main">
+      <div className="Edit-Profile Main">
         <EditProfileForm
           errors={this.state.errors}
           onChange={this.handleChange}
