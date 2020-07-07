@@ -4,6 +4,7 @@ KEBB Bazaar was a group project created in 8 days. The aim was to produce an app
 
 In our group of 4 we created KEBB Bazaar, a social site for people in London to rent out items from their wardrobe to encourage people to borrow rather than buy. It allowed people to upload posts and befriend other users. Users could view items, posts and other users profiles without a token, but in order to interact with any of these things they are required to login. 
 
+Please see a hosted version here: [KEBB Bazaar](http://kebb-bazaar.herokuapp.com/)
 - - - -
 ### Brief
 * **Build a full-stack application** by making your own backend and your own front-end
